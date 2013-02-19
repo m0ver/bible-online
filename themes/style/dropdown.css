@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/*	DROP DOWN $Revision: 1.6 $
+Copyright 2006 Adobe Systems Incorporated
+*/
+.d-dropdown {
+position: relative;
+_behavior: url("theme/hover.htc"); /*IE sub7*/
+z-index: 2;
+}
+.d-dropdown>li {
+position: relative;
+top: 0;
+left: 0;
+z-index: 2;
+}
+.d-dropdown li {
+list-style-type: none;
+_position: relative; /*IE sub7*/
+_top: 0; /*IE sub7*/
+_left: 0; /*IE sub7*/
+}
+.d-dropdown li li { _position: static; }
+.d-dropdown .dropdown-pane {
+position: absolute;
+top: 16px;
+left: 0;
+z-index: 2;
+display: none;
+margin-top: 0;
+}
+.d-dropdown li.hover .dropdown-pane,
+.d-dropdown li.focus .dropdown-pane { 
+display: block;
+}
+.d-dropdown>li:hover .dropdown-pane { display: block; }
+.d-dropdown .dropdown-tab { 
+/*\*/
+display: block; 
+/*/
+display: inline-block;
+/**/
+_display: inline;
+_zoom: 1;
+}
+/*--Tier 1---*/
+.d-dropdown .dropdown-pane>* {
+margin: 0;
+}
+.d-dropdown .dropdown-pane dt,
+.d-dropdown .dropdown-pane dd,
+.d-dropdown .dropdown-pane li {
+_margin: 0;
+}
+.d-dropdown .dropdown-pane a {
+margin: 0 1px;
+-moz-outline: none;
+}
+.d-dropdown .dropdown-tab { 
+min-height: 16px;
+_height: 16px;
+}

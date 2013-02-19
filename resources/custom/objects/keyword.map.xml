@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="keyword" table="keyword">
+  <id name="Id" column="id" increment="false" generate="true" length="50" type="varchar"/>
+  <property name="keyword" column="keyword" length="255" type="varchar"/>
+  <property name="visit" column="visit" length="4" type="int"/>
+ </class>
+</mapping>

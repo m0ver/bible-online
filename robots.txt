@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+Disallow: /download/
+Sitemap: http://ingod.asia/sitemap.xml

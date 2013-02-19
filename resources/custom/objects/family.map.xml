@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="family" table="family">
+  <id name="Id" column="id" increment="false" generate="true" length="50" type="varchar"/>
+  <property name="userId" column="user_id" length="50" type="varchar"/>
+  <property name="name" column="name" length="11" type="varchar"/>
+  <property name="description" column="description" length="0" type="longtext"/>
+  <property name="status" column="status" length="4" type="int"/>
+  <property name="members" column="members" length="4" type="int"/>
+ </class>
+</mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="article" table="article">
+  <id name="Id" column="id" increment="false" generate="true" length="50" type="varchar"/>
+  <property name="userId" column="user_id" length="50" type="varchar"/>
+  <property name="author" column="author" length="50" type="varchar"/>
+  <property name="type" column="type" length="4" type="int"/>
+  <property name="topicId" column="topic_id" length="50" type="varchar"/>
+  <property name="title" column="title" length="255" type="varchar"/>
+  <property name="content" column="content" length="0" type="text"/>
+  <property name="date" column="date" length="0" type="datetime"/>
+  <property name="updateTime" column="update_time" length="0" type="datetime"/>
+  <property name="status" column="status" length="1" type="bit"/>
+ </class>
+</mapping>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="Log" table="Log">
+  <id name="Id" column="id" increment="false" generate="true" length="48" type="varchar"/>
+  <property name="userId" column="user_id" length="48" type="varchar"/>
+  <property name="actionType" column="action_type" length="11" type="int"/>
+  <property name="action" column="action" length="500" type="varchar"/>
+  <property name="date" column="date" length="0" type="datetime"/>
+ </class>
+</mapping>

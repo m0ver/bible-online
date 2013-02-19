@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="book" table="book">
+  <id name="Id" column="id" increment="false" generate="true" length="50" type="varchar"/>
+  <property name="bookId" column="book_id" length="4" type="int"/>
+  <property name="bookName" column="book_name" length="255" type="varchar"/>
+  <property name="language" column="language" length="10" type="varchar"/>
+ </class>
+</mapping>

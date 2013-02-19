@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>mobile1.0</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>server.xml</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/development%20tools/apache-tomcat-6.0.35/conf/server.xml</locationURI>
+		</link>
+		<link>
+			<name>web.xml</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/WEB-INF/web.xml</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
