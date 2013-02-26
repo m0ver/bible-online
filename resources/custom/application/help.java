@@ -66,6 +66,12 @@ public class help extends AbstractApplication {
 		buffer.append("  <changefreq>daily</changefreq>\r\n");
 		buffer.append("  <priority>1.00</priority>\r\n");
 		buffer.append("</url>\r\n");
+
+		buffer.append("<url>\r\n");
+		buffer.append("  <loc>http://ingod.asia/bible.pdf</loc>\r\n");
+		buffer.append("  <changefreq>daily</changefreq>\r\n");
+		buffer.append("  <priority>0.90</priority>\r\n");
+		buffer.append("</url>\r\n");
 		
 		String path;
 		Iterator<String> iterator = paths.iterator();
