@@ -1,11 +1,17 @@
+<!DOCTYPE >
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
 <head>
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta property="og:title" content="{%book.bookName%} | Chapter {%chapterid%} | [%holy.bible%]"/>
+<meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
+<meta property="og:image" content="{%TEMPLATES_DIR%}/images/favicon.png"/>
+<meta property="og:site_name" content="[%application.title%]"/>
+<meta property="og:description" content="[%application.description%]"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
-<link rel="prev" href="[%LINK:bible%]/{%book.bookId%}/{%lastchapter%}#up" />
-<link rel="next" href="[%LINK:bible%]/{%book.bookId%}/{%nextchapter%}#up" />
+<link rel="prev" href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" />
+<link rel="next" href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
 <link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
@@ -170,7 +176,7 @@ $(function(){
 	<h2>[%holy.book.info%]</h2> 
 	<a class="clear-fix"></a>
 	<div class="partner" id="partner">
-		<div class="clear-fix">[%holy.book.forward%]：<a href="[%LINK:bible%]/{%book.bookId%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.preview%]</a> <a href="[%LINK:bible%]/{%book.bookId%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} </div>
+		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.preview%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} </div>
 		<div id="documentation">
 			<div class="column" id="column1">{%left_column%} {%right_column%}</div>
 		</div>
@@ -180,7 +186,7 @@ $(function(){
 				<li>2:</li>
 			</ul>
 			
-			<div class="clear-fix">[%holy.book.forward%]：<a href="[%LINK:bible%]/{%book.bookId%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.preview%]</a> <a href="[%LINK:bible%]/{%book.bookId%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
+			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.preview%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
 		</div>
 		
 	</div>
