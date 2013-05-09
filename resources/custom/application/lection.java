@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright  (c) 2013 Mover Zhou
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
 package custom.application;
 
 import java.text.SimpleDateFormat;
@@ -13,6 +28,7 @@ import javax.servlet.http.HttpSession;
 
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
+import org.tinystruct.data.component.Cache;
 import org.tinystruct.data.component.Field;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
@@ -38,12 +54,33 @@ public class lection extends AbstractApplication {
 	private book book;
 	private HttpServletRequest request;
 	private User usr;
+	private Cache data=Cache.getInstance();
 
 	@Override
 	public void init() {
 		this.setAction("bible", "read");
 		this.setAction("bible/api", "api");
 		this.setAction("bible/feed", "feed");
+		
+		this.book=new book();
+		
+		this.data=Cache.getInstance();
+		
+		try {
+			Table list=book.findAll();
+			Iterator<Row> item = list.iterator();
+			while(item.hasNext()){
+				book.setData(item.next());
+				
+				this.setAction(book.getBookName(), "viewByName");
+				this.data.set(book.getBookName(), book.getBookId());
+			}
+			
+		} catch (ApplicationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 //		this.setAction("bible/version", "version");
 //		this.setAction("bible/version=", "setVersion");
 //		this.setAction("bible/config", "getConfiguration");
@@ -67,6 +104,7 @@ public class lection extends AbstractApplication {
 		this.setText("holy.bible");
 		this.setText("holy.bible.old-testament");
 		this.setText("holy.bible.new-testament");
+		this.setText("holy.bible.directory");
 		this.setText("holy.book.find-and-reading");
 		this.setText("holy.book.tools");
 		this.setText("holy.bible.version");
@@ -115,6 +153,23 @@ public class lection extends AbstractApplication {
 		return null;
 	}
 	
+	public Object viewByName() throws ApplicationException{
+		return this.viewByName(1);
+	}
+	
+	public Object viewByName(int chapterId) throws ApplicationException {
+		return this.viewByName(chapterId, 0);
+	}
+	
+	public Object viewByName(int chapterId, int partId) throws ApplicationException {
+		String bookName = (String) this.context.getAttribute("HTTP_REQUEST_ACTION");
+		
+		if(bookName.indexOf('/')!=-1)
+			bookName = bookName.split("/")[0];
+		
+		return this.read(Integer.valueOf((this.data.get(bookName).toString())), chapterId, partId);
+	}
+	
 	public Object read() throws ApplicationException {
 		return this.read(1);
 	}
@@ -133,6 +188,7 @@ public class lection extends AbstractApplication {
 
 		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
 		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 		
 		HttpSession session = this.request.getSession();
 		if(session.getAttribute("usr")!=null) {
@@ -152,7 +208,7 @@ public class lection extends AbstractApplication {
 		this.chapterid = chapterid;
 		this.partid = partid;
 		
-		book book = new book();
+		book = book==null?new book():this.book;
 		try {
 			String lang = this.getLocale().toString();
 			if(this.getLocale().toString().equalsIgnoreCase("en_GB")) {
@@ -180,15 +236,15 @@ public class lection extends AbstractApplication {
 		bible bible = new bible();
 		if(this.getLocale().toString().equalsIgnoreCase(Locale.US.toString())) {
 			bible.setTableName("NIV");
-			this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"\">中文</a> <a href=\"?lang=en-GB&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"\">ESV</a>");
+			this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">中文</a> <a href=\"?lang=en-GB&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">ESV</a>");
 		}
 		else if(this.getLocale().toString().equalsIgnoreCase(Locale.UK.toString())) {
 			bible.setTableName("ESV");
-			this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"\">中文</a> <a href=\"?lang=en-US&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"\">NIV</a>");
+			this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">中文</a> <a href=\"?lang=en-US&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">NIV</a>");
 		}
 		else {
 			bible.setTableName(this.getLocale().toString());
-			this.setVariable("language.switch", "<a href=\"?lang=en-GB&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"\">ESV</a> <a href=\"?lang=en-US&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"\">NIV</a>");
+			this.setVariable("language.switch", "<a href=\"?lang=en-GB&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">ESV</a> <a href=\"?lang=en-US&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">NIV</a>");
 		}
 		
 		Table vtable = bible.findWith(where, new Object[] {});
@@ -227,20 +283,21 @@ public class lection extends AbstractApplication {
 		
 				line = bible.getContent();
 		
-				if (i == 0)
+				if(line!=null) {
+				if (i == 0 && line.trim().length()>0)
 					line = "<span class='firstletter'>" + line.substring(0, 1)
 							+ "</span>" + line.substring(1, line.length());
 		
-				line = line.replaceAll("\n\n", "<br />");
+					line = line.replaceAll("\n\n", "<br />");
+					left_column
+							.append("<li"
+									+ (this.partid == bible.getPartId() ? " class=\"selected\""
+											: "")
+									+ "><a class=\"sup\" onmousedown=\"rightMenu.show(event,'"
+									+ bible.getId() + "')\">" + bible.getPartId()
+									+ "</a>" + line + "</li>");
+				}
 				
-				left_column
-						.append("<li"
-								+ (this.partid == bible.getPartId() ? " class=\"selected\""
-										: "")
-								+ "><a class=\"sup\" onmousedown=\"rightMenu.show(event,'"
-								+ bible.getId() + "')\">" + bible.getPartId()
-								+ "</a>" + line + "</li>");
-		
 				line1 = bible1.getContent();
 				line1 = line1.replaceAll("\n\n", "<br />");
 				right_column
@@ -272,38 +329,24 @@ public class lection extends AbstractApplication {
 		this.setVariable("left_column", left_column.toString());
 		this.setVariable("right_column", right_column.toString());
 		
+//		this.menu();
 		return this;
 	}
 	
 	public Object menu() throws ApplicationException {
 
-		book book = new book();
-		int bookid;
-
-		String lang = this.getLocale().toString();
-		if(this.getLocale().toString().equalsIgnoreCase("en_GB")) {
-			lang = "en_US";
-		}
-		
-		Table findTable = book.setRequestFields("book.book_id,book.book_name")
-				.findWith("WHERE book.language=? ORDER BY book.book_id",
-						new Object[] { lang });
-		
-		Iterator<Row> iterator = findTable.iterator();
-		
+		int i=0;
 		Element ul = new Element("ol"), ul1 = new Element("ol"), li, a;
 
-		Row r;
-		while (iterator.hasNext()) {
-			r = iterator.next();
+		while (i++ < 66) {
 
 			li = new Element("li");
 			a = new Element("a");
 
-			bookid = r.getFieldInfo("book_id").intValue();
-			a.setAttribute("href", this.getContext().getAttribute("HTTP_SERVER") + "bible?bookid="
-							+ bookid);
-			a.setData(r.getFieldInfo("book_name").stringValue());
+			a.setAttribute("href", this.getContext().getAttribute("HTTP_HOST") + "bible/"
+							+ i);
+			
+//			a.setData(this.data);
 			li.addElement(a);
 
 			if (bookid < 40)
