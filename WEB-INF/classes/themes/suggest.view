@@ -1,0 +1,112 @@
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
+<head>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
+<link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+
+<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
+<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
+<link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
+<!--[if IE]>
+<style type="text/css">
+@import url("{%TEMPLATES_DIR%}/style/ie.css?9");
+</style>
+<![endif]-->
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/struct.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/{%language%}.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/tools.js" charset="utf-8"></script>
+<script type="text/javascript">
+//<![CDATA[
+	var profileMenu;
+	var languageMenu;
+	var dialog;
+	struct.attachOnLoadEvent(
+	function(){
+		profileMenu=new Menu();
+		languageMenu=new Menu();
+		
+		//profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/settings%]'","caption":"[%page.language-setting.title%]"});
+		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"[%page.logout.caption%]"});
+		
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'","caption":"English(UK)"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'","caption":"English(US)"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-CN'","caption":"简体中文"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-TW'","caption":"繁体中文"});
+		
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-22425440-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+		  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	});
+
+//]]>
+</script>
+<!--[if !(IE 6)]>
+<script type="text/javascript">
+$(function(){
+	var corner={
+		src:"{%TEMPLATES_DIR%}/images/circle.png",
+		width:"7px",
+		height:"7px",
+		background:"#464646",
+		positions: ["topleft","topright"]
+	};
+
+	//$("#header ul li a.current").addCorners("topleft,topright",corner);
+});
+</script>
+<![endif]-->
+<title>[%page.suggestion.title%] - [%application.title%]</title>
+</head>
+<body>
+<div id="header">
+	<div class="wrapper">
+		<h1><a href="/">[%application.title%]</a></h1>
+		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
+		<ul>
+			<li><a class="current" href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
+			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
+			<li id="download"><a href='/download/' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+		</ul>
+	</div>
+</div>
+<div id="headline">
+	<div class="wrapper">
+		<h2>[%page.suggestion.title%]</h2>
+	</div>
+</div>
+
+<div id="pagebody">
+<div class="wrapper">
+	<a name="down" class="clear-fix"> </a>
+	<div style="padding-top:10px;">
+			{%error%}
+			{%value%}
+	</div>
+	<a name="down" class="clear-fix"> </a>
+		
+</div>
+</div>
+
+<div id="footer">
+	<div class="wrapper">
+		<p>
+			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
+			<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
+			<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
+			<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
+ 			<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
+		</p>
+	</div>
+</div>
+
+</body>
+</html>

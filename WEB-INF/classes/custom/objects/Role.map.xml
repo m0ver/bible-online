@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="Role" table="Role">
+  <id name="Id" column="id" increment="false" generate="true" length="50" type="varchar"/>
+  <property name="role" column="role" length="50" type="varchar"/>
+  <property name="rights" column="rights" length="100" type="varchar"/>
+  <property name="description" column="description" length="200" type="varchar"/>
+ </class>
+</mapping>
