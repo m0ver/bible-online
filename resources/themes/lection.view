@@ -1,8 +1,9 @@
 <!DOCTYPE >
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
 <head>
-<meta content="width=device-width, initial-scale=1, maximum-scale=1" " name="viewport" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+{%metas%}
 <meta property="og:title" content="{%book.bookName%} | 第{%chapterid%}章 | [%holy.bible%]"/>
 <meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
 <meta property="og:image" content="{%TEMPLATES_DIR%}/images/favicon.png"/>
@@ -133,7 +134,7 @@ $(function(){
 	<div class="wrapper">
 		<h1><a href="/">[%application.title%]</a></h1>
 		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
-		<ul>
+		<ul class="menu">
 			<li><a class="current" href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a>
 			<ul class="bible-menu">
 				<li>[%holy.bible.old-testament%]

@@ -42,7 +42,7 @@ import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Document;
 import org.tinystruct.dom.Element;
-import org.tinystruct.system.util.IString;
+import org.tinystruct.system.util.StringUtilities;
 
 import custom.objects.User;
 import custom.objects.bible;
@@ -242,7 +242,7 @@ public class search extends AbstractApplication
 				j=0;
 		        while(j<keywords.length)
 		        {
-		        	finded=IString.sign(finded,keywords[j++]);
+		        	finded=StringUtilities.sign(finded,keywords[j++]);
 		        }
 		        
 	            html.append("<li"+(n%2==0?" class=\"even\"":" class=\"odd\"")+"><a href=\""+this.context.getAttribute("HTTP_HOST")+"bible/"+field.get("book_id").value().toString()+"/"+field.get("chapter_id").value().toString()+"/"+field.get("part_id").value().toString()+"\" target=\"_blank\">"+this.setText("search.bible.info", field.get("book_name").value().toString(),field.get("chapter_id").value().toString(),field.get("part_id").value().toString())+"</a><p>"+finded+"</p></li> \r\n");
@@ -379,7 +379,7 @@ public class search extends AbstractApplication
 				
 		        for(int j=0;j<keywords.length;j++)
 		        {
-		        	finded=IString.sign(finded,keywords[j]);
+		        	finded=StringUtilities.sign(finded,keywords[j]);
 		        }
 		        
 	            xml.append("<item id=\""+next+"\" chapterid=\""+field.get("chapter_id").value().toString()+"\" bookid=\""+field.get("book_id").value().toString()+"\" "+field.get("book_name").value().toString()+" partid=\""+field.get("part_id").value().toString()+"\">"+finded+"</item>\r\n");

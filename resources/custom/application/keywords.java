@@ -24,7 +24,7 @@ import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
-import org.tinystruct.system.util.IString;
+import org.tinystruct.system.util.StringUtilities;
 
 import custom.objects.keyword;
 
@@ -48,7 +48,7 @@ public class keywords extends AbstractApplication {
 		String keyword;
 		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
 		
-		if(this.request.getParameter("keyword")!=null&&this.request.getParameter("keyword").equals("")==false&&new IString(this.request.getParameter("keyword").toString()).safe())
+		if(this.request.getParameter("keyword")!=null&&this.request.getParameter("keyword").equals("")==false&&new StringUtilities(this.request.getParameter("keyword").toString()).safe())
 		{
 			if(this.request.getMethod().equalsIgnoreCase("GET"))
 			{

@@ -29,7 +29,6 @@ import org.tinystruct.data.component.Table;
 import org.tinystruct.handle.Report;
 import org.tinystruct.system.Language;
 import org.tinystruct.system.Resource;
-import org.tinystruct.system.util.IString;
 import org.tinystruct.system.util.Security;
 import org.tinystruct.system.util.StringUtilities;
 
@@ -201,14 +200,14 @@ public class passport
 	public boolean checkUser() throws ApplicationException
 	{
 		Object[] parameters=new Object[]{};
-		if(currentUser.getUsername()!=null && currentUser.getUsername().trim().length()!=0 && new IString(currentUser.getUsername()).safe())
+		if(currentUser.getUsername()!=null && currentUser.getUsername().trim().length()!=0 && new StringUtilities(currentUser.getUsername()).safe())
 		{
 			this.username=currentUser.getUsername();
 			parameters=new Object[]{this.username};
 			where="WHERE username=? and status='1'";
 		}
 		else
-		if(currentUser.getEmail()!=null&&new IString(currentUser.getEmail()).safe())
+		if(currentUser.getEmail()!=null&&new StringUtilities(currentUser.getEmail()).safe())
 		{
 			this.email=currentUser.getEmail();
 			parameters=new Object[]{this.email};

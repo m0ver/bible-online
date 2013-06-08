@@ -85,8 +85,11 @@ public class lection extends AbstractApplication {
 //		this.setAction("bible/version=", "setVersion");
 //		this.setAction("bible/config", "getConfiguration");
 		
+		this.setText("application.keywords");
+		this.setText("application.description");
 		this.setText("application.title");
 		this.setText("application.language.name");
+		
 		this.setText("page.welcome.caption");
 		this.setText("page.language-setting.title");
 		this.setText("page.logout.caption");
@@ -171,6 +174,11 @@ public class lection extends AbstractApplication {
 	}
 	
 	public Object read() throws ApplicationException {
+		StringBuffer metas = new StringBuffer();
+		metas.append("<meta name=\"keywords\" content=\"").append(this.getProperty("application.keywords")).append("\" />\r\n")
+		.append("<meta name=\"description\" content=\"").append(this.getProperty("application.description")).append("\" />");
+		
+		this.setVariable("metas", metas.toString());
 		return this.read(1);
 	}
 	
