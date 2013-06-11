@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<mapping>
- <class name="Rights" table="Rights">
-  <id name="Id" column="id" increment="false" generate="true" length="4" type="int"/>
-  <property name="name" column="name" length="50" type="varchar"/>
-  <property name="description" column="description" length="200" type="varchar"/>
- </class>
-</mapping>

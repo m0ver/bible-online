@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<mapping>
- <class name="plan" table="plan">
-  <id name="Id" column="id" increment="false" generate="true" length="50" type="varchar"/>
-  <property name="date" column="date" length="0" type="date"/>
-  <property name="task" column="task" length="50" type="varchar"/>
- </class>
-</mapping>
