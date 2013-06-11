@@ -141,7 +141,8 @@ public class lection extends AbstractApplication {
 		this.setVariable("TEMPLATES_DIR", "/themes");
 		this.setVariable("language",this.config.get("language").toString());
 		this.setVariable("keyword",this.getVariable("keyword")==null?"":this.getVariable("keyword").getValue().toString());
-		
+		this.setVariable("metas", "");
+
 		String username="";
 		if(this.getVariable("username")!=null) {
 			username = String.valueOf(this.getVariable("username").getValue());
