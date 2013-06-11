@@ -30,7 +30,7 @@ hr {
 body {
 	font-size: 62.5%;
 	background: #fff;
-	font-family: 'å®‹ä½“',sans-serif, Verdana, Arial, "Lucida Grande",
+	font-family: 'ËÎÌå',sans-serif, Verdana, Arial, "Lucida Grande",
 		"Bitstream Vera Sans";
 	line-height: 22px;
 	color: #555;
@@ -176,6 +176,10 @@ em,cite {
 
 #header ul li#download a.current:hover {
 	color: #555;
+}
+
+#header ul.bible-menu {
+	display: none;
 }
 
 #header .welcome {
@@ -404,8 +408,7 @@ p.button {
 }
 
 #pagebody ul {
-	margin-left: 16px;
-	list-style: square;
+	list-style: none;
 }
 
 a.rsslink {
@@ -429,7 +432,7 @@ a.rsslink {
 	font-weight: normal;
 }
 
-#pagebody .sidebar .container {
+.sidebar .container {
 	width: 287px;
 }
 
@@ -514,7 +517,7 @@ blockquote {
 	color: #c00;
 }
 
-#keyword.glass {
+.text.glass {
 	background: url("../images/magnifying_glass.png") no-repeat scroll 5px
 		5px white;
 	height: 22px;
@@ -524,6 +527,7 @@ blockquote {
 
 textarea {
 	border: 1px solid #bdc7d8;
+	width: 100%;
 	padding: 3px;
 	font-family: sans-serif, "lucida grande", tahoma, verdana, arial;
 }
@@ -860,4 +864,58 @@ ul.testament li ol li {
 	background: yellow;
 	border: 1px solid #ff8000;
 	padding: 5px
+}
+
+
+/* Mobile and iPad Portrait */
+@media only screen and (max-width: 959px) {
+    
+}
+
+/* Mobile Landscape and Portrait */
+@media only screen and (max-width: 767px) {
+    #header {
+    	background: #464646;
+    }
+    #headline, #header ul { display: none; }
+    #header .wrapper, #header h1 a {
+    	height:75px;
+    }
+    
+    #header .welcome a { color: #fff; }
+    #header .welcome {
+	    padding: 13px 0;
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	}
+    
+    .open { display: block; }
+}
+
+/* Mobile Portrait */
+@media only screen and (max-width: 479px) {
+    #header .wrapper, #header h1 a {
+    	height:50px
+    }
+    #header {
+    	padding: 0 15px;
+    	position: fixed;
+    	top:0;
+    	width:100%;
+    }
+    #header .welcome {
+	    padding: 13px 0;
+	    position: absolute;
+	    right: 30px;
+	    top: 0;
+	}
+	#pagebody {
+	    padding: 10px 15px;
+	    margin-top:50px;
+	}
+	#footer {
+	    padding: 0 15px;
+	}
+    #header h1 a { background:url("../images/favicon-b.png") no-repeat scroll left center transparent; }
 }
