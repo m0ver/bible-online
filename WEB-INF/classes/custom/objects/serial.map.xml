@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="serial" table="serial">
+  <id name="Id" column="id" increment="false" generate="true" length="48" type="varchar"/>
+  <property name="number" column="number" length="48" type="varchar"/>
+  <property name="userId" column="user_id" length="48" type="varchar"/>
+ </class>
+</mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="vocabulary" table="vocabulary">
+  <id name="Id" column="id" increment="false" generate="true" length="48" type="varchar"/>
+  <property name="userId" column="user_id" length="48" type="varchar"/>
+  <property name="word" column="word" length="255" type="varchar"/>
+  <property name="phoneticSymbol" column="phonetic_symbol" length="20" type="varchar"/>
+  <property name="interpretation" column="interpretation" length="5000" type="varchar"/>
+  <property name="comment" column="comment" length="5000" type="varchar"/>
+  <property name="date" column="date" length="0" type="datetime"/>
+  <property name="referenceLink" column="reference_link" length="255" type="varchar"/>
+ </class>
+</mapping>

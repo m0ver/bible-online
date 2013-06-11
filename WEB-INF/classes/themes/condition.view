@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
+<head>
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
+<link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+
+<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
+<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
+<link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
+<!--[if IE]>
+<style type="text/css">
+@import url("{%TEMPLATES_DIR%}/style/ie.css?9");
+</style>
+<![endif]-->
+<title>[%page.condition.title%] - [%application.title%]</title>
+</head>
+<body>
+<div id="header">
+	<div class="wrapper">
+		<h1><a href="/">[%application.title%]</a></h1>
+		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%] <a href="[%LINK:user/settings%]">[%page.language-setting.title%]</a> | <a href="[%LINK:user/logout%]">[%page.logout.caption%]?</a></p>
+		<ul>
+			<li><a href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
+			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
+			<li id="download"><a href='/download/' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+		</ul>
+	</div>
+</div>
+<div id="headline">
+	<div class="wrapper">
+		<h2>[%page.condition.title%]</h2>
+	</div>
+</div>
+
+<div id="pagebody">
+<div class="wrapper">
+<!-- header end -->
+<div>
+<ul class="nav">
+	<li><a href="#">InGod.asia 概述</a></li>
+	<li><a href="#">新功能</a></li>
+	<li><a href="#">InGod.asia 帮助中心</a></li>
+	<li><a href="[%LINK:user/register%]">创建帐户</a></li>
+</ul>
+</div>
+<div class="line-space"></div>
+<div>
+<h2 style="border: medium none;">InGod.asia 使用条款</h2>
+<h4>2010 年 1 月 1 日</h4>
+<p>本站提供的各项服务仅供个人使用。<br />
+欢迎您进入本站网站！用户使用本站的网站或其他服务，即表示用户同意接受此条款的约束（以下简称&ldquo;使用条款&rdquo;）。此协议下的&ldquo;本站服务&rdquo;不包括目前或将来任何本站的分支机构或公告中的内容。</p>
+
+<h4>仅供个人使用</h4>
+<p>本站提供的服务仅供用户个人、非商业性使用。用户不得使用本站的服务销售产品或服务，也得出于商业目的增加个人站点的通信量，例如进行广告销售。如果想对本站服务进行商业性使用，用户必须提前与本站就此项使用达成协议。欲知更多信息，请与我们联系。</p>
+
+<h4>服务使用费</h4>
+<p>本站保留自行决定对所有服务或任何一项服务收费的权利。本站也保留对先前免费提供的服务收费或在任意时间改变价格的权利。</p>
+
+<h4>通过本站链接的内容</h4>
+<p>作为搜索结果或通过本站服务链接显示的站点，可能是由本站范围以外的人建立的。本站索引中出现的搜索结果是本站的计算机系统自动索引的，但在将网站编入此种自动搜索结果的索引之前，本站无法对其进行筛选。使用本站服务搜索得到的结果或链接到的站点可能是令人反感的、不当的或冒犯性的。我们不保证本站搜索不会定位到意外的或令人反感的内容，也不对任何搜索结果或由本站服务链接到的任何站点的内容承担责任。</p>
+
+<h4>隐私权政策</h4>
+<p>欲查看本站隐私策略，请点击任意页面上的&ldquo;<a href="[%LINK:help%]">隐私策略</a>&rdquo;链接。</p>
+
+<h4>使用条款及本站搜索服务的更改</h4>
+<p>本站有时会以任何理由更改或终止服务而无需另行通知。无论以通知或不通知的方式终止服务，本站均对用户本人、其他使用者或任何第三方不负有责任。本站保留不经通知而经常更改条款及服务的权利。为了及时获知变更信息，建议用户经常查看这些条款和服务。</p>
+
+<h4>免于担保条款</h4>
+<p>对于使用本站服务所获得的信息或材料的准确性、满意度、完整性、合法性、可靠性、可操作性或有效性，本站拒绝承担任何责任或义务。对于任何信息或材料的删除、存储失败、发送错误或未能及时发送，本站不承担任何责任。对于因通过本站服务在网络上下载或得到的任何信息或材料而造成的任何损害，本站不承担任何责任。
+本站服务及其包括的全部材料、信息、产品和服务在任何情况下本站都拒绝担保。本站及其许可人对于下列事项不承担责任：所有明示或默示的法律完整许可，法定担保包括但不限于对商业能力的担保，符合特定目的以及不侵犯所有权的担保。本站及其许可人拒绝对一切与服务的安全、可靠、及时、性能相关的事项进行担保。本站及其许可人不对任何通过本站服务获得的信息或建议提供担保。本站及其许可人不对下列事项进行担保：通过本站服务获得的服务或商品、在本站服务上做广告的商品或服务、通过任何本站服务的链接获得的商品或服务，以及通过本站服务上的链接获得的任何信息或建议。
+用户需理解并同意对于自行决定下载或使用本站服务获得的材料或数据自行承担风险，对由此造成的计算机系统损害或导致的数据丢失自行承担责任。</p>
+
+<h4>责任限制</h4>
+<p>在任何情况下，本站及其许可人都不对任何用户因为使用、错误使用或信赖本站的服务带来的结果承担责任。任何因为与本协议或此种责任限制中的主要事实有关的问题引发的索赔（如直接的、间接的、附带的、结果性的、特别的、警戒性的、惩罚性的赔偿金），本站及其许可人均拒绝承担责任，无论这种索赔是基于担保、合同还是侵权（包括疏忽），即使本站或其许可人已经被建议过此种赔偿的可能性。无论赔偿金是由使用、错误使用、信赖本站服务，没有能力使用本站服务还是本站服务的中断、搁置或终止引起的（包括因第三方引发的此类赔偿金），此责任限制均适用。此限制也同样适用于通过本站服务或本站服务上的广告获得的服务或商品引起的赔偿金，通过本站服务上提供的链接获得的服务引起的赔偿金，通过本站服务或本站服务上的广告接收的任何消息或建议引起的赔偿金，以及通过本站服务上提供的链接获得的信息或建议引起的赔偿金。此限制也无限适用于购买替代商品或服务的花费、利益损失或资料损失。这种限制也适用于本站服务在运行与非运行期间，出现在其上的任何信息或商品，与本站服务以任何方式链接或相关的信息或商品。此种限制不仅适用于任何有限赔偿的实质性目的的失效，而且在法律允许的最大范围内适用。
+此外，在任何情况下本站或其许可人都不对直接或间接由于自然、外力、超出合理控制导致的任何运行延迟或失效承担责任，包括但不限于网络故障、计算机设备故障、电信设备故障、其他设备故障、电力故障、罢工、劳动争议、暴动、起义、动乱、劳动力或资源短缺、火灾、洪水、暴风雨、爆炸、不可抗力、战争、政府行为、国内或国外法庭的命令、第三方不履行义务，以及热能、光、空调装置的缺失或波动。</p>
+
+<h4>服务终止、账户终止及数据删除</h4>
+<p>本站保留在任何时间取消过去提供的任何服务的权利。本站也保留在任何时间取消任何或所有用户的账户，并删除任何或所有用户资料的权利。因此，当用户希望持续地获取资料时，建议用户在另一个系统上储存和备份从本站获取的资料。</p>
+
+<h4>内容的传播</h4>
+<p>用户认可使用本站服务输入的任何信息可能会被在多个网页上浏览到，并可以通过互联网获得。用户在此应确保使用本站服务发布信息时不会侵犯版权或其他权利。同时，用户不应在本站服务上输入任何自己希望保护版权或限制传播的信息。</p>
+
+<h4>其他条款</h4>
+<p>这些服务条款构成了各方主要事实的完整协议，取代此前或同期的任何主要事实的书面或口头的协议和默契。对于此服务条款中任何规定的内容，只有通过书面方式由本站签署方能生效。</p>
+</div>
+		
+</div>
+</div>
+
+<div id="footer">
+	<div class="wrapper">
+		<p>
+			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
+			<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
+			<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
+			<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
+ 			<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
+		</p>
+	</div>
+</div>
+
+</body>
+</html>

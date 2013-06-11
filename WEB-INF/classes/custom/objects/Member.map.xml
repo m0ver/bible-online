@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="Member" table="Member">
+  <id name="Id" column="id" increment="false" generate="true" length="50" type="varchar"/>
+  <property name="userId" column="user_id" length="50" type="varchar"/>
+  <property name="groupId" column="group_id" length="50" type="varchar"/>
+ </class>
+</mapping>

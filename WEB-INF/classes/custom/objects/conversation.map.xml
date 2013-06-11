@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="conversation" table="conversation">
+  <id name="Id" column="id" increment="false" generate="true" length="50" type="varchar"/>
+  <property name="userId" column="user_id" length="50" type="varchar"/>
+  <property name="fromUserId" column="from_user_id" length="50" type="varchar"/>
+  <property name="groupId" column="group_id" length="4" type="int"/>
+  <property name="content" column="content" length="0" type="longtext"/>
+  <property name="postDate" column="post_date" length="0" type="datetime"/>
+  <property name="checked" column="checked" length="4" type="int"/>
+  <property name="read" column="read" length="4" type="int"/>
+ </class>
+</mapping>

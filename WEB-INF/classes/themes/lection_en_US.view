@@ -1,10 +1,9 @@
 <!DOCTYPE >
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
 <head>
-<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-{%metas%}
-<meta property="og:title" content="{%book.bookName%} | 第{%chapterid%}章 | [%holy.bible%]"/>
+<meta property="og:title" content="{%book.bookName%} | Chapter {%chapterid%} | [%holy.bible%]"/>
 <meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
 <meta property="og:image" content="{%TEMPLATES_DIR%}/images/favicon.png"/>
 <meta property="og:site_name" content="[%application.title%]"/>
@@ -21,8 +20,8 @@
 @import url("{%TEMPLATES_DIR%}/style/ie.css?9");
 </style>
 <![endif]-->
-<link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 " type="application/rss+xml" rel="alternate" />
-<link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 " type="application/atom+xml" rel="alternate" />
+<link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | Chapter {%chapterid%} " type="application/rss+xml" rel="alternate" />
+<link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | Chapter {%chapterid%} " type="application/atom+xml" rel="alternate" />
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/struct.js" charset="utf-8"></script>
@@ -31,13 +30,13 @@
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/google.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/tools.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/life.js" charset="utf-8"></script>
-
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/dictionary.js" charset="utf-8"></script>
 <script type="text/javascript">
 //<![CDATA[
 	var rightMenu;
 	var profileMenu;
 	var languageMenu;
-	var dialog;
+	var dialog,tdialog;
 	var book_id={%book.bookId%},chapter_id={%chapterid%};
 	struct.attachOnLoadEvent(
 	function(){
@@ -45,21 +44,21 @@
 		profileMenu=new Menu();
 		languageMenu=new Menu();
 		
-		dialog=new Dialog({title:"纠错对话框",action:function(){
+		dialog=new Dialog({title:"Dialog",okLabel:"OK",cancelLabel:"Cancel",action:function(){
 			var $this=this;
 			if(this.parameters.id==-1 || this.parameters.id=="")
 		    {
-		    	alert("参数无效，无法保存！");
+		    	alert("Invalid parameters！");
 		    	return;
 		    }
 			
 			if($("#content").val()==null || $("#content").val()=="")
 		    {
-		    	alert("内容填写不完整，无法保存！");
+		    	alert("Content is empty！");
 		    	return;
 		    }
 		    
-			if(confirm("你确信这节经文有错吗?"))
+			if(confirm("Are you sure it's not correct?"))
 			{
 				$.ajax({url:"[%LINK:services/report%]",
 					type:'POST',
@@ -67,13 +66,13 @@
 					.success(function(data){
 						if(data.indexOf("true")==0)
 						{
-							alert("操作成功！");
+							alert("Successfully!");
 						}
 						else if(data.indexOf("false")==0)
 						{
-							alert("内容填写不完整，无法保存！"+data);
+							alert("Failure to post it！"+data);
 						}
-						else if(confirm("你可能尚未登录或登录超时！点确定立即重新登录。"))
+						else if(confirm("Please login to the website first!"))
 						{
 							window.location.reload();
 						}
@@ -81,35 +80,59 @@
 			}
 
 		}});
-		rightMenu.appendItem({"action":"javascript:dialog.show({id:'$id',value:'$text'})","caption":"纠错"});
-		rightMenu.appendItem({"action":"javascript:void(0)","caption":"注解"});
-		rightMenu.appendItem({"action":"javascript:copyToClipboard('$text')","caption":"复制"});
 		
-		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:dashboard%]'","caption":"[%navigator.controller.caption%]"});
+		tdialog=new TDialog({title:"Dictionary",okLabel:"OK",cancelLabel:"Cancel"});
+		
+		rightMenu.appendItem({"action":"javascript:dialog.show({id:'$id',value:'$text'})","caption":"Correct it"});
+		rightMenu.appendItem({"action":"javascript:void(0)","caption":"Comment"});
+		rightMenu.appendItem({"action":"javascript:copyToClipboard('$text')","caption":"Copy"});
+		
+		//profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/settings%]'","caption":"[%page.language-setting.title%]"});
 		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"[%page.logout.caption%]"});
 		
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'","caption":"English(UK)"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'","caption":"English(US)"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-CN'","caption":"简体中文"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-TW'","caption":"繁体中文"});
+
 	});
 	
 	$(function(){
-		$("ul.testament li").each(function(){
-			$(this).find("ol").hide();
-			$(this).hover(function(){ $(this).find('ol').slideDown().fadeIn();},function(){  $(this).find('ol').slideUp().fadeOut();});
+		ldialog=new TDialog({title:"My Words",okLabel:"",cancelLabel:"Close"});
+
+		$("#pagebody").mouseup(function() {
+			var word = (_dictGetSel());
+			if(!word || word=='') return;
+			if (navigator.appVersion.indexOf("Win") != -1) {
+				fetchWordWithoutDeskDict(word, function(a){tdialog.action=function(){
+					window.open("http://dict.youdao.com/wordbook/ajax?action=addword&q="+encodeURIComponent(word)+"&le=eng");
+				};
+				tdialog.show(a)});
+			}
+			else{
+				fetchWordWithoutDeskDict(word,function(a){tdialog.action=function(){
+					if(confirm("Do you want to add the word to YouDao?")) 
+					{
+						window.open("http://dict.youdao.com/wordbook/ajax?action=addword&q="+encodeURIComponent(word)+"&le=eng");
+					} else {
+						tdialog.close();
+						{%scripts%}
+					}
+				};
+				tdialog.show(a)});
+			}
 		});
 	});
-	
+
 	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-22425440-1']);
-	_gaq.push(['_trackPageview']);
-	
-	(function() {
-	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
+	  _gaq.push(['_setAccount', 'UA-22425440-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
 	//]]>
 </script>
 <!--[if !(IE 6)]>
@@ -127,23 +150,15 @@ $(function(){
 });
 </script>
 <![endif]-->
-<title>{%book.bookName%} | 第{%chapterid%}章 | [%holy.bible%]</title>
+<title>{%book.bookName%} | Chapter {%chapterid%} | [%holy.bible%]</title>
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-role="page">
-<div id="header" data-role="header">
+<body>
+<div id="header">
 	<div class="wrapper">
 		<h1><a href="/">[%application.title%]</a></h1>
 		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
-		<ul class="menu">
-			<li><a class="current" href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a>
-			<ul class="bible-menu">
-				<li>[%holy.bible.old-testament%]
-				</li>
-				<li>
-				[%holy.bible.new-testament%]
-				</li>
-			</ul>
-			</li>
+		<ul>
+			<li><a class="current" href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
 			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
 			<li id="download"><a href='/download/' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
 		</ul>
@@ -162,17 +177,17 @@ $(function(){
 	<h2>[%holy.book.info%]</h2> 
 	<a class="clear-fix"></a>
 	<div class="partner" id="partner">
-		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.preview%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} </div>
+		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.preview%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} </div>
 		<div id="documentation">
 			<div class="column" id="column1">{%left_column%} {%right_column%}</div>
 		</div>
 		<div class="clear-fix footnote">
 			<ul>
-				<li>注1:</li>
-				<li>注2:</li>
+				<li>1:</li>
+				<li>2:</li>
 			</ul>
 			
-			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.preview%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
+			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.preview%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
 		</div>
 		
 	</div>
@@ -229,15 +244,14 @@ $(function(){
 	</form>
 	
 	<label>[%holy.bible.download%]</label>
-	<ul>
+	<ol>
 		<li><a href="/bible.pdf" title="[%holy.bible.chinese.download%]">[%holy.bible.chinese.download%]</a></li>
-	</ul>
+	</ol>
 	</div>
-
 </div>
 </div>
 
-<div id="footer"  data-role="footer">
+<div id="footer">
 	<div class="wrapper">
 		<p>
 			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
@@ -250,7 +264,7 @@ $(function(){
 </div>
 
 <script type="text/javascript">
-window.listener.install(document.getElementById("f"),document.getElementById("keyword"),"keyword.jsp",false,"×");
+window.listener.install(document.f,document.f.keyword,"keyword.jsp",false,"×");
 </script>
 </body>
 </html>

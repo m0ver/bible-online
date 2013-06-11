@@ -4,3 +4,4 @@
 *.war
 *.ear
 *.DS_Store
+*.sqlite
