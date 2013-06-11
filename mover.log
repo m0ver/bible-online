@@ -3977,3 +3977,1902 @@ Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.h
 Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
 2013-06-09 01:49:48 	
 Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 06:58:05 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 06:58:05 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 06:58:05 	
+find:SELECT * FROM `book` 
+
+2013-06-09 06:58:05 	
+system default database:bible
+
+2013-06-09 06:58:05 	
+SELECT * FROM `book` 
+
+2013-06-09 06:58:05 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 06:58:05 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 06:58:05 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 06:58:05 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 06:58:05 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 06:58:15 	
+find:SELECT * FROM `book` 
+
+2013-06-09 06:58:15 	
+SELECT * FROM `book` 
+
+2013-06-09 06:58:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 06:58:15 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 06:58:15 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 06:58:15 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-09 06:58:15 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-09 06:58:15 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 06:58:15 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 06:58:27 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:27 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:27 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:27 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:27 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:27 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:35 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:35 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:36 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:36 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:38 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:38 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:38 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:38 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:42 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:42 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:43 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:43 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:44 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:44 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:44 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:44 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-09 06:58:47 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 06:58:47 	
+find:SELECT bible.*,book.book_name FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%路加%'  AND book.language='zh_CN'  order by bible.book_id,bible.chapter_id limit 0,20
+
+2013-06-09 06:58:47 	
+SELECT bible.*,book.book_name FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%路加%'  AND book.language='zh_CN'  order by bible.book_id,bible.chapter_id limit 0,20
+
+2013-06-09 06:58:47 	
+SELECT count(bible.id) AS size FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%路加%'  AND book.language='zh_CN' 
+
+2013-06-09 06:58:47 	
+find:SELECT id,visit FROM `keyword` WHERE keyword=?
+
+2013-06-09 06:58:47 	
+SELECT id,visit FROM `keyword` WHERE keyword=?
+
+2013-06-09 06:58:47 	
+UPDATE `keyword` SET `keyword`=?,`visit`=? WHERE id=?
+
+2013-06-09 06:59:01 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:55:50 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:55:57 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:55:57 	
+SELECT * FROM `book` 
+
+2013-06-09 07:55:57 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:55:57 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:55:57 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:55:57 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-09 07:55:57 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-09 07:55:57 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:55:57 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:03 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:03 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:03 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:03 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:03 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:03 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=2 order by part_id
+
+2013-06-09 07:56:03 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=2 order by part_id
+
+2013-06-09 07:56:03 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:03 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:05 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:05 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:05 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:05 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:05 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:05 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=3 order by part_id
+
+2013-06-09 07:56:06 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=3 order by part_id
+
+2013-06-09 07:56:06 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:06 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:07 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:07 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:07 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:07 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:07 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:07 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=4 order by part_id
+
+2013-06-09 07:56:07 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=4 order by part_id
+
+2013-06-09 07:56:07 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:07 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:08 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:08 	
+2013-06-09 07:56:08 	
+find:SELECT * FROM `book` 
+
+SELECT * FROM `book` 
+
+2013-06-09 07:56:08 	
+system default database:bible
+
+2013-06-09 07:56:08 	
+2013-06-09 07:56:08 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:08 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:08 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:08 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=5 order by part_id
+
+2013-06-09 07:56:08 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:08 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:08 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:08 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=5 order by part_id
+
+2013-06-09 07:56:08 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=5 order by part_id
+
+2013-06-09 07:56:08 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:08 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=5 order by part_id
+
+2013-06-09 07:56:08 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:08 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:08 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:09 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:09 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:09 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:09 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:09 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:09 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=6 order by part_id
+
+2013-06-09 07:56:09 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=6 order by part_id
+
+2013-06-09 07:56:09 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:09 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:09 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:09 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:09 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:09 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:09 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:09 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=7 order by part_id
+
+2013-06-09 07:56:09 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=7 order by part_id
+
+2013-06-09 07:56:09 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:09 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:10 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:10 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:10 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:10 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:10 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:10 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=7 order by part_id
+
+2013-06-09 07:56:10 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=7 order by part_id
+
+2013-06-09 07:56:10 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:10 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:10 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:10 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:10 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:10 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:10 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:10 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=8 order by part_id
+
+2013-06-09 07:56:10 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=8 order by part_id
+
+2013-06-09 07:56:10 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:10 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:11 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:11 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:11 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:11 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:11 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:11 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=9 order by part_id
+
+2013-06-09 07:56:11 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=9 order by part_id
+
+2013-06-09 07:56:11 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:11 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:12 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:12 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:12 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:12 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:12 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:12 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=10 order by part_id
+
+2013-06-09 07:56:12 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=10 order by part_id
+
+2013-06-09 07:56:12 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:12 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:12 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:12 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:12 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:12 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:12 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:12 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=11 order by part_id
+
+2013-06-09 07:56:12 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=11 order by part_id
+
+2013-06-09 07:56:12 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:13 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:14 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:14 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:14 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:14 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:14 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:14 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=12 order by part_id
+
+2013-06-09 07:56:14 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:14 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=12 order by part_id
+
+2013-06-09 07:56:14 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:14 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:14 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:14 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:14 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:14 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=12 order by part_id
+
+2013-06-09 07:56:14 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:14 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=12 order by part_id
+
+2013-06-09 07:56:14 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:14 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:14 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:14 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:14 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:14 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:14 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:14 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=12 order by part_id
+
+2013-06-09 07:56:14 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=12 order by part_id
+
+2013-06-09 07:56:14 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:14 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:15 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:15 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:15 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:15 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:15 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=13 order by part_id
+
+2013-06-09 07:56:15 	
+2013-06-09 07:56:15 	
+find:SELECT * FROM `book` 
+
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=13 order by part_id
+
+2013-06-09 07:56:15 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:15 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:15 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:15 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:15 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=13 order by part_id
+
+2013-06-09 07:56:15 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:15 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=13 order by part_id
+
+2013-06-09 07:56:15 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:15 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:15 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:15 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:15 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:15 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=13 order by part_id
+
+2013-06-09 07:56:15 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:15 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=13 order by part_id
+
+2013-06-09 07:56:15 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:15 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:15 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:15 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:15 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:15 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:15 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=13 order by part_id
+
+2013-06-09 07:56:15 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=13 order by part_id
+
+2013-06-09 07:56:15 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:15 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:16 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:16 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:16 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:16 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:16 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:16 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=13 order by part_id
+
+2013-06-09 07:56:16 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=13 order by part_id
+
+2013-06-09 07:56:16 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:16 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:17 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:17 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:17 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:17 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:17 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:17 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=14 order by part_id
+
+2013-06-09 07:56:17 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=14 order by part_id
+
+2013-06-09 07:56:17 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:17 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:17 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:17 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:17 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:17 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:17 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:17 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=14 order by part_id
+
+2013-06-09 07:56:17 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=14 order by part_id
+
+2013-06-09 07:56:17 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:17 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:17 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:17 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:17 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:17 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:17 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:17 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=14 order by part_id
+
+2013-06-09 07:56:17 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:17 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:17 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:17 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:17 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:17 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=14 order by part_id
+
+2013-06-09 07:56:17 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:17 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=14 order by part_id
+
+2013-06-09 07:56:17 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:17 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=14 order by part_id
+
+2013-06-09 07:56:17 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:17 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:18 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:18 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:18 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:18 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:18 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=15 order by part_id
+
+2013-06-09 07:56:18 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=15 order by part_id
+
+2013-06-09 07:56:18 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:18 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:18 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:18 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:18 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:18 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:18 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=16 order by part_id
+
+2013-06-09 07:56:18 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=16 order by part_id
+
+2013-06-09 07:56:18 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:18 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:20 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:20 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:20 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:20 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:20 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:20 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=17 order by part_id
+
+2013-06-09 07:56:20 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=17 order by part_id
+
+2013-06-09 07:56:20 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:20 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:20 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:20 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:20 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:20 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:20 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:20 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=18 order by part_id
+
+2013-06-09 07:56:20 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=18 order by part_id
+
+2013-06-09 07:56:20 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:20 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:21 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:21 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:21 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:21 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:21 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:21 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=19 order by part_id
+
+2013-06-09 07:56:21 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=19 order by part_id
+
+2013-06-09 07:56:21 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:21 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:22 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:22 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:22 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:22 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:22 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:22 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=20 order by part_id
+
+2013-06-09 07:56:22 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=20 order by part_id
+
+2013-06-09 07:56:22 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:22 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:23 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:23 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:23 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:23 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:23 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:23 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=21 order by part_id
+
+2013-06-09 07:56:23 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=21 order by part_id
+
+2013-06-09 07:56:23 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:23 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:23 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:23 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:23 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:23 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:23 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:23 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=21 order by part_id
+
+2013-06-09 07:56:23 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=21 order by part_id
+
+2013-06-09 07:56:23 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:23 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:25 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:25 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:25 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:25 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:25 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:25 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=22 order by part_id
+
+2013-06-09 07:56:25 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=22 order by part_id
+
+2013-06-09 07:56:25 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:25 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:25 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:25 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:25 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:25 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:25 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:25 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=22 order by part_id
+
+2013-06-09 07:56:25 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=22 order by part_id
+
+2013-06-09 07:56:25 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:25 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:27 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:27 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:27 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:27 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:27 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:27 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=23 order by part_id
+
+2013-06-09 07:56:27 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=23 order by part_id
+
+2013-06-09 07:56:27 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:27 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:28 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:28 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:28 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:28 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:28 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:28 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=24 order by part_id
+
+2013-06-09 07:56:28 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=24 order by part_id
+
+2013-06-09 07:56:28 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:28 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:29 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:29 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:29 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:29 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:29 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:29 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=25 order by part_id
+
+2013-06-09 07:56:29 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=25 order by part_id
+
+2013-06-09 07:56:29 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:29 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:31 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:31 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:31 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:31 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:31 	
+find:SELECT * FROM ESV WHERE book_id=1 and chapter_id=25 order by part_id
+
+2013-06-09 07:56:31 	
+SELECT * FROM ESV WHERE book_id=1 and chapter_id=25 order by part_id
+
+2013-06-09 07:56:31 	
+find:SELECT max(chapter_id) as max_chapter FROM ESV WHERE book_id=?
+
+2013-06-09 07:56:31 	
+SELECT max(chapter_id) as max_chapter FROM ESV WHERE book_id=?
+
+2013-06-09 07:56:33 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:33 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:33 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:33 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:33 	
+find:SELECT * FROM NIV WHERE book_id=1 and chapter_id=25 order by part_id
+
+2013-06-09 07:56:33 	
+SELECT * FROM NIV WHERE book_id=1 and chapter_id=25 order by part_id
+
+2013-06-09 07:56:33 	
+find:SELECT max(chapter_id) as max_chapter FROM NIV WHERE book_id=?
+
+2013-06-09 07:56:33 	
+SELECT max(chapter_id) as max_chapter FROM NIV WHERE book_id=?
+
+2013-06-09 07:56:38 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:38 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:38 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:38 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:38 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:38 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=25 order by part_id
+
+2013-06-09 07:56:38 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=25 order by part_id
+
+2013-06-09 07:56:38 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:38 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:53 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:56:53 	
+SELECT * FROM `book` 
+
+2013-06-09 07:56:53 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:56:53 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:53 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:56:53 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=26 order by part_id
+
+2013-06-09 07:56:53 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=26 order by part_id
+
+2013-06-09 07:56:53 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:56:53 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:58:13 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:58:13 	
+SELECT * FROM `book` 
+
+2013-06-09 07:58:13 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:58:13 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:58:13 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-09 07:58:13 	
+find:SELECT * FROM zh_CN WHERE book_id=42 and chapter_id=6 order by part_id
+
+2013-06-09 07:58:13 	
+SELECT * FROM zh_CN WHERE book_id=42 and chapter_id=6 order by part_id
+
+2013-06-09 07:58:13 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:58:13 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-09 07:36:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:36:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:36:48 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:36:49 	
+system default database:bible
+
+2013-06-09 07:36:49 	
+SELECT * FROM `book` 
+
+2013-06-09 07:36:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:36:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:36:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:36:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:36:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:52:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:52:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:52:04 	
+find:SELECT * FROM `book` 
+
+2013-06-09 07:52:04 	
+system default database:bible
+
+2013-06-09 07:52:04 	
+SELECT * FROM `book` 
+
+2013-06-09 07:52:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:52:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:52:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:52:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 07:52:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:00:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:00:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:00:52 	
+find:SELECT * FROM `book` 
+
+2013-06-09 08:00:52 	
+system default database:bible
+
+2013-06-09 08:00:52 	
+SELECT * FROM `book` 
+
+2013-06-09 08:00:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:00:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:00:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:00:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:00:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:24:53 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:24:53 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:24:53 	
+find:SELECT * FROM `book` 
+
+2013-06-09 08:24:54 	
+system default database:bible
+
+2013-06-09 08:24:54 	
+SELECT * FROM `book` 
+
+2013-06-09 08:24:54 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:24:54 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:24:54 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:24:54 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:24:54 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:28:57 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:28:57 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:28:57 	
+find:SELECT * FROM `book` 
+
+2013-06-09 08:28:58 	
+system default database:bible
+
+2013-06-09 08:28:58 	
+SELECT * FROM `book` 
+
+2013-06-09 08:28:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:28:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:28:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:28:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:28:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:35:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:35:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:35:52 	
+find:SELECT * FROM `book` 
+
+2013-06-09 08:35:52 	
+system default database:bible
+
+2013-06-09 08:35:52 	
+SELECT * FROM `book` 
+
+2013-06-09 08:35:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:35:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:35:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:35:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:35:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:41:54 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:41:54 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:41:54 	
+find:SELECT * FROM `book` 
+
+2013-06-09 08:41:55 	
+system default database:bible
+
+2013-06-09 08:41:55 	
+SELECT * FROM `book` 
+
+2013-06-09 08:41:55 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:41:55 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:41:55 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:41:55 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:41:55 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:51:23 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:51:23 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:51:23 	
+find:SELECT * FROM `book` 
+
+2013-06-09 08:51:23 	
+system default database:bible
+
+2013-06-09 08:51:23 	
+SELECT * FROM `book` 
+
+2013-06-09 08:51:23 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:51:24 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:51:24 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:51:24 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:51:24 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:54:34 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:54:34 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:54:34 	
+find:SELECT * FROM `book` 
+
+2013-06-09 08:54:34 	
+system default database:bible
+
+2013-06-09 08:54:34 	
+SELECT * FROM `book` 
+
+2013-06-09 08:54:34 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:54:34 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:54:34 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:54:34 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 08:54:34 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:01:13 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:01:13 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:01:13 	
+find:SELECT * FROM `book` 
+
+2013-06-09 09:01:13 	
+system default database:bible
+
+2013-06-09 09:01:13 	
+SELECT * FROM `book` 
+
+2013-06-09 09:01:13 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:01:13 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:01:13 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:01:13 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:01:13 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:02:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:02:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:02:04 	
+find:SELECT * FROM `book` 
+
+2013-06-09 09:02:04 	
+system default database:bible
+
+2013-06-09 09:02:04 	
+SELECT * FROM `book` 
+
+2013-06-09 09:02:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:02:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:02:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:02:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:02:04 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:30:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:30:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:30:18 	
+find:SELECT * FROM `book` 
+
+2013-06-09 09:30:18 	
+system default database:bible
+
+2013-06-09 09:30:18 	
+SELECT * FROM `book` 
+
+2013-06-09 09:30:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:30:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:30:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:30:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 09:30:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:11:11 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:11:11 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:11:11 	
+find:SELECT * FROM `book` 
+
+2013-06-09 10:11:11 	
+system default database:bible
+
+2013-06-09 10:11:11 	
+SELECT * FROM `book` 
+
+2013-06-09 10:11:11 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:11:11 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:11:11 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:11:11 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:11:11 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:15:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:15:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:15:48 	
+find:SELECT * FROM `book` 
+
+2013-06-09 10:15:49 	
+system default database:bible
+
+2013-06-09 10:15:49 	
+SELECT * FROM `book` 
+
+2013-06-09 10:15:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:15:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:15:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:15:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:15:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:19:35 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:19:35 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:19:35 	
+find:SELECT * FROM `book` 
+
+2013-06-09 10:19:35 	
+system default database:bible
+
+2013-06-09 10:19:35 	
+SELECT * FROM `book` 
+
+2013-06-09 10:19:36 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:19:36 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:19:36 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:19:36 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-09 10:19:36 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:36:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:36:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:36:58 	
+find:SELECT * FROM `book` 
+
+2013-06-10 11:36:58 	
+system default database:bible
+
+2013-06-10 11:36:58 	
+SELECT * FROM `book` 
+
+2013-06-10 11:36:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:36:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:36:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:36:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:36:58 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:51:51 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:51:51 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:51:51 	
+find:SELECT * FROM `book` 
+
+2013-06-10 11:51:52 	
+system default database:bible
+
+2013-06-10 11:51:52 	
+SELECT * FROM `book` 
+
+2013-06-10 11:51:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:51:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:51:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:51:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:51:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:56:59 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:56:59 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:56:59 	
+find:SELECT * FROM `book` 
+
+2013-06-10 11:56:59 	
+system default database:bible
+
+2013-06-10 11:56:59 	
+SELECT * FROM `book` 
+
+2013-06-10 11:56:59 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:56:59 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:56:59 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:56:59 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-10 11:56:59 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:01:09 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:01:10 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:01:10 	
+find:SELECT * FROM `book` 
+
+2013-06-11 12:01:10 	
+system default database:bible
+
+2013-06-11 12:01:10 	
+SELECT * FROM `book` 
+
+2013-06-11 12:01:10 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:01:10 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:01:10 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:01:10 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:01:10 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:02:43 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:02:43 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:02:43 	
+find:SELECT * FROM `book` 
+
+2013-06-11 12:02:43 	
+system default database:bible
+
+2013-06-11 12:02:43 	
+SELECT * FROM `book` 
+
+2013-06-11 12:02:43 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:02:43 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:02:43 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:02:43 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:02:43 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:05:02 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:05:02 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:05:02 	
+find:SELECT * FROM `book` 
+
+2013-06-11 12:05:02 	
+system default database:bible
+
+2013-06-11 12:05:02 	
+SELECT * FROM `book` 
+
+2013-06-11 12:05:02 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:05:02 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:05:02 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:05:02 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:05:02 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:09 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:09 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:09 	
+find:SELECT * FROM `book` 
+
+2013-06-11 12:06:09 	
+system default database:bible
+
+2013-06-11 12:06:09 	
+SELECT * FROM `book` 
+
+2013-06-11 12:06:09 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:09 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:09 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:09 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:09 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:50 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:50 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:50 	
+find:SELECT * FROM `book` 
+
+2013-06-11 12:06:50 	
+system default database:bible
+
+2013-06-11 12:06:50 	
+SELECT * FROM `book` 
+
+2013-06-11 12:06:50 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:50 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:50 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:50 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:06:50 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:08:30 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:08:30 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:08:30 	
+find:SELECT * FROM `book` 
+
+2013-06-11 12:08:30 	
+system default database:bible
+
+2013-06-11 12:08:30 	
+SELECT * FROM `book` 
+
+2013-06-11 12:08:30 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:08:30 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:08:30 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:08:30 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:08:30 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:09:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:09:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:09:52 	
+find:SELECT * FROM `book` 
+
+2013-06-11 12:09:52 	
+system default database:bible
+
+2013-06-11 12:09:52 	
+SELECT * FROM `book` 
+
+2013-06-11 12:09:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:09:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:09:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:09:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:09:52 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:21:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:21:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:21:48 	
+find:SELECT * FROM `book` 
+
+2013-06-11 12:21:48 	
+system default database:bible
+
+2013-06-11 12:21:48 	
+SELECT * FROM `book` 
+
+2013-06-11 12:21:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:21:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:21:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:21:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:21:48 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:27:45 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:27:45 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:27:45 	
+find:SELECT * FROM `book` 
+
+2013-06-11 12:27:45 	
+system default database:bible
+
+2013-06-11 12:27:45 	
+SELECT * FROM `book` 
+
+2013-06-11 12:27:45 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:27:45 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:27:45 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:27:45 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 12:27:45 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 11:13:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 11:13:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 11:13:49 	
+find:SELECT * FROM `book` 
+
+2013-06-11 11:13:49 	
+system default database:bible
+
+2013-06-11 11:13:49 	
+SELECT * FROM `book` 
+
+2013-06-11 11:13:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 11:13:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 11:13:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 11:13:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 11:13:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
