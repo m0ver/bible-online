@@ -5876,3 +5876,1223 @@ Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.h
 Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
 2013-06-11 11:13:49 	
 Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:53:20 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:53:20 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:53:20 	
+find:SELECT * FROM `book` 
+
+2013-06-11 09:53:21 	
+system default database:bible
+
+2013-06-11 09:53:22 	
+SELECT * FROM `book` 
+
+2013-06-11 09:53:22 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:53:22 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:53:22 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:53:22 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:53:22 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:53:26 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:53:31 	
+find:SELECT * FROM `book` 
+
+2013-06-11 09:53:31 	
+SELECT * FROM `book` 
+
+2013-06-11 09:53:31 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:53:31 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:53:31 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:53:31 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 09:53:32 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 09:53:32 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:53:32 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:53:54 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:53:54 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:53:54 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:53:54 	
+system default database:bible
+
+2013-06-11 09:53:54 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:53:54 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:53:54 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:53:54 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:53:54 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:53:55 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:53:55 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:54:05 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:54:05 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:54:16 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:54:16 	
+find:SELECT bible.*,book.book_name FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%Ô¸Ò®ºÍ»ª´Í¸£ÓëÄã%'  AND book.language='zh_CN'  order by bible.book_id,bible.chapter_id limit 0,20
+
+2013-06-11 09:54:16 	
+SELECT bible.*,book.book_name FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%Ô¸Ò®ºÍ»ª´Í¸£ÓëÄã%'  AND book.language='zh_CN'  order by bible.book_id,bible.chapter_id limit 0,20
+
+2013-06-11 09:54:16 	
+SELECT count(bible.id) AS size FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%Ô¸Ò®ºÍ»ª´Í¸£ÓëÄã%'  AND book.language='zh_CN' 
+
+2013-06-11 09:54:16 	
+find:SELECT id,visit FROM `keyword` WHERE keyword=?
+
+2013-06-11 09:54:16 	
+SELECT id,visit FROM `keyword` WHERE keyword=?
+
+2013-06-11 09:54:16 	
+UPDATE `keyword` SET `keyword`=?,`visit`=? WHERE id=?
+
+2013-06-11 09:54:30 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:54:30 	
+find:SELECT bible.*,book.book_name FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%%E6%84%BF%E8%80%B6%E5%92%8C%E5%8D%8E%E8%B5%90%E7%A6%8F%E4%B8%8E%E4%BD%A0%'  AND book.language='zh_CN'  order by bible.book_id,bible.chapter_id limit 0,20
+
+2013-06-11 09:54:30 	
+SELECT bible.*,book.book_name FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%%E6%84%BF%E8%80%B6%E5%92%8C%E5%8D%8E%E8%B5%90%E7%A6%8F%E4%B8%8E%E4%BD%A0%'  AND book.language='zh_CN'  order by bible.book_id,bible.chapter_id limit 0,20
+
+2013-06-11 09:54:30 	
+SELECT count(bible.id) AS size FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%%E6%84%BF%E8%80%B6%E5%92%8C%E5%8D%8E%E8%B5%90%E7%A6%8F%E4%B8%8E%E4%BD%A0%'  AND book.language='zh_CN' 
+
+2013-06-11 09:54:44 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:54:44 	
+find:SELECT bible.*,book.book_name FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%%E6%84%BF%E8%80%B6%E5%92%8C%E5%8D%8E%E8%B5%90%E7%A6%8F%E4%B8%8E%E4%BD%A0%'  AND book.language='zh_CN'  order by bible.book_id,bible.chapter_id limit 0,20
+
+2013-06-11 09:54:44 	
+SELECT bible.*,book.book_name FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%%E6%84%BF%E8%80%B6%E5%92%8C%E5%8D%8E%E8%B5%90%E7%A6%8F%E4%B8%8E%E4%BD%A0%'  AND book.language='zh_CN'  order by bible.book_id,bible.chapter_id limit 0,20
+
+2013-06-11 09:54:44 	
+SELECT count(bible.id) AS size FROM zh_CN as bible left join `book` as book on bible.book_id=book.book_id where  bible.content like '%%E6%84%BF%E8%80%B6%E5%92%8C%E5%8D%8E%E8%B5%90%E7%A6%8F%E4%B8%8E%E4%BD%A0%'  AND book.language='zh_CN' 
+
+2013-06-11 09:54:51 	
+find:SELECT * FROM `book` 
+
+2013-06-11 09:54:51 	
+SELECT * FROM `book` 
+
+2013-06-11 09:54:51 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:54:51 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:54:51 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:54:51 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 09:54:51 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 09:54:51 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:54:51 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:54:56 	
+find:SELECT * FROM `book` 
+
+2013-06-11 09:54:56 	
+SELECT * FROM `book` 
+
+2013-06-11 09:54:56 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:54:56 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:54:56 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:54:56 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 09:54:56 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 09:54:56 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:54:56 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:55:07 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:55:07 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:55:08 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:55:08 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:55:08 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:55:08 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:55:08 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:55:08 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:55:09 	
+find:SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:55:09 	
+SELECT * FROM `keyword` WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7
+
+2013-06-11 09:55:17 	
+find:SELECT * FROM `book` 
+
+2013-06-11 09:55:17 	
+SELECT * FROM `book` 
+
+2013-06-11 09:55:17 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:55:17 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:55:17 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:55:17 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 09:55:17 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 09:55:17 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:55:17 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:55:39 	
+find:SELECT * FROM `book` 
+
+2013-06-11 09:55:39 	
+SELECT * FROM `book` 
+
+2013-06-11 09:55:39 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:55:39 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:55:39 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:55:39 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=2 order by part_id
+
+2013-06-11 09:55:39 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=2 order by part_id
+
+2013-06-11 09:55:39 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:55:39 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:57:53 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:57:53 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:57:53 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:57:53 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:57:53 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:57:53 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:57:53 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:57:53 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:57:53 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:57:53 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:00 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:00 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:00 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:00 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:00 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:00 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:00 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:00 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:00 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:00 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:58:10 	
+find:SELECT * FROM `book` 
+
+2013-06-11 09:58:10 	
+SELECT * FROM `book` 
+
+2013-06-11 09:58:10 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:58:10 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:58:10 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:58:10 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=2 order by part_id
+
+2013-06-11 09:58:10 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=2 order by part_id
+
+2013-06-11 09:58:10 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:58:10 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:59:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:59:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:59:15 	
+find:SELECT * FROM `book` 
+
+2013-06-11 09:59:15 	
+system default database:bible
+
+2013-06-11 09:59:15 	
+SELECT * FROM `book` 
+
+2013-06-11 09:59:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:59:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:59:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:59:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:59:15 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:59:22 	
+find:SELECT * FROM `book` 
+
+2013-06-11 09:59:22 	
+SELECT * FROM `book` 
+
+2013-06-11 09:59:22 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 09:59:22 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:59:22 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 09:59:22 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=2 order by part_id
+
+2013-06-11 09:59:22 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=2 order by part_id
+
+2013-06-11 09:59:22 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:59:22 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 09:59:40 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:40 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 09:59:41 	
+Application has not been installed, or it is uninstalled already.:
+org.tinystruct.system.ApplicationManager.call(ApplicationManager.java:93)
+org.tinystruct.system.DefaultHandler.service(DefaultHandler.java:106)
+org.tinystruct.system.DefaultHandler.doFilter(DefaultHandler.java:193)
+org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:859)
+org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:602)
+org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+java.lang.Thread.run(Thread.java:680)
+
+
+2013-06-11 10:00:16 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:00:16 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:00:16 	
+find:SELECT * FROM `book` 
+
+2013-06-11 10:00:16 	
+system default database:bible
+
+2013-06-11 10:00:16 	
+SELECT * FROM `book` 
+
+2013-06-11 10:00:16 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:00:16 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:00:16 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:00:16 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:00:16 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:01:36 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:01:36 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:05:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:05:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:05:18 	
+find:SELECT * FROM `book` 
+
+2013-06-11 10:05:18 	
+system default database:bible
+
+2013-06-11 10:05:18 	
+SELECT * FROM `book` 
+
+2013-06-11 10:05:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:05:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:05:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:05:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:05:18 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:05:33 	
+find:SELECT * FROM `book` 
+
+2013-06-11 10:05:33 	
+SELECT * FROM `book` 
+
+2013-06-11 10:05:33 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:05:33 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 10:05:33 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 10:05:33 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 10:05:33 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 10:05:33 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 10:05:33 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 10:06:40 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:06:40 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:06:40 	
+find:SELECT * FROM `book` 
+
+2013-06-11 10:06:40 	
+system default database:bible
+
+2013-06-11 10:06:40 	
+SELECT * FROM `book` 
+
+2013-06-11 10:06:40 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:06:40 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:06:40 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:06:40 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:06:40 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:07:05 	
+find:SELECT * FROM `book` 
+
+2013-06-11 10:07:05 	
+SELECT * FROM `book` 
+
+2013-06-11 10:07:05 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:07:05 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 10:07:05 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 10:07:05 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 10:07:05 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 10:07:05 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 10:07:05 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 10:07:28 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:07:28 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:07:28 	
+find:SELECT * FROM `book` 
+
+2013-06-11 10:07:29 	
+system default database:bible
+
+2013-06-11 10:07:29 	
+SELECT * FROM `book` 
+
+2013-06-11 10:07:29 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:07:29 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:07:29 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:07:29 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:07:29 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:07:33 	
+find:SELECT * FROM `book` 
+
+2013-06-11 10:07:33 	
+SELECT * FROM `book` 
+
+2013-06-11 10:07:33 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-11 10:07:33 	
+find:SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 10:07:33 	
+SELECT * FROM `book` WHERE book_id=? and language=?
+
+2013-06-11 10:07:33 	
+find:SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 10:07:33 	
+SELECT * FROM zh_CN WHERE book_id=1 and chapter_id=1 order by part_id
+
+2013-06-11 10:07:33 	
+find:SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-11 10:07:33 	
+SELECT max(chapter_id) as max_chapter FROM zh_CN WHERE book_id=?
+
+2013-06-12 12:28:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-12 12:28:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-12 12:28:49 	
+find:SELECT * FROM `book` 
+
+2013-06-12 12:28:49 	
+system default database:bible
+
+2013-06-12 12:28:49 	
+SELECT * FROM `book` 
+
+2013-06-12 12:28:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-12 12:28:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-12 12:28:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-12 12:28:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
+2013-06-12 12:28:49 	
+Can't find resource for bundle java.util.PropertyResourceBundle, key navigator.home.caption key:navigator.home.caption
