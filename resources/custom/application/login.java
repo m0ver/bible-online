@@ -15,17 +15,49 @@
  *******************************************************************************/
 package custom.application;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.security.GeneralSecurityException;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.Header;
+import org.apache.http.HeaderIterator;
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpProtocolParams;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
+import org.tinystruct.data.component.Builder;
+import org.tinystruct.data.component.Struct;
+import org.tinystruct.datatype.ObjectVariable;
 import org.tinystruct.handle.Reforward;
 import org.tinystruct.handle.Report;
 import org.tinystruct.system.util.StringUtilities;
 import org.tinystruct.system.util.ValidateCode;
+
+import com.google.api.client.auth.oauth2.TokenResponse;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 
 import custom.objects.User;
 
@@ -33,77 +65,84 @@ public class login extends AbstractApplication {
 	private passport passport;
 	private User usr;
 
-	public Object validate() 
-	{
-		HttpServletRequest request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-		HttpServletResponse response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
-		
-		Cookie cookie=StringUtilities.getCookieByName(request.getCookies(), "username");
-		if(cookie!=null)
-		{
-			this.setVariable("username",cookie.getValue());
-			String user_field=cookie.getValue()+"<input class=\"text\" id=\"username\" name=\"username\" type=\"hidden\" value=\""+cookie.getValue()+"\"/>  <a href=\"javascript:void(0)\" onclick=\"restoreField()\">[%login.user.change%]</a>";
+	public Object validate() {
+		HttpServletRequest request = (HttpServletRequest) this.context
+				.getAttribute("HTTP_REQUEST");
+		HttpServletResponse response = (HttpServletResponse) this.context
+				.getAttribute("HTTP_RESPONSE");
+
+		Cookie cookie = StringUtilities.getCookieByName(request.getCookies(),
+				"username");
+		if (cookie != null) {
+			this.setVariable("username", cookie.getValue());
+			String user_field = cookie.getValue()
+					+ "<input class=\"text\" id=\"username\" name=\"username\" type=\"hidden\" value=\""
+					+ cookie.getValue()
+					+ "\"/>  <a href=\"javascript:void(0)\" onclick=\"restoreField()\">[%login.user.change%]</a>";
 
 			this.setVariable("user_field", user_field);
-		}
-		else
-		{
+		} else {
 			this.setVariable("username", "");
-			this.setVariable("user_field", "<input class=\"text\" id=\"username\" name=\"username\" type=\"text\" value=\"\"/>");
+			this.setVariable(
+					"user_field",
+					"<input class=\"text\" id=\"username\" name=\"username\" type=\"text\" value=\"\"/>");
 		}
 
-		this.setText("login.tips.text",this.getLink("bible"));
+		this.setText("login.tips.text", this.getLink("bible"));
 
-		try 
-		{
+		try {
 			Reforward reforward = new Reforward(request, response);
 
-			if(request.getMethod().equalsIgnoreCase("post")) {
-				this.passport=new passport(request,response, "waslogined");
-				if(this.passport.login())
-				{
+			if (request.getMethod().equalsIgnoreCase("post")) {
+				this.passport = new passport(request, response, "waslogined");
+				if (this.passport.login()) {
 					reforward.forward();
 				}
 			}
-			
+
 			this.setVariable("from", reforward.getFromURL());
 		} catch (ApplicationException e) {
-			this.setVariable("error", "<div class=\"error\">"+e.getRootCause().getMessage()+"</div>");
+			this.setVariable("error", "<div class=\"error\">"
+					+ e.getRootCause().getMessage() + "</div>");
 		}
-		
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
-		
+
+		this.setVariable("action", this.config.get("default.base_url")
+				+ this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+
 		HttpSession session = request.getSession();
-		if(session.getAttribute("usr")!=null) {
+		if (session.getAttribute("usr") != null) {
 			this.usr = (User) session.getAttribute("usr");
-			
-			this.setVariable("user.status","");
-			this.setVariable("user.profile","<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">"+this.usr.getEmail()+"</a>");
+
+			this.setVariable("user.status", "");
+			this.setVariable("user.profile",
+					"<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">"
+							+ this.usr.getEmail() + "</a>");
+		} else {
+			this.setVariable(
+					"user.status",
+					"<a href=\"" + this.getLink("user/login") + "\">"
+							+ this.getProperty("page.login.caption") + "</a>");
+			this.setVariable("user.profile", "");
 		}
-		else {
-			this.setVariable("user.status","<a href=\""+this.getLink("user/login")+"\">"+this.getProperty("page.login.caption")+"</a>");
-			this.setVariable("user.profile","");
-		}
-		
+
 		return this;
 	}
-	
-	public void logout()
-	{
-		HttpServletRequest request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-		HttpServletResponse response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
+
+	public void logout() {
+		HttpServletRequest request = (HttpServletRequest) this.context
+				.getAttribute("HTTP_REQUEST");
+		HttpServletResponse response = (HttpServletResponse) this.context
+				.getAttribute("HTTP_RESPONSE");
 
 		try {
-			this.passport=new passport(request,response, "waslogined");
+			this.passport = new passport(request, response, "waslogined");
 			this.passport.logout();
-			
-			if(request.getCookies()!=null)
-			{
-				Cookie[] cookies=request.getCookies();
-				int i=0;
+
+			if (request.getCookies() != null) {
+				Cookie[] cookies = request.getCookies();
+				int i = 0;
 				Cookie cookie;
-				while(cookies.length>i)
-				{
+				while (cookies.length > i) {
 					cookie = cookies[i];
 					cookie.setMaxAge(0);
 					cookie.setValue("");
@@ -111,10 +150,12 @@ public class login extends AbstractApplication {
 					i++;
 				}
 			}
-			
+
 			Reforward reforward = new Reforward(request, response);
 
-			reforward.setDefault(this.getLink(this.context.getAttribute("default.login.page").toString())+"&from="+reforward.getFromURL());
+			reforward.setDefault(this.getLink(this.context.getAttribute(
+					"default.login.page").toString())
+					);
 			reforward.forward();
 		} catch (ApplicationException e) {
 			// TODO Auto-generated catch block
@@ -122,18 +163,20 @@ public class login extends AbstractApplication {
 		}
 
 	}
-	
+
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
 		this.setAction("user/login", "validate");
 		this.setAction("user/logout", "logout");
 		this.setAction("validator/code", "toImage");
-		
+		this.setAction("user/login/googleaccount", "execute");
+		this.setAction("oauth2callback", "oAuth2callback");
+
 		this.setVariable("error", "");
 		this.setVariable("service", "");
-		this.setVariable("application.summary","");
-		
+		this.setVariable("application.summary", "");
+
 		this.setText("login");
 		this.setText("login.user.caption");
 		this.setText("login.password.caption");
@@ -144,7 +187,8 @@ public class login extends AbstractApplication {
 		this.setText("login.password.invalid");
 		this.setText("login.authorized.invalid");
 		this.setText("login.user.change");
-		
+		this.setText("login.with.otheraccount");
+
 		this.setText("navigator.login.caption");
 		this.setText("footer.forgot");
 		this.setText("page.login.title");
@@ -168,34 +212,189 @@ public class login extends AbstractApplication {
 		this.setText("footer.register");
 		this.setText("footer.api");
 		this.setText("footer.updates-rss");
-		
-		String username="";
-		if(this.getVariable("username")!=null) {
+
+		String username = "";
+		if (this.getVariable("username") != null) {
 			username = String.valueOf(this.getVariable("username").getValue());
 		}
 
 		this.setText("page.welcome.hello", (username == null || username.trim()
-				.length() == 0) ? "" : username + "，");		
+				.length() == 0) ? "" : username + "，");
 	}
-	
-	public void toImage(){
-		
-		HttpServletRequest request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-		HttpServletResponse response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
-		
-		response.setHeader("Pragma","No-cache");
-		response.setHeader("Cache-Control","no-cache");
+
+	public void toImage() {
+
+		HttpServletRequest request = (HttpServletRequest) this.context
+				.getAttribute("HTTP_REQUEST");
+		HttpServletResponse response = (HttpServletResponse) this.context
+				.getAttribute("HTTP_RESPONSE");
+
+		response.setHeader("Pragma", "No-cache");
+		response.setHeader("Cache-Control", "no-cache");
 		response.setDateHeader("Expires", 0);
-		
-		try
-		{
-			ValidateCode code=new ValidateCode(request);
+
+		try {
+			ValidateCode code = new ValidateCode(request);
 			code.toImage(response);
-		}
-		catch(java.io.IOException io)
-		{
+		} catch (java.io.IOException io) {
 			Report.getInstance().print(io.getMessage());
 		}
+	}
+
+	protected String createRequestString() throws UnsupportedEncodingException {
+		StringBuffer requestBuffer = new StringBuffer();
+
+		requestBuffer.append("https://accounts.google.com/o/oauth2/auth?");
+		requestBuffer.append("scope=");
+		requestBuffer.append(URLEncoder.encode(
+				StringUtilities.implode(" ", SCOPES), "utf-8"));
+		requestBuffer.append("&state=profile");
+		requestBuffer.append("&redirect_uri=");
+		requestBuffer.append(URLEncoder.encode(this.getLink("oauth2callback"),
+				"utf8"));
+		requestBuffer.append("&response_type=code");
+		requestBuffer
+				.append("&client_id=737184644498-2k1qvfbj34horj4lhfg06rph878kj72r.apps.googleusercontent.com");
+
+		return requestBuffer.toString();
+	}
+
+	/** Global instance of the JSON factory. */
+	private static final JsonFactory JSON_FACTORY = new JacksonFactory();
+
+	/** OAuth 2.0 scopes. */
+	private static final List<String> SCOPES = Arrays.asList(
+			"https://www.googleapis.com/auth/userinfo.profile",
+			"https://www.googleapis.com/auth/userinfo.email",
+			"https://www.google.com/m8/feeds");
+
+	private static GoogleClientSecrets clientSecrets;
+
+	public String oAuth2callback() throws ApplicationException {
+		HttpServletRequest request = (HttpServletRequest) this.context
+				.getAttribute("HTTP_REQUEST");
+		HttpServletResponse response = (HttpServletResponse) this.context
+				.getAttribute("HTTP_RESPONSE");
+		Reforward reforward = new Reforward(request, response);
+		TokenResponse oauth2_response;
+
+		try {
+			if (this.getVariable("google_client_secrets") == null) {
+				clientSecrets = GoogleClientSecrets.load(
+						JSON_FACTORY,
+						new InputStreamReader(login.class
+								.getResourceAsStream("/clients_secrets.json")));
+				if (clientSecrets.getDetails().getClientId()
+						.startsWith("Enter")
+						|| clientSecrets.getDetails().getClientSecret()
+								.startsWith("Enter ")) {
+					System.out
+							.println("Enter Client ID and Secret from https://code.google.com/apis/console/ ");
+				}
+
+				this.setVariable(new ObjectVariable("google_client_secrets",
+						clientSecrets));
+			} else
+				clientSecrets = (GoogleClientSecrets) this.getVariable(
+						"google_client_secrets").getValue();
+
+			GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+					GoogleNetHttpTransport.newTrustedTransport(), JSON_FACTORY,
+					clientSecrets, SCOPES).build();
+
+			oauth2_response = flow
+					.newTokenRequest(request.getParameter("code"))
+					.setRedirectUri(this.getLink("oauth2callback")).execute();
+
+			System.out.println("Ok:" + oauth2_response.toPrettyString());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			throw new ApplicationException(e1.getMessage(), e1);
+		} catch (GeneralSecurityException e) {
+			// TODO Auto-generated catch block
+			throw new ApplicationException(e.getMessage(), e);
+		}
+
+		try {
+			HttpClient httpClient = new DefaultHttpClient();
+			String url = "https://www.google.com/m8/feeds/contacts/default/full";
+			url = "https://www.googleapis.com/oauth2/v1/userinfo";
+			HttpGet httpget = new HttpGet(url + "?access_token="
+					+ oauth2_response.getAccessToken());
+			httpClient.getParams().setParameter(
+					HttpProtocolParams.HTTP_CONTENT_CHARSET, "UTF-8");
+
+			HttpResponse http_response = httpClient.execute(httpget);
+			HeaderIterator iterator = http_response.headerIterator();
+			while (iterator.hasNext()) {
+				Header next = iterator.nextHeader();
+				System.out.println(next.getName() + ":" + next.getValue());
+			}
+
+			InputStream instream = http_response.getEntity().getContent();
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			byte[] bytes = new byte[1024];
+
+			int len;
+			while ((len = instream.read(bytes)) != -1) {
+				out.write(bytes, 0, len);
+			}
+			instream.close();
+			out.close();
+
+			Struct struct = new Builder();
+			struct.parse(new String(out.toByteArray(), "utf-8"));
+
+			this.usr = new User();
+			this.usr.setEmail(struct.toData().getFieldInfo("email")
+					.stringValue());
+
+			if (this.usr.findOneByKey("email", this.usr.getEmail()).size() == 0) {
+				usr.setPassword("");
+				usr.setUsername(usr.getEmail());
+
+				usr.setLastloginIP(request.getRemoteAddr());
+				usr.setLastloginTime(new Date());
+				usr.setRegistrationTime(new Date());
+				usr.append();
+			}
+
+			new passport(request, response, "waslogined")
+					.setLoginAsUser(this.usr.getId());
+
+			reforward.setDefault(URLDecoder.decode(this.getVariable("from")
+					.getValue().toString(), "utf8"));
+			reforward.forward();
+
+			return new String(out.toByteArray(), "utf-8");
+		} catch (ClientProtocolException e) {
+			throw new ApplicationException(e.getMessage(), e);
+		} catch (IOException e) {
+			throw new ApplicationException(e.getMessage(), e);
+		} catch (ParseException e) {
+			throw new ApplicationException(e.getMessage(), e);
+		}
+
+	}
+
+	public void execute() throws ApplicationException {
+		HttpServletRequest http_request = (HttpServletRequest) this.context
+				.getAttribute("HTTP_REQUEST");
+		HttpServletResponse http_response = (HttpServletResponse) this.context
+				.getAttribute("HTTP_RESPONSE");
+
+		Reforward reforward = new Reforward(http_request, http_response);
+		this.setVariable("from", reforward.getFromURL());
+		System.out.println("From:" + reforward.getFromURL());
+		try {
+			HttpSession session = http_request.getSession();
+			if (session.getAttribute("usr") == null)
+				reforward.setDefault(createRequestString());
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			throw new ApplicationException(e.getMessage(), e);
+		}
+		reforward.forward();
 	}
 
 	@Override

@@ -117,6 +117,17 @@ $(function(){
 				<li><input id="autologin" name="autologin" value="true" type="checkbox" /> <label for="autologin">[%login.remember.caption%]</label> 	<input type="submit" class="button-secondary" value="[%login%] »" /></li> 
 				</ul>
 			</form>
+			<div>[%login.with.otheraccount%]:</div>
+			    <div>
+			    	<a href="/?q=user/login/googleaccount&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/google.png"></a>
+			    	<!-- 
+			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/sinat.png"></a>
+			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/qq.png"></a>
+			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/linkedin.png"></a>
+			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/github.png"></a>
+			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/baidu.png"></a>
+			         -->
+			    </div>
 			<div>
 			<a href="http://ingod.asia/bible.pdf" target="_blank"> <span><strong>圣经</strong> <em>简体中文和合本</em> </span></a>
 			</div>

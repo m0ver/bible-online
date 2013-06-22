@@ -74,7 +74,7 @@ public class search extends AbstractApplication
 		this.setText("navigator.help.caption");
 		
 		this.setText("holy.book.forward");
-		this.setText("holy.book.preview");
+		this.setText("holy.book.previous");
 		this.setText("holy.book.next");
 		this.setText("holy.book.find-and-reading");
 		this.setText("holy.book.tools");

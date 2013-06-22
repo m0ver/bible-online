@@ -220,6 +220,8 @@ public class sender extends AbstractApplication {
 			this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
 			this.response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
 	
+			bible.findOneById();
+			
 			this.reforward=new Reforward(this.request,this.response);
 			this.reforward.setDefault(this.getLink("bible")+"/"+bible.getBookId()+"/"+bible.getChapterId()+"/"+bible.getPartId());
 			this.reforward.forward();

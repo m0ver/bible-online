@@ -102,7 +102,7 @@ public class lection extends AbstractApplication {
 		this.setText("navigator.help.caption");
 		this.setText("page.reading.title");
 		this.setText("holy.book.forward");
-		this.setText("holy.book.preview");
+		this.setText("holy.book.previous");
 		this.setText("holy.book.next");
 		this.setText("holy.bible");
 		this.setText("holy.bible.old-testament");

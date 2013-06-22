@@ -176,7 +176,7 @@ $(function(){
 	<h2>[%holy.book.info%]</h2> 
 	<a class="clear-fix"></a>
 	<div class="partner" id="partner">
-		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.preview%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} </div>
+		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} </div>
 		<div id="documentation">
 			<div class="column" id="column1">{%left_column%} {%right_column%}</div>
 		</div>
@@ -186,7 +186,7 @@ $(function(){
 				<li>2:</li>
 			</ul>
 			
-			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.preview%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
+			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
 		</div>
 		
 	</div>
