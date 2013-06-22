@@ -8,6 +8,27 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/httpcore-4.2.2.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/mysql-connector-java-5.0.4-bin.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-api-client-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-api-client-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-api-client-java6-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-api-client-java6-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-api-client-servlet-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-api-client-servlet-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-oauth-client-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-oauth-client-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-oauth-client-java6-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-oauth-client-java6-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-oauth-client-java7-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-oauth-client-java7-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-oauth-client-servlet-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-oauth-client-servlet-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-http-client-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-http-client-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-http-client-protobuf-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-http-client-protobuf-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-http-client-gson-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-http-client-gson-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-http-client-jackson-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-http-client-jackson-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/google-http-client-jackson2-1.15.0-rc.jar" sourcepath="WEB-INF/lib-sources/google-http-client-jackson2-1.15.0-rc-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-logging-1.1.1.jar" sourcepath="WEB-INF/lib-sources/commons-logging-1.1.1-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/gson-2.1.jar" sourcepath="WEB-INF/lib-sources/gson-2.1-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jackson-core-asl-1.9.11.jar" sourcepath="WEB-INF/lib-sources/jackson-core-asl-1.9.11-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jackson-core-2.1.3.jar" sourcepath="WEB-INF/lib-sources/jackson-core-2.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jdo2-api-2.3-eb.jar" sourcepath="WEB-INF/lib-sources/jdo2-api-2.3-eb-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jsr305-1.3.9.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/protobuf-java-2.4.1.jar" sourcepath="WEB-INF/lib-sources/protobuf-java-2.4.1-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/transaction-api-1.1.jar" sourcepath="WEB-INF/lib-sources/transaction-api-1.1-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/xpp3-1.1.4c.jar" sourcepath="WEB-INF/lib-sources/xpp3-1.1.4c-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

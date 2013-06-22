@@ -882,6 +882,11 @@ ul.testament li ol li {
     	height:75px;
     }
     
+    #header h1 a {
+    	height:75px;
+    	background:url("../images/logo-small.png") no-repeat scroll left center transparent;
+    }
+    
     #header .welcome a { color: #fff; }
     #header .welcome {
 	    padding: 13px 0;
