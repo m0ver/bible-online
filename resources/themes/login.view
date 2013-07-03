@@ -119,12 +119,13 @@ $(function(){
 			</form>
 			<div>[%login.with.otheraccount%]:</div>
 			    <div>
-			    	<a href="/?q=user/login/googleaccount&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/google.png"></a>
+			    	<a href="/?q=user/account/google&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/google.png"></a>
+			    	<a href="/?q=user/account/github&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/github.png"></a>
 			    	<!-- 
 			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/sinat.png"></a>
 			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/qq.png"></a>
 			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/linkedin.png"></a>
-			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/github.png"></a>
+			        
 			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/baidu.png"></a>
 			         -->
 			    </div>
