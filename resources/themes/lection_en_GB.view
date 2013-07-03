@@ -87,7 +87,7 @@
 		rightMenu.appendItem({"action":"javascript:void(0)","caption":"Comment"});
 		rightMenu.appendItem({"action":"javascript:copyToClipboard('$text')","caption":"Copy"});
 		
-		//profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/settings%]'","caption":"[%page.language-setting.title%]"});
+		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:dashboard%]'","caption":"[%navigator.controller.caption%]"});
 		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"[%page.logout.caption%]"});
 		
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'","caption":"English(UK)"});
