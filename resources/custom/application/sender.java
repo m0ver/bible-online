@@ -282,7 +282,7 @@ public class sender extends AbstractApplication {
 					buff.append(citerator.next().getElementsByTagName("content").get(0).getData());
 				}
 				vocabulary.setInterpretation(buff.toString());
-				vocabulary.setReferenceLink(this.request.getRequestURL().toString());
+				vocabulary.setReferenceLink(this.request.getHeader("referer").toString());
 			}
 			
 			Table words = vocabulary.findWith("WHERE word=? and user_id=?", new Object[]{vocabulary.getWord(),this.user.getId()});
