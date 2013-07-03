@@ -49,6 +49,7 @@ import org.tinystruct.datatype.ObjectVariable;
 import org.tinystruct.handle.Reforward;
 import org.tinystruct.handle.Report;
 import org.tinystruct.system.util.StringUtilities;
+import org.tinystruct.system.util.TextFileLoader;
 import org.tinystruct.system.util.ValidateCode;
 
 import com.google.api.client.auth.oauth2.TokenResponse;
@@ -59,6 +60,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 import custom.objects.User;
+import custom.util.model.oAuth2Provider;
 
 public class login extends AbstractApplication {
 	private passport passport;
@@ -153,8 +155,7 @@ public class login extends AbstractApplication {
 			Reforward reforward = new Reforward(request, response);
 
 			reforward.setDefault(this.getLink(this.context.getAttribute(
-					"default.login.page").toString())
-					);
+					"default.login.page").toString()));
 			reforward.forward();
 		} catch (ApplicationException e) {
 			// TODO Auto-generated catch block
@@ -169,8 +170,9 @@ public class login extends AbstractApplication {
 		this.setAction("user/login", "validate");
 		this.setAction("user/logout", "logout");
 		this.setAction("validator/code", "toImage");
-		this.setAction("user/login/googleaccount", "execute");
+		this.setAction("user/account", "execute");
 		this.setAction("oauth2callback", "oAuth2callback");
+		this.setAction("oauth2_github_callback", "oAuth2_github_callback");
 
 		this.setVariable("error", "");
 		this.setVariable("service", "");
@@ -240,21 +242,37 @@ public class login extends AbstractApplication {
 		}
 	}
 
-	protected String createRequestString() throws UnsupportedEncodingException {
+	protected String createRequestString(oAuth2Provider provider)
+			throws UnsupportedEncodingException {
 		StringBuffer requestBuffer = new StringBuffer();
 
-		requestBuffer.append("https://accounts.google.com/o/oauth2/auth?");
-		requestBuffer.append("scope=");
-		requestBuffer.append(URLEncoder.encode(
-				StringUtilities.implode(" ", SCOPES), "utf-8"));
-		requestBuffer.append("&state=profile");
-		requestBuffer.append("&redirect_uri=");
-		requestBuffer.append(URLEncoder.encode(this.getLink("oauth2callback"),
-				"utf8"));
-		requestBuffer.append("&response_type=code");
-		requestBuffer
-				.append("&client_id=737184644498-2k1qvfbj34horj4lhfg06rph878kj72r.apps.googleusercontent.com");
+		switch (provider) {
+		case GITHUB:
+			requestBuffer
+					.append("https://github.com/login/oauth/authorize?")
+					.append("client_id=9db0327fa27efc4449af")
+					.append("&response_type=code")
+					.append("&scope=user:email")
+					.append("&redirect_uri=")
+					.append(URLEncoder.encode(
+							this.getLink("oauth2_github_callback"), "utf8"));
+			break;
 
+		default:
+			requestBuffer.append("https://accounts.google.com/o/oauth2/auth?");
+			requestBuffer.append("scope=");
+			requestBuffer.append(URLEncoder.encode(
+					StringUtilities.implode(" ", SCOPES), "utf-8"));
+			requestBuffer.append("&state=profile");
+			requestBuffer.append("&redirect_uri=");
+			requestBuffer.append(URLEncoder.encode(
+					this.getLink("oauth2callback"), "utf8"));
+			requestBuffer.append("&response_type=code");
+			requestBuffer
+					.append("&client_id=737184644498-2k1qvfbj34horj4lhfg06rph878kj72r.apps.googleusercontent.com");
+			break;
+
+		}
 		return requestBuffer.toString();
 	}
 
@@ -268,6 +286,7 @@ public class login extends AbstractApplication {
 			"https://www.google.com/m8/feeds");
 
 	private static GoogleClientSecrets clientSecrets;
+	private static Builder builder;
 
 	public String oAuth2callback() throws ApplicationException {
 		HttpServletRequest request = (HttpServletRequest) this.context
@@ -376,7 +395,138 @@ public class login extends AbstractApplication {
 
 	}
 
-	public void execute() throws ApplicationException {
+	public String oAuth2_github_callback() throws ApplicationException {
+		HttpServletRequest request = (HttpServletRequest) this.context
+				.getAttribute("HTTP_REQUEST");
+		HttpServletResponse response = (HttpServletResponse) this.context
+				.getAttribute("HTTP_RESPONSE");
+		Reforward reforward = new Reforward(request, response);
+
+		if (this.getVariable("github_client_secrets") == null) {
+			TextFileLoader loader = new TextFileLoader();
+			loader.setInputStream(login.class
+					.getResourceAsStream("/clients_secrets.json"));
+			builder = new Builder();
+			builder.parse(loader.getContent().toString());
+
+			if (builder.get("github") instanceof Builder) {
+				builder = (Builder) builder.get("github");
+
+				System.out.println(builder.get("client_secret"));
+				System.out.println(builder.get("client_id"));
+				this.setVariable(new ObjectVariable("github_client_secrets",
+						builder));
+			}
+		} else
+			builder = (Builder) this.getVariable("github_client_secrets")
+					.getValue();
+
+		String arguments = this
+				.http_client("https://github.com/login/oauth/access_token?client_id="
+						+ builder.get("client_id")
+						+ "&client_secret="
+						+ builder.get("client_secret")
+						+ "&code="
+						+ request.getParameter("code"));
+
+		try {
+
+			HttpClient httpClient = new DefaultHttpClient();
+			String url = "https://api.github.com/user";
+
+			HttpGet httpget = new HttpGet(url + "?" + arguments);
+			httpClient.getParams().setParameter(
+					HttpProtocolParams.HTTP_CONTENT_CHARSET, "UTF-8");
+
+			HttpResponse http_response = httpClient.execute(httpget);
+			HeaderIterator iterator = http_response.headerIterator();
+			while (iterator.hasNext()) {
+				Header next = iterator.nextHeader();
+				System.out.println(next.getName() + ":" + next.getValue());
+			}
+
+			InputStream instream = http_response.getEntity().getContent();
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			byte[] bytes = new byte[1024];
+
+			int len;
+			while ((len = instream.read(bytes)) != -1) {
+				out.write(bytes, 0, len);
+			}
+			instream.close();
+			out.close();
+
+			Struct struct = new Builder();
+			struct.parse(new String(out.toByteArray(), "utf-8"));
+
+			this.usr = new User();
+			this.usr.setEmail(struct.toData().getFieldInfo("email")
+					.stringValue());
+
+			if (this.usr.findOneByKey("email", this.usr.getEmail()).size() == 0) {
+				usr.setPassword("");
+				usr.setUsername(usr.getEmail());
+
+				usr.setLastloginIP(request.getRemoteAddr());
+				usr.setLastloginTime(new Date());
+				usr.setRegistrationTime(new Date());
+				usr.append();
+			}
+
+			new passport(request, response, "waslogined")
+					.setLoginAsUser(this.usr.getId());
+
+			reforward.setDefault(URLDecoder.decode(this.getVariable("from")
+					.getValue().toString(), "utf8"));
+			reforward.forward();
+
+			return new String(out.toByteArray(), "utf-8");
+		} catch (ClientProtocolException e) {
+			throw new ApplicationException(e.getMessage(), e);
+		} catch (IOException e) {
+			throw new ApplicationException(e.getMessage(), e);
+		} catch (ParseException e) {
+			throw new ApplicationException(e.getMessage(), e);
+		}
+	}
+
+	public String http_client(String url) throws ApplicationException {
+		HttpClient httpClient = new DefaultHttpClient();
+
+		HttpGet httpget = new HttpGet(url);
+		httpClient.getParams().setParameter(
+				HttpProtocolParams.HTTP_CONTENT_CHARSET, "UTF-8");
+
+		HttpResponse http_response;
+		try {
+			http_response = httpClient.execute(httpget);
+
+			HeaderIterator iterator = http_response.headerIterator();
+			while (iterator.hasNext()) {
+				Header next = iterator.nextHeader();
+				System.out.println(next.getName() + ":" + next.getValue());
+			}
+
+			InputStream instream = http_response.getEntity().getContent();
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			byte[] bytes = new byte[1024];
+
+			int len;
+			while ((len = instream.read(bytes)) != -1) {
+				out.write(bytes, 0, len);
+			}
+			instream.close();
+			out.close();
+
+			return new String(out.toByteArray(), "utf-8");
+		} catch (ClientProtocolException e) {
+			throw new ApplicationException(e.getMessage(), e);
+		} catch (IOException e) {
+			throw new ApplicationException(e.getMessage(), e);
+		}
+	}
+
+	public void execute(String provider) throws ApplicationException {
 		HttpServletRequest http_request = (HttpServletRequest) this.context
 				.getAttribute("HTTP_REQUEST");
 		HttpServletResponse http_response = (HttpServletResponse) this.context
@@ -388,7 +538,8 @@ public class login extends AbstractApplication {
 		try {
 			HttpSession session = http_request.getSession();
 			if (session.getAttribute("usr") == null)
-				reforward.setDefault(createRequestString());
+				reforward.setDefault(createRequestString(oAuth2Provider
+						.valueOf(provider.toUpperCase())));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			throw new ApplicationException(e.getMessage(), e);
@@ -402,4 +553,17 @@ public class login extends AbstractApplication {
 		return null;
 	}
 
+	public static void main(String[] args) throws ApplicationException {
+		TextFileLoader loader = new TextFileLoader();
+		loader.setInputStream(login.class
+				.getResourceAsStream("/clients_secrets.json"));
+		Builder builder = new Builder();
+		builder.parse(loader.getContent().toString());
+
+		if (builder.get("github") instanceof Builder)
+			builder = (Builder) builder.get("github");
+
+		System.out.println(builder.get("client_secret"));
+		System.out.println(builder.get("client_id"));
+	}
 }
