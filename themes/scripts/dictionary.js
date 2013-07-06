@@ -698,7 +698,21 @@ function translateTransXML(xmlnode)
 }
 
 var loading=false;
-function fetchWordWithoutDeskDict(word,callback) {
+function fetchWordWithoutDeskDict(e, word,callback) {
+	  e = e || event;   
+	  var target = e.target || e.srcElement;
+	  if (target.nodeName != 'LI') return;
+
+	  var verse_id = target.getElementsByTagName('a')[0].innerHTML;
+	  var url=document.location.href;
+	  var referer = url.substring(url.indexOf('/?'),url.indexOf('q=bible'));
+	  
+	  var params = url.substring(url.indexOf('q=bible')).split('/');
+	  if(params.length==1) referer += params[0]+"/1/1/"+verse_id;
+	  if(params.length==2) referer += params[0]+"/"+params[1]+"/1/"+verse_id;
+	  if(params.length==3) referer += params[0]+"/"+params[1]+"/"+params[2]+"/"+verse_id;
+	  if(params.length==4) referer += params[0]+"/"+params[1]+"/"+params[2]+"/"+verse_id;
+	  
         var lang='';
         if(!word && !loading) return;
 		if (isContainKoera(word)) {
@@ -708,7 +722,7 @@ function fetchWordWithoutDeskDict(word,callback) {
 		new struct.message().showMessage("正在加载……");
 
 		$.ajax({url:'/?q=services/getword/'+encodeURIComponent(word),
-			type:'GET',dataType: 'xml'
+			type:'POST',dataType: 'xml',data:{'referer': referer}
 			})
 			.success(function(data){
 	              var dataText = translateXML(data);

@@ -43,7 +43,7 @@
 		rightMenu=new Menu();
 		profileMenu=new Menu();
 		languageMenu=new Menu();
-
+		
 		dialog=new Dialog({title:"Dialog",okLabel:"OK",cancelLabel:"Cancel",action:function(){
 			var $this=this;
 			if(this.parameters.id==-1 || this.parameters.id=="")
@@ -100,17 +100,17 @@
 	$(function(){
 		ldialog=new TDialog({title:"My Words",okLabel:"",cancelLabel:"Close"});
 
-		$("#pagebody").mouseup(function() {
+		document.getElementById("pagebody").onmouseup = function(e) {
 			var word = (_dictGetSel());
 			if(!word || word=='') return;
 			if (navigator.appVersion.indexOf("Win") != -1) {
-				fetchWordWithoutDeskDict(word, function(a){tdialog.action=function(){
+				fetchWordWithoutDeskDict(e,word, function(a){tdialog.action=function(){
 					window.open("http://dict.youdao.com/wordbook/ajax?action=addword&q="+encodeURIComponent(word)+"&le=eng");
 				};
 				tdialog.show(a)});
 			}
 			else{
-				fetchWordWithoutDeskDict(word,function(a){tdialog.action=function(){
+				fetchWordWithoutDeskDict(e,word,function(a){tdialog.action=function(){
 					if(confirm("Do you want to add the word to YouDao?")) 
 					{
 						window.open("http://dict.youdao.com/wordbook/ajax?action=addword&q="+encodeURIComponent(word)+"&le=eng");
@@ -121,7 +121,7 @@
 				};
 				tdialog.show(a)});
 			}
-		});
+		};
 	});
 	
 	var _gaq = _gaq || [];
@@ -173,9 +173,9 @@ $(function(){
 
 <div id="pagebody">
 <div class="wrapper">
+	<div class="container">
 	<h2>[%holy.book.info%]</h2> 
 	<a class="clear-fix"></a>
-	<div class="partner" id="partner">
 		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} </div>
 		<div id="documentation">
 			<div class="column" id="column1">{%left_column%} {%right_column%}</div>
@@ -189,9 +189,8 @@ $(function(){
 			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
 		</div>
 		
-	</div>
 	<a name="down" class="clear-fix"> </a>
-		
+	</div>
 	<div class="sidebar">
 	<label>[%holy.book.find-and-reading%]</label>
 	
@@ -261,9 +260,9 @@ $(function(){
 		</p>
 	</div>
 </div>
-
+<div id="__base__"></div>
 <script type="text/javascript">
-window.listener.install(document.f,document.f.keyword,"keyword.jsp",false,"×");
+window.listener.install(document.getElementById("f"),document.getElementById("keyword"),"keyword.jsp",false,"×");
 </script>
 </body>
 </html>

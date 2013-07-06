@@ -455,6 +455,7 @@ a.rsslink {
 }
 
 #footer {
+	font-size: 1.5em;
 	padding: 0 30px;
 	margin: 0 auto;
 }
@@ -462,11 +463,6 @@ a.rsslink {
 #footer .wrapper {
 	border-top: 1px solid #DEDEDE;
 	padding: 6px 0;
-}
-
-#footer p {
-	color: #bbb;
-	font-size: 1.2em;
 }
 
 #footer h6 {
@@ -525,11 +521,14 @@ blockquote {
 	width: 217px;
 }
 
+
 textarea {
 	border: 1px solid #bdc7d8;
 	width: 100%;
 	padding: 3px;
 	font-family: sans-serif, "lucida grande", tahoma, verdana, arial;
+	color: #555555;
+    font-size: 0.9em;
 }
 
 select {
@@ -572,7 +571,7 @@ a.clear-fix {
 #documentation,p.summary {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	text-indent: 24px;
+	/*text-indent: 24px;*/
 	letter-spacing: 1.32px;
 	line-height: 25px;
 	/*font-size:10.5pt*/
@@ -866,10 +865,51 @@ ul.testament li ol li {
 	padding: 5px
 }
 
+.container {
+	float:right;width:74%;
+}
+.sidebar {
+	float:left
+}
+
+/* Mobile and iPad Portrait */
+@media only screen and (max-width: 1200px) {
+    .container {
+		float:right;width:70%;
+	}
+	.sidebar {
+		float:left
+	}
+}
+
+/* Mobile and iPad Portrait */
+@media only screen and (max-width: 1100px) {
+    .container {
+		float:right;width:67%;
+	}
+	.sidebar {
+		float:left
+	}
+}
+
+/* Mobile and iPad Portrait */
+@media only screen and (max-width: 980px) {
+    .container {
+		float:right;width:65%;
+	}
+	.sidebar {
+		float:left
+	}
+}
 
 /* Mobile and iPad Portrait */
 @media only screen and (max-width: 959px) {
-    
+    .container {
+		float:none;width:auto;
+	}
+	.sidebar {
+		float:none
+	}
 }
 
 /* Mobile Landscape and Portrait */
@@ -896,6 +936,13 @@ ul.testament li ol li {
 	}
     
     .open { display: block; }
+    
+    .container {
+		float:none;width:auto;
+	}
+	.sidebar {
+		float:none
+	}
 }
 
 /* Mobile Portrait */
@@ -923,4 +970,10 @@ ul.testament li ol li {
 	    padding: 0 15px;
 	}
     #header h1 a { background:url("../images/favicon-b.png") no-repeat scroll left center transparent; }
+	    .container {
+		float:none;width:auto;
+	}
+	.sidebar {
+		float:none
+	}
 }

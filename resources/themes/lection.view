@@ -104,7 +104,6 @@
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-22425440-1']);
 	_gaq.push(['_trackPageview']);
-	
 	(function() {
 	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -159,9 +158,9 @@ $(function(){
 
 <div id="pagebody">
 <div class="wrapper">
+	<div class="container">
 	<h2>[%holy.book.info%]</h2> 
 	<a class="clear-fix"></a>
-	<div class="partner" id="partner">
 		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} </div>
 		<div id="documentation">
 			<div class="column" id="column1">{%left_column%} {%right_column%}</div>
@@ -175,9 +174,8 @@ $(function(){
 			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
 		</div>
 		
-	</div>
 	<a name="down" class="clear-fix"> </a>
-		
+	</div>
 	<div class="sidebar">
 	<label>[%holy.book.find-and-reading%]</label>
 	
@@ -239,16 +237,14 @@ $(function(){
 
 <div id="footer"  data-role="footer">
 	<div class="wrapper">
-		<p>
-			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
-			<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
-			<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
-			<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
- 			<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
-		</p>
+		<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
+		<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
+		<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
+		<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
+		<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
 	</div>
 </div>
-
+<div id="__base__"></div>
 <script type="text/javascript">
 window.listener.install(document.getElementById("f"),document.getElementById("keyword"),"keyword.jsp",false,"×");
 </script>
