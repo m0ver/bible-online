@@ -261,6 +261,8 @@ public class sender extends AbstractApplication {
 			vocabulary vocabulary = new vocabulary();
 			vocabulary.setUserId(this.user.getId());
 			vocabulary.setDate(new Date());
+			vocabulary.setReferenceLink(this.request.getParameter("referer").toString());
+
 			List<Element> phrase = document.getElementsByTagName("return-phrase");
 			if(phrase.size()>0)
 			{
@@ -282,7 +284,6 @@ public class sender extends AbstractApplication {
 					buff.append(citerator.next().getElementsByTagName("content").get(0).getData());
 				}
 				vocabulary.setInterpretation(buff.toString());
-				vocabulary.setReferenceLink(this.request.getHeader("referer").toString());
 			}
 			
 			Table words = vocabulary.findWith("WHERE word=? and user_id=?", new Object[]{vocabulary.getWord(),this.user.getId()});
