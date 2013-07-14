@@ -545,7 +545,6 @@ public class search extends AbstractApplication
     private void execute(String query, int start) throws ApplicationException {
         HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpget;
-		
 		try {
 			httpget = new HttpGet(createRequestString(query, start == 0?1:start));
 			httpClient.getParams().setParameter(HttpProtocolParams.HTTP_CONTENT_CHARSET, "UTF-8");
@@ -554,8 +553,6 @@ public class search extends AbstractApplication
             InputStream instream = response.getEntity().getContent();
             
         	document.load(instream);
-        	
-        	if(i==ids.length-1) i=0;
         	
         	if(document.getRoot().getElementsByTagName("errors").size()>0 && i++ < ids.length-1) {
         		CUSTOM_SEARCH_ENGINE_ID = ids[i];
