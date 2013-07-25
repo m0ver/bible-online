@@ -67,7 +67,8 @@ public class lection extends AbstractApplication {
 		this.data=Cache.getInstance();
 		
 		try {
-			Table list=book.findAll();
+			Table list=book.findWith("WHERE language=?", new Object[]{this.getLocale().toString()});
+			
 			Iterator<Row> item = list.iterator();
 			while(item.hasNext()){
 				book.setData(item.next());
@@ -220,7 +221,7 @@ public class lection extends AbstractApplication {
 		book = book==null?new book():this.book;
 		try {
 			String lang = this.getLocale().toString();
-			if(this.getLocale().toString().equalsIgnoreCase("en_GB")) {
+			if(lang.equalsIgnoreCase("en_GB")) {
 				lang = "en_US";
 			}
 			
