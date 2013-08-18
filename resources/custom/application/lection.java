@@ -70,11 +70,13 @@ public class lection extends AbstractApplication {
 			Table list=book.findWith("WHERE language=?", new Object[]{this.getLocale().toString()});
 			
 			Iterator<Row> item = list.iterator();
+			String bookName;
 			while(item.hasNext()){
 				book.setData(item.next());
 				
-				this.setAction(book.getBookName(), "viewByName");
-				this.data.set(book.getBookName(), book.getBookId());
+				bookName = book.getBookName();
+				this.setAction(bookName, "viewByName");
+				this.data.set(bookName, book.getBookId());
 			}
 			
 		} catch (ApplicationException e) {
@@ -339,7 +341,6 @@ public class lection extends AbstractApplication {
 		this.setVariable("left_column", left_column.toString());
 		this.setVariable("right_column", right_column.toString());
 		
-//		this.menu();
 		return this;
 	}
 	
