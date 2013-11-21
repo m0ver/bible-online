@@ -30,7 +30,7 @@ hr {
 body {
 	font-size: 62.5%;
 	background: #fff;
-	font-family: 'ËÎÌו',sans-serif, Verdana, Arial, "Lucida Grande",
+	font-family: 'Microsoft Yahei',"Times New Roman",sans-serif, Verdana, Arial, "Lucida Grande",
 		"Bitstream Vera Sans";
 	line-height: 22px;
 	color: #555;
@@ -256,8 +256,6 @@ input.text {
 	height: 22px;
 	vertical-align: top;
 	color: #666;
-	font-family: sans-serif, "Lucida Grande", Verdana, "Bitstream Vera Sans",
-		Arial;
 }
 
 button {
@@ -434,6 +432,11 @@ a.rsslink {
 
 .sidebar .container {
 	width: 287px;
+	float: none;
+}
+
+.sidebar label {
+	clear:both;
 }
 
 #pagebody #sitesearch input#keyword.text {
@@ -533,7 +536,6 @@ textarea {
 
 select {
 	border: 1px solid #BDC7D8;
-	font-family: sans-serif, "lucida grande", tahoma, verdana, arial;
 	padding: 2px;
 	-moz-border-radius: 3px;
 	-khtml-border-radius: 3px;
@@ -582,7 +584,6 @@ a.clear-fix {
 	padding: 0px;
 	text-align: justify;
 	text-justify: inter-ideograph;
-	font-family: "Times New Roman", sans-serif;
 }
 
 #documentation .spilter {
