@@ -85,10 +85,10 @@ $(function(){
 </div>
 
 <div id="pagebody">
-	<div class="wrapper">
+	<div class="wrapper standard">
 			<p class="bbcrumb"><a href="/"> &#8250; </a> [%register%]</p>
 	</div>
-	<div class="wrapper">
+	<div class="wrapper standard">
 			{%info%}
 			<form class="form-columns" method="post" action="[%LINK:user/register%]" style="display:{%display%}">
 			<p><span class="required">*</span>[%register.required-fields%]</p>

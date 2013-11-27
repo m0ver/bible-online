@@ -85,14 +85,9 @@ $(function(){
 </div>
 
 <div id="pagebody">
-<div class="wrapper">
-	<a name="down" class="clear-fix"> </a>
-	<div style="padding-top:10px;">
+<div class="wrapper standard">
 			{%error%}
 			{%value%}
-	</div>
-	<a name="down" class="clear-fix"> </a>
-		
 </div>
 </div>
 

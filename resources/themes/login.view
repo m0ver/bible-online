@@ -106,7 +106,7 @@ $(function(){
 </div>
 
 <div id="pagebody">
-	<div class="wrapper">
+	<div class="wrapper standard">
 			<p><a href="/"> &#8250; </a> [%login%]  [%login.tips.text%]  </p>
 			<form class="form-columns" method="post" action="/?q=user/login&amp;from={%from%}" onsubmit="return login()">
 				<div> {%error%} </div>

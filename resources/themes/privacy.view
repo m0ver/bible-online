@@ -34,7 +34,7 @@
 </div>
 
 <div id="pagebody">
-<div class="wrapper">
+<div class="wrapper standard">
 		<!-- header end -->
 		<div>
 		<ul class="nav">
@@ -44,7 +44,6 @@
 			<li><a href="[%LINK:user/register%]">创建帐户</a></li>
 		</ul>
 		</div>
-		<div class="line-space"></div>
 		<div>
 		<h2 style="border: medium none;">InGod.asia 隐私声明</h2>
 		<h4>2010 年 1 月 1 日</h4>
