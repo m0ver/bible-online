@@ -30,7 +30,7 @@ hr {
 body {
 	font-size: 92.5%;
 	background: #fff;
-	font-family: 'Microsoft Yahei',"Times New Roman",sans-serif, Verdana, Arial, "Lucida Grande",
+	font-family: "Times New Roman",'Microsoft Yahei',sans-serif, Verdana, Arial, "Lucida Grande",
 		"Bitstream Vera Sans";
 	line-height: 2.2em;
 	color: #555;
@@ -414,7 +414,7 @@ p.button {
 
 a.rsslink {
 	background: url(../images/feedicon10.png) top left no-repeat;
-	padding-left: 1.400em;
+	padding-left: 0.7em;
 }
 
 #pagebody ol {
@@ -468,7 +468,7 @@ a.rsslink {
 #footer .wrapper {
 	border-top: 1px solid #DEDEDE;
 	padding: 0.6em 0;
-	font-size: 1.5em;
+	font-size: 1.4em;
 }
 
 #footer h6 {
@@ -654,7 +654,6 @@ ol li span.interpretation {
 
 #dialog, #tdialog {
 	position: absolute;
-	width: 30em;
 	background: #e4f2fd;
 	border: 1px solid #c6d9e9;
 	display: block;

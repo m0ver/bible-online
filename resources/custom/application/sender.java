@@ -254,9 +254,8 @@ public class sender extends AbstractApplication {
 			this.user = (User) session.getAttribute("usr");
 			Document doc=new Document();
 			doc.load(new URL(url));
-			Element root = doc.getRoot();
-			if( root.getElementsByTagName("yodaodict").size()==0) throw new ApplicationException("The dictionary resource is temporarily unavailable");
-			Element document = root.getElementsByTagName("yodaodict").get(0);
+			Element document = doc.getRoot();
+			if( document.getChildNodes().size() < 3) throw new ApplicationException("The dictionary resource is temporarily unavailable");
 			
 			vocabulary vocabulary = new vocabulary();
 			vocabulary.setUserId(this.user.getId());
@@ -296,7 +295,7 @@ public class sender extends AbstractApplication {
 				vocabulary.update();
 			}
 	
-			return root.toString();
+			return document.toString();
 		}
 		
 		URLFileLoader loader=new URLFileLoader(new URL(url));
