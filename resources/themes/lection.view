@@ -130,7 +130,7 @@ $(function(){
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-role="page">
 <div id="header" data-role="header">
-	<div class="wrapper">
+	<div class="wrapper" itemscope itemtype="http://schema.org/Organization">
 		<h1><a href="/">[%application.title%]</a></h1>
 		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
 		<ul class="menu">
@@ -158,12 +158,12 @@ $(function(){
 
 <div id="pagebody">
 <div class="wrapper">
-	<div class="container">
-	<h2>[%holy.book.info%]</h2> 
+	<div class="container" itemscope itemtype="http://schema.org/Article">
+	<h2 itemprop="name">[%holy.book.info%]</h2> 
 	<a class="clear-fix"></a>
 		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} </div>
 		<div id="documentation">
-			<div class="column" id="column1">{%left_column%} {%right_column%}</div>
+			<div class="column" id="column1" itemprop="articleBody">{%left_column%} {%right_column%}</div>
 		</div>
 		<div class="clear-fix footnote">
 			<ul>
