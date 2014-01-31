@@ -305,9 +305,6 @@ struct.loading = function() {
 	}
 };
 
-/*
- * 感谢网友淡新举
- */
 var inited = false;
 struct.fixed = function(element, top, left) {
 
