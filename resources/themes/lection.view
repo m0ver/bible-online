@@ -88,6 +88,7 @@
 		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:dashboard%]'","caption":"[%navigator.controller.caption%]"});
 		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"[%page.logout.caption%]"});
 		
+		languageMenu.setAutoReposition(true);
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'","caption":"English(UK)"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'","caption":"English(US)"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-CN'","caption":"简体中文"});
@@ -151,11 +152,9 @@ $(function(){
 <div id="headline">
 	<div class="wrapper">
 		<h2>[%page.reading.title%]</h2>
-		
-		<a name="up"></a>
 	</div>
 </div>
-
+<a name="up"></a>
 <div id="pagebody">
 <div class="wrapper">
 	<div class="container" itemscope itemtype="http://schema.org/Article">

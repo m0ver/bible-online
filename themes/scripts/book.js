@@ -19,7 +19,7 @@ var Book=function()
 	this.chapter_id=0;
 	this.article_id=-1;
 	
-	this.language="zh-CN";
+	this.language="zh_CN";
 	
 	this.url="/?q=feed&chapterid="+this.chapter_id+"&bookid="+this.book_id+"&clsid=3";
 	
@@ -85,7 +85,8 @@ var Book=function()
 
 		for(var i=1;i<chapters_number;i++)
 		{
-			chapters_node.options.add(new Option({"text":"第"+i+"章","value":i}));
+			text = this.language != 'zh_CN'?i:"第"+i+"章";
+			chapters_node.options.add(new Option({"text":text,"value":i}));		
 		}
 	};
 	
@@ -109,7 +110,8 @@ var Book=function()
 		chapters_node.options.length=1;
 		for(var i=1;i<chapters_number;i++)
 		{
-			chapters_node.options.add(new Option({"text":"第"+i+"章","value":i}));
+			text = this.language != 'zh_CN'?i:"第"+i+"章";
+			chapters_node.options.add(new Option({"text":text,"value":i}));		
 		}
 		
 		chapters_node.selectedIndex=this.chapter_id;

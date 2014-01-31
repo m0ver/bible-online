@@ -255,6 +255,9 @@ var Tips=function()
 var Menu=function(){
 	this.items=document.createElement("ul");
 	this.id=(typeof(arguments[0])=='undefined'?'menu':arguments[0]);
+	this.setAutoReposition = function(flag){
+		this.autoReposition = flag;
+	}
 	this.panel=function(){
 		if(!document.getElementById(this.id))
 		{
@@ -400,8 +403,27 @@ var Menu=function(){
 				}
 		);
 		
+		if(this.autoReposition) {
+			this.reposition();
+		}
 		this.timer.start();
 	}
+	
+	this.reposition=function(){
+		var x=parseInt(this.panel().style.left),y=parseInt(this.panel().style.top);
+		this.panel().style.position="absolute";
+
+		var ie=(document.compatMode && document.compatMode != "BackCompat")? document.documentElement : document.body;
+		if(!document.all)
+		{
+			x+=window.pageXOffset;
+			y+=window.pageYOffset;
+		}
+		
+		this.panel().style.left = x+"px";
+		this.panel().style.top = y+"px";
+	}
+	
 	this.hide=function(){
 		this.panel().style.display="none";
 		this.timer.stop();

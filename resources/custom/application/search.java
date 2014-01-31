@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpResponse;
@@ -42,6 +43,7 @@ import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Document;
 import org.tinystruct.dom.Element;
+import org.tinystruct.handle.Reforward;
 import org.tinystruct.system.util.StringUtilities;
 
 import custom.objects.User;
@@ -52,6 +54,7 @@ import custom.objects.keyword;
 public class search extends AbstractApplication
 {
 	private HttpServletRequest request;
+	private HttpServletResponse response;
 	private User usr;
 
 	@Override
@@ -210,6 +213,30 @@ public class search extends AbstractApplication
         
         Table vtable=bible.find(SQL, new Object[]{});
         boolean noResult=vtable.size()>0;
+        
+        if(!noResult) {
+    		try {
+    			Table list=book.findWith("WHERE language=? and book_name=?", new Object[]{this.getLocale().toString(), query});
+    			if(list.size() > 0)
+    			{
+    	    		this.response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
+
+    				Reforward reforward = new Reforward(request, response);
+    				query = URLEncoder.encode(query, "utf-8");
+    				reforward.setDefault(this.context.getAttribute("HTTP_HOST")+query);
+    				reforward.forward();
+    				return reforward;
+    			}
+    			
+    		} catch (ApplicationException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+        }
         
         Row found=bible.findOne(look, new Object[]{});
         
