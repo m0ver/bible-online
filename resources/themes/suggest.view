@@ -72,9 +72,9 @@ $(function(){
 		<h1><a href="/">[%application.title%]</a></h1>
 		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
 		<ul>
-			<li><a class="current" href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
+			<li><a href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
 			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
-			<li id="download"><a href='/download/' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+			<li id="download"><a class="current" href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
 		</ul>
 	</div>
 </div>

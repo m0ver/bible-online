@@ -139,7 +139,7 @@ $(function(){
 			</ul>
 			</li>
 			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
-			<li id="download"><a class="current" href='/download/' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+			<li id="download"><a class="current" href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
 		</ul>
 	</div>
 </div>
