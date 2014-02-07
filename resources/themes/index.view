@@ -83,19 +83,17 @@ $(function(){
 
 <div id="headline">
 	<div class="wrapper">
-		
-	<form name="f" id="f" action="[%LINK:bible/search%]" method="post">
-	<div class="container">
-	<input size="20" class="text glass" autocomplete="off" maxlength="2048" value="{%keyword%}" id="keyword" name="keyword"  />
-	<input class="button-secondary inputbutton" type="submit" value=" [%search.submit.caption%] " />
-	</div>
-	</form>		
+		<form name="f" id="f" action="[%LINK:bible/search%]" method="post">
+		<div class="container">
+		<input size="20" class="text glass" autocomplete="off" maxlength="2048" value="{%keyword%}" id="keyword" name="keyword"  />
+		<input class="button-secondary inputbutton" type="submit" value=" [%search.submit.caption%] " />
+		</div>
+		</form>		
 	</div>
 </div>
-
 <div id="pagebody">
 	<div class="wrapper">
-	<div class="container"><div class="gallery"></div></div>
+	<div class="container"><p>[%holy.bible.introduction%]</p><div class="gallery"></div><p>[%holy.bible.introduction1%]</p></div>
 	<div class="sidebar">
 		<label>[%holy.book.find-and-reading%]</label>
 	

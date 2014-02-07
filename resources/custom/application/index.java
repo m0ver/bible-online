@@ -61,6 +61,9 @@ public class index extends AbstractApplication {
 		
 		this.setText("user.lastlogin.caption");
 		
+		this.setText("holy.bible.introduction");
+		this.setText("holy.bible.introduction1");
+
 		this.setText("holy.bible.download");
 		this.setText("holy.bible.chinese.download");
 		
