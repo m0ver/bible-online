@@ -106,7 +106,11 @@ $(function(){
 </div>
 
 <div id="pagebody">
-	<div class="wrapper standard">
+	<div class="wrapper">
+		<div class="container">
+			<div class="gallery"></div>
+		</div>
+		<div class="sidebar">
 			<p><a href="/"> &#8250; </a> [%login%]  [%login.tips.text%]  </p>
 			<form class="form-columns" method="post" action="/?q=user/login&amp;from={%from%}" onsubmit="return login()">
 				<div> {%error%} </div>
@@ -135,7 +139,8 @@ $(function(){
 			<div>
 			<a href="http://www.mozilla.org/products/download.html?product=firefox&amp;lang={%language%}" target="_blank"> <span><strong>下载安装 Firefox</strong> </span></a>
 			</div>
-
+		</div>
+	
 	</div>
 </div>
 
