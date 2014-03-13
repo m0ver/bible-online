@@ -1,13 +1,19 @@
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="[%application.keywords%]" />
 <meta name="description" content="[%application.description%]" />
+<meta property="og:title" content="[%application.title%]"/>
+<meta property="og:url" content="[%LINK:bible%]"/>
+<meta property="og:image" content="{%TEMPLATES_DIR%}/images/favicon.png"/>
+<meta property="og:site_name" content="[%application.title%]"/>
+<meta property="og:description" content="[%application.description%]"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
-<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
-<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
+<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" />
+<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" />
 <link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
 <!--[if IE]>
 <style type="text/css">
@@ -66,7 +72,7 @@ $(function(){
 });
 </script>
 <![endif]-->
-<title>[%application.title%]{%application.summary%}</title>
+<title>[%application.title%] - InGod.ASIA</title>
 </head>
 <body>
 <div id="header">

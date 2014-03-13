@@ -89,7 +89,6 @@ em,cite {
 #header {
 	background: url("/themes/images/candle.png") no-repeat scroll right center / 15% auto #464646;
 	padding: 0 3em;
-
 }
 
 #header .wrapper {
@@ -98,7 +97,7 @@ em,cite {
 }
 
 #header h1 a {
-    background: url("../images/logo.png") no-repeat scroll left center / 32% auto rgba(0, 0, 0, 0);
+	background: url("../images/logo.png") no-repeat scroll left center / 32% auto transparent;
     display: block;
     height: 5.6em;
     text-indent: -9999px;
@@ -525,7 +524,7 @@ blockquote {
 
 .text.glass {
 	background: url("../images/magnifying_glass.png") no-repeat scroll 0.5em 0.5em / 7% auto #FFFFFF;
-	height: 2.2em;
+	height: 1.4em;
 	padding-left: 1.8em;
 }
 

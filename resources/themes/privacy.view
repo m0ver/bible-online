@@ -13,6 +13,21 @@
 @import url("{%TEMPLATES_DIR%}/style/ie.css?9");
 </style>
 <![endif]-->
+<!--[if (gt IE 6)&(lt IE 9)]>
+<script type="text/javascript">
+$(function(){
+	var corner={
+		src:"{%TEMPLATES_DIR%}/images/circle.png",
+		width:"7px",
+		height:"7px",
+		background:"#464646",
+		positions: ["topleft","topright"]
+	};
+
+	$("#header ul li a.current").addCorners("topleft,topright",corner);
+});
+</script>
+<![endif]-->
 <title>[%page.condition.title%] - [%application.title%]</title>
 </head>
 <body>

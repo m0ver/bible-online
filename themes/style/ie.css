@@ -1,8 +1,33 @@
+#header {
+	background: none repeat scroll 0 0 #464646;
+	padding: 0 3em;
+}
+
+#header .wrapper {
+	position:relative;
+}
+
+#header h1 a {
+    background: url("../images/logo.png") no-repeat scroll left center transparent;
+    height: 5.6em;
+    width:10em;
+    text-indent: -9999px;
+    transition: all 3s ease 0s;
+	-webkit-transition: all 3s;
+	-moz-transition: all 3s;
+	-o-transition: all 3s;
+}
+
 #header ul {
 	margin-top: 18px;
-	height: 27px;
 }
 
 #header ul li a {
-	padding: 0 9px;
+	height: 2.7em;
+}
+
+.text.glass {
+    background: url("../images/magnifying_glass.png") no-repeat scroll .8em .8em #FFFFFF;
+    height: 1.4em;
+    padding-left: 1.8em;
 }
