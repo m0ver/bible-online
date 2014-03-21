@@ -15,6 +15,7 @@
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" />
 <link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
+<link rel="canonical" href="http://www.ingod.asia" />
 <!--[if IE]>
 <style type="text/css">
 @import url("{%TEMPLATES_DIR%}/style/ie.css?9");

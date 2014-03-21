@@ -10,6 +10,7 @@
 <meta property="og:description" content="[%application.description%]"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+<link rel="canonical" href="{%base_url%}{%book.bookName%}/{%chapterid%}" />
 <link rel="prev" href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" />
 <link rel="next" href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
