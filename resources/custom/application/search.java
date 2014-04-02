@@ -140,6 +140,14 @@ public class search extends AbstractApplication
 		return null;
 	}
 	
+	public Object query() throws ApplicationException{
+		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		if (this.request.getParameter("keyword") != null)
+		return this.query(this.request.getParameter("keyword"));
+		
+		return this;
+	}
+	
     public Object query(String query) throws ApplicationException
     {
         StringBuffer html = new StringBuffer();
@@ -162,14 +170,16 @@ public class search extends AbstractApplication
         if(query.trim().length()>0)
         {
             keywords=query.split(" ");
+            
+			this.setVariable("keyword", query);
+			this.setVariable("search.title", query + " - ");
         }
         else
         {
+        	this.setVariable("keyword", "");
         	return this;
         }
     	
-		this.setVariable("keyword", query);
-		
         StringBuffer condition=new StringBuffer();
         int i=0,j,k=0;
         while(i<keywords.length)
@@ -484,7 +494,13 @@ public class search extends AbstractApplication
         pager.setListSize(amount);
         
         int next = pager.getStartIndex();//此位置即为当前页的第一条记录的ID opensearch:totalResults
-		this.setVariable("keyword", query);
+		if(query!=null && query.length() > 0)
+		{
+			this.setVariable("keyword", query);
+			this.setVariable("search.title", query + " - ");
+		}
+		else
+			this.setVariable("keyword", "");
 
         StringBuffer html = new StringBuffer();
         
