@@ -481,16 +481,15 @@ public class search extends AbstractApplication
         pager.setCurrentPage(page);
         pager.setListSize(total);
         
-        this.execute(query, pager.getStartIndex());
-        
-        if(document.getRoot().getElementsByTagName("feed").size() == 0) {
+        Document document = this.execute(query, pager.getStartIndex());
+        Element root = document.getRoot();
+        if(root.getElementsByTagName("entry").size() == 0) {
         	this.setVariable("value", "Sorry, Daily Limit Exceeded Issue. so you couldn't use this function for today! ");
         	return this;
         }
         
-        Element feed = document.getRoot().getElementsByTagName("feed").get(0);
         
-        int amount = Integer.parseInt(feed.getElementsByTagName("opensearch:totalResults").get(0).getData());
+        int amount = Integer.parseInt(root.getElementsByTagName("opensearch:totalResults").get(0).getData());
         pager.setListSize(amount);
         
         int next = pager.getStartIndex();//此位置即为当前页的第一条记录的ID opensearch:totalResults
@@ -506,7 +505,7 @@ public class search extends AbstractApplication
         
     	html.append("<ol class=\"searchresults\" start=\""+next+"\">\r\n");
     	
-    	List<Element> vtable = feed.getElementsByTagName("entry");
+    	List<Element> vtable = root.getElementsByTagName("entry");
     	
 //    	System.out.println(vtable);
     	Iterator<Element> item = vtable.iterator();
@@ -520,9 +519,9 @@ public class search extends AbstractApplication
     		
     		link = element.getElementsByTagName("id").get(0);
     		title = element.getElementsByTagName("title").get(0);
-    		summary = element.getElementsByTagName("summary").get(0);
+    		summary = element.getElementsByTagName("cse:PageMap").get(0).getElementsByTagName("cse:DataObject").get(1).getElementsByTagName("cse:Attribute").get(1);
     		
-            html.append("<li"+(n%2==0?" class=\"even\"":" class=\"odd\"")+"><a href=\""+link.getData()+"\" target=\"_blank\">"+title.getData()+" </a><p>"+summary.getData()+"</p></li> \r\n");
+            html.append("<li"+(n%2==0?" class=\"even\"":" class=\"odd\"")+"><a href=\""+link.getData()+"\" target=\"_blank\">"+title.getData()+" </a><p>"+summary.getAttribute("value")+"</p></li> \r\n");
 
             next++;
     	}
@@ -585,7 +584,7 @@ public class search extends AbstractApplication
         return requestBuffer.toString();
     }
     
-    private void execute(String query, int start) throws ApplicationException {
+    private Document execute(String query, int start) throws ApplicationException {
         HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpget;
 		try {
@@ -594,15 +593,24 @@ public class search extends AbstractApplication
 			
             HttpResponse response = httpClient.execute(httpget);
             InputStream instream = response.getEntity().getContent();
-            
-        	document.load(instream);
-        	
+
+            Document document = new Document();
+            document.load(instream);
         	if(document.getRoot().getElementsByTagName("errors").size()>0 && i++ < ids.length-1) {
         		CUSTOM_SEARCH_ENGINE_ID = ids[i];
         		API_KEY = keys[i];
         		System.out.println("Using:"+ids[i]);
-        		this.execute(query, start);
+        		
+    			httpget = new HttpGet(createRequestString(query, start == 0?1:start));
+    			httpClient.getParams().setParameter(HttpProtocolParams.HTTP_CONTENT_CHARSET, "UTF-8");
+    			
+                response = httpClient.execute(httpget);
+                instream = response.getEntity().getContent();
+                
+            	document.load(instream);
         	}
+        	
+        	return document;
         }
         catch(ClientProtocolException e)
         {
@@ -618,7 +626,6 @@ public class search extends AbstractApplication
     }
     
     private static int i=0;
-    private Document document = new Document();
     private final String[] ids = new String[]{
     	"016436735745445346824:fgyqgo18wfm","014099384324434647311:udrkfx4-ipk"
     };

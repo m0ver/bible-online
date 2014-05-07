@@ -264,6 +264,8 @@ $(function(){
 	<label>[%holy.bible.download%]</label>
 	<ul>
 		<li><a href="/bible.pdf" title="[%holy.bible.chinese.download%]">[%holy.bible.chinese.download%]</a></li>
+		<li><a href="/English-Standard-Version.pdf" title="English Standard Version">English Standard Version</a></li>
+		<li><a href="/New-International-Version.pdf" title="New International Version">New International Version</a></li>
 	</ul>
 	</div>
 
