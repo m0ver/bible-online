@@ -484,7 +484,7 @@ public class search extends AbstractApplication
         Document document = this.execute(query, pager.getStartIndex());
         Element root = document.getRoot();
         if(root.getElementsByTagName("entry").size() == 0) {
-        	this.setVariable("value", "Sorry, Daily Limit Exceeded Issue. so you couldn't use this function for today! ");
+        	this.setVariable("value", "Sorry, we could not get any related results with this keyword! ");
         	return this;
         }
         
@@ -509,8 +509,9 @@ public class search extends AbstractApplication
     	
 //    	System.out.println(vtable);
     	Iterator<Element> item = vtable.iterator();
-    	Element element,title,summary,link;
-    	
+    	Element element,title,link;
+		List<Element> t;
+    	String summary;
     	int n=0;
     	while(item.hasNext()) {
     		element = item.next();
@@ -519,9 +520,16 @@ public class search extends AbstractApplication
     		
     		link = element.getElementsByTagName("id").get(0);
     		title = element.getElementsByTagName("title").get(0);
-    		summary = element.getElementsByTagName("cse:PageMap").get(0).getElementsByTagName("cse:DataObject").get(1).getElementsByTagName("cse:Attribute").get(1);
     		
-            html.append("<li"+(n%2==0?" class=\"even\"":" class=\"odd\"")+"><a href=\""+link.getData()+"\" target=\"_blank\">"+title.getData()+" </a><p>"+summary.getAttribute("value")+"</p></li> \r\n");
+    		t = element.getElementsByTagName("cse:PageMap").get(0).getElementsByTagName("cse:DataObject");
+    		if(t.size() >= 3){
+    			t = t.get(1).getElementsByTagName("cse:Attribute");
+    			summary = t.get(1).getAttribute("value");
+    		}
+    		else
+    			summary = element.getElementsByTagName("summary").get(0).getData();
+    		
+            html.append("<li"+(n%2==0?" class=\"even\"":" class=\"odd\"")+"><a href=\""+link.getData()+"\" target=\"_blank\">"+title.getData()+" </a><p>"+summary+"</p></li> \r\n");
 
             next++;
     	}
