@@ -114,7 +114,6 @@ public class search extends AbstractApplication
 		this.setText("search.info",0,0,0,0);
 		
 		this.setVariable("TEMPLATES_DIR", "/themes");
-		this.setVariable("language",this.config.get("language").toString());
 		this.setVariable("keyword","");
 		
 		String username="";

@@ -68,7 +68,6 @@ public class index extends AbstractApplication {
 		this.setText("holy.bible.chinese.download");
 		
 		this.setVariable("TEMPLATES_DIR", "/themes");
-		this.setVariable("language",this.config.get("language").toString());
 		this.setVariable("keyword",this.getVariable("keyword")==null?"":this.getVariable("keyword").getValue().toString());
 		this.setVariable("metas", "");
 
