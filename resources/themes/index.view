@@ -100,10 +100,17 @@ $(function(){
 </div>
 <div id="pagebody">
 	<div class="wrapper">
-	<div class="container"><p>[%holy.bible.introduction%]</p><div class="gallery"></div><p>[%holy.bible.introduction1%]</p></div>
+	<div class="container"><p>[%holy.bible.introduction%]</p><div class="gallery"></div><p>[%holy.bible.introduction1%]</p>
+		<div class="column">
+		<h2>[%holy.bible.old-testament%]</h2>
+		{%old-testament%}</div>
+		<div class="column">
+		<h2>[%holy.bible.new-testament%]</h2>
+		{%new-testament%}</div>
+		<a class="clear-fix"></a>
+	</div>
 	<div class="sidebar">
 		<label>[%holy.book.find-and-reading%]</label>
-	
 	<ul>
 		<li><select name="old_book" id="old_book"><option value="0">[%holy.bible.old-testament%]</option></select><select name="old_book_chapter" id="old_book_chapter"><option value="0">[%holy.book.select%]</option></select></li>
 		<li><select name="new_book" id="new_book"><option value="0">[%holy.bible.new-testament%]</option></select><select name="new_book_chapter" id="new_book_chapter"><option value="0">[%holy.book.select%]</option></select></li>

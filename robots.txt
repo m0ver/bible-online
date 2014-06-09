@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: 
 Disallow: /download/
-Sitemap: http://ingod.asia/sitemap.xml
+Sitemap: http://ingod.asia/?q=sitemap.xml

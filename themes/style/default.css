@@ -86,6 +86,10 @@ em,cite {
 	margin: 0 auto;
 }
 
+.column {
+	float: left;
+}
+
 #header {
 	background: url("/themes/images/candle.png") no-repeat scroll right center / 15% auto #464646;
 	padding: 0 3em;
@@ -409,6 +413,11 @@ p.button {
 
 #pagebody ol.searchresults li.even {
 	background: #f5f5f5;
+}
+
+#pagebody ol.menu {
+    list-style-position: inside;
+    width: 300px;
 }
 
 #pagebody ul {

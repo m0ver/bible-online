@@ -1,11 +1,19 @@
 package custom.application;
 
+import java.util.Iterator;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.tinystruct.AbstractApplication;
+import org.tinystruct.ApplicationException;
+import org.tinystruct.data.component.Cache;
+import org.tinystruct.data.component.Row;
+import org.tinystruct.data.component.Table;
+import org.tinystruct.dom.Element;
 
 import custom.objects.User;
+import custom.objects.book;
 
 public class index extends AbstractApplication {
 	private User usr;
@@ -80,6 +88,7 @@ public class index extends AbstractApplication {
 				.length() == 0) ? "" : username + "，");
 		
 		this.setAction("default", "start");
+		
 	}
 	
 	public Object start(){
@@ -100,6 +109,67 @@ public class index extends AbstractApplication {
 			this.setVariable("user.profile","");
 			this.setVariable("scripts","");
 		}
+		
+		try {
+			this.menu();
+		} catch (ApplicationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return this;
+	}
+
+	public Object menu() throws ApplicationException {
+		Cache data = Cache.getInstance();
+		
+		Object menu;
+		Table list = null;
+		book book = new book();
+		if((menu = data.get("cache-menu")) == null) {
+			try {
+				list=book.findWith("WHERE language=? order by book_id", new Object[]{this.getLocale().toString()});
+				data.set("cache-menu", list);
+			} catch (ApplicationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			list = (Table) menu;
+		}
+		
+		int i=0;
+		
+		Element ul = new Element("ol"), ul1 = new Element("ol"), li, a;
+		Iterator<Row> item = list.iterator();
+		String bookName;
+		while (item.hasNext()) {
+			book.setData(item.next());
+
+			li = new Element("li");
+			a = new Element("a");
+
+			bookName = book.getBookName();
+
+			a.setAttribute("href", this.getContext().getAttribute("HTTP_HOST") + bookName);
+			a.setAttribute("title", bookName);
+			a.setData(bookName);
+			li.addElement(a);
+
+			if (i++ < 39)
+				ul.addElement(li);
+			else
+				ul1.addElement(li);
+		}
+		
+		ul.setAttribute("class","menu");
+		ul1.setAttribute("class", "menu");
+		ul1.setAttribute("start", "40");
+
+		this.setVariable("old-testament", ul.toString());
+		this.setVariable("new-testament", ul1.toString());
+
 		return this;
 	}
 
