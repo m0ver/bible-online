@@ -91,7 +91,8 @@ em,cite {
 }
 
 #header {
-	background: url("/themes/images/candle.png") no-repeat scroll right center / 15% auto #464646;
+	/*background: url("/themes/images/candle.png") no-repeat scroll right center / 15% auto #464646;*/
+	background:url("/themes/images/banner.jpg") repeat-x scroll 0 50% #464646;
 	padding: 0 3em;
 }
 

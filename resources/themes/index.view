@@ -54,6 +54,16 @@
 		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		})();
+		
+		var i=0;
+		var timer = new Timer(0.1,function(){});
+		timer.setAction(function() {
+			if(i == 1920) i = 0;
+			$('#header').css({"background-position": (i++)+"px 50%"});
+		});
+		timer.start().complete(function(){
+			timer.start();
+		});
 	});
 
 //]]>
@@ -155,6 +165,8 @@ $(function(){
 	<label>[%holy.bible.download%]</label>
 	<ul>
 		<li><a href="/bible.pdf" title="[%holy.bible.chinese.download%]">[%holy.bible.chinese.download%]</a></li>
+		<li><a href="/English-Standard-Version.pdf" title="English Standard Version">English Standard Version</a></li>
+		<li><a href="/New-International-Version.pdf" title="New International Version">New International Version</a></li>
 	</ul>
 	
 	</div>

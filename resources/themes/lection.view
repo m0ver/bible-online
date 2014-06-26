@@ -94,6 +94,16 @@
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'","caption":"English(US)"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-CN'","caption":"简体中文"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-TW'","caption":"繁体中文"});
+	
+		var i=0;
+		var timer = new Timer(0.1,function(){});
+		timer.setAction(function() {
+			if(i == 1920) i = 0;
+			$('#header').css({"background-position": (i++)+"px 50%"});
+		});
+		timer.start().complete(function(){
+			timer.start();
+		});
 	});
 	
 	$(function(){
