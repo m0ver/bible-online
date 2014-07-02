@@ -177,11 +177,6 @@ public class lection extends AbstractApplication {
 	}
 	
 	public Object read() throws ApplicationException {
-		StringBuffer metas = new StringBuffer();
-		metas.append("<meta name=\"keywords\" content=\"").append(this.getProperty("application.keywords")).append("\" />\r\n")
-		.append("<meta name=\"description\" content=\"").append(this.getProperty("application.description")).append("\" />");
-		
-		this.setVariable("metas", metas.toString());
 		return this.read(1);
 	}
 	

@@ -3,7 +3,6 @@
 <head>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-{%metas%}
 <meta property="og:title" content="{%book.bookName%} | 第{%chapterid%}章 | [%holy.bible%]"/>
 <meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
 <meta property="og:image" content="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png"/>
