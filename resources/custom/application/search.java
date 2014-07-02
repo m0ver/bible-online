@@ -168,6 +168,8 @@ public class search extends AbstractApplication
         
         if(query.trim().length()>0)
         {
+        	query = StringUtilities.htmlSpecialChars(query);
+        	
             keywords=query.split(" ");
             
 			this.setVariable("keyword", query);
@@ -452,6 +454,8 @@ public class search extends AbstractApplication
         	return this;
         }
         
+    	query = StringUtilities.htmlSpecialChars(query);
+
         int page = 1, pageSize = 10, total = 0;
         
 		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
