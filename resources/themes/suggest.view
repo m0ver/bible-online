@@ -5,6 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+<link rel="alternate" href="http://www.ingod.asia{%action%}" hreflang="x-default" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=en-GB" hreflang="en-gb" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=en-US" hreflang="en-us" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=zh-TW" hreflang="zh-tw" />
 
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
