@@ -1,5 +1,5 @@
 /**
- * A standard timer for Java script.
+ * A standard timer for JavaScript.
  * 
  * @author: Mover Zhou
  * @url http://development.ingod.asia
@@ -49,7 +49,7 @@ var Timer = function() {
 
 			this.status = list[1]; // 'running'
 		} else if (this.timer == null) {
-			$this = this.handle;
+			$this = this;
 			this.timer = setTimeout(function() {
 				$this.action();
 				$this.stop();
@@ -312,8 +312,7 @@ struct.fixed = function(element, top, left) {
 	element.style.display = "block";
 	if (!window.XMLHttpRequest && window.ActiveXObject) {
 		element.style.position = "absolute";
-
-		this.setGlobal();
+//		this.setGlobal();
 	} else {
 		element.style.position = "fixed";
 	}

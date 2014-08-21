@@ -431,37 +431,6 @@ var Menu=function(){
 	}
 }
 
-var DTimer=function()
-{
-	if (arguments.length > 1) {
-		this.limit = arguments[0];
-		this.action = typeof (arguments[1]) == 'undefined' ? function() {
-		} : arguments[1];
-	} else {
-		this.limit = 1;
-		this.action = arguments[0];
-	}
-	
-	this.timer=null;
-	
-	this.setAction=function()
-	{
-		this.action=arguments[0];
-	};
-	this.start=function(){
-		if(this.timer)this.stop();
-		this.timer=setTimeout(this.action,this.limit*1000);
-//		document.title="started";
-	};
-	this.stop=function(){
-		clearTimeout(this.timer);
-//		document.title="stopped";	
-	};
-	this.excute=function()
-	{
-		this.action();
-	};
-}
 var Dialog=function(){
 	this.id='dialog';
 	this.sid=-1;
