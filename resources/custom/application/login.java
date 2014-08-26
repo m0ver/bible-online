@@ -47,7 +47,6 @@ import org.tinystruct.data.component.Builder;
 import org.tinystruct.data.component.Struct;
 import org.tinystruct.datatype.ObjectVariable;
 import org.tinystruct.handle.Reforward;
-import org.tinystruct.handle.Report;
 import org.tinystruct.system.util.StringUtilities;
 import org.tinystruct.system.util.TextFileLoader;
 import org.tinystruct.system.util.ValidateCode;
@@ -238,7 +237,7 @@ public class login extends AbstractApplication {
 			ValidateCode code = new ValidateCode(request);
 			code.toImage(response);
 		} catch (java.io.IOException io) {
-			Report.getInstance().print(io.getMessage());
+			io.printStackTrace();
 		}
 	}
 

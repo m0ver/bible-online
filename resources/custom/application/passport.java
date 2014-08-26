@@ -26,7 +26,6 @@ import javax.servlet.http.HttpSession;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
-import org.tinystruct.handle.Report;
 import org.tinystruct.system.Language;
 import org.tinystruct.system.Resource;
 import org.tinystruct.system.util.Security;
@@ -49,7 +48,6 @@ public class passport
 	private Language lang;
 
 	private User currentUser;
-	private Report event;
 	private boolean recognized=false;
 
 	private HttpSession session;
@@ -61,9 +59,6 @@ public class passport
 		this.request=request;
 		this.response=response;
 		this.currentUser=new User();
-		
-		this.event=Report.getInstance();
-		this.event.setClassName(getClass().getName());
 		
 		this.session=this.request.getSession();
 		
@@ -242,7 +237,6 @@ public class passport
 			if(this.password.equals(new Security(this.email).decodePassword(String.valueOf(found.get(0).get("password").value()))))
 			{
 				currentUser.setData(found);
-				this.event.println(currentUser.toString());
 				
 				currentUser.setLastloginTime(new Date());
 				currentUser.setLastloginIP(this.request.getRemoteAddr());
