@@ -12,9 +12,9 @@
 <link href="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
 <link rel="canonical" href="{%base_url%}{%book.bookName%}/{%chapterid%}" />
 <link rel="alternate" href="http://www.ingod.asia{%action%}" hreflang="x-default" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=en-GB" hreflang="en-gb" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=en-US" hreflang="en-us" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=zh-TW" hreflang="zh-tw" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-GB" hreflang="en-gb" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-US" hreflang="en-us" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
 <link rel="prev" href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" />
 <link rel="next" href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
@@ -143,9 +143,9 @@ $(function(){
 <![endif]-->
 <title>{%book.bookName%} | 第{%chapterid%}章 | [%holy.bible%]</title>
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-role="page">
+<body itemscope="" itemtype="http://schema.org/WebPage" data-role="page">
 <div id="header" data-role="header">
-	<div class="wrapper" itemscope itemtype="http://schema.org/Organization">
+	<div class="wrapper" itemscope="" itemtype="http://schema.org/Organization">
 		<h1><a href="/">[%application.title%]</a></h1>
 		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
 		<ul class="menu">
@@ -171,7 +171,7 @@ $(function(){
 <a name="up"></a>
 <div id="pagebody">
 <div class="wrapper">
-	<div class="container" itemscope itemtype="http://schema.org/Article">
+	<div class="container" itemscope="" itemtype="http://schema.org/Article">
 	<h2 itemprop="name">[%holy.book.info%]</h2> 
 	<a class="clear-fix"></a>
 		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} 

@@ -2,27 +2,27 @@
 <html lang="{%language_code%}">
 <head>
 <meta content="width=device-width, initial-scale=1" name="viewport" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
 <link rel="alternate" href="http://www.ingod.asia{%action%}" hreflang="x-default" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=en-GB" hreflang="en-gb" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=en-US" hreflang="en-us" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=zh-TW" hreflang="zh-tw" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-GB" hreflang="en-gb" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-US" hreflang="en-us" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
+
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/struct.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/tools.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/google.js" charset="utf-8"></script>
-
+<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
 <link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
-
 <!--[if IE]>
 <style type="text/css">
 @import url("{%TEMPLATES_DIR%}/style/ie.css?9");
 </style>
 <![endif]-->
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/struct.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/{%language%}.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/tools.js" charset="utf-8"></script>
 <script type="text/javascript">
 //<![CDATA[
 	var profileMenu;
@@ -79,7 +79,7 @@ $(function(){
 });
 </script>
 <![endif]-->
-<title>{%search.title%} [%application.title%][%search.submit.caption%]</title>
+<title>[%page.suggestion.title%] - [%application.title%]</title>
 </head>
 <body>
 <div id="header">
@@ -87,35 +87,23 @@ $(function(){
 		<h1><a href="/">[%application.title%]</a></h1>
 		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
 		<ul>
-			<li><a class="current" href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
+			<li><a href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
 			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
-			<li id="download"><a href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+			<li id="download"><a class="current" href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
 		</ul>
 	</div>
 </div>
-
 <div id="headline">
 	<div class="wrapper">
-		<h2>[%page.search.title%]</h2>
+		<h2>[%page.suggestion.title%]</h2>
 	</div>
 </div>
 
 <div id="pagebody">
-	<div class="wrapper">
-		<div class="col-12">
-			<form name="sitesearch" id="sitesearch" action="[%LINK:bible/search%]" method="post">
-			<div class="i-font">
-				<input size="50" class="text" autocomplete="off" maxlength="2048" value="{%keyword%}" id="keyword" name="keyword" />
-				<input class="button inputbutton" type="submit" value=" [%search.submit.caption%] " /> <a href="[%LINK:bible/advsearch%]/{%keyword%}">[%search.advanced.mode%]</a>
-			</div>
-			</form>
-			
-			<div class="search-tips">[%search.info%]</div>
-			
+<div class="wrapper standard">
+			{%error%}
 			{%value%}
-			
-			</div>
-	</div>
+</div>
 </div>
 
 <div id="footer">
@@ -124,14 +112,11 @@ $(function(){
 			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
 			<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
 			<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
-			<a href="[%LINK:bible/api%]">[%footer.api%]</a> | 
+			<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
  			<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
 		</p>
 	</div>
 </div>
 
-<script type="text/javascript">
-window.listener.install(document.sitesearch,document.sitesearch.keyword,"keyword.jsp",false,"×");
-</script>
 </body>
 </html>

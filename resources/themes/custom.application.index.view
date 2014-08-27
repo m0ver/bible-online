@@ -17,9 +17,9 @@
 <link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
 <link rel="canonical" href="http://www.ingod.asia" />
 <link rel="alternate" href="http://www.ingod.asia/" hreflang="x-default" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=en-GB" hreflang="en-gb" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=en-US" hreflang="en-us" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&lang=zh-TW" hreflang="zh-tw" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-GB" hreflang="en-gb" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-US" hreflang="en-us" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
 <!--[if IE]>
 <style type="text/css">
 @import url("{%TEMPLATES_DIR%}/style/ie.css?9");
