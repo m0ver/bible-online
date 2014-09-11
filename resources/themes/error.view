@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
 <title>{%exception.message%} - Service Unavailable!</title>
 <style type="text/css">
 body{font-family: Times New Roman,Courier New} 

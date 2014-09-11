@@ -167,7 +167,7 @@ public class error extends AbstractApplication {
 			}
 		});
 		
-		return this.getBuffer();
+		return this.getOutputText();
 	}
 
 	public void process() throws ApplicationException {

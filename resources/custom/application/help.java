@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
-import org.tinystruct.system.util.TextFileLoader;
+import org.tinystruct.system.template.DefaultTemplate;
 
 public class help extends AbstractApplication {
 
@@ -58,18 +58,13 @@ public class help extends AbstractApplication {
 	}
 	
 	public void privacy() throws ApplicationException{
-		
 		InputStream in = help.class.getClassLoader().getResourceAsStream("themes/privacy.view");
-		TextFileLoader loader=new TextFileLoader(in);
-		
-		this.setBuffer(loader.getContent().toString());
+		this.setTemplate(new DefaultTemplate(this, in));
 	}
 	
 	public void condition() throws ApplicationException{
 		InputStream in = help.class.getClassLoader().getResourceAsStream("themes/condition.view");
-		TextFileLoader loader=new TextFileLoader(in);
-		
-		this.setBuffer(loader.getContent().toString());
+		this.setTemplate(new DefaultTemplate(this, in));
 	}
 	
 	public Object sitemap(){

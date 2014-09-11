@@ -79,9 +79,9 @@ public class suggest extends AbstractApplication
     	html.append("<div>\r\n");
     	html.append("<form id=\"poster\" action=\""+this.getLink("suggestion/post")+"\" method=\"post\">");
     	html.append("<ul>\r\n");
-    	html.append("<li><label>"+this.getProperty("suggestion.email.address")+"&nbsp;<br /><input type=\"text\" value=\"\" name=\"iemail\" id=\"iemail\" class=\"text\"/></label></li>\r\n");
-    	html.append("<li><label>"+this.getProperty("suggestion.content.text")+"&nbsp;<br /><textarea name=\"content\" id=\"content\" cols=\"45\" rows=\"8\"></textarea></label></li>\r\n");
-    	html.append("<li><label><input type=\"submit\" class=\"button-secondary\" value=\""+this.getProperty("suggestion.button.ok")+"\"/> &nbsp;&nbsp; </label><input type=\"reset\" class=\"button-secondary\" value=\""+this.getProperty("suggestion.button.cancel")+" \" onclick=\"history.back()\"/></li>\r\n");
+    	html.append("<li><label>"+this.getProperty("suggestion.email.address")+"<br /><input type=\"text\" value=\"\" name=\"iemail\" id=\"iemail\" class=\"text\"/></label></li>\r\n");
+    	html.append("<li><label>"+this.getProperty("suggestion.content.text")+"<br /><textarea name=\"content\" id=\"content\" cols=\"45\" rows=\"8\"></textarea></label></li>\r\n");
+    	html.append("<li><label><input type=\"submit\" class=\"button-secondary\" value=\""+this.getProperty("suggestion.button.ok")+"\"/> </label><input type=\"reset\" class=\"button-secondary\" value=\""+this.getProperty("suggestion.button.cancel")+" \" onclick=\"history.back()\"/></li>\r\n");
     	html.append("</ul>\r\n");
 		html.append("</form>\r\n");
 		html.append("</div>\r\n");

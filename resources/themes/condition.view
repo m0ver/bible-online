@@ -35,11 +35,11 @@ $(function(){
 <div id="header">
 	<div class="wrapper">
 		<h1><a href="/">[%application.title%]</a></h1>
-		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%] <a href="[%LINK:user/settings%]">[%page.language-setting.title%]</a> | <a href="[%LINK:user/logout%]">[%page.logout.caption%]?</a></p>
+		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
 		<ul>
 			<li><a href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
 			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
-			<li id="download"><a href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+			<li id="download"><a class="current" href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
 		</ul>
 	</div>
 </div>
@@ -64,7 +64,7 @@ $(function(){
 <h2 style="border: medium none;">InGod.asia 使用条款</h2>
 <h4>2010 年 1 月 1 日</h4>
 <p>本站提供的各项服务仅供个人使用。<br />
-欢迎您进入本站网站！用户使用本站的网站或其他服务，即表示用户同意接受此条款的约束（以下简称&ldquo;使用条款&rdquo;）。此协议下的&ldquo;本站服务&rdquo;不包括目前或将来任何本站的分支机构或公告中的内容。</p>
+欢迎您进入本站网站！用户使用本站的网站或其他服务，即表示用户同意接受此条款的约束（以下简称“使用条款”）。此协议下的“本站服务”不包括目前或将来任何本站的分支机构或公告中的内容。</p>
 
 <h4>仅供个人使用</h4>
 <p>本站提供的服务仅供用户个人、非商业性使用。用户不得使用本站的服务销售产品或服务，也得出于商业目的增加个人站点的通信量，例如进行广告销售。如果想对本站服务进行商业性使用，用户必须提前与本站就此项使用达成协议。欲知更多信息，请与我们联系。</p>
@@ -76,7 +76,7 @@ $(function(){
 <p>作为搜索结果或通过本站服务链接显示的站点，可能是由本站范围以外的人建立的。本站索引中出现的搜索结果是本站的计算机系统自动索引的，但在将网站编入此种自动搜索结果的索引之前，本站无法对其进行筛选。使用本站服务搜索得到的结果或链接到的站点可能是令人反感的、不当的或冒犯性的。我们不保证本站搜索不会定位到意外的或令人反感的内容，也不对任何搜索结果或由本站服务链接到的任何站点的内容承担责任。</p>
 
 <h4>隐私权政策</h4>
-<p>欲查看本站隐私策略，请点击任意页面上的&ldquo;<a href="[%LINK:help%]">隐私策略</a>&rdquo;链接。</p>
+<p>欲查看本站隐私策略，请点击任意页面上的“<a href="[%LINK:help%]">隐私策略</a>”链接。</p>
 
 <h4>使用条款及本站搜索服务的更改</h4>
 <p>本站有时会以任何理由更改或终止服务而无需另行通知。无论以通知或不通知的方式终止服务，本站均对用户本人、其他使用者或任何第三方不负有责任。本站保留不经通知而经常更改条款及服务的权利。为了及时获知变更信息，建议用户经常查看这些条款和服务。</p>
