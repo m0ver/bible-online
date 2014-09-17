@@ -211,14 +211,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 						themail.setSubject("每日读经["
 								+ format.format(new Date()).toString() + "]");
 
-//						Element footer = new Element("div");
-//						footer.setAttribute("style",
-//										"padding:10px;font-size:12px;color:#888888;background:#000;");
-//						footer.setData("让我们一起来养成每天读经的好习惯...<br />如果您不能正常访问此站点(<a href=\"http://ingod.asia\">http://ingod.asia</a>)，请尝试通过VPN或运行代理程序(Freegate7.01)后，再进行访问，给您带来不便请谅解！");
-//
-//						container.addElement(footer);
-
-						themail.setBody(container.toString());
+						Element footer = new Element("div");
 
 						subscription subscription = new subscription();
 						Table table = subscription.findWith("WHERE available = 1", new Object[]{});
@@ -226,6 +219,11 @@ public class dailymail extends AbstractApplication implements ServletContextList
 						while (iterator1.hasNext()) {
 							subscription.setData(iterator1.next());
 							
+							footer.setAttribute("style",
+											"padding:10px;font-size:12px;color:#ccc;");
+							footer.setData("让我们一起来养成每天读经的好习惯...<br />如果您不能正常访问此站点(<a href=\"http://ingod.asia\">http://ingod.asia</a>)，请尝试通过VPN或运行代理程序(Freegate7.01)后，再进行访问，给您带来不便请谅解！如果你不想收到此邮件，请点击<a href=\"http://ingod.asia/?q=services/unsubscribe/"+subscription.getId()+"\">退订</a>。");
+
+							themail.setBody(container.toString() + footer.toString());
 							themail.setTo(subscription.getEmail());
 							themail.send();
 						}

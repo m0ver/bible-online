@@ -40,7 +40,6 @@ import org.tinystruct.system.util.URLFileLoader;
 import custom.objects.User;
 import custom.objects.bible;
 import custom.objects.report;
-import custom.objects.subscription;
 import custom.objects.vocabulary;
 
 public class sender extends AbstractApplication {
@@ -147,53 +146,6 @@ public class sender extends AbstractApplication {
 		return "true";
 	}
 
-	public String subscribe() throws ApplicationException {
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-
-		String mailto = "moverinfo@gmail.com";
-		if (this.request.getParameter("toemail") != null
-				&& this.request.getParameter("toemail").trim().length() > 0) {
-			mailto = this.request.getParameter("toemail");
-		} else
-			return "false";
-
-		String list = null;
-		if (this.request.getParameter("bible") != null) {
-			list = "bible";
-		}
-
-		if (this.request.getParameter("article") != null) {
-			if (list == null)
-				list = "article";
-			else
-				list += ",article";
-		}
-
-		if (list == null)
-			return "empty";
-
-		String[] addresses = mailto.split(";");
-
-		for (int i = 0; i < addresses.length; i++) {
-			if (addresses[i].indexOf('@') < 1
-					|| addresses[i].indexOf('@') >= addresses[i]
-							.lastIndexOf('.') + 1) {
-				return "invalid";
-			} else {
-				subscription subscription = new subscription();
-				subscription.setAvailable(true);
-
-				Row row = subscription.findOneByKey("email", addresses[i]);
-				if (row.size() == 0) {
-					subscription.setEmail(addresses[i]);
-					subscription.setList(list);
-					subscription.append();
-				}
-			}
-		}
-
-		return "true";
-	}
 	
 	public boolean update(String id) throws ApplicationException{
 		report report = new report();
@@ -235,7 +187,6 @@ public class sender extends AbstractApplication {
 	public void init() {
 		// TODO Auto-generated method stub
 		this.setAction("friends/invite", "invite");
-		this.setAction("services/subscribe", "subscribe");
 		this.setAction("services/report", "send");
 		this.setAction("services/bible/update", "update");
 		this.setAction("services/getword", "getWord");
