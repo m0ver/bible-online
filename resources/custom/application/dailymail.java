@@ -140,7 +140,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 							res.add(bibles);
 						
 						StringBuffer buffer=new StringBuffer();
-						buffer.append("<div style=\"background: none repeat scroll 0 0 -moz-field; border: 1px solid threedshadow; margin: 2em auto; padding: 3em;\">");
+						buffer.append("<div style=\"background: none repeat scroll 0 0 -moz-field; border: 1px solid threedshadow; margin: 2em auto; padding: 2em;\">");
 						buffer.append("	<div>");
 						buffer.append("		<a style=\"-moz-margin-end: 0; -moz-margin-start: 0.6em; float: right; margin-bottom: 0; margin-top: 0;\">");
 						buffer.append("			<img id=\"feedTitleImage\" src=\"http://ingod.asia/themes/images/favicon-b.png\"/> </a>");
