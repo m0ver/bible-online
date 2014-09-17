@@ -181,8 +181,9 @@ public class sender extends AbstractApplication {
 				return "invalid";
 			} else {
 				subscription subscription = new subscription();
-				Row row = subscription.findOneByKey("email", addresses[i]);
+				subscription.setAvailable(true);
 
+				Row row = subscription.findOneByKey("email", addresses[i]);
 				if (row.size() == 0) {
 					subscription.setEmail(addresses[i]);
 					subscription.setList(list);
