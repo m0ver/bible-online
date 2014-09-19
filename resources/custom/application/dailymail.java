@@ -225,12 +225,19 @@ public class dailymail extends AbstractApplication implements ServletContextList
 
 							themail.setBody(container.toString() + footer.toString());
 							themail.setTo(subscription.getEmail());
-							themail.send();
+							
+							try {
+								themail.send();
+							}
+							catch(ApplicationException e){
+								subscription.setAvailable(false);
+								subscription.update();
+							}
 						}
 
 						// themail.attachFile("E:\\常用应用软件\\网络代理\\freegate7.01.rar");
 
-						Thread.sleep(10);
+						Thread.sleep(1);
 					} catch (ApplicationException e) {
 						suggestion = new suggestion();
 						suggestion.setEmail("services@ingod.asia");
