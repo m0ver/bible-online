@@ -1,4 +1,4 @@
-package custom.application;
+package custom.tools;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,6 +17,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
@@ -33,7 +34,7 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 import custom.objects.bible;
 import custom.objects.book;
 
-public class pdf_generator {
+public class PDFGenerator {
 
 	/**
 	 * @param args
@@ -43,42 +44,71 @@ public class pdf_generator {
 	 */
 	public static void main(String[] args) throws DocumentException, ApplicationException, IOException {
 		// TODO Auto-generated method stub
-		new pdf_generator().create("bible.pdf");
+		new PDFGenerator().create("New-International-Version.pdf","NIV");
+		new PDFGenerator().create("English-Standard-Version.pdf","ESV");
+		new PDFGenerator().create("bible.pdf","zh_CN");
 	}
 	
-	public void create(String fileName) throws DocumentException, ApplicationException, IOException
+	public void create(String fileName, String tableName) throws DocumentException, ApplicationException, IOException
 	{
 	       // step 1
-        Rectangle pagesize = new Rectangle(600f, 800f);
+        Rectangle pagesize = new Rectangle(360f, 480f);
         
         pagesize.setBackgroundColor(new BaseColor(228,242,253));
         
-        Document document = new Document(pagesize, 40f, 200f, 50f, 50f);
+        Document document = new Document(pagesize, 30f, 30f, 37f, 37f);
         // step 2
-        PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(fileName));
+        writer.setBoxSize("default", pagesize);
+        
+        FontFactory.registerDirectories();
+
+		BaseFont defaultFont = BaseFont.createFont("STSongStd-Light", "UniGB-UCS2-H",BaseFont.EMBEDDED);
+		BaseFont headFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H",BaseFont.EMBEDDED); 
+        
+		Font NormalStyle = FontFactory.getFont("Times New Roman",12, Font.NORMAL);
+		Font HeaderStyle = FontFactory.getFont("Times New Roman",14, Font.BOLD);
+//		Font UnderlineHeaderStyle =  FontFactory.getFont("Times New Roman",15, Font.UNDERLINE);
+		Font BlueHeaderStyle = FontFactory.getFont("Times New Roman", 20, Font.BOLD,BaseColor.BLUE);
+
+		String lang = "en_US";
+		String version = "Holy Bible (New International Version)";
+		if(tableName.equalsIgnoreCase("ESV")) {
+			version = "Holy Bible (English Standard Version)";
+		}
+		
+		if(tableName.equalsIgnoreCase("zh_CN")) {
+			NormalStyle = new Font(defaultFont, 11, Font.NORMAL);
+			HeaderStyle = new Font(headFont, 13, Font.BOLD);
+//			UnderlineHeaderStyle = new Font(headFont, 13, Font.UNDERLINE);
+			BlueHeaderStyle = new Font(headFont, 18, Font.BOLD,BaseColor.BLUE);
+			
+			lang="zh_CN";
+			version="中文圣经（简体版）";
+		}
+        /** 
+         * HeaderFooter的第2个参数为非false时代表打印页码 
+         * 页眉页脚中也可以加入图片，并非只能是文字 
+         */  
+        PDFPageFooter header=new PDFPageFooter();  
+        writer.setPageEvent(header);
+        
         // step 3
         document.open();
         
         Image logo=PngImage.getImage("themes/images/pdf-logo.png");
-        logo.scalePercent(85f);
         
+        logo.scalePercent(50f);
+         
         document.add(logo);
         
         book book=new book();
-        Table table=book.findWith("WHERE language=? order by book_id", new Object[]{"zh_CN"});
+        Table table=book.findWith("WHERE language=? order by book_id", new Object[]{lang});
         Iterator<Row> iterator=table.iterator();
         
         List list=new List(List.ORDERED);
-        list.setIndentationLeft(36);
-        list.setIndentationRight(36);
-
-		BaseFont defaultFont = BaseFont.createFont("STSongStd-Light", "UniGB-UCS2-H",BaseFont.EMBEDDED);
-		BaseFont headFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H",BaseFont.EMBEDDED); 
-		
-		Font NormalStyle = new Font(defaultFont, 11, Font.NORMAL);
-		Font HeaderStyle = new Font(headFont, 13, Font.BOLD);
-		Font UnderlineHeaderStyle = new Font(headFont, 13, Font.UNDERLINE);
-		Font BlueHeaderStyle = new Font(headFont, 18, Font.BOLD,BaseColor.BLUE);
+        //list.setIndentationLeft(36);
+        //list.setIndentationRight(36);
 		
         int i=1;
         while(iterator.hasNext())
@@ -86,20 +116,21 @@ public class pdf_generator {
         	book.setData(iterator.next());
         	
             Phrase phrase = new Phrase();
-            phrase.add(new Chunk(book.getBookName(),UnderlineHeaderStyle).setAction(PdfAction.gotoLocalPage(String.valueOf(i++), false)));
+            phrase.add(new Chunk(book.getBookName(),NormalStyle).setAction(PdfAction.gotoLocalPage(String.valueOf(i++), false)));
             ListItem item=new ListItem();
             item.add(phrase);
             list.add(item);
         }
         // step 4
         
-        Paragraph bookName=new Paragraph(new Chunk("中文圣经（简体版）",BlueHeaderStyle));
+        Paragraph bookName=new Paragraph(new Chunk(version,BlueHeaderStyle));
+
         document.add(bookName);
         
         document.add(list);
         
         bible bible=new bible();
-        bible.setTableName("zh_CN");
+        bible.setTableName(tableName);
         
         Iterator<Row> page_iterator=table.iterator();
         i=1;
@@ -117,12 +148,18 @@ public class pdf_generator {
             chapter.setBookmarkOpen(false);
             
             bible m=new bible();
-            m.setTableName("zh_CN");
+            m.setTableName(tableName);
+            
             int max_chapter=bible.setRequestFields("max(chapter_id) as max_chapter").findWith("WHERE book_id=?",new Object[]{book.getBookId()}).get(0).get(0).get("max_chapter").intValue();
             for(int k=0;k<max_chapter;k++)
             {
             	Paragraph title = new Paragraph();
+            	
+            	if(tableName.equalsIgnoreCase("zh_CN"))
 	            title.add(new Chunk("第"+(k+1)+"章",NormalStyle));
+            	else
+	            title.add(new Chunk("Chapter "+(k+1),NormalStyle));
+
 	        	LineSeparator line = new LineSeparator();
 	        	line.setLineColor(BaseColor.GRAY);
 	            document.add(line);
@@ -165,5 +202,6 @@ public class pdf_generator {
         document.close();
 
 	}
+
 
 }
