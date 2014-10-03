@@ -126,10 +126,11 @@ public class index extends AbstractApplication {
 		Object menu;
 		Table list = null;
 		book book = new book();
-		if((menu = data.get("cache-menu")) == null) {
+		String _locale = this.getLocale().toString();
+		if((menu = data.get("cache-menu"+_locale)) == null) {
 			try {
-				list=book.findWith("WHERE language=? order by book_id", new Object[]{this.getLocale().toString()});
-				data.set("cache-menu", list);
+				list=book.findWith("WHERE language=? order by book_id", new Object[]{_locale});
+				data.set("cache-menu"+_locale, list);
 			} catch (ApplicationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
