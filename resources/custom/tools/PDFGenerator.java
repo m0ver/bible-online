@@ -52,7 +52,7 @@ public class PDFGenerator {
 	public void create(String fileName, String tableName) throws DocumentException, ApplicationException, IOException
 	{
 	       // step 1
-        Rectangle pagesize = new Rectangle(360f, 480f);
+        Rectangle pagesize = new Rectangle(280f, 420f);
         
         pagesize.setBackgroundColor(new BaseColor(228,242,253));
         
@@ -97,8 +97,7 @@ public class PDFGenerator {
         document.open();
         
         Image logo=PngImage.getImage("themes/images/pdf-logo.png");
-        
-        logo.scalePercent(50f);
+        logo.scalePercent(36.8f);
          
         document.add(logo);
         
