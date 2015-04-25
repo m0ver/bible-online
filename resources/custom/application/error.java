@@ -67,7 +67,7 @@ public class error extends AbstractApplication {
 	public String not_found() throws ApplicationException {
 		final error app = this;
 		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 		
 		HttpSession session = this.request.getSession();

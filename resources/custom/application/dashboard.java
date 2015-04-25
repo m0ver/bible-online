@@ -72,7 +72,7 @@ public class dashboard extends AbstractApplication {
 	public Object index() throws ApplicationException{
 		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
 		
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
@@ -161,7 +161,7 @@ public class dashboard extends AbstractApplication {
 			reforward.forward();
 		}
 		
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		
 		return this;
 	}

@@ -89,7 +89,7 @@ public class suggest extends AbstractApplication
 		
 		this.setVariable("error", "");
 		this.setVariable("value", html.toString());
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		
 		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
 
@@ -154,7 +154,7 @@ public class suggest extends AbstractApplication
 			// TODO Auto-generated catch block
 			this.setVariable("error", "<div class=\"error\">"+this.getProperty("suggestion.send.failure")+"</div>");
 		}
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {

@@ -168,7 +168,7 @@ public class lection extends AbstractApplication {
 	}
 	
 	public Object viewByName(int chapterId, int partId) throws ApplicationException {
-		String bookName = (String) this.context.getAttribute("HTTP_REQUEST_ACTION");
+		String bookName = (String) this.context.getAttribute("REQUEST_ACTION");
 		
 		if(bookName.indexOf('/')!=-1)
 			bookName = bookName.split("/")[0];
@@ -193,7 +193,7 @@ public class lection extends AbstractApplication {
 		if(chapterid==0) chapterid=1;
 
 		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 		
 		HttpSession session = this.request.getSession();

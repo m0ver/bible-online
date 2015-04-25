@@ -126,7 +126,7 @@ public class register extends AbstractApplication
 			this.setVariable("error", "<div class=\"error\">"+e.getMessage()+"</div>");
 		}
 
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
@@ -173,7 +173,7 @@ public class register extends AbstractApplication
 		key.setMaxAge(24 * 3600 * 7);
 		response.addCookie(key);
 
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {

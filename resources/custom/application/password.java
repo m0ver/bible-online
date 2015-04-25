@@ -44,7 +44,7 @@ public class password extends AbstractApplication {
 	
 	public Object send() throws ApplicationException
 	{
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		
 		HttpServletRequest request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
 		HttpSession session = request.getSession();

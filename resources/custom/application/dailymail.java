@@ -353,12 +353,11 @@ public class dailymail extends AbstractApplication implements ServletContextList
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
 	}
 	
 	public void init() {
 		// TODO Auto-generated method stub
-		
+		this.setAction("start", "start");
 	}
 
 	public String version() {

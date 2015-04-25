@@ -329,7 +329,7 @@ public class search extends AbstractApplication
 		this.setVariable("end", String.valueOf(end));
 		this.setVariable("size", String.valueOf(pager.getSize()));
 		this.setVariable("value", html.toString());
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		
 		this.setText("search.info",start,end,query, pager.getSize());
 
@@ -559,7 +559,7 @@ public class search extends AbstractApplication
 
 		this.setText("search.info",start,end,query, pager.getSize());
 		
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("HTTP_REQUEST_ACTION").toString());
+		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
