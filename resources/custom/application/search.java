@@ -111,7 +111,7 @@ public class search extends AbstractApplication
 		
 		this.setText("holy.bible.download");
 		this.setText("holy.bible.chinese.download");
-		this.setText("search.info",0,0,0,0);
+		this.setText("search.info",0,0,"",0);
 		
 		this.setVariable("TEMPLATES_DIR", "/themes");
 		this.setVariable("keyword","");
@@ -165,11 +165,16 @@ public class search extends AbstractApplication
         }
         
         int startIndex=(page-1)*pageSize;
-        
+		this.setVariable("search.title", "无相关结果 - ");
+
         if(query.trim().length()>0)
         {
         	query = StringUtilities.htmlSpecialChars(query);
+        	if(query.indexOf('|')!=-1) {
+        		query = query.split("|")[0];
+        	}
         	
+        	query = query.trim();
             keywords=query.split(" ");
             
 			this.setVariable("keyword", query);
@@ -183,22 +188,26 @@ public class search extends AbstractApplication
     	
         StringBuffer condition=new StringBuffer();
         int i=0,j,k=0;
+        String _keyword;
         while(i<keywords.length)
         {
-        	if(condition.length()==0)
-        	{
-        		condition.append(" bible.content like '%"+keywords[i]+"%' ");
+        	_keyword = keywords[i];
+        	if(_keyword.trim().length() > 0) {
+	        	if(condition.length()==0)
+	        	{
+	        		condition.append(" bible.content like '%"+_keyword+"%' ");
+	        	}
+	        	else
+	        	{
+	        		condition.append(" AND bible.content like '%"+_keyword+"%' ");
+	        		/*if(true)
+	        			condition.append(" AND bible.content like '%"+keywords[i]+"%' ");
+	        		else
+	        			condition.append(" OR bible.content like '%"+keywords[i]+"%' ");*/
+	        	}
+	        	
+	        	i++;
         	}
-        	else
-        	{
-        		condition.append(" AND bible.content like '%"+keywords[i]+"%' ");
-        		/*if(true)
-        			condition.append(" AND bible.content like '%"+keywords[i]+"%' ");
-        		else
-        			condition.append(" OR bible.content like '%"+keywords[i]+"%' ");*/
-        	}
-        	
-        	i++;
         }
         
         Locale locale = this.getLocale();
@@ -225,7 +234,7 @@ public class search extends AbstractApplication
         Table vtable=bible.find(SQL, new Object[]{});
         boolean noResult=vtable.size()>0;
         
-        if(!noResult) {
+        if(!noResult && query.length()>0) {
     		try {
     			Table list=book.findWith("WHERE language=? and book_name=?", new Object[]{this.getLocale().toString(), query});
     			if(list.size() > 0)

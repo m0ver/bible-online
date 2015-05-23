@@ -67,6 +67,9 @@ public class error extends AbstractApplication {
 	public String not_found() throws ApplicationException {
 		final error app = this;
 		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
+		this.response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+
 		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 		
@@ -176,6 +179,7 @@ public class error extends AbstractApplication {
 		this.response = (HttpServletResponse) this.context
 				.getAttribute("HTTP_RESPONSE");
 
+		this.response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		this.reforward = new Reforward(this.request, this.response);
 
 		this.setVariable("from", this.reforward.getFromURL());
