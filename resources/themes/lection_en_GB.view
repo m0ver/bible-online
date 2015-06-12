@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="{%language_code%}">
 <head>
-<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta property="og:title" content="{%book.bookName%} | Chapter {%chapterid%} | [%holy.bible%]"/>
 <meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
 <meta property="og:image" content="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png"/>
 <meta property="og:site_name" content="[%application.title%]"/>
 <meta property="og:description" content="[%application.description%]"/>
+<meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
 <link href="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
 <link rel="canonical" href="{%base_url%}{%book.bookName%}/{%chapterid%}" />

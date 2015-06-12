@@ -171,7 +171,8 @@ public class search extends AbstractApplication
         {
         	query = StringUtilities.htmlSpecialChars(query);
         	if(query.indexOf('|')!=-1) {
-        		query = query.split("|")[0];
+        		String[] q = query.split("|");
+        		query = q[0];
         	}
         	
         	query = query.trim();
@@ -205,9 +206,8 @@ public class search extends AbstractApplication
 	        		else
 	        			condition.append(" OR bible.content like '%"+keywords[i]+"%' ");*/
 	        	}
-	        	
-	        	i++;
         	}
+        	i++;
         }
         
         Locale locale = this.getLocale();

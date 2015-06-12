@@ -18,6 +18,6 @@
 
 	<!-- compile java files-->
 	<target name="packing" depends="clean,prepare" description="Create binary destribution">
-		<jar excludes="**/resources/,**/src/,**/data/,**/ant/,**/depends/,**/.git/" jarfile="${dist.dir}/${application.name}-${application.version}.war" basedir="${webapps.dir}"/>
+		<jar excludes="**/resources/,**/src/,**/data/,**/ant/,**/lib/,**/.git/" jarfile="${dist.dir}/${application.name}-${application.version}.war" basedir="${webapps.dir}"/>
 	</target>
 </project>

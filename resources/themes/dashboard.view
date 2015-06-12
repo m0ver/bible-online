@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="{%language_code%}">
 <head>
-<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+<meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
 <link rel="prev" href="[%LINK:bible%]/{%book.bookId%}/{%lastchapter%}#up" />
 <link rel="next" href="[%LINK:bible%]/{%book.bookId%}/{%nextchapter%}#up" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
