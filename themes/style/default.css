@@ -976,7 +976,8 @@ ul.testament li ol li {
 }
 
 /* Mobile Portrait */
-@media only screen and (max-width: 479px) {
+/* for 480 px width screen */ 
+@media only screen and (max-width:480px) { 
     #header .wrapper, #header h1 a {
     	height:5em;
     }
@@ -1004,7 +1005,7 @@ ul.testament li ol li {
 	}
     #header h1 a { 
 	    height:2.5em;
-	    background:url("../images/favicon-b.png") no-repeat scroll left center transparent; 
+	    background:url("../images/favicon-b.png") no-repeat scroll left center / auto auto transparent; 
     }
 	.container {
 		float:none;width:auto;
