@@ -355,12 +355,15 @@ var Menu=function(){
 		var text="";
 		for(var i=1;i<currentElement.parentNode.childNodes.length;i++)
 		{
-			if(currentElement.parentNode.childNodes[i].tagName=="SPAN")
-			text+=(currentElement.parentNode.childNodes[i].childNodes[0].nodeValue)
-			else
-			text+=(currentElement.parentNode.childNodes[i].nodeValue);
+			if(currentElement.parentNode.childNodes[i].tagName=="SPAN") {
+				text+=(currentElement.parentNode.childNodes[i].childNodes[0].nodeValue);
+			}
+			else {
+				if(currentElement.parentNode.childNodes[i].nodeValue!=null) {
+					text+=(currentElement.parentNode.childNodes[i].nodeValue);
+				}
+			}
 		}
-		
 		text=text.replace(/'/g,"\\'");
 		this.items=document.createElement("ul");
 		for(var i=0;i<this.itemlist.length;i++)
