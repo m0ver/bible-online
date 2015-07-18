@@ -141,7 +141,7 @@ public class lection extends AbstractApplication {
 		this.setText("holy.bible.download");
 		this.setText("holy.bible.chinese.download");
 		
-		this.setVariable("TEMPLATES_DIR", "/themes");
+		this.setVariable("TEMPLATES_DIR", "/themes", false);
 		this.setVariable("keyword",this.getVariable("keyword")==null?"":this.getVariable("keyword").getValue().toString());
 		this.setVariable("metas", "");
 
@@ -232,7 +232,7 @@ public class lection extends AbstractApplication {
 			e.printStackTrace();
 		}
 		
-		this.setVariable(new DataVariable("book",book));
+		this.setVariable(new DataVariable("book",book), true);
 		
 		String condition = "book_id=" + this.bookid + " and chapter_id="
 					+ this.chapterid;

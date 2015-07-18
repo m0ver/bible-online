@@ -108,10 +108,10 @@
 		timer.setAction(function() {
 			if(i == 1920) i = 0;
 			$('#header').css({"background-position": (i++)+"px 50%"});
+			
+			this.start();
 		});
-		timer.start().complete(function(){
-			timer.start();
-		});
+		timer.start().complete(function(){});
 	});
 	
 	$(function(){

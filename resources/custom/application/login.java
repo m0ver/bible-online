@@ -310,7 +310,7 @@ public class login extends AbstractApplication {
 				}
 
 				this.setVariable(new ObjectVariable("google_client_secrets",
-						clientSecrets));
+						clientSecrets), false);
 			} else
 				clientSecrets = (GoogleClientSecrets) this.getVariable(
 						"google_client_secrets").getValue();
@@ -414,7 +414,7 @@ public class login extends AbstractApplication {
 				System.out.println(builder.get("client_secret"));
 				System.out.println(builder.get("client_id"));
 				this.setVariable(new ObjectVariable("github_client_secrets",
-						builder));
+						builder), false);
 			}
 		} else
 			builder = (Builder) this.getVariable("github_client_secrets")

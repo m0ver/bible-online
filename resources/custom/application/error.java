@@ -102,7 +102,7 @@ public class error extends AbstractApplication {
 
 			@Override
 			public void setVariable(Variable<?> variable) {
-				app.setVariable(variable);
+				app.setVariable(variable, true);
 			}
 
 			@Override

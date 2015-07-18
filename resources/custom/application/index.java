@@ -75,7 +75,7 @@ public class index extends AbstractApplication {
 		this.setText("holy.bible.download");
 		this.setText("holy.bible.chinese.download");
 		
-		this.setVariable("TEMPLATES_DIR", "/themes");
+		this.setVariable("TEMPLATES_DIR", "/themes", false);
 		this.setVariable("keyword",this.getVariable("keyword")==null?"":this.getVariable("keyword").getValue().toString());
 		this.setVariable("metas", "");
 
@@ -168,8 +168,8 @@ public class index extends AbstractApplication {
 		ul1.setAttribute("class", "menu");
 		ul1.setAttribute("start", "40");
 
-		this.setVariable("old-testament", ul.toString());
-		this.setVariable("new-testament", ul1.toString());
+		this.setVariable("old-testament", ul.toString(), false);
+		this.setVariable("new-testament", ul1.toString(), false);
 
 		return this;
 	}
