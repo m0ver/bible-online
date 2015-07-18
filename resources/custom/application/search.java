@@ -113,7 +113,7 @@ public class search extends AbstractApplication
 		this.setText("holy.bible.chinese.download");
 		this.setText("search.info",0,0,"",0);
 		
-		this.setVariable("TEMPLATES_DIR", "/themes", true);
+		this.setVariable("TEMPLATES_DIR", "/themes", false);
 		this.setVariable("keyword","");
 		
 		String username="";
