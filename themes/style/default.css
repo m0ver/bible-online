@@ -558,9 +558,9 @@ select {
 }
 
 .selected {
-	border-bottom: 1px dotted #000;
-	color: #0000ff;
-	padding: 0.2em;
+    border-bottom: 1px dotted #000;
+    color: #0000ff;
+    margin-bottom: -1px;
 }
 
 .line {

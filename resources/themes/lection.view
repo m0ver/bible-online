@@ -109,6 +109,40 @@
 			this.start();
 		});
 		timer.start().complete(function(){});
+		
+		Array.prototype.remove = function(e) {
+		  var i = this.indexOf(e);
+		  if (i >= 0) {
+		    this.splice(i, 1);
+		    return true;
+		  }
+		  return false;
+		};
+		
+		var hash=[];
+		if(location.hash!='') {
+			hash = location.hash.substring(1).split(',');
+			for(var index=0;index < hash.length;index++) {
+				$("#documentation .column li:eq("+hash[index]+")").addClass('selected');
+			}
+		}
+
+		$("#documentation .column").click(function(event){
+			target = event.target;
+		  	element = $(target);
+		  
+			if(element.hasClass('selected')){
+			  element.removeClass('selected');
+			  hash.remove(element.index()+"");
+			}
+			else {
+			  element.addClass('selected');
+			  hash.push(element.index()+"");
+			}
+			
+			location.hash = hash.join(',');
+		});
+
 	});
 	
 	$(function(){
@@ -213,7 +247,7 @@ $(function(){
 </script>
 		</div>
 		<div id="documentation">
-			<div class="column" id="column1" itemprop="articleBody">{%left_column%} {%right_column%}</div>
+			<div class="column" id="column1" itemprop="articleBody">{%left_column%}</div>
 		</div>
 		<div class="clear-fix footnote">
 			<ul>

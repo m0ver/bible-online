@@ -272,20 +272,17 @@ public class lection extends AbstractApplication {
 		this.setText("holy.book.info", book.getBookName(),this.chapterid,this.max_chapter);
 		
 		int count = vtable.size();
-		StringBuffer left_column = new StringBuffer(), right_column = new StringBuffer();
-		String line, line1;
+		StringBuffer left_column = new StringBuffer();
+		String line;
 		
 		if (count > 0) {
-			int n = count / 2, i;
+			int i;
 		
 			left_column.append("<ol>");
-			right_column.append("<ol start=\"" + (n + 1) + "\">");
 		
-			bible bible1 = new bible();
-			for (i = 0; i < n; i++) {
-				Row item = vtable.get(i), item1 = vtable.get(i + n);
+			for (i = 0; i < count; i++) {
+				Row item = vtable.get(i);
 				bible.setData(item);
-				bible1.setData(item1);
 		
 				line = bible.getContent();
 		
@@ -304,36 +301,14 @@ public class lection extends AbstractApplication {
 									+ "</a>" + line + "</li>");
 				}
 				
-				line1 = bible1.getContent();
-				line1 = line1.replaceAll("\n\n", "<br />");
-				right_column
-						.append("<li"
-								+ (this.partid == bible1.getPartId() ? " class=\"selected\""
-										: "")
-								+ "><a class=\"sup\" onmousedown=\"rightMenu.show(event,'"
-								+ bible1.getId() + "')\">" + bible1.getPartId()
-								+ "</a>" + line1 + "</li>");
-			}
-		
-			if ((i + n) < count) {
-				bible.setData(vtable.get(i + n));
-				right_column
-						.append("<li"
-								+ (this.partid == bible.getPartId() ? " class=\"selected\""
-										: "")
-								+ "><a class=\"sup\" onmousedown=\"rightMenu.show(event,'"
-								+ bible.getId() + "')\">" + bible.getPartId()
-								+ "</a>" + bible.getContent() + "</li>");
 			}
 		
 			left_column.append("</ol>");
-			right_column.append("</ol>");
 		} else {
 			left_column.append("暂时没有任何内容");
 		}
 		
 		this.setVariable("left_column", left_column.toString());
-		this.setVariable("right_column", right_column.toString());
 		
 		return this;
 	}
