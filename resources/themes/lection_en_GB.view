@@ -124,6 +124,7 @@
 
 		
 		var hash=[];
+		location.hash = location.hash.replace(/up,?/g,'');
 		if(location.hash!='') {
 			hash = location.hash.substring(1).split(',');
 			for(var index=0;index < hash.length;index++) {
@@ -144,7 +145,7 @@
 			  hash.push(element.index()+"");
 			}
 			
-			location.hash = hash.join(',');
+			if(hash.length > 0) location.hash = hash.join(',');
 		});
 
 	});
