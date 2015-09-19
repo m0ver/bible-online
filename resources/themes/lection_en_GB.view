@@ -243,7 +243,7 @@ $(function(){
 		<span class='st_email_large' displayText='Email'></span>
 		</div>
 		<div id="documentation">
-			<div class="column" id="column1" itemprop="articleBody">{%left_column%} {%right_column%}</div>
+			<div class="column" id="column1" itemprop="articleBody">{%left_column%}</div>
 		</div>
 		<div class="clear-fix footnote">
 			<ul>
