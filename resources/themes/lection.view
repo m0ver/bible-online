@@ -67,7 +67,7 @@
 		    
 			if(confirm("你确信这节经文有错吗?"))
 			{
-				$.ajax({url:"[%LINK:services/report%]",
+				$.ajax({url:"[%LINK:services/report%]".replace(/\&amp;/g,'&'),
 					type:'POST',
 					data:{id:$this.parameters.id,text:$("#content").val()}})
 					.success(function(data){
@@ -91,8 +91,8 @@
 		rightMenu.appendItem({"action":"javascript:void(0)","caption":"注解"});
 		rightMenu.appendItem({"action":"javascript:copyToClipboard('$text')","caption":"复制"});
 		
-		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:dashboard%]'","caption":"[%navigator.controller.caption%]"});
-		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"[%page.logout.caption%]"});
+		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:dashboard%]'.replace(/\&amp;/g,'&')","caption":"[%navigator.controller.caption%]"});
+		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'.replace(/\&amp;/g,'&')","caption":"[%page.logout.caption%]"});
 		
 		languageMenu.setAutoReposition(true);
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'","caption":"English(UK)"});
