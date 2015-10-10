@@ -74,7 +74,7 @@ public class search extends AbstractApplication {
 		this.setText("navigator.reader.caption");
 		this.setText("navigator.controller.caption");
 		this.setText("navigator.help.caption");
-
+		
 		this.setText("holy.book.forward");
 		this.setText("holy.book.previous");
 		this.setText("holy.book.next");
@@ -472,7 +472,7 @@ public class search extends AbstractApplication {
 		    .getAttribute("HTTP_REQUEST");
 
 		if (this.request.getParameter("page") == null
-		    || this.request.getParameter("page").toString().trim().length() <= 0) {
+		    || this.request.getParameter("page").toString().trim().length() == 0) {
 			page = 1;
 		} else {
 			page = Integer.parseInt(this.request.getParameter("page").toString());
@@ -494,8 +494,9 @@ public class search extends AbstractApplication {
 		Document document = this.execute(query, pager.getStartIndex());
 		Element root = document.getRoot();
 		if (root.getElementsByTagName("entry").size() == 0) {
-			this.setVariable("value",
-			    "Sorry, we could not get any related results with this keyword! ");
+			this.setVariable("keyword", query);
+			this.setVariable("search.title", query + " - ");
+			this.setVariable("value", "Sorry, we could not get any related results with this keyword! " + StringUtilities.htmlSpecialChars(root.toString()));
 			return this;
 		}
 
@@ -611,30 +612,27 @@ public class search extends AbstractApplication {
 		HttpGet httpget;
 		try {
 			httpget = new HttpGet(createRequestString(query, start == 0 ? 1 : start));
-			httpClient.getParams().setParameter(
-			    HttpProtocolParams.HTTP_CONTENT_CHARSET, "UTF-8");
+			httpClient.getParams().setParameter(HttpProtocolParams.HTTP_CONTENT_CHARSET, "UTF-8");
 
 			HttpResponse response = httpClient.execute(httpget);
 			InputStream instream = response.getEntity().getContent();
 
 			Document document = new Document();
 			document.load(instream);
-			if (document.getRoot().getElementsByTagName("errors").size() > 0
-			    && i++ < ids.length - 1) {
+			if (document.getRoot().getElementsByTagName("errors").size() > 0 ) {
+				if(i++ > ids.length - 1) i = 0;
+				
 				CUSTOM_SEARCH_ENGINE_ID = ids[i];
 				API_KEY = keys[i];
-
-				httpget = new HttpGet(
-				    createRequestString(query, start == 0 ? 1 : start));
-				httpClient.getParams().setParameter(
-				    HttpProtocolParams.HTTP_CONTENT_CHARSET, "UTF-8");
-
+				
+				httpget = new HttpGet(createRequestString(query, start == 0 ? 1 : start));
+				
 				response = httpClient.execute(httpget);
 				instream = response.getEntity().getContent();
-
+				
 				document.load(instream);
 			}
-
+			
 			return document;
 		} catch (ClientProtocolException e) {
 			throw new ApplicationException(e.getMessage(), e);
@@ -645,13 +643,14 @@ public class search extends AbstractApplication {
 		}
 
 	}
+	
+	public static void main(String[]args) throws UnsupportedEncodingException {
+		System.out.println(new search().createRequestString("hello", 1));
+	}
 
 	private static int i = 0;
-	private final String[] ids = new String[] {
-	    "016436735745445346824:fgyqgo18wfm", "014099384324434647311:udrkfx4-ipk" };
-	private final String[] keys = new String[] {
-	    "AIzaSyCgMMCOs8drxcnBclraPiR0eU29qSF1vHM",
-	    "AIzaSyC-k_Cm_xClsqzeOGk8Dh5ECaZ449Vf6Ic" };
+	private final String[] ids = new String[] { "016436735745445346824:fgyqgo18wfm", "014099384324434647311:udrkfx4-ipk" };
+	private final String[] keys = new String[] { "AIzaSyCgMMCOs8drxcnBclraPiR0eU29qSF1vHM", "AIzaSyC-k_Cm_xClsqzeOGk8Dh5ECaZ449Vf6Ic" };
 	private static String API_KEY = "AIzaSyCgMMCOs8drxcnBclraPiR0eU29qSF1vHM";
 	private static String CUSTOM_SEARCH_ENGINE_ID = "016436735745445346824:fgyqgo18wfm";
 }

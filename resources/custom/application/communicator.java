@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Builder;
-import org.tinystruct.data.component.Struct;
 import org.tinystruct.system.util.StringUtilities;
 
 public class communicator extends AbstractApplication {

@@ -96,6 +96,8 @@ public class lection extends AbstractApplication {
 		this.setText("page.welcome.caption");
 		this.setText("page.language-setting.title");
 		this.setText("page.logout.caption");
+		this.setText("page.reading.title");
+
 		this.setText("navigator.home.caption");
 		this.setText("navigator.bible.caption");
 		this.setText("navigator.video.caption");
@@ -103,7 +105,7 @@ public class lection extends AbstractApplication {
 		this.setText("navigator.reader.caption");
 		this.setText("navigator.controller.caption");
 		this.setText("navigator.help.caption");
-		this.setText("page.reading.title");
+		
 		this.setText("holy.book.forward");
 		this.setText("holy.book.previous");
 		this.setText("holy.book.next");
