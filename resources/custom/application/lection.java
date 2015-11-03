@@ -257,10 +257,8 @@ public class lection extends AbstractApplication {
 		
 		Table vtable = bible.findWith(where, new Object[] {});
 		
-		this.max_chapter = bible.setRequestFields(
-				"max(chapter_id) as max_chapter").findWith("WHERE book_id=?",
-				new Object[] { this.bookid }).get(0).get(0).get("max_chapter")
-				.intValue();
+		this.max_chapter = bible.setRequestFields("max(chapter_id) as max_chapter").findWith("WHERE book_id=?",
+				new Object[] { this.bookid }).get(0).get(0).get("max_chapter").intValue();
 		this.lastchapterid = this.chapterid - 1 <= 0 ? 1 : this.chapterid - 1;
 		this.nextchapterid = this.chapterid + 1 > this.max_chapter ? this.max_chapter
 				: this.chapterid + 1;

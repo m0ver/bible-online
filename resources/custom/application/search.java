@@ -491,36 +491,35 @@ public class search extends AbstractApplication {
 		pager.setCurrentPage(page);
 		pager.setListSize(total);
 
-		Document document = this.execute(query, pager.getStartIndex());
-		Element root = document.getRoot();
-		if (root.getElementsByTagName("entry").size() == 0) {
+		if (query == null || query.length() > 0) {
+			this.setVariable("keyword", "");
+		}
+		else {
 			this.setVariable("keyword", query);
 			this.setVariable("search.title", query + " - ");
+		}
+		
+		Document document = this.execute(query, pager.getStartIndex());
+		Element root = document.getRoot();
+		List<Element> vtable = root.getElementsByTagName("entry");
+		if (vtable.size() == 0) {
 			this.setVariable("value", "Sorry, we could not get any related results with this keyword! " + StringUtilities.htmlSpecialChars(root.toString()));
 			return this;
 		}
 
-		int amount = Integer.parseInt(root
-		    .getElementsByTagName("opensearch:totalResults").get(0).getData());
+		int n = 0, next, amount = Integer.parseInt(root.getElementsByTagName("opensearch:totalResults").get(0).getData());
 		pager.setListSize(amount);
 
-		int next = pager.getStartIndex();// 此位置即为当前页的第一条记录的ID
+		next = pager.getStartIndex();// 此位置即为当前页的第一条记录的ID
 																		 // opensearch:totalResults
-		if (query != null && query.length() > 0) {
-			this.setVariable("keyword", query);
-			this.setVariable("search.title", query + " - ");
-		} else
-			this.setVariable("keyword", "");
-
 		StringBuffer html = new StringBuffer();
 		html.append("<ol class=\"searchresults\" start=\"" + next + "\">\r\n");
 
-		List<Element> vtable = root.getElementsByTagName("entry");
-		Iterator<Element> item = vtable.iterator();
 		Element element, title, link;
 		List<Element> t;
 		String summary;
-		int n = 0;
+		
+		Iterator<Element> item = vtable.iterator();
 		while (item.hasNext()) {
 			element = item.next();
 
@@ -545,8 +544,7 @@ public class search extends AbstractApplication {
 
 		html.append("</ol>\r\n");
 
-		String actionURL = this.context.getAttribute("HTTP_HOST")
-		    + "bible/advsearch/" + query + "&amount=" + amount + "&page";
+		String actionURL = this.context.getAttribute("HTTP_HOST") + "bible/advsearch/" + query + "&amount=" + amount + "&page";
 		pager.setFirstPageText(this.getProperty("page.first.text"));
 		pager.setLastPageText(this.getProperty("page.last.text"));
 		pager.setCurrentPageText(this.getProperty("page.current.text"));
@@ -595,14 +593,11 @@ public class search extends AbstractApplication {
 		StringBuffer buffer = new StringBuffer();
 
 		buffer.append("https://www.googleapis.com/customsearch/v1?");
-		buffer.append("key=");
-		buffer.append(API_KEY);
-		buffer.append("&cx=");
-		buffer.append(CUSTOM_SEARCH_ENGINE_ID);
-		buffer.append("&q=");
-		buffer.append(encoded_query);
+		buffer.append("key=").append(API_KEY);
+		buffer.append("&cx=").append(CUSTOM_SEARCH_ENGINE_ID);
+		buffer.append("&q=").append(encoded_query);
 		buffer.append("&alt=atom");
-		buffer.append("&start=" + start);
+		buffer.append("&start=").append(start);
 
 		return buffer.toString();
 	}
