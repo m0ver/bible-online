@@ -124,7 +124,7 @@
 
 		
 		var hash=[];
-		location.hash = location.hash.replace(/up,?/g,'');
+		location.hash = location.hash.replace(/up,+/g,'');
 		if(location.hash!='') {
 			hash = location.hash.substring(1).split(',');
 			for(var index=0;index < hash.length;index++) {
