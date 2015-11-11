@@ -135,7 +135,8 @@
 		$("#documentation .column").click(function(event){
 			target = event.target;
 		  	element = $(target);
-		  
+		  	if(hash.indexOf('up')!=-1) hash.remove('up');
+
 			if(element.hasClass('selected')){
 			  element.removeClass('selected');
 			  hash.remove(element.index()+"");
