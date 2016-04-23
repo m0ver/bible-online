@@ -132,7 +132,7 @@
 			}
 		}
 
-		$("#documentation .column").click(function(event){
+		$("#documentation .column li").click(function(event){
 			target = event.target;
 		  	element = $(target);
 		  	if(hash.indexOf('up')!=-1) hash.remove('up');
