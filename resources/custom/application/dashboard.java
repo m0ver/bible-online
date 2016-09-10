@@ -111,7 +111,7 @@ public class dashboard extends AbstractApplication {
 		    	buffer.append("<ol class=\"searchresults\" start=\""+next+"\">\r\n");
 				Iterator<Row> rows = list.iterator();
 				
-				SimpleDateFormat format=new SimpleDateFormat(this.context.getAttribute("default.date.format").toString());
+				SimpleDateFormat format=new SimpleDateFormat(this.getConfiguration("default.date.format"));
 				while(rows.hasNext()) {
 					vocabulary.setData(rows.next());
 					
