@@ -153,7 +153,7 @@ public class index extends AbstractApplication {
 
 			bookName = book.getBookName();
 
-			a.setAttribute("href", this.getContext().getAttribute("HTTP_HOST") + bookName);
+			a.setAttribute("href", this.context.getAttribute("HTTP_HOST") + bookName);
 			a.setAttribute("title", bookName);
 			a.setData(bookName);
 			li.addElement(a);
@@ -168,8 +168,8 @@ public class index extends AbstractApplication {
 		ul1.setAttribute("class", "menu");
 		ul1.setAttribute("start", "40");
 
-		this.setVariable("old-testament", ul.toString(), false);
-		this.setVariable("new-testament", ul1.toString(), false);
+		this.setVariable("old-testament", ul.toString(), true);
+		this.setVariable("new-testament", ul1.toString(), true);
 
 		return this;
 	}

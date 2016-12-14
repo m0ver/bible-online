@@ -157,7 +157,7 @@ public class dashboard extends AbstractApplication {
 			this.response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
 
 			Reforward reforward = new Reforward(request, response);
-			reforward.setDefault(this.getLink(this.context.getAttribute("default.login.page").toString())+"&from="+this.getLink("dashboard"));
+			reforward.setDefault(this.getLink(this.config.get("default.login.page"))+"&from="+this.getLink("dashboard"));
 			reforward.forward();
 		}
 		

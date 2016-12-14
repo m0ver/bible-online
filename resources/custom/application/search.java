@@ -468,8 +468,7 @@ public class search extends AbstractApplication {
 		query = StringUtilities.htmlSpecialChars(query);
 
 		int page = 1, pageSize = 10, total = 0;
-		this.request = (HttpServletRequest) this.context
-		    .getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
 
 		if (this.request.getParameter("page") == null
 		    || this.request.getParameter("page").toString().trim().length() == 0) {
@@ -478,8 +477,7 @@ public class search extends AbstractApplication {
 			page = Integer.parseInt(this.request.getParameter("page").toString());
 		}
 
-		if (this.request.getParameter("amount") == null
-		    || this.request.getParameter("amount").toString().trim().length() <= 0) {
+		if (this.request.getParameter("amount") == null || this.request.getParameter("amount").toString().trim().length() == 0) {
 			total = 1;
 		} else {
 			total = Integer.parseInt(this.request.getParameter("amount").toString());
@@ -522,9 +520,7 @@ public class search extends AbstractApplication {
 		Iterator<Element> item = vtable.iterator();
 		while (item.hasNext()) {
 			element = item.next();
-
 			n++;
-
 			link = element.getElementsByTagName("id").get(0);
 			title = element.getElementsByTagName("title").get(0);
 
