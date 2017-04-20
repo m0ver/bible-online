@@ -15,12 +15,17 @@
  *******************************************************************************/
 package custom.objects;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.AbstractData;
 
-public class article extends AbstractData {
+public class article extends AbstractData  implements Serializable {
+	/**
+   * Auto Generated Serial Version UID
+   */
+  private static final long serialVersionUID = -771418381855777571L;
 	private String userId;
 	private String author;
 	private int type;

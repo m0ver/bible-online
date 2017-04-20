@@ -35,7 +35,7 @@ import org.tinystruct.dom.Element;
 import org.tinystruct.handle.Reforward;
 import org.tinystruct.mail.SimpleMail;
 import org.tinystruct.system.util.ActivationKey;
-import org.tinystruct.system.util.URLFileLoader;
+import org.tinystruct.system.util.URLResourceLoader;
 
 import custom.objects.User;
 import custom.objects.bible;
@@ -250,7 +250,7 @@ public class sender extends AbstractApplication {
 			return document.toString();
 		}
 		
-		URLFileLoader loader=new URLFileLoader(new URL(url));
+		URLResourceLoader loader=new URLResourceLoader(new URL(url));
 		
 		return loader.getContent().toString();
 	}
@@ -307,7 +307,7 @@ public class sender extends AbstractApplication {
 	public StringBuffer getTranslate(String words) throws MalformedURLException, ApplicationException{
         String url = "http://fanyi.youdao.com/translate?client=deskdict&keyfrom=chrome.extension&xmlVersion=1.1&dogVersion=1.0&ue=utf8&i="+(words)+"&doctype=xml";
 
-		URLFileLoader loader=new URLFileLoader(new URL(url));
+		URLResourceLoader loader=new URLResourceLoader(new URL(url));
 		
 		return loader.getContent();
 	}
