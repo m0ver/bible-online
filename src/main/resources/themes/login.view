@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="{%language_code%}">
+<head>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
+<link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+<meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}" hreflang="x-default" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-GB" hreflang="en-gb" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-US" hreflang="en-us" />
+<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
+<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
+<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
+<link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
+<!--[if IE]>
+<style type="text/css">
+@import url("{%TEMPLATES_DIR%}/style/ie.css?9");
+</style>
+<![endif]-->
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"> </script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/timer.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/struct.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"> </script>
+<script type="text/javascript">
+//<![CDATA[
+	var profileMenu;
+	var languageMenu;
+	var dialog;
+	struct.attachOnLoadEvent(
+	function(){
+		profileMenu=new Menu();
+		languageMenu=new Menu();
+		
+		//profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/settings%]'","caption":"[%page.language-setting.title%]"});
+		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"[%page.logout.caption%]"});
+		
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'","caption":"English(UK)"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'","caption":"English(US)"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-CN'","caption":"简体中文"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-TW'","caption":"繁体中文"});
+		
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-22425440-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+		  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+		
+		var i=0;
+		var timer = new Timer(0.1,function(){});
+		timer.setAction(function() {
+			if(i == 1920) i = 0;
+			$('#header').css({"background-position": (i++)+"px 50%"});
+			
+			this.start();
+		});
+		timer.start().complete(function(){});
+	});
+
+function login()
+{
+	var username=document.getElementById("username").value;
+	var password=document.getElementById("password").value;
+	var authorize=document.getElementById("{%codename%}").value;
+	if (username=="" || username==null){ alert("[%login.username.invalid%]"); document.getElementById("username").focus(); return false; }
+	if (password=="" || password==null){ alert("[%login.password.invalid%]");   document.getElementById("password").focus(); return false; }
+	if (authorize=="" || authorize==null){ alert("[%login.authorized.invalid%]");   document.getElementById("{%codename%}").focus(); return false; }
+	return true;
+}
+
+var __default_field='<input class="text" id="username" name="username" type="text" value=""/>',	user="{%username%}";
+window.onload=function(){
+	var __new_field=user?user+'<input class="text" id="username" name="username" type="hidden" value="'+user+'"/>  <a href="javascript:void(0)" onclick="restoreField()">[%login.user.change%]</a>':__default_field;
+	document.getElementById('__default_user').innerHTML=(__new_field);
+}
+function restoreField(){document.getElementById('__default_user').innerHTML=(__default_field);}
+function reload(){location.reload();}
+
+//]]>
+</script>
+<!--[if (gt IE 6)&(lt IE 9)]>
+<script type="text/javascript">
+$(function(){
+	var corner={
+		src:"{%TEMPLATES_DIR%}/images/circle.png",
+		width:"7px",
+		height:"7px",
+		background:"#464646",
+		positions: ["topleft","topright"]
+	};
+
+	$("#header ul li a.current").addCorners("topleft,topright",corner);
+});
+</script>
+<![endif]-->
+<title>[%navigator.login.caption%] | [%application.title%]{%application.summary%}</title>
+</head>
+<body>
+<div id="header">
+	<div class="wrapper">
+		<h1><a href="http://ingod.asia">[%application.title%]</a></h1>
+		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
+		<ul>
+			<li><a class="current" href='[%LINK:user/login%]' title="[%navigator.login.caption%]">[%navigator.login.caption%]</a></li>
+			<li><a href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
+			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
+			<li id="download"><a href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="headline">
+	<div class="wrapper">
+	<h2>[%page.login.title%]</h2>		
+	</div>
+</div>
+
+<div id="pagebody">
+	<div class="wrapper">
+		<div class="container">
+			<div class="gallery"></div>
+		</div>
+		<div class="sidebar">
+			<p><a href="/"> &#8250; </a>  [%login.tips.text%]  </p>
+			<form class="form-columns" method="post" action="/?q=user/login&amp;from={%from%}" onsubmit="return login()">
+				<div> {%error%} </div>
+				<ul id="login">
+				<li><div class="label"><label for="username">[%login.user.caption%] </label></div><span id="__default_user">{%user_field%}</span></li>
+				<li><div class="label"><label for="password">[%login.password.caption%] </label></div><input class="text" id="password" name="password" value="" type="password" /></li>
+				<li><div class="label"><label for="{%codename%}">[%login.verifycode.caption%] </label></div><input class="text" name="{%codename%}" id="{%codename%}" size="6" maxlength="4" value="" type="text" /><img class="i-image" src="/?q=validator/code&amp;output=function" alt="validator" onclick="javascript:reload();" /></li>
+				<li><input id="autologin" name="autologin" value="true" type="checkbox" /> <label for="autologin">[%login.remember.caption%]</label> 	<input type="submit" class="button-secondary" value="[%login%] »" /></li> 
+				</ul>
+			</form>
+			<div>[%login.with.otheraccount%]:</div>
+			    <div>
+			    	<a href="/?q=user/account/google&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/google.png" /></a>
+			    	<a href="/?q=user/account/github&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/github.png" /></a>
+			    	<!-- 
+			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/sinat.png"></a>
+			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/qq.png"></a>
+			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/linkedin.png"></a>
+			        
+			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/baidu.png"></a>
+			         -->
+			    </div>
+			<div>
+			<a href="http://ingod.asia/bible.pdf" target="_blank"> <span><strong>圣经</strong> <em>简体中文和合本</em> </span></a>
+			</div>
+			<div>
+			<a href="http://www.mozilla.org/products/download.html?product=firefox&amp;lang={%language%}" target="_blank"> <span><strong>下载安装 Firefox</strong> </span></a>
+			</div>
+		</div>
+	
+	</div>
+</div>
+
+<div id="footer">
+	<div class="wrapper">
+		<p>
+			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
+			<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
+			<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
+			<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
+			<a href="[%LINK:user/password%]">[%footer.forgot%]</a> | 
+ 			<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
+		</p>
+	</div>
+</div>
+</body>
+</html>

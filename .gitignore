@@ -5,3 +5,9 @@
 *.ear
 *.DS_Store
 *.sqlite
+.idea
+.settings
+ant/
+.classpath
+.project
+target/

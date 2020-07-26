@@ -1,6 +1,6 @@
-#!/usr/bin/env sh
+#!/bin/sh
 ROOT="`pwd`"
 cd "`dirname "$0"`"
 cd "../"
 cd "$ROOT"
-java -cp "$ROOT/lib/*:$ROOT/WEB-INF/lib/*:$ROOT/WEB-INF/classes" org.tinystruct.system.Dispatcher "$@"
+java -cp "$HOME/.m2/repository:$ROOT/lib/*:$ROOT/WEB-INF/lib/*:$ROOT/WEB-INF/classes" org.tinystruct.system.Dispatcher "$@"

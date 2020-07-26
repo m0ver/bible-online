@@ -1,4 +1,8 @@
-mobile1.0
+Introduction
 =========
 
-Open the source code of ingod.asia project which is based on struct2.0
+An open source project of bible online service which bases on struct2.0 framework.
+
+MySQL Server Installation
+====
+docker run -p 3306:3306 --name mysql-5.7 -v /Users/James/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d mysql:5.7

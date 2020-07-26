@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="report" table="report">
+  <id name="Id" column="id" increment="false" generate="true" length="50" type="varchar"/>
+  <property name="userId" column="user_id" length="50" type="varchar"/>
+  <property name="bibleId" column="bible_id" length="48" type="varchar"/>
+  <property name="languageId" column="language_id" length="4" type="int"/>
+  <property name="updatedContent" column="updated_content" length="0" type="longtext"/>
+  <property name="modifiedTime" column="modified_time" length="0" type="datetime"/>
+  <property name="status" column="status" length="4" type="int"/>
+ </class>
+</mapping>
