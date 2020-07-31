@@ -15,16 +15,8 @@
  *******************************************************************************/
 package custom.application;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
+import custom.objects.*;
+import custom.util.TaskDescriptor;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Row;
@@ -35,12 +27,10 @@ import org.tinystruct.system.scheduling.Scheduler;
 import org.tinystruct.system.scheduling.SchedulerTask;
 import org.tinystruct.system.scheduling.TimeIterator;
 
-import custom.objects.bible;
-import custom.objects.book;
-import custom.objects.plan;
-import custom.objects.subscription;
-import custom.objects.suggestion;
-import custom.util.TaskDescriptor;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class dailymail extends AbstractApplication implements ServletContextListener {
 
@@ -61,7 +51,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 	public boolean start() {
 		TimeIterator iterator = new TimeIterator(00, 00, 00);
 		iterator.setInterval(3600 * 24);
-		this.config.set("default.base_url", "http://ingod.asia/?q=");
+		this.config.set("default.base_url", "http://ingod.today/?q=");
 		this.scheduler.schedule(new SchedulerTask() {
 
 			private Object o = new Object();
@@ -143,7 +133,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 						buffer.append("<div style=\"background: none repeat scroll 0 0 -moz-field; border: 1px solid threedshadow; margin: 2em auto; padding: 2em;\">");
 						buffer.append("	<div>");
 						buffer.append("		<a style=\"-moz-margin-end: 0; -moz-margin-start: 0.6em; float: right; margin-bottom: 0; margin-top: 0;\">");
-						buffer.append("			<img id=\"feedTitleImage\" src=\"http://ingod.asia/themes/images/favicon-b.png\"/> </a>");
+						buffer.append("			<img id=\"feedTitleImage\" src=\"http://ingod.today/themes/images/favicon-b.png\"/> </a>");
 						buffer.append("		<div style=\"-moz-margin-end: 0.6em; -moz-margin-start: 0; margin-bottom: 0; margin-top: 0;\">");
 						buffer.append("			<h1 style=\"border-bottom: 2px solid threedlightshadow; font-size: 160%; margin: 0 0 0.2em;\">国际圣经在线</h1>");
 //						buffer.append("			<h2 style=\"color: #C0C0C0; font-weight: normal; margin: 0 0 0.6em;\">国际圣经在线为立志跟随主耶稣基督的朋友提供圣经阅读、圣经收听、圣经检索、福音电影分享以及资源下载等服务</h2>");
@@ -155,9 +145,9 @@ public class dailymail extends AbstractApplication implements ServletContextList
 						
 						String date_string = new SimpleDateFormat("MM/dd").format(date);
 
-						buffer.append("				<a href=\"http://ingod.asia/?lang=zh-CN&amp;q=feed/"+date_string+"\">每日读经 "+date_string+"</a>");
+						buffer.append("				<a href=\"http://ingod.today/?lang=zh-CN&amp;q=feed/"+date_string+"\">每日读经 "+date_string+"</a>");
 						buffer.append("			</h2>");
-						buffer.append("			<div base=\"http://ingod.asia/?lang=zh-CN&amp;q=feed\" class=\"feedEntryContent\">");
+						buffer.append("			<div base=\"http://ingod.today/?lang=zh-CN&amp;q=feed\" class=\"feedEntryContent\">");
 
 						Iterator<List<bible>> iterator = res.iterator();
 						
@@ -221,7 +211,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 							
 							footer.setAttribute("style",
 											"padding:10px;font-size:12px;color:#ccc;");
-							footer.setData("让我们一起来养成每天读经的好习惯...<br />如果您不能正常访问此站点(<a href=\"http://ingod.asia\">http://ingod.asia</a>)，请尝试通过VPN或运行代理程序(Freegate7.01)后，再进行访问，给您带来不便请谅解！如果你不想收到此邮件，请点击<a href=\"http://ingod.asia/?q=services/unsubscribe/"+subscription.getId()+"\">退订</a>。");
+							footer.setData("让我们一起来养成每天读经的好习惯...<br />如果您不能正常访问此站点(<a href=\"http://ingod.today\">http://ingod.today</a>)，请尝试通过VPN或运行代理程序(Freegate7.01)后，再进行访问，给您带来不便请谅解！如果你不想收到此邮件，请点击<a href=\"http://ingod.today/?q=services/unsubscribe/"+subscription.getId()+"\">退订</a>。");
 
 							themail.setBody(container.toString() + footer.toString());
 							themail.setTo(subscription.getEmail());

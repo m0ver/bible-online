@@ -15,21 +15,20 @@
  *******************************************************************************/
 package custom.application;
 
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import custom.objects.User;
+import custom.objects.suggestion;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.mail.SimpleMail;
 
-import custom.objects.User;
-import custom.objects.suggestion;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.logging.Logger;
 
 public class suggest extends AbstractApplication
 {
-    
+    private Logger logger = Logger.getLogger("suggest.class");
 	private HttpServletRequest request;
 	private User usr;
 
@@ -146,12 +145,11 @@ public class suggest extends AbstractApplication
 			mail.setSubject(this.getProperty("mail.suggestion.title"));
 			mail.setBody(body);
 			mail.addTo("moverinfo@gmail.com");
-
 			mail.send();
 			
 			this.setVariable("error", "<div class=\"info\">"+this.getProperty("suggestion.send.success")+"</div>");
 		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
+    		logger.severe(e.getMessage());
 			this.setVariable("error", "<div class=\"error\">"+this.getProperty("suggestion.send.failure")+"</div>");
 		}
 		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
