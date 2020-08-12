@@ -238,7 +238,6 @@ $(function(){
 		<span class='st_evernote_large' displayText='Evernote'></span>
 		<span class='st_twitter_large' displayText='Tweet'></span>
 		<span class='st_linkedin_large' displayText='LinkedIn'></span>
-		<span class='st_fblike_large' displayText='Facebook Like'></span>
 		<span class='st_delicious_large' displayText='Delicious'></span>
 		<span class='st_pinterest_large' displayText='Pinterest'></span>
 		<span class='st_email_large' displayText='Email'></span>
