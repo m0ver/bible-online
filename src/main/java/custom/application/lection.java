@@ -230,7 +230,7 @@ public class lection extends AbstractApplication {
 		}
 		
 		this.setVariable(new DataVariable("book",book), true);
-		
+
 		String condition = "book_id=" + this.bookid + " and chapter_id="
 					+ this.chapterid;
 		
@@ -239,24 +239,42 @@ public class lection extends AbstractApplication {
 		bible bible = new bible();
 		if(this.getLocale().toString().equalsIgnoreCase(Locale.US.toString())) {
 			bible.setTableName("NIV");
-			this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">中文</a> <a href=\"?lang=en-GB&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">ESV</a>");
-		}
-		else if(this.getLocale().toString().equalsIgnoreCase(Locale.UK.toString())) {
-			bible.setTableName("ESV");
+			this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">中文</a> Version: <a href=\"?lang=en-GB&version=ESV&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">ESV</a> | <a href=\\\"?lang=en-GB&version=KJV&q=bible/\"+this.bookid+\"/\"+this.chapterid+\"/\"+this.partid+\"#up\\\">KJV</a>");
+		} else if(this.getLocale().toString().equalsIgnoreCase(Locale.UK.toString())) {
+			bible.setTableName("KJV");
 			this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">中文</a> <a href=\"?lang=en-US&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">NIV</a>");
-		}
-		else {
+		} else {
 			bible.setTableName(this.getLocale().toString());
-			this.setVariable("language.switch", "<a href=\"?lang=en-GB&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">ESV</a> <a href=\"?lang=en-US&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">NIV</a>");
+			this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">中文</a> Version: <a href=\"?lang=en-GB&version=ESV&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">ESV</a> | <a href=\\\"?lang=en-GB&version=KJV&q=bible/\"+this.bookid+\"/\"+this.chapterid+\"/\"+this.partid+\"#up\\\">KJV</a>");
 		}
-		
+
+		if(request.getParameter("version")!=null) {
+			switch (request.getParameter("version")) {
+				case "NIV":
+					bible.setTableName("NIV");
+					this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">中文</a> Version: <a href=\"?lang=en-GB&version=ESV&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">ESV</a> | <a href=\\\"?lang=en-GB&version=KJV&q=bible/\"+this.bookid+\"/\"+this.chapterid+\"/\"+this.partid+\"#up\\\">KJV</a>");
+
+					break;
+				case "ESV":
+					bible.setTableName("ESV");
+					this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">中文</a> Version: <a href=\"?lang=en-GB&version=NIV&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">NIV</a> | <a href=\\\"?lang=en-GB&version=KJV&q=bible/\"+this.bookid+\"/\"+this.chapterid+\"/\"+this.partid+\"#up\\\">KJV</a>");
+
+					break;
+				case "KJV":
+				default:
+					bible.setTableName("KJV");
+					this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">中文</a> Version: <a href=\"?lang=en-GB&version=ESV&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">ESV</a> | <a href=\\\"?lang=en-GB&version=NIV&q=bible/\"+this.bookid+\"/\"+this.chapterid+\"/\"+this.partid+\"#up\\\">NIV</a>");
+
+					break;
+			}
+		}
+
 		Table vtable = bible.findWith(where, new Object[] {});
 		
 		this.max_chapter = bible.setRequestFields("max(chapter_id) as max_chapter").findWith("WHERE book_id=?",
 				new Object[] { this.bookid }).get(0).get(0).get("max_chapter").intValue();
 		this.lastchapterid = this.chapterid - 1 <= 0 ? 1 : this.chapterid - 1;
-		this.nextchapterid = this.chapterid + 1 > this.max_chapter ? this.max_chapter
-				: this.chapterid + 1;
+		this.nextchapterid = Math.min(this.chapterid + 1, this.max_chapter);
 		
 		this.setVariable("chapterid", String.valueOf(this.chapterid));
 		this.setVariable("partid", String.valueOf(this.partid));
