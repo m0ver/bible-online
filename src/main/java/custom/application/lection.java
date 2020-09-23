@@ -249,7 +249,7 @@ public class lection extends AbstractApplication {
 			bible.setTableName(this.getLocale().toString());
 			this.setVariable("version", "");
 
-			this.setVariable("language.switch", "<a href=\"?q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">KJV</a>");
+			this.setVariable("language.switch", "<a href=\"?version=NIV&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">NIV</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/"+this.bookid+"/"+this.chapterid+"/"+this.partid+"#up\">KJV</a>");
 		}
 
 		if(request.getParameter("version")!=null && !request.getParameter("version").isEmpty()) {
