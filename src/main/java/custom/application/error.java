@@ -404,7 +404,7 @@ public class error extends AbstractApplication {
 					Entry<String, Variable<?>> v = iterator.next();
 					variable = v.getValue();
 
-					if (variable.getType() == DataType.Array) {
+					if (variable.getType() == DataType.ARRAY) {
 						list.add(variable);
 					} else {
 						if (v.getKey().startsWith("[%LINK:")) {
