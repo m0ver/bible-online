@@ -158,9 +158,9 @@ public class dashboard extends AbstractApplication {
 			reforward.setDefault(this.getLink(this.config.get("default.login.page"))+"&from="+this.getLink("dashboard"));
 			reforward.forward();
 		}
-		
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
-		
+
+		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());
+
 		return this;
 	}
 	
