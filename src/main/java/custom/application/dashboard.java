@@ -15,13 +15,8 @@
  *******************************************************************************/
 package custom.application;
 
-import java.text.SimpleDateFormat;
-import java.util.Iterator;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import custom.objects.User;
+import custom.objects.vocabulary;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Pager;
@@ -29,8 +24,11 @@ import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.handle.Reforward;
 
-import custom.objects.User;
-import custom.objects.vocabulary;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
 
 public class dashboard extends AbstractApplication {
 
@@ -71,8 +69,8 @@ public class dashboard extends AbstractApplication {
 
 	public Object index() throws ApplicationException{
 		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-		
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
+
+		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());
 
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {

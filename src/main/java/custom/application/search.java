@@ -563,8 +563,7 @@ public class search extends AbstractApplication {
 
 		this.setText("search.info", start, end, query, pager.getSize());
 
-		this.setVariable("action", this.config.get("default.base_url")
-		    + this.context.getAttribute("REQUEST_ACTION").toString());
+		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());
 
 		HttpSession session = request.getSession();
 		if (session.getAttribute("usr") != null) {

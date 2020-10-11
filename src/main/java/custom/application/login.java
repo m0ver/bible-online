@@ -99,8 +99,7 @@ public class login extends AbstractApplication {
 					+ e.getRootCause().getMessage() + "</div>");
 		}
 
-		this.setVariable("action", this.config.get("default.base_url")
-				+ this.context.getAttribute("REQUEST_ACTION").toString());
+		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());
 
 		HttpSession session = request.getSession();
 		if (session.getAttribute("usr") != null) {

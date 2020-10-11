@@ -171,7 +171,7 @@ public class register extends AbstractApplication
 		key.setMaxAge(24 * 3600 * 7);
 		response.addCookie(key);
 
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
+		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
