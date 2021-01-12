@@ -15,18 +15,18 @@
  *******************************************************************************/
 package custom.application;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
-
-import javax.servlet.http.HttpServletRequest;
-
+import custom.objects.keyword;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.system.util.StringUtilities;
 
-import custom.objects.keyword;
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.util.Iterator;
+
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
 
 public class keywords extends AbstractApplication {
 
@@ -46,7 +46,7 @@ public class keywords extends AbstractApplication {
 
 	public String list() throws ApplicationException {
 		String keyword;
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		
 		if(this.request.getParameter("keyword")!=null&&this.request.getParameter("keyword").equals("")==false&&new StringUtilities(this.request.getParameter("keyword").toString()).safe())
 		{

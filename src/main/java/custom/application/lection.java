@@ -24,17 +24,19 @@ import org.tinystruct.data.component.Cache;
 import org.tinystruct.data.component.Field;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
-import org.tinystruct.datatype.DataVariable;
 import org.tinystruct.dom.Element;
 import org.tinystruct.system.security.Authentication;
 import org.tinystruct.system.security.Credential;
-import org.tinystruct.system.util.Base64;
+import org.tinystruct.system.template.variable.DataVariable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 
 public class lection extends AbstractApplication {
@@ -189,7 +191,7 @@ public class lection extends AbstractApplication {
 		if(bookid==0) bookid=1;
 		if(chapterid==0) chapterid=1;
 
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());
 		this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 		
@@ -530,7 +532,7 @@ public class lection extends AbstractApplication {
 		// end
 
 		this.response = (HttpServletResponse) this.context
-				.getAttribute("HTTP_RESPONSE");
+				.getAttribute(HTTP_RESPONSE);
 
 		this.response.setContentType("text/xml;charset="
 				+ this.config.get("charset"));
@@ -659,8 +661,8 @@ public class lection extends AbstractApplication {
 	{
 		boolean valid = false;
 		
-		HttpServletRequest request=(HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-		HttpServletResponse response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
+		HttpServletRequest request=(HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
+		HttpServletResponse response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
 
 		String s = "Basic realm=\"Login for Bible API\"";
 		response.setHeader("WWW-Authenticate", s);
@@ -681,7 +683,7 @@ public class lection extends AbstractApplication {
 					// You will need to provide your own
 					// if you are not comfortable with that.
 
-					String userPass = new String(Base64.decode(credentials));
+					String userPass = new String(Base64.getDecoder().decode(credentials));
 					// The decoded string is in the form
 					// "userID:password".
 

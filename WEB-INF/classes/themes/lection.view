@@ -5,23 +5,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta property="og:title" content="{%book.bookName%} | 第{%chapterid%}章 | [%holy.bible%]"/>
 <meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
-<meta property="og:image" content="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png"/>
+<meta property="og:image" content="http://ingod.today{%TEMPLATES_DIR%}/images/favicon.png"/>
 <meta property="og:site_name" content="[%application.title%]"/>
 <meta property="og:description" content="[%application.description%]"/>
 <meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
-<link href="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
-<link href="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="http://ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
+<link href="http://ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
 <link rel="canonical" href="{%base_url%}{%book.bookName%}/{%chapterid%}" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}" hreflang="x-default" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-GB" hreflang="en-gb" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-US" hreflang="en-us" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
+<link rel="alternate" href="{%action%}" hreflang="x-default" />
+<link rel="alternate" href="{%action%}&amp;lang=en-GB" hreflang="en-gb" />
+<link rel="alternate" href="{%action%}&amp;lang=en-US" hreflang="en-us" />
+<link rel="alternate" href="{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
 <link rel="prev" href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" />
 <link rel="next" href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
 <link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 <!--[if IE]>
 <style type="text/css">
 @import url("{%TEMPLATES_DIR%}/style/ie.css?9");
@@ -213,7 +212,7 @@ $(function(){
 	<div class="container" itemscope="" itemtype="http://schema.org/Article">
 	<h2 itemprop="name">[%holy.book.info%]</h2> 
 	<a class="clear-fix"></a>
-	<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} 
+	<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%}
 	<div class="bdsharebuttonbox" data-tag="share_1">
 		<a class="bds_weixin" data-cmd="weixin"></a>
 		<a class="bds_qzone" data-cmd="qzone" href="#"></a>
@@ -254,7 +253,7 @@ $(function(){
 				<li>注2:</li>
 			</ul>
 			
-			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
+			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
 		</div>
 		
 	<a name="down" class="clear-fix"> </a>
@@ -333,10 +332,5 @@ $(function(){
 <script type="text/javascript">
 window.listener.install(document.getElementById("f"),document.getElementById("keyword"),"keyword.jsp",false,"×");
 </script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -22,13 +22,16 @@ import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Pager;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
-import org.tinystruct.handle.Reforward;
+import org.tinystruct.handler.Reforward;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
+
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class dashboard extends AbstractApplication {
 
@@ -68,7 +71,7 @@ public class dashboard extends AbstractApplication {
 	}
 
 	public Object index() throws ApplicationException{
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 
 		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());
 
@@ -152,7 +155,7 @@ public class dashboard extends AbstractApplication {
 			this.setVariable("user.status","<a href=\""+this.getLink("user/login")+"\">"+this.getProperty("page.login.caption")+"</a>");
 			this.setVariable("user.profile","");
 
-			this.response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
+			this.response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
 
 			Reforward reforward = new Reforward(request, response);
 			reforward.setDefault(this.getLink(this.config.get("default.login.page"))+"&from="+this.getLink("dashboard"));

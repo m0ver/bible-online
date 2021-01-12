@@ -18,17 +18,20 @@ package custom.application;
 import custom.objects.Member;
 import custom.objects.User;
 import custom.objects.serial;
+import custom.util.ActivationKey;
+import custom.util.Security;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Table;
-import org.tinystruct.system.util.ActivationKey;
-import org.tinystruct.system.util.Security;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class register extends AbstractApplication
 {
@@ -112,7 +115,7 @@ public class register extends AbstractApplication
     {
 		this.setText("register.tips",this.getLink("help"),this.getLink("help/condition"));
 
-    	this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+    	this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		try 
 		{
 			if(this.append())
@@ -166,7 +169,7 @@ public class register extends AbstractApplication
 	public Object post(String keyValue){
 		this.setText("register.tips",this.getLink("help"),this.getLink("help/condition"));
 
-		HttpServletResponse response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
+		HttpServletResponse response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
 		Cookie key = new Cookie("key", keyValue);
 		key.setMaxAge(24 * 3600 * 7);
 		response.addCookie(key);

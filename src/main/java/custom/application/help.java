@@ -15,15 +15,16 @@
  *******************************************************************************/
 package custom.application;
 
+import org.tinystruct.AbstractApplication;
+import org.tinystruct.ApplicationException;
+import org.tinystruct.system.template.DefaultTemplate;
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Iterator;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.tinystruct.AbstractApplication;
-import org.tinystruct.ApplicationException;
-import org.tinystruct.system.template.DefaultTemplate;
+import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class help extends AbstractApplication {
 
@@ -97,7 +98,7 @@ public class help extends AbstractApplication {
 		buffer.append("</urlset>");
 		
 		HttpServletResponse response = (HttpServletResponse) this.context
-		.getAttribute("HTTP_RESPONSE");
+		.getAttribute(HTTP_RESPONSE);
 
 		response.setContentType("text/xml;charset="
 		+ this.config.get("charset"));

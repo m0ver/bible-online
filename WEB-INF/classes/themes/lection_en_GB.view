@@ -5,19 +5,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta property="og:title" content="{%book.bookName%} | Chapter {%chapterid%} | [%holy.bible%]"/>
 <meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
-<meta property="og:image" content="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png"/>
+<meta property="og:image" content="http://ingod.today{%TEMPLATES_DIR%}/images/favicon.png"/>
 <meta property="og:site_name" content="[%application.title%]"/>
 <meta property="og:description" content="[%application.description%]"/>
 <meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
-<link href="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
-<link href="http://www.ingod.asia{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="http://ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
+<link href="http://ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
 <link rel="canonical" href="{%base_url%}{%book.bookName%}/{%chapterid%}" />
 <link rel="prev" href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" />
 <link rel="next" href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}" hreflang="x-default" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-GB" hreflang="en-gb" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=en-US" hreflang="en-us" />
-<link rel="alternate" href="http://www.ingod.asia{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
+<link rel="alternate" href="{%action%}" hreflang="x-default" />
+<link rel="alternate" href="{%action%}&amp;lang=en-GB" hreflang="en-gb" />
+<link rel="alternate" href="{%action%}&amp;lang=en-US" hreflang="en-us" />
+<link rel="alternate" href="{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
 <link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
@@ -231,14 +231,13 @@ $(function(){
 	<div class="container" itemscope=""  itemtype="http://schema.org/Article">
 	<h2 itemprop="name">[%holy.book.info%]</h2> 
 	<a class="clear-fix"></a>
-		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%} 
+		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%}
 		<span class='st_sharethis_large' displayText='ShareThis'></span>
 		<span class='st_googleplus_large' displayText='Google +'></span>
 		<span class='st_facebook_large' displayText='Facebook'></span>
 		<span class='st_evernote_large' displayText='Evernote'></span>
 		<span class='st_twitter_large' displayText='Tweet'></span>
 		<span class='st_linkedin_large' displayText='LinkedIn'></span>
-		<span class='st_fblike_large' displayText='Facebook Like'></span>
 		<span class='st_delicious_large' displayText='Delicious'></span>
 		<span class='st_pinterest_large' displayText='Pinterest'></span>
 		<span class='st_email_large' displayText='Email'></span>
@@ -252,7 +251,7 @@ $(function(){
 				<li>2:</li>
 			</ul>
 			
-			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
+			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
 		</div>
 		
 	<a name="down" class="clear-fix"> </a>

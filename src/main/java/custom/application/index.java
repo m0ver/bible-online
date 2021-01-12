@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Iterator;
 
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+
 public class index extends AbstractApplication {
 	private User usr;
 
@@ -90,7 +92,7 @@ public class index extends AbstractApplication {
 	}
 	
 	public Object start(){
-		HttpServletRequest request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		HttpServletRequest request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());
 		this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 		

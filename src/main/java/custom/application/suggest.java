@@ -26,6 +26,8 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+
 public class suggest extends AbstractApplication
 {
     private Logger logger = Logger.getLogger("suggest.class");
@@ -90,7 +92,7 @@ public class suggest extends AbstractApplication
 		this.setVariable("value", html.toString());
 		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
@@ -109,7 +111,7 @@ public class suggest extends AbstractApplication
     
     public Object post() throws ApplicationException
     {
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 
     	suggestion suggestion=new suggestion();
     	

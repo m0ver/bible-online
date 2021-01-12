@@ -15,19 +15,10 @@
  *******************************************************************************/
 package custom.application;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import custom.objects.User;
+import custom.objects.bible;
+import custom.objects.book;
+import custom.objects.keyword;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
@@ -43,13 +34,23 @@ import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Document;
 import org.tinystruct.dom.Element;
-import org.tinystruct.handle.Reforward;
+import org.tinystruct.handler.Reforward;
 import org.tinystruct.system.util.StringUtilities;
 
-import custom.objects.User;
-import custom.objects.bible;
-import custom.objects.book;
-import custom.objects.keyword;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class search extends AbstractApplication {
 	private HttpServletRequest request;
@@ -140,7 +141,7 @@ public class search extends AbstractApplication {
 
 	public Object query() throws ApplicationException {
 		this.request = (HttpServletRequest) this.context
-		    .getAttribute("HTTP_REQUEST");
+		    .getAttribute(HTTP_REQUEST);
 		if (this.request.getParameter("keyword") != null)
 			return this.query(this.request.getParameter("keyword"));
 
@@ -154,7 +155,7 @@ public class search extends AbstractApplication {
 		int page = 1, pageSize = 20;
 
 		this.request = (HttpServletRequest) this.context
-		    .getAttribute("HTTP_REQUEST");
+		    .getAttribute(HTTP_REQUEST);
 		if (this.request.getParameter("page") == null
 		    || this.request.getParameter("page").toString().trim().length() <= 0) {
 			page = 1;
@@ -237,7 +238,7 @@ public class search extends AbstractApplication {
 				    new Object[] { this.getLocale().toString(), query });
 				if (list.size() > 0) {
 					this.response = (HttpServletResponse) this.context
-					    .getAttribute("HTTP_RESPONSE");
+					    .getAttribute(HTTP_RESPONSE);
 
 					Reforward reforward = new Reforward(request, response);
 					query = URLEncoder.encode(query, "utf-8");
@@ -468,7 +469,7 @@ public class search extends AbstractApplication {
 		query = StringUtilities.htmlSpecialChars(query);
 
 		int page = 1, pageSize = 10, total = 0;
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 
 		if (this.request.getParameter("page") == null
 		    || this.request.getParameter("page").toString().trim().length() == 0) {

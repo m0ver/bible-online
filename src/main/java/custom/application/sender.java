@@ -15,6 +15,24 @@
  *******************************************************************************/
 package custom.application;
 
+import custom.objects.User;
+import custom.objects.bible;
+import custom.objects.report;
+import custom.objects.vocabulary;
+import custom.util.ActivationKey;
+import org.tinystruct.AbstractApplication;
+import org.tinystruct.ApplicationException;
+import org.tinystruct.data.component.Row;
+import org.tinystruct.data.component.Table;
+import org.tinystruct.dom.Document;
+import org.tinystruct.dom.Element;
+import org.tinystruct.handler.Reforward;
+import org.tinystruct.mail.SimpleMail;
+import org.tinystruct.system.util.URLResourceLoader;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
@@ -22,25 +40,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.tinystruct.AbstractApplication;
-import org.tinystruct.ApplicationException;
-import org.tinystruct.data.component.Row;
-import org.tinystruct.data.component.Table;
-import org.tinystruct.dom.Document;
-import org.tinystruct.dom.Element;
-import org.tinystruct.handle.Reforward;
-import org.tinystruct.mail.SimpleMail;
-import org.tinystruct.system.util.ActivationKey;
-import org.tinystruct.system.util.URLResourceLoader;
-
-import custom.objects.User;
-import custom.objects.bible;
-import custom.objects.report;
-import custom.objects.vocabulary;
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class sender extends AbstractApplication {
 	private HttpServletRequest request;
@@ -49,7 +50,7 @@ public class sender extends AbstractApplication {
 	private User user;
 
 	public boolean send() {
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		if (this.request.getParameter("id") == null
 				|| this.request.getParameter("text") == null
 				|| this.request.getParameter("text").trim().length() == 0) {
@@ -102,7 +103,7 @@ public class sender extends AbstractApplication {
 	}
 
 	public String invite() throws ApplicationException {
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
 			this.user = (User) session.getAttribute("usr");
@@ -170,8 +171,8 @@ public class sender extends AbstractApplication {
 		report.setStatus(1);
 
 		if(bible.update() && report.update()) {
-			this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-			this.response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
+			this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
+			this.response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
 	
 			bible.findOneById();
 			
@@ -199,7 +200,7 @@ public class sender extends AbstractApplication {
 	public String getWord(String word) throws MalformedURLException, ApplicationException{
         String url = "http://dict.youdao.com/fsearch?client=deskdict&keyfrom=chrome.extension&q="+word+"&pos=-1&doctype=xml&vendor=unknown&appVer=3.1.17.4208&le=eng";
 
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
@@ -256,7 +257,7 @@ public class sender extends AbstractApplication {
 	}
 	
 	public void deleteWord(String id) throws ApplicationException {
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
 			this.user = (User) session.getAttribute("usr");
@@ -265,7 +266,7 @@ public class sender extends AbstractApplication {
 			
 			vocabulary.delete();
 			
-			this.response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
+			this.response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
 			
 			this.reforward=new Reforward(this.request,this.response);
 			this.reforward.setDefault(this.getLink("dashboard"));
@@ -275,7 +276,7 @@ public class sender extends AbstractApplication {
 	}
 	
 	public Object getAllWords(){
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
 			this.user = (User) session.getAttribute("usr");

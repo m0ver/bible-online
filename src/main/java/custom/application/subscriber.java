@@ -1,12 +1,13 @@
 package custom.application;
 
-import javax.servlet.http.HttpServletRequest;
-
+import custom.objects.subscription;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Row;
 
-import custom.objects.subscription;
+import javax.servlet.http.HttpServletRequest;
+
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
 
 public class subscriber extends AbstractApplication {
 
@@ -19,7 +20,7 @@ public class subscriber extends AbstractApplication {
 	}
 	
 	public String subscribe() throws ApplicationException {
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 
 		String mailto = "moverinfo@gmail.com";
 		if (this.request.getParameter("toemail") != null

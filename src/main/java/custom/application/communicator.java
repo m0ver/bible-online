@@ -1,17 +1,19 @@
 package custom.application;
 
+import org.tinystruct.AbstractApplication;
+import org.tinystruct.ApplicationException;
+import org.tinystruct.data.component.Builder;
+import org.tinystruct.system.util.StringUtilities;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.tinystruct.AbstractApplication;
-import org.tinystruct.ApplicationException;
-import org.tinystruct.data.component.Builder;
-import org.tinystruct.system.util.StringUtilities;
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class communicator extends AbstractApplication {
 
@@ -34,7 +36,7 @@ public class communicator extends AbstractApplication {
 
 	public synchronized void update() throws InterruptedException, IOException, ApplicationException {
 		HttpServletResponse response = (HttpServletResponse) this.context
-				.getAttribute("HTTP_RESPONSE");
+				.getAttribute(HTTP_RESPONSE);
 		
 		Builder struct;
 		while (true) {
@@ -59,7 +61,7 @@ public class communicator extends AbstractApplication {
 
 	public synchronized boolean save() {
 		HttpServletRequest request = (HttpServletRequest) this.context
-		.getAttribute("HTTP_REQUEST");
+		.getAttribute(HTTP_REQUEST);
 		
 		String[] agent = request.getHeader("User-Agent").split(" ");
 		

@@ -11,3 +11,4 @@ ant/
 .classpath
 .project
 target/
+*.properties

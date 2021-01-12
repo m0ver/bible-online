@@ -15,27 +15,22 @@
  *******************************************************************************/
 package custom.application;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletResponse;
-
+import custom.objects.bible;
+import custom.objects.book;
+import custom.objects.plan;
+import custom.util.TaskDescriptor;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Element;
 
-import custom.objects.bible;
-import custom.objects.book;
-import custom.objects.plan;
-import custom.util.TaskDescriptor;
+import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class document extends AbstractApplication {
 
@@ -298,7 +293,7 @@ public class document extends AbstractApplication {
 		// end
 
 		this.response = (HttpServletResponse) this.context
-				.getAttribute("HTTP_RESPONSE");
+				.getAttribute(HTTP_RESPONSE);
 
 		this.response.setContentType("text/xml;charset="
 				+ this.config.get("charset"));

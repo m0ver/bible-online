@@ -15,15 +15,16 @@
  *******************************************************************************/
 package custom.application;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import custom.objects.User;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.mail.SimpleMail;
 
-import custom.objects.User;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
 
 public class password extends AbstractApplication {
 
@@ -46,7 +47,7 @@ public class password extends AbstractApplication {
 	{
 		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		
-		HttpServletRequest request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
+		HttpServletRequest request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		HttpSession session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
 			this.usr = (User) session.getAttribute("usr");

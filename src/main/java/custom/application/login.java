@@ -22,6 +22,7 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import custom.objects.User;
+import custom.util.ValidateCode;
 import custom.util.model.oAuth2Provider;
 import org.apache.http.Header;
 import org.apache.http.HeaderIterator;
@@ -36,11 +37,10 @@ import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Builder;
 import org.tinystruct.data.component.Struct;
-import org.tinystruct.datatype.ObjectVariable;
-import org.tinystruct.handle.Reforward;
+import org.tinystruct.handler.Reforward;
+import org.tinystruct.system.template.variable.ObjectVariable;
 import org.tinystruct.system.util.StringUtilities;
 import org.tinystruct.system.util.TextFileLoader;
-import org.tinystruct.system.util.ValidateCode;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -54,15 +54,18 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
+
 public class login extends AbstractApplication {
 	private passport passport;
 	private User usr;
 
 	public Object validate() {
 		HttpServletRequest request = (HttpServletRequest) this.context
-				.getAttribute("HTTP_REQUEST");
+				.getAttribute(HTTP_REQUEST);
 		HttpServletResponse response = (HttpServletResponse) this.context
-				.getAttribute("HTTP_RESPONSE");
+				.getAttribute(HTTP_RESPONSE);
 
 		Cookie cookie = StringUtilities.getCookieByName(request.getCookies(),
 				"username");
@@ -122,9 +125,9 @@ public class login extends AbstractApplication {
 
 	public void logout() {
 		HttpServletRequest request = (HttpServletRequest) this.context
-				.getAttribute("HTTP_REQUEST");
+				.getAttribute(HTTP_REQUEST);
 		HttpServletResponse response = (HttpServletResponse) this.context
-				.getAttribute("HTTP_RESPONSE");
+				.getAttribute(HTTP_RESPONSE);
 
 		try {
 			this.passport = new passport(request, response, "waslogined");
@@ -217,9 +220,9 @@ public class login extends AbstractApplication {
 	public void toImage() {
 
 		HttpServletRequest request = (HttpServletRequest) this.context
-				.getAttribute("HTTP_REQUEST");
+				.getAttribute(HTTP_REQUEST);
 		HttpServletResponse response = (HttpServletResponse) this.context
-				.getAttribute("HTTP_RESPONSE");
+				.getAttribute(HTTP_RESPONSE);
 
 		response.setHeader("Pragma", "No-cache");
 		response.setHeader("Cache-Control", "no-cache");
@@ -281,9 +284,9 @@ public class login extends AbstractApplication {
 
 	public String oAuth2callback() throws ApplicationException {
 		HttpServletRequest request = (HttpServletRequest) this.context
-				.getAttribute("HTTP_REQUEST");
+				.getAttribute(HTTP_REQUEST);
 		HttpServletResponse response = (HttpServletResponse) this.context
-				.getAttribute("HTTP_RESPONSE");
+				.getAttribute(HTTP_RESPONSE);
 		Reforward reforward = new Reforward(request, response);
 		TokenResponse oauth2_response;
 
@@ -389,9 +392,9 @@ public class login extends AbstractApplication {
 
 	public String oAuth2_github_callback() throws ApplicationException {
 		HttpServletRequest request = (HttpServletRequest) this.context
-				.getAttribute("HTTP_REQUEST");
+				.getAttribute(HTTP_REQUEST);
 		HttpServletResponse response = (HttpServletResponse) this.context
-				.getAttribute("HTTP_RESPONSE");
+				.getAttribute(HTTP_RESPONSE);
 		Reforward reforward = new Reforward(request, response);
 
 		if (this.getVariable("github_client_secrets") == null) {
@@ -520,9 +523,9 @@ public class login extends AbstractApplication {
 
 	public void execute(String provider) throws ApplicationException {
 		HttpServletRequest http_request = (HttpServletRequest) this.context
-				.getAttribute("HTTP_REQUEST");
+				.getAttribute(HTTP_REQUEST);
 		HttpServletResponse http_response = (HttpServletResponse) this.context
-				.getAttribute("HTTP_RESPONSE");
+				.getAttribute(HTTP_RESPONSE);
 
 		Reforward reforward = new Reforward(http_request, http_response);
 		this.setVariable("from", reforward.getFromURL());

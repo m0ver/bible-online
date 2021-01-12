@@ -20,10 +20,10 @@ import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.application.Template;
 import org.tinystruct.application.Variables;
-import org.tinystruct.datatype.DataType;
-import org.tinystruct.datatype.Variable;
 import org.tinystruct.dom.Element;
-import org.tinystruct.handle.Reforward;
+import org.tinystruct.handler.Reforward;
+import org.tinystruct.system.template.variable.DataType;
+import org.tinystruct.system.template.variable.Variable;
 import org.tinystruct.system.util.TextFileLoader;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +34,9 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class error extends AbstractApplication {
 
@@ -327,8 +330,8 @@ public class error extends AbstractApplication {
 
 	public String not_found() throws ApplicationException {
 		final error app = this;
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-		this.response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
+		this.response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
 		this.response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
 		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
@@ -433,8 +436,8 @@ public class error extends AbstractApplication {
 	}
 
 	public void process() throws ApplicationException {
-		this.request = (HttpServletRequest) this.context.getAttribute("HTTP_REQUEST");
-		this.response = (HttpServletResponse) this.context.getAttribute("HTTP_RESPONSE");
+		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
+		this.response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
 		this.response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		this.reforward = new Reforward(this.request, this.response);
 
