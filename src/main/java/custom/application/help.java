@@ -73,13 +73,13 @@ public class help extends AbstractApplication {
 		StringBuffer buffer=new StringBuffer();
 		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">");
 		buffer.append("<url>\r\n");
-		buffer.append("  <loc>http://ingod.today/</loc>\r\n");
+		buffer.append("  <loc>http://www.ingod.today/</loc>\r\n");
 		buffer.append("  <changefreq>daily</changefreq>\r\n");
 		buffer.append("  <priority>1.00</priority>\r\n");
 		buffer.append("</url>\r\n");
 
 		buffer.append("<url>\r\n");
-		buffer.append("  <loc>http://ingod.today/bible.pdf</loc>\r\n");
+		buffer.append("  <loc>http://www.ingod.today/bible.pdf</loc>\r\n");
 		buffer.append("  <changefreq>daily</changefreq>\r\n");
 		buffer.append("  <priority>0.90</priority>\r\n");
 		buffer.append("</url>\r\n");

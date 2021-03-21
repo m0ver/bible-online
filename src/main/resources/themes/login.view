@@ -6,10 +6,10 @@
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
 <meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
-<link rel="alternate" href="http://ingod.today{%action%}" hreflang="x-default" />
-<link rel="alternate" href="http://ingod.today{%action%}&amp;lang=en-GB" hreflang="en-gb" />
-<link rel="alternate" href="http://ingod.today{%action%}&amp;lang=en-US" hreflang="en-us" />
-<link rel="alternate" href="http://ingod.today{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
+<link rel="alternate" href="http://www.ingod.today{%action%}" hreflang="x-default" />
+<link rel="alternate" href="http://www.ingod.today{%action%}&amp;lang=en-GB" hreflang="en-gb" />
+<link rel="alternate" href="http://www.ingod.today{%action%}&amp;lang=en-US" hreflang="en-us" />
+<link rel="alternate" href="http://www.ingod.today{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
 <link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
@@ -103,7 +103,7 @@ $(function(){
 <body>
 <div id="header">
 	<div class="wrapper">
-		<h1><a href="http://ingod.today">[%application.title%]</a></h1>
+		<h1><a href="http://www.ingod.today">[%application.title%]</a></h1>
 		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
 		<ul>
 			<li><a class="current" href='[%LINK:user/login%]' title="[%navigator.login.caption%]">[%navigator.login.caption%]</a></li>
@@ -149,7 +149,7 @@ $(function(){
 			         -->
 			    </div>
 			<div>
-			<a href="http://ingod.today/bible.pdf" target="_blank"> <span><strong>圣经</strong> <em>简体中文和合本</em> </span></a>
+			<a href="http://www.ingod.today/bible.pdf" target="_blank"> <span><strong>圣经</strong> <em>简体中文和合本</em> </span></a>
 			</div>
 			<div>
 			<a href="http://www.mozilla.org/products/download.html?product=firefox&amp;lang={%language%}" target="_blank"> <span><strong>下载安装 Firefox</strong> </span></a>
