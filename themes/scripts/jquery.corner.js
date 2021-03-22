@@ -2,7 +2,7 @@
 /* *
  * @Copyright Mover.
  * @author Mover Zhou.
- * @site: http://ingod.asia
+ * @site: http://www.ingod.today
  * usage: 
  * 		
  * */
