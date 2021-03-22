@@ -41,7 +41,7 @@ public class crawler extends AbstractApplication {
             URL url;
             URLResourceLoader loader;
             Row o;
-            StringBuffer content;
+            StringBuilder content;
             String words;
             Pattern pat = Pattern.compile("</span>\\s*(.*)(\r\n)*");
             Matcher mat;
@@ -97,7 +97,7 @@ public class crawler extends AbstractApplication {
             URL url;
             URLResourceLoader loader;
             Row o;
-            StringBuffer content;
+            StringBuilder content;
             String words;
             Pattern pat = Pattern.compile("<span class=\"verse\" id=\"(\\d+)\">.*</span>\\s*(.*)(\r\n)*");
 
