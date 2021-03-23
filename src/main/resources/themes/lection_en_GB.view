@@ -188,9 +188,6 @@
 	})();
 	//]]>
 </script>
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "ur-8db934de-84d5-a778-88b3-c1f77e568115", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 <!--[if (gt IE 6)&(lt IE 9)]>
 <script type="text/javascript">
 $(function(){
@@ -232,15 +229,6 @@ $(function(){
 	<h2 itemprop="name">[%holy.book.info%]</h2> 
 	<a class="clear-fix"></a>
 		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%}
-		<span class='st_sharethis_large' displayText='ShareThis'></span>
-		<span class='st_googleplus_large' displayText='Google +'></span>
-		<span class='st_facebook_large' displayText='Facebook'></span>
-		<span class='st_evernote_large' displayText='Evernote'></span>
-		<span class='st_twitter_large' displayText='Tweet'></span>
-		<span class='st_linkedin_large' displayText='LinkedIn'></span>
-		<span class='st_delicious_large' displayText='Delicious'></span>
-		<span class='st_pinterest_large' displayText='Pinterest'></span>
-		<span class='st_email_large' displayText='Email'></span>
 		</div>
 		<div id="documentation">
 			<div class="column" id="column1" itemprop="articleBody">{%left_column%}</div>

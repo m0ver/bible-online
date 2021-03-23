@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 <html lang="{%language_code%}">
 <head>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta property="og:title" content="{%book.bookName%} | 第{%chapterid%}章 | [%holy.bible%]"/>
-<meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
-<meta property="og:image" content="http://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png"/>
-<meta property="og:site_name" content="[%application.title%]"/>
-<meta property="og:description" content="[%application.description%]"/>
-<meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
-<link href="http://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
-<link href="http://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
-<link rel="canonical" href="{%base_url%}{%book.bookName%}/{%chapterid%}" />
-<link rel="alternate" href="{%action%}" hreflang="x-default" />
-<link rel="alternate" href="{%action%}&amp;lang=en-GB" hreflang="en-gb" />
-<link rel="alternate" href="{%action%}&amp;lang=en-US" hreflang="en-us" />
-<link rel="alternate" href="{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
-<link rel="prev" href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up" />
-<link rel="next" href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up" />
-<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
-<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
-<link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
-<!--[if IE]>
-<style type="text/css">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta property="og:title" content="{%book.bookName%} | 第{%chapterid%}章 | [%holy.bible%]"/>
+    <meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
+    <meta property="og:image" content="http://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png"/>
+    <meta property="og:site_name" content="[%application.title%]"/>
+    <meta property="og:description" content="[%application.description%]"/>
+    <meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)"/>
+    <link href="http://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="http://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="canonical" href="{%base_url%}{%book.bookName%}/{%chapterid%}"/>
+    <link rel="alternate" href="{%action%}" hreflang="x-default"/>
+    <link rel="alternate" href="{%action%}&amp;lang=en-GB" hreflang="en-gb"/>
+    <link rel="alternate" href="{%action%}&amp;lang=en-US" hreflang="en-us"/>
+    <link rel="alternate" href="{%action%}&amp;lang=zh-TW" hreflang="zh-tw"/>
+    <link rel="prev" href="{%base_url%}{%book.bookName%}/{%lastchapter%}#up"/>
+    <link rel="next" href="{%base_url%}{%book.bookName%}/{%nextchapter%}#up"/>
+    <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8"/>
+    <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8"/>
+    <link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css"
+          rel="stylesheet"/>
+    <!--[if IE]>
+    <style type="text/css">
 @import url("{%TEMPLATES_DIR%}/style/ie.css?9");
-</style>
-<![endif]-->
-<link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 " type="application/rss+xml" rel="alternate" />
-<link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 " type="application/atom+xml" rel="alternate" />
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/timer.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/struct.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/{%language%}.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/book.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/google.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/tools.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/life.js" charset="utf-8"></script>
 
-<script type="text/javascript">
+    </style>
+    <![endif]-->
+    <link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 "
+          type="application/rss+xml" rel="alternate"/>
+    <link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 "
+          type="application/atom+xml" rel="alternate"/>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/timer.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/struct.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/{%language%}.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/book.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/google.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/tools.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/life.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
 //<![CDATA[
 	var rightMenu;
 	var profileMenu;
@@ -163,110 +167,106 @@
 	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
 	//]]>
-</script>
-<!--[if (gt IE 6)&(lt IE 9)]>
-<script type="text/javascript">
-$(function(){
-	var corner={
-		src:"{%TEMPLATES_DIR%}/images/circle.png",
-		width:"7px",
-		height:"7px",
-		background:"#464646",
-		positions: ["topleft","topright"]
-	};
 
-	$("#header ul li a.current").addCorners("topleft,topright",corner);
-});
-</script>
-<![endif]-->
-<title>{%book.bookName%} | 第{%chapterid%}章 | [%holy.bible%]</title>
+    </script>
+    <!--[if (gt IE 6)&(lt IE 9)]>
+    <script type="text/javascript">
+    $(function(){
+        var corner={
+            src:"{%TEMPLATES_DIR%}/images/circle.png",
+            width:"7px",
+            height:"7px",
+            background:"#464646",
+            positions: ["topleft","topright"]
+        };
+
+        $("#header ul li a.current").addCorners("topleft,topright",corner);
+    });
+    </script>
+    <![endif]-->
+    <title>{%book.bookName%} | 第{%chapterid%}章 | [%holy.bible%]</title>
 </head>
 <body itemscope="" itemtype="http://schema.org/WebPage" data-role="page">
 <div id="header" data-role="header">
-	<div class="wrapper" itemscope="" itemtype="http://schema.org/Organization">
-		<h1><a href="/">[%application.title%]</a></h1>
-		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
-		<ul class="menu">
-			<li><a class="current" href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a>
-			<ul class="bible-menu">
-				<li>[%holy.bible.old-testament%]
-				</li>
-				<li>
-				[%holy.bible.new-testament%]
-				</li>
-			</ul>
-			</li>
-			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
-			<li id="download"><a href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
-		</ul>
-	</div>
+    <div class="wrapper" itemscope="" itemtype="http://schema.org/Organization">
+        <h1><a href="/">[%application.title%]</a></h1>
+        <p class="welcome">[%page.welcome.hello%][%page.welcome.caption%] <a href="javascript:void(0)"
+                                                                             onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a>
+            | {%user.profile%} {%user.status%}</p>
+        <ul class="menu">
+            <li><a class="current" href='[%LINK:bible%]'
+                   title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a>
+                <ul class="bible-menu">
+                    <li>[%holy.bible.old-testament%]
+                    </li>
+                    <li>
+                        [%holy.bible.new-testament%]
+                    </li>
+                </ul>
+            </li>
+            <li><a href='[%LINK:dashboard%]'
+                   title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
+            <li id="download"><a href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a>
+            </li>
+        </ul>
+    </div>
 </div>
 <div id="headline">
-	<div class="wrapper">
-		<h2>[%page.reading.title%]</h2>
-	</div>
+    <div class="wrapper">
+        <h2>[%page.reading.title%]</h2>
+    </div>
 </div>
 <a name="up"></a>
 <div id="pagebody">
-<div class="wrapper">
-	<div class="container" itemscope="" itemtype="http://schema.org/Article">
-	<h2 itemprop="name">[%holy.book.info%]</h2> 
-	<a class="clear-fix"></a>
-	<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%}
-	<div class="bdsharebuttonbox" data-tag="share_1">
-		<a class="bds_weixin" data-cmd="weixin"></a>
-		<a class="bds_qzone" data-cmd="qzone" href="#"></a>
-		<a class="bds_tsina" data-cmd="tsina"></a>
-		<a class="bds_sqq" data-cmd="sqq"></a>
-		<a class="bds_more" data-cmd="more"></a>
-	</div>
-<script>
-	window._bd_share_config = {
-		share : [{
-			"bdSize" : 16
-		}],
-		slide : [{	   
-			bdImg : 0,
-			bdPos : "right",
-			bdTop : 100
-		}],
-		image : [{
-			viewType : 'list',
-			viewPos : 'top',
-			viewColor : 'black',
-			viewSize : '16',
-			viewList : ['qzone','tsina','huaban','tqq','renren']
-		}],
-		selectShare : [{
-			"bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
-		}]
-	}
-	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-		</div>
-		<div id="documentation">
-			<div class="column" id="column1" itemprop="articleBody">{%left_column%}</div>
-		</div>
-		<div class="clear-fix footnote">
-			<ul>
-				<li>注1:</li>
-				<li>注2:</li>
-			</ul>
-			
-			<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> </div>
-		</div>
-		
-	<a name="down" class="clear-fix"> </a>
-	</div>
-	<div class="sidebar">
-	<label>[%holy.book.find-and-reading%]</label>
-	
-	<ul>
-		<li><select name="old_book" id="old_book"><option value="0">[%holy.bible.old-testament%]</option></select><select name="old_book_chapter" id="old_book_chapter"><option value="0">[%holy.book.select%]</option></select></li>
-		<li><select name="new_book" id="new_book"><option value="0">[%holy.bible.new-testament%]</option></select><select name="new_book_chapter" id="new_book_chapter"><option value="0">[%holy.book.select%]</option></select></li>
-	</ul>
+    <div class="wrapper">
+        <div class="container" itemscope="" itemtype="http://schema.org/Article">
+            <h2 itemprop="name">[%holy.book.info%]</h2>
+            <a class="clear-fix"></a>
+            <div class="clear-fix">[%holy.book.forward%]：<a
+                    href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up"
+                    title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249;
+                [%holy.book.previous%]</a> <a
+                    href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up"
+                    title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a>
+                [%holy.bible.version%] {%language.switch%}
+            </div>
+            <div id="documentation">
+                <div class="column" id="column1" itemprop="articleBody">{%left_column%}</div>
+            </div>
+            <div class="clear-fix footnote">
+                <ul>
+                    <li>注1:</li>
+                    <li>注2:</li>
+                </ul>
 
-	<script type="text/javascript">
+                <div class="clear-fix">[%holy.book.forward%]：<a
+                        href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up"
+                        title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249;
+                    [%holy.book.previous%]</a> <a
+                        href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up"
+                        title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%]
+                    &#8250;&#8250;</a></div>
+            </div>
+
+            <a name="down" class="clear-fix"> </a>
+        </div>
+        <div class="sidebar">
+            <label>[%holy.book.find-and-reading%]</label>
+
+            <ul>
+                <li><select name="old_book" id="old_book">
+                    <option value="0">[%holy.bible.old-testament%]</option>
+                </select><select name="old_book_chapter" id="old_book_chapter">
+                    <option value="0">[%holy.book.select%]</option>
+                </select></li>
+                <li><select name="new_book" id="new_book">
+                    <option value="0">[%holy.bible.new-testament%]</option>
+                </select><select name="new_book_chapter" id="new_book_chapter">
+                    <option value="0">[%holy.book.select%]</option>
+                </select></li>
+            </ul>
+
+            <script type="text/javascript">
 	var bible=new Book({
 			"old_books_id":"old_book",
 			"old_chapters_id":"old_book_chapter",
@@ -276,61 +276,71 @@ $(function(){
 		bible.setLanguage("{%language%}");
 		bible.load({%book.bookId%},{%chapterid%},{%partid%});
 		//bible.show();
-	</script>
-	
-	<div class="clear"> </div>
-	
-	<form name="f" id="f" action="[%LINK:bible/search%]" method="post">
-	<div class="container"><label for="keyword">[%search.confirm.caption%]</label>
-	<input size="20" class="text glass" autocomplete="off" maxlength="2048" value="{%keyword%}" id="keyword" name="keyword"  />
-	<input class="button-secondary inputbutton" type="submit" value=" [%search.submit.caption%] " />
-	</div>
-	</form>
 
-	<form method="post" onsubmit="return invite()">
-	<div class="container"><label for="email">[%invite.confirm.caption%]</label>
-	<textarea class="text" rows="3" cols="33" id="email" name="email" onfocus="this.value=''">[%invite.email.default.tips%]</textarea>
-	<input class="button-secondary" id="invite_button" type="submit" value=" [%invite.submit.caption%] " />
-	<span id="invite-message"> </span>
-	</div>
-	</form>
-	
-	<label>[%subscribe.plan%]</label>
-	<form method="post" onsubmit="return subscribe();">
-	<ul>
-		<li><input type="checkbox" id="bible" name="bible" value="bible" checked="checked"/>  <label for="bible">[%subscribe.bible.plan%]</label></li>
-		<li><input type="checkbox" id="article" name="article" value="article" checked="checked"/>  <label for="article">[%subscribe.article.plan%]</label></li>
-	</ul>
-	<div class="container">
-		<textarea class="text" rows="3" cols="33" id="toemail" name="toemail" onfocus="this.value=''">[%subscribe.email.default.tips%]</textarea>
-		<input class="button-secondary" id="subscribe_button" type="submit" value=" [%subscribe.submit.caption%] " />
-		<span id="subscribe-message"></span>
-	</div>
-	</form>
-	
-	<label>[%holy.bible.download%]</label>
-	<ul>
-		<li><a href="/bible.pdf" title="[%holy.bible.chinese.download%]">[%holy.bible.chinese.download%]</a></li>
-		<li><a href="/English-Standard-Version.pdf" title="English Standard Version">English Standard Version</a></li>
-		<li><a href="/New-International-Version.pdf" title="New International Version">New International Version</a></li>
-	</ul>
-	</div>
+            </script>
 
+            <div class="clear"></div>
+
+            <form name="f" id="f" action="[%LINK:bible/search%]" method="post">
+                <div class="container"><label for="keyword">[%search.confirm.caption%]</label>
+                    <input size="20" class="text glass" autocomplete="off" maxlength="2048" value="{%keyword%}"
+                           id="keyword" name="keyword"/>
+                    <input class="button-secondary inputbutton" type="submit" value=" [%search.submit.caption%] "/>
+                </div>
+            </form>
+
+            <form method="post" onsubmit="return invite()">
+                <div class="container"><label for="email">[%invite.confirm.caption%]</label>
+                    <textarea class="text" rows="3" cols="33" id="email" name="email" onfocus="this.value=''">[%invite.email.default.tips%]</textarea>
+                    <input class="button-secondary" id="invite_button" type="submit"
+                           value=" [%invite.submit.caption%] "/>
+                    <span id="invite-message"> </span>
+                </div>
+            </form>
+
+            <label>[%subscribe.plan%]</label>
+            <form method="post" onsubmit="return subscribe();">
+                <ul>
+                    <li><input type="checkbox" id="bible" name="bible" value="bible" checked="checked"/> <label
+                            for="bible">[%subscribe.bible.plan%]</label></li>
+                    <li><input type="checkbox" id="article" name="article" value="article" checked="checked"/> <label
+                            for="article">[%subscribe.article.plan%]</label></li>
+                </ul>
+                <div class="container">
+                    <textarea class="text" rows="3" cols="33" id="toemail" name="toemail" onfocus="this.value=''">[%subscribe.email.default.tips%]</textarea>
+                    <input class="button-secondary" id="subscribe_button" type="submit"
+                           value=" [%subscribe.submit.caption%] "/>
+                    <span id="subscribe-message"></span>
+                </div>
+            </form>
+
+            <label>[%holy.bible.download%]</label>
+            <ul>
+                <li><a href="/bible.pdf" title="[%holy.bible.chinese.download%]">[%holy.bible.chinese.download%]</a>
+                </li>
+                <li><a href="/English-Standard-Version.pdf" title="English Standard Version">English Standard
+                    Version</a></li>
+                <li><a href="/New-International-Version.pdf" title="New International Version">New International
+                    Version</a></li>
+            </ul>
+        </div>
+
+    </div>
 </div>
-</div>
 
-<div id="footer"  data-role="footer">
-	<div class="wrapper">
-		<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
-		<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
-		<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
-		<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
-		<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
-	</div>
+<div id="footer" data-role="footer">
+    <div class="wrapper">
+        <a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> |
+        <a href="[%LINK:help%]">[%footer.privacy%]</a> |
+        <a href="[%LINK:user/register%]">[%footer.register%]</a> |
+        <a href="[%LINK:bible/api%]">[%footer.api%]</a> |
+        <a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
+    </div>
 </div>
 <div id="__base__"></div>
 <script type="text/javascript">
 window.listener.install(document.getElementById("f"),document.getElementById("keyword"),"keyword.jsp",false,"×");
+
 </script>
 </body>
 </html>
