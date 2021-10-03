@@ -12,7 +12,7 @@
         <dependency>
             <groupId>org.tinystruct</groupId>
             <artifactId>tinystruct</artifactId>
-            <version>0.2.1</version>
+            <version>0.2.8</version>
             <classifier>jar-with-dependencies</classifier>
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
@@ -53,8 +53,6 @@
             <version>4.5.12</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.google.api.client/google-api-client-auth-oauth2 -->
-
-
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
@@ -127,9 +125,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
     <build>
-        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-        <outputDirectory>${basedir}/WEB-INF/classes</outputDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -141,7 +138,7 @@
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
-                        <phase>prepare-package</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
                         </goals>
