@@ -98,10 +98,10 @@
 		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'.replace(/\&amp;/g,'&')","caption":"[%page.logout.caption%]"});
 		
 		languageMenu.setAutoReposition(true);
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'","caption":"English(UK)"});
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'","caption":"English(US)"});
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-CN'","caption":"简体中文"});
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-TW'","caption":"繁体中文"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'.replace(/\&amp;/g,'&')","caption":"English(UK)"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'.replace(/\&amp;/g,'&')","caption":"English(US)"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-CN'.replace(/\&amp;/g,'&')","caption":"简体中文"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-TW'.replace(/\&amp;/g,'&')","caption":"繁体中文"});
 	
 		var i=0;
 		var timer = new Timer(0.1,function(){});
