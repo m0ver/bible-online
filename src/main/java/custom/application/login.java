@@ -147,9 +147,7 @@ public class login extends AbstractApplication {
 			}
 
 			Reforward reforward = new Reforward(request, response);
-
-			reforward.setDefault(this.getLink(this.context.getAttribute(
-					"default.login.page").toString()));
+			reforward.setDefault(this.getLink(this.getConfiguration("default.login.page")));
 			reforward.forward();
 		} catch (ApplicationException e) {
 			// TODO Auto-generated catch block
@@ -262,8 +260,7 @@ public class login extends AbstractApplication {
 			requestBuffer.append(URLEncoder.encode(
 					this.getLink("oauth2callback"), "utf8"));
 			requestBuffer.append("&response_type=code");
-			requestBuffer
-					.append("&client_id=737184644498-2k1qvfbj34horj4lhfg06rph878kj72r.apps.googleusercontent.com");
+			requestBuffer.append("&client_id=850344213005-lgjck8o3b3u75l8hpa8ihn8d56omvd06.apps.googleusercontent.com");
 			break;
 
 		}

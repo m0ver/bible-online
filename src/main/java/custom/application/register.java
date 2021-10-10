@@ -177,7 +177,7 @@ public class register extends AbstractApplication
 		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());
 		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("usr")!=null) {
+		if(null!=session.getAttribute("usr")) {
 			this.user = (User) session.getAttribute("usr");
 			
 			this.setVariable("user.status","");
