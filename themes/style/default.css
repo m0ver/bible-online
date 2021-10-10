@@ -897,9 +897,11 @@ ul.testament li ol li {
 }
 
 .gallery {
-    background: url("/themes/images/last-dinner.png") no-repeat scroll 0 50% #000000;
+    background: url("/themes/images/last-dinner.png") no-repeat scroll 0 50%;
+        background-size: auto;
     height: 20em;
     margin-bottom: 0.5em;
+    background-size: 100%;
 }
 
 /* Mobile and iPad Portrait */
