@@ -88,6 +88,7 @@ public class help extends AbstractApplication {
 		Iterator<String> iterator = paths.iterator();
 		while(iterator.hasNext()) {
 			path=iterator.next();
+			if(path.equals("#")) continue;
 			buffer.append("<url>\r\n");
 			buffer.append("  <loc>"+this.getLink(path).replace("&", "&amp;")+"</loc>\r\n");
 			buffer.append("  <changefreq>weekly</changefreq>\r\n");
