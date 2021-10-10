@@ -194,7 +194,7 @@ public class lection extends AbstractApplication {
 		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		String host = String.valueOf(this.context.getAttribute("HTTP_HOST"));
 		// remove the default language for action
-		this.setVariable("action", host.substring(0, host.lastIndexOf("/"))+"/"+this.context.getAttribute("REQUEST_ACTION").toString());
+		this.setVariable("action", host.substring(0, host.lastIndexOf("/"))+"/?q="+this.context.getAttribute("REQUEST_ACTION").toString());
 		this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 		
 		HttpSession session = this.request.getSession();
