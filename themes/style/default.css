@@ -455,6 +455,10 @@ a.rsslink {
 	clear:both;
 }
 
+#old_book, #new_book {
+  width:7.5em;
+}
+
 #pagebody #sitesearch input#keyword.text {
 	width: 245px;
 }
