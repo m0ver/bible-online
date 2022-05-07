@@ -190,6 +190,8 @@ public class sender extends AbstractApplication {
         this.setAction("services/saveword", "saveWord");
         this.setAction("services/getwords", "getAllWords");
         this.setAction("services/deleteword", "deleteWord");
+
+        this.setTemplateRequired(false);
     }
 
     public String getWord(String word) throws MalformedURLException, ApplicationException {
