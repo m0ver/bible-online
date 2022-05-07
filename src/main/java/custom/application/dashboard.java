@@ -55,7 +55,6 @@ public class dashboard extends AbstractApplication {
 		
 		this.setText("words.list.title");
 
-		this.setText("navigator.home.caption");
 		this.setText("navigator.bible.caption");
 		this.setText("navigator.video.caption");
 		this.setText("navigator.document.caption");

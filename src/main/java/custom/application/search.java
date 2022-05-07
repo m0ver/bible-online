@@ -68,7 +68,6 @@ public class search extends AbstractApplication {
 		this.setText("page.logout.caption");
 		this.setText("page.reading.title");
 
-		this.setText("navigator.home.caption");
 		this.setText("navigator.bible.caption");
 		this.setText("navigator.video.caption");
 		this.setText("navigator.document.caption");

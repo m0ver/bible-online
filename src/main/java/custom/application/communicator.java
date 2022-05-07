@@ -26,8 +26,6 @@ public class communicator extends AbstractApplication {
 		this.setAction("communicator/update", "update");
 		this.setAction("communicator/save", "save");
 		this.setAction("communicator/version", "version");
-		
-		System.out.println("COMMUNICATOR:Thread["+Thread.currentThread().getId()+"]"+Thread.currentThread().getName());
 	}
 	
 	public communicator index(){

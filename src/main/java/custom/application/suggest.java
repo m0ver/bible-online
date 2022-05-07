@@ -47,7 +47,6 @@ public class suggest extends AbstractApplication
 		this.setText("page.language-setting.title");
 		this.setText("page.logout.caption");
 
-		this.setText("navigator.home.caption");
 		this.setText("navigator.bible.caption");
 		this.setText("navigator.video.caption");
 		this.setText("navigator.document.caption");

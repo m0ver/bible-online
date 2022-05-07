@@ -17,12 +17,14 @@ package custom.application;
 
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
+import org.tinystruct.application.Action;
+import org.tinystruct.system.ApplicationManager;
+import org.tinystruct.system.cli.CommandLine;
 import org.tinystruct.system.template.DefaultTemplate;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
 import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
@@ -43,7 +45,6 @@ public class help extends AbstractApplication {
 		this.setText("page.language-setting.title");
 		this.setText("page.logout.caption");
 
-		this.setText("navigator.home.caption");
 		this.setText("navigator.bible.caption");
 		this.setText("navigator.video.caption");
 		this.setText("navigator.document.caption");
@@ -69,7 +70,10 @@ public class help extends AbstractApplication {
 	}
 	
 	public Object sitemap(){
-		Collection<String> paths = this.actions().paths();
+		lection lection = (custom.application.lection) ApplicationManager.get(custom.application.lection.class.getName());
+		lection.init();
+		Map<String, CommandLine> commandLines = lection.getCommandLines();
+		Set<String> list = commandLines.keySet();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">");
 		buffer.append("<url>\r\n");
@@ -85,7 +89,7 @@ public class help extends AbstractApplication {
 		buffer.append("</url>\r\n");
 		
 		String path;
-		Iterator<String> iterator = paths.iterator();
+		Iterator<String> iterator = list.iterator();
 		while(iterator.hasNext()) {
 			path=iterator.next();
 			if(path.equals("#")) continue;

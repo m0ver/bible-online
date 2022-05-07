@@ -22,6 +22,8 @@ public class crawler extends AbstractApplication {
     public void init() {
         // TODO Auto-generated method stub
         this.setAction("start-crawler", "start");
+
+        this.setTemplateRequired(false);
     }
 
     @Override
@@ -158,7 +160,7 @@ public class crawler extends AbstractApplication {
      */
     public static void main(String[] args) throws ApplicationException, IOException {
         // TODO Auto-generated method stub
-//    ApplicationManager.init();
+        ApplicationManager.init();
         ApplicationManager.install(new crawler());
         ApplicationManager.call("start-crawler", null);
 
