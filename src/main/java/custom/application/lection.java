@@ -70,7 +70,7 @@ public class lection extends AbstractApplication {
                 while (item.hasNext()) {
                     book.setData(item.next());
 
-                    bookName = book.getBookName();
+                    bookName = book.getBookName().trim();
                     this.setAction(bookName, "viewByName");
                     this.data.set(bookName, book.getBookId());
                 }
