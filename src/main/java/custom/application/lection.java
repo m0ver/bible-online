@@ -230,7 +230,7 @@ public class lection extends AbstractApplication {
         this.setVariable(new DataVariable("book", book), true);
 
         bible bible = new bible();
-        bible.setTableName(lang);
+        bible.setTableName("zh_CN");
 
         this.max_chapter = bible.setRequestFields("max(chapter_id) as max_chapter").findWith("WHERE book_id=?",
                 new Object[]{this.bookid}).get(0).get(0).get("max_chapter").intValue();
