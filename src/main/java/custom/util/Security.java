@@ -16,43 +16,43 @@
 package custom.util;
 
 
+import org.apache.commons.codec.digest.DigestUtils;
 
-public class Security
-{
-	public static enum Mode
-	{
-		OnlyNumber,NumberAndLetter,ALL
-	}
-	
-	private String username="";
+public class Security {
+    private String username = "";
 
-	public Security(String username)
-	{
-		this.username=username;
-	}
+    public Security(String username) {
+        this.username = username;
+    }
 
-	public String encodePassword(String password)
-	{
-		char[]u=username.toCharArray(),p=password.toCharArray();
-		int t=(u[0]-u[0]%10)/10;
-		for(int i=0;i<p.length;i++)
-		{
-			p[i]+=t;
-			if(p[i]>126)p[i]-=94;
-		}
-		return String.valueOf(p);
-	}
+    public String encode(String password) {
+        return DigestUtils.md5Hex((password + username).getBytes()).toUpperCase();
+    }
 
-	public String decodePassword(String password)
-	{
-		char[]u=username.toCharArray(),p=password.toCharArray();
-		int t=(u[0]-u[0]%10)/10;
-		for(int i=0;i<p.length;i++)
-		{
-			p[i]-=t;
-			if(p[i]<33)p[i]+=94;
-		}
-		return String.valueOf(p);
-	}
+    @Deprecated
+    public String encodePassword(String password) {
+        char[] u = username.toCharArray(), p = password.toCharArray();
+        int t = (u[0] - u[0] % 10) / 10;
+        for (int i = 0; i < p.length; i++) {
+            p[i] += t;
+            if (p[i] > 126) p[i] -= 94;
+        }
+        return String.valueOf(p);
+    }
+
+    @Deprecated
+    public String decodePassword(String password) {
+        char[] u = username.toCharArray(), p = password.toCharArray();
+        int t = (u[0] - u[0] % 10) / 10;
+        for (int i = 0; i < p.length; i++) {
+            p[i] -= t;
+            if (p[i] < 33) p[i] += 94;
+        }
+        return String.valueOf(p);
+    }
+
+    public static enum Mode {
+        OnlyNumber, NumberAndLetter, ALL
+    }
 
 }
