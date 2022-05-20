@@ -155,7 +155,7 @@ public class sender extends AbstractApplication {
         if (this.getLocale().toString().equalsIgnoreCase(Locale.US.toString())) {
             bible.setTableName("NIV");
         } else if (this.getLocale().toString().equalsIgnoreCase(Locale.UK.toString())) {
-            bible.setTableName("ESV");
+            bible.setTableName("KJV");
         } else {
             bible.setTableName(this.getLocale().toString());
         }
