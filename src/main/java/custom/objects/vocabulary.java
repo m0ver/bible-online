@@ -15,6 +15,7 @@
  *******************************************************************************/
 package custom.objects;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.tinystruct.data.component.Row;
@@ -26,7 +27,7 @@ public class vocabulary extends AbstractData {
 	private String phoneticSymbol;
 	private String interpretation;
 	private String comment;
-	private Date date;
+	private LocalDateTime date;
 	private String referenceLink;
 
 	public String getId()
@@ -84,12 +85,12 @@ public class vocabulary extends AbstractData {
 		return this.comment;
 	}
 
-	public void setDate(Date date)
+	public void setDate(LocalDateTime date)
 	{
-		this.date=this.setFieldAsDate("date",date);
+		this.date=this.setFieldAsDateTime("date",date);
 	}
 
-	public Date getDate()
+	public LocalDateTime getDate()
 	{
 		return this.date;
 	}
@@ -113,7 +114,7 @@ public class vocabulary extends AbstractData {
 		if(row.getFieldInfo("phonetic_symbol")!=null)	this.setPhoneticSymbol(row.getFieldInfo("phonetic_symbol").stringValue());
 		if(row.getFieldInfo("interpretation")!=null)	this.setInterpretation(row.getFieldInfo("interpretation").stringValue());
 		if(row.getFieldInfo("comment")!=null)	this.setComment(row.getFieldInfo("comment").stringValue());
-		if(row.getFieldInfo("date")!=null)	this.setDate(row.getFieldInfo("date").dateValue());
+		if(row.getFieldInfo("date")!=null)	this.setDate(row.getFieldInfo("date").dateTimeValue());
 		if(row.getFieldInfo("reference_link")!=null)	this.setReferenceLink(row.getFieldInfo("reference_link").stringValue());
 	}
 
