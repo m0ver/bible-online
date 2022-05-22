@@ -15,7 +15,7 @@ public class ApplicationGenerator {
 				Generator generator=new MySQLGenerator();
 				generator.setFileName("resources/custom/objects/");
 				generator.setPackageName("custom.objects");
-				generator.importPackages("java.util.Date");
+				generator.importPackages("java.util.LocalDateTime");
 				generator.create(className,className);
 				System.out.println("class:"+className+" table:"+className);
 			}
