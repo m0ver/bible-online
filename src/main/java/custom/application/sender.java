@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -210,7 +211,7 @@ public class sender extends AbstractApplication {
 
             vocabulary vocabulary = new vocabulary();
             vocabulary.setUserId(this.user.getId());
-            vocabulary.setDate(new Date());
+            vocabulary.setDate(LocalDateTime.now());
             vocabulary.setReferenceLink(this.request.getParameter("referer").toString());
 
             List<Element> phrase = document.getElementsByTagName("return-phrase");
@@ -240,7 +241,7 @@ public class sender extends AbstractApplication {
                 vocabulary.append();
             } else {
                 vocabulary.setData(words.get(0));
-                vocabulary.setDate(new Date());
+                vocabulary.setDate(LocalDateTime.now());
                 vocabulary.update();
             }
 
