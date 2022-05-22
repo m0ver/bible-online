@@ -1,27 +1,16 @@
-/*******************************************************************************
- * Copyright  (c) 2013 Mover Zhou
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *******************************************************************************/
 package custom.objects;
+import java.io.Serializable;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.AbstractData;
 
-public class vocabulary extends AbstractData {
+public class vocabulary extends AbstractData implements Serializable {
+  /**
+   * Auto Generated Serial Version UID
+   */
+  private static final long serialVersionUID = -2761115593194047123L;
 	private String userId;
 	private String word;
 	private String phoneticSymbol;
@@ -37,7 +26,7 @@ public class vocabulary extends AbstractData {
 
 	public void setUserId(String userId)
 	{
-		this.userId=this.setFieldAsString("userId",userId);
+		this.userId = this.setFieldAsString("userId",userId);
 	}
 
 	public String getUserId()
@@ -47,7 +36,7 @@ public class vocabulary extends AbstractData {
 
 	public void setWord(String word)
 	{
-		this.word=this.setFieldAsString("word",word);
+		this.word = this.setFieldAsString("word",word);
 	}
 
 	public String getWord()
@@ -57,7 +46,7 @@ public class vocabulary extends AbstractData {
 
 	public void setPhoneticSymbol(String phoneticSymbol)
 	{
-		this.phoneticSymbol=this.setFieldAsString("phoneticSymbol",phoneticSymbol);
+		this.phoneticSymbol = this.setFieldAsString("phoneticSymbol",phoneticSymbol);
 	}
 
 	public String getPhoneticSymbol()
@@ -67,7 +56,7 @@ public class vocabulary extends AbstractData {
 
 	public void setInterpretation(String interpretation)
 	{
-		this.interpretation=this.setFieldAsString("interpretation",interpretation);
+		this.interpretation = this.setFieldAsString("interpretation",interpretation);
 	}
 
 	public String getInterpretation()
@@ -77,7 +66,7 @@ public class vocabulary extends AbstractData {
 
 	public void setComment(String comment)
 	{
-		this.comment=this.setFieldAsString("comment",comment);
+		this.comment = this.setFieldAsString("comment",comment);
 	}
 
 	public String getComment()
@@ -87,7 +76,7 @@ public class vocabulary extends AbstractData {
 
 	public void setDate(LocalDateTime date)
 	{
-		this.date=this.setFieldAsDateTime("date",date);
+		this.date = this.setFieldAsLocalDateTime("date",date);
 	}
 
 	public LocalDateTime getDate()
@@ -97,7 +86,7 @@ public class vocabulary extends AbstractData {
 
 	public void setReferenceLink(String referenceLink)
 	{
-		this.referenceLink=this.setFieldAsString("referenceLink",referenceLink);
+		this.referenceLink = this.setFieldAsString("referenceLink",referenceLink);
 	}
 
 	public String getReferenceLink()
@@ -114,13 +103,13 @@ public class vocabulary extends AbstractData {
 		if(row.getFieldInfo("phonetic_symbol")!=null)	this.setPhoneticSymbol(row.getFieldInfo("phonetic_symbol").stringValue());
 		if(row.getFieldInfo("interpretation")!=null)	this.setInterpretation(row.getFieldInfo("interpretation").stringValue());
 		if(row.getFieldInfo("comment")!=null)	this.setComment(row.getFieldInfo("comment").stringValue());
-		if(row.getFieldInfo("date")!=null)	this.setDate(row.getFieldInfo("date").dateTimeValue());
+		if(row.getFieldInfo("date")!=null)	this.setDate(row.getFieldInfo("date").localDateTimeValue());
 		if(row.getFieldInfo("reference_link")!=null)	this.setReferenceLink(row.getFieldInfo("reference_link").stringValue());
 	}
 
 	@Override
 	public String toString() {
-		StringBuffer buffer=new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("{");
 		buffer.append("\"Id\":\""+this.getId()+"\"");
 		buffer.append(",\"userId\":\""+this.getUserId()+"\"");
@@ -128,7 +117,7 @@ public class vocabulary extends AbstractData {
 		buffer.append(",\"phoneticSymbol\":\""+this.getPhoneticSymbol()+"\"");
 		buffer.append(",\"interpretation\":\""+this.getInterpretation()+"\"");
 		buffer.append(",\"comment\":\""+this.getComment()+"\"");
-		buffer.append(",\"date\":\""+this.getDate()+"\"");
+		buffer.append(",\"date\":"+this.getDate());
 		buffer.append(",\"referenceLink\":\""+this.getReferenceLink()+"\"");
 		buffer.append("}");
 		return buffer.toString();
