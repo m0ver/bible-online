@@ -246,32 +246,6 @@ public class login extends AbstractApplication {
 
         this.setText("page.welcome.hello", (username == null || username.trim()
                 .length() == 0) ? "" : username + "，");
-
-        initialize_user();
-    }
-
-    private void initialize_user()  {
-
-        try(DatabaseOperator operator = new DatabaseOperator()) {
-            operator.createStatement(false);
-            operator.execute("ALTER TABLE bible.`User` MODIFY COLUMN password varchar(33) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;\n");
-        } catch (ApplicationException e) {
-            e.printStackTrace();
-        }
-
-        User user = new User();
-        user.setId("8cb220a6-35d0-40ec-982c-138907664454");
-        user.setUsername("James");
-        user.setStatus(true);
-
-        String password = "0123456";
-        user.setPassword(new Security(user.getUsername()).encode(password));
-        user.setEmail("moverinfo@gmail.com");
-        try {
-            user.update();
-        } catch (ApplicationException e) {
-            e.printStackTrace();
-        }
     }
 
     public void toImage() {
