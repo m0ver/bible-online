@@ -226,7 +226,7 @@ public class sender extends AbstractApplication {
 
             List<Element> custom_translation = document.getElementsByTagName("custom-translation");
             if (custom_translation.size() > 0) {
-                StringBuffer buff = new StringBuffer();
+                StringBuilder buff = new StringBuilder();
 
                 Iterator<Element> citerator = custom_translation.get(0).getElementsByTagName("translation").iterator();
                 while (citerator.hasNext()) {
