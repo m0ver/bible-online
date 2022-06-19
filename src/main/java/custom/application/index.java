@@ -12,6 +12,7 @@ import org.tinystruct.dom.Element;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Iterator;
+import java.util.Locale;
 
 import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
 
@@ -19,11 +20,22 @@ public class index extends AbstractApplication {
 	private User usr;
 
 	public void init(){
+		this.setAction("default", "start");
+
+		this.setVariable("TEMPLATES_DIR", "/themes", false);
+		this.setVariable("keyword",this.getVariable("keyword")==null?"":this.getVariable("keyword").getValue().toString());
+		this.setVariable("metas", "");
+	}
+
+	@Override
+	public void setLocale(Locale locale) {
+		super.setLocale(locale);
+
 		this.setText("application.keywords");
 		this.setText("application.description");
 		this.setText("application.title");
 		this.setText("application.language.name");
-		
+
 		this.setText("page.welcome.caption");
 		this.setText("page.language-setting.title");
 		this.setText("page.logout.caption");
@@ -44,14 +56,14 @@ public class index extends AbstractApplication {
 		this.setText("holy.book.find-and-reading");
 		this.setText("holy.book.tools");
 		this.setText("holy.bible.version");
-		
+
 		this.setText("footer.report-a-site-bug");
 		this.setText("footer.privacy");
 		this.setText("footer.register");
 		this.setText("footer.api");
 		this.setText("footer.updates-rss");
 		this.setText("holy.book.select");
-		
+
 		this.setText("search.confirm.caption");
 		this.setText("search.submit.caption");
 
@@ -65,31 +77,24 @@ public class index extends AbstractApplication {
 		this.setText("subscribe.submit.caption");
 		this.setText("subscribe.email.caption");
 		this.setText("subscribe.email.default.tips");
-		
+
 		this.setText("user.lastlogin.caption");
-		
+
 		this.setText("holy.bible.introduction");
 		this.setText("holy.bible.introduction1");
 
 		this.setText("holy.bible.download");
 		this.setText("holy.bible.chinese.download");
-		
-		this.setVariable("TEMPLATES_DIR", "/themes", false);
-		this.setVariable("keyword",this.getVariable("keyword")==null?"":this.getVariable("keyword").getValue().toString());
-		this.setVariable("metas", "");
 
 		String username="";
 		if(this.getVariable("username")!=null) {
 			username = String.valueOf(this.getVariable("username").getValue());
 		}
-		
+
 		this.setText("page.welcome.hello", (username == null || username.trim()
 				.length() == 0) ? "" : username + "，");
-		
-		this.setAction("default", "start");
-		
 	}
-	
+
 	public Object start(){
 		HttpServletRequest request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
 		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());

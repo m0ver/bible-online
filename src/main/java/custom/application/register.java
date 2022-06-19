@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.Locale;
 
 import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
 import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
@@ -41,10 +42,33 @@ public class register extends AbstractApplication
 	
 	@Override
 	public void init() {
-		this.setAction("user/register", "post");
-		
-		this.setText("page.register.title");
 		// TODO Auto-generated method stub
+		this.setAction("user/register", "post");
+
+		this.setVariable("error", "");
+    	this.setVariable("lastname", "");
+    	this.setVariable("firstname", "");
+    	this.setVariable("city", "");
+    	this.setVariable("postcode","");
+    	
+    	this.setVariable("gender.male", "");
+		this.setVariable("gender.female", "");
+		this.setVariable("gender.security", "");
+		
+		this.setVariable("telephone", "");
+		
+		this.setVariable("nickname", "");
+		this.setVariable("email","");
+		this.setVariable("password", "");
+		this.setVariable("info", "");
+		this.setVariable("display", "block");
+	}
+
+	@Override
+	public void setLocale(Locale locale) {
+		super.setLocale(locale);
+
+		this.setText("page.register.title");
 		this.setText("register.account-details");
 		this.setText("register.required-fields");
 		this.setText("register.screen-name.caption");
@@ -82,7 +106,7 @@ public class register extends AbstractApplication
 		this.setText("footer.register");
 		this.setText("footer.api");
 		this.setText("footer.updates-rss");
-		
+
 		String username="";
 		if(this.getVariable("username")!=null) {
 			username = String.valueOf(this.getVariable("username").getValue());
@@ -90,27 +114,9 @@ public class register extends AbstractApplication
 
 		this.setText("page.welcome.hello", (username == null || username.trim()
 				.length() == 0) ? "" : username + "，");
-		
-		this.setVariable("error", "");
-    	this.setVariable("lastname", "");
-    	this.setVariable("firstname", "");
-    	this.setVariable("city", "");
-    	this.setVariable("postcode","");
-    	
-    	this.setVariable("gender.male", "");
-		this.setVariable("gender.female", "");
-		this.setVariable("gender.security", "");
-		
-		this.setVariable("telephone", "");
-		
-		this.setVariable("nickname", "");
-		this.setVariable("email","");
-		this.setVariable("password", "");
-		this.setVariable("info", "");
-		this.setVariable("display", "block");
 	}
-	
-    public Object post()
+
+	public Object post()
     {
 		this.setText("register.tips",this.getLink("help"),this.getLink("help/condition"));
 

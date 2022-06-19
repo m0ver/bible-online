@@ -20,14 +20,11 @@ import custom.util.Security;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
+import org.tinystruct.http.*;
 import org.tinystruct.system.Language;
 import org.tinystruct.system.Resource;
 import org.tinystruct.system.util.StringUtilities;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Vector;
 
@@ -35,7 +32,7 @@ public class passport {
     private String username;
     private String password;
     private String email = "";
-    private String sessionname = "";
+    private String sessionName = "";
     private String where = "";
     private Resource resource;
     private Language lang;
@@ -43,24 +40,25 @@ public class passport {
     private User currentUser;
     private boolean recognized = false;
 
-    private HttpSession session;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
+    private Session session;
+    private Request request;
+    private Response response;
 
-    public passport(HttpServletRequest request, HttpServletResponse response, String sessionname) throws ApplicationException {
+    public passport(Request request, Response response, String sessionname) throws ApplicationException {
         this.request = request;
         this.response = response;
         this.currentUser = new User();
 
         this.session = this.request.getSession();
 
-        this.sessionname = sessionname;
+        this.sessionName = sessionname;
         if (this.session.getAttribute(sessionname) != null)
-            this.recognized = ((Boolean) this.session.getAttribute(sessionname)).booleanValue();
+            this.recognized = (Boolean) this.session.getAttribute(sessionname);
 
-        Cookie language = StringUtilities.getCookieByName(request.getCookies(), "language");
+
+        Cookie language = StringUtilities.getCookieByName(request.cookies(), "language");
         if (language != null) {
-            this.setLanguage(Language.valueOf(language.getValue()));
+            this.setLanguage(Language.valueOf(language.value()));
         } else
             this.setLanguage(Language.zh_CN);
 
@@ -90,12 +88,13 @@ public class passport {
 
     private void setlogin() throws ApplicationException {
         this.recognized = true;
-        this.session.setAttribute(sessionname, new Boolean("true"));
+        this.session.setAttribute(sessionName, Boolean.TRUE);
         this.session.setAttribute("usr", this.currentUser);
 
-        Cookie username = new Cookie("username", this.currentUser.getUsername());
+        Cookie username = new CookieImpl("username");
+        username.setValue(this.currentUser.getUsername());
         username.setMaxAge(24 * 3600);
-        this.response.addCookie(username);
+        this.response.addHeader(Header.SET_COOKIE.toString(), username);
 
         Member member = new Member();
         Table members = member.findWith("WHERE user_id=?", new Object[]{this.currentUser.getId()});
@@ -142,14 +141,14 @@ public class passport {
 
     }
 
-    public HttpSession getSession() {
+    public Session getSession() {
         return this.session;
     }
 
     public void logout() {
         this.recognized = false;
 
-        this.session.removeAttribute(this.sessionname);
+        this.session.removeAttribute(this.sessionName);
         this.session.removeAttribute("usr");
         this.session.removeAttribute("rights");
 
@@ -205,12 +204,12 @@ public class passport {
                 currentUser.setData(found);
 
                 currentUser.setLastloginTime(new Date());
-                currentUser.setLastloginIP(this.request.getRemoteAddr());
+//                currentUser.setLastloginIP(this.request.getRemoteAddr());
 
                 if (this.request.getParameter("autologin") != null) {
-                    Cookie autologin = new Cookie("autologin", String.valueOf(currentUser.getId()));
+                    Cookie autologin = new CookieImpl("autologin");
+                    autologin.setValue(currentUser.getId());
                     autologin.setMaxAge(24 * 3600 * 30);
-//					this.communicator.addCookie(autologin);
                 }
 
                 currentUser.update();

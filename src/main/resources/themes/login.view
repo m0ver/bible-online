@@ -132,7 +132,7 @@ $(function(){
 				<ul id="login">
 				<li><div class="label"><label for="username">[%login.user.caption%] </label></div><span id="__default_user">{%user_field%}</span></li>
 				<li><div class="label"><label for="password">[%login.password.caption%] </label></div><input class="text" id="password" name="password" value="" type="password" /></li>
-				<li><div class="label"><label for="{%codename%}">[%login.verifycode.caption%] </label></div><input class="text" name="{%codename%}" id="{%codename%}" size="6" maxlength="4" value="" type="text" /><img class="i-image" src="/?q=validator/code&amp;output=function" alt="validator" onclick="javascript:reload();" /></li>
+				<li><div class="label"><label for="{%codename%}">[%login.verifycode.caption%] </label></div><input class="text" name="{%codename%}" id="{%codename%}" size="6" maxlength="4" value="" type="text" /><img class="i-image" src="{%code%}" alt="validator" onclick="javascript:reload();" /></li>
 				<li><input id="autologin" name="autologin" value="true" type="checkbox" /> <label for="autologin">[%login.remember.caption%]</label> 	<input type="submit" class="button-secondary" value="[%login%] »" /></li> 
 				</ul>
 			</form>

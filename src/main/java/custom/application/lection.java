@@ -25,13 +25,11 @@ import org.tinystruct.data.component.Field;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Element;
+import org.tinystruct.http.*;
 import org.tinystruct.system.security.Authentication;
 import org.tinystruct.system.security.Credential;
 import org.tinystruct.system.template.variable.DataVariable;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -47,9 +45,9 @@ public class lection extends AbstractApplication {
     private int max_chapter = 0;
     private int lastchapterid;
     private int nextchapterid;
-    private HttpServletResponse response;
+    private Response response;
     private book book;
-    private HttpServletRequest request;
+    private Request request;
     private User usr;
     private Cache data = Cache.getInstance();
 
@@ -80,6 +78,19 @@ public class lection extends AbstractApplication {
                 e.printStackTrace();
             }
         }
+
+
+
+        this.setVariable("TEMPLATES_DIR", "/themes", false);
+        this.setVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
+        this.setVariable("metas", "");
+
+
+    }
+
+    @Override
+    public void setLocale(Locale locale) {
+        super.setLocale(locale);
 
         this.setText("application.keywords");
         this.setText("application.description");
@@ -131,13 +142,8 @@ public class lection extends AbstractApplication {
         this.setText("subscribe.email.default.tips");
 
         this.setText("user.lastlogin.caption");
-
         this.setText("holy.bible.download");
         this.setText("holy.bible.chinese.download");
-
-        this.setVariable("TEMPLATES_DIR", "/themes", false);
-        this.setVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
-        this.setVariable("metas", "");
 
         String username = "";
         if (this.getVariable("username") != null) {
@@ -186,13 +192,14 @@ public class lection extends AbstractApplication {
         if (bookid == 0) bookid = 1;
         if (chapterid == 0) chapterid = 1;
 
-        this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+
         String host = String.valueOf(this.context.getAttribute("HTTP_HOST"));
         // remove the default language for action
         this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + this.context.getAttribute("REQUEST_ACTION").toString());
         this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 
-        HttpSession session = this.request.getSession();
+        Session session = this.request.getSession(); //@TODO
         if (session.getAttribute("usr") != null) {
             this.usr = (User) session.getAttribute("usr");
 
@@ -211,21 +218,19 @@ public class lection extends AbstractApplication {
 
         book = book == null ? new book() : this.book;
         String lang = this.getLocale().toString();
-        try {
-            if (lang.equalsIgnoreCase("en_GB")) {
-                lang = "en_US";
-            }
 
-            Table table = book.findWith("WHERE book_id=? and language=?",
-                    new Object[]{this.bookid, lang});
-
-            if (table.size() > 0) {
-                Row row = table.get(0);
-                book.setData(row);
-            }
-        } catch (ApplicationException e) {
-            e.printStackTrace();
+        if (lang.equalsIgnoreCase("en_GB")) {
+            lang = "en_US";
         }
+
+        Table table = book.findWith("WHERE book_id=? AND language=?",
+                new Object[]{this.bookid, lang});
+
+        if (table.size() > 0) {
+            Row row = table.get(0);
+            book.setData(row);
+        }
+
 
         this.setVariable(new DataVariable("book", book), true);
 
@@ -518,18 +523,13 @@ public class lection extends AbstractApplication {
         root.addElement(channel);
         // end
 
-        this.response = (HttpServletResponse) this.context
+        this.response = (Response) this.context
                 .getAttribute(HTTP_RESPONSE);
 
-        this.response.setContentType("text/xml;charset="
-                + this.config.get("charset"));
-
-        StringBuffer xbuffer = new StringBuffer();
-        xbuffer.append("<?xml version=\"1.0\" encoding=\""
-                + this.config.get("charset") + "\"?>\r\n");
-        xbuffer.append(root);
-
-        return xbuffer.toString();
+//        this.response.setContentType("text/xml;charset=" + this.config.get("charset"));
+        this.response.headers().add(Header.CONTENT_TYPE.set(this.config.get(Header.StandardValue.CHARSET.name())));
+        return "<?xml version=\"1.0\" encoding=\"" + this.config.get("charset") + "\"?>\r\n" +
+                root;
     }
 
     public Object bible() throws ApplicationException {
@@ -647,16 +647,17 @@ public class lection extends AbstractApplication {
     public Object api() throws ApplicationException {
         boolean valid = false;
 
-        HttpServletRequest request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
-        HttpServletResponse response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
+        Request request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        Response response = (Response) this.context.getAttribute(HTTP_RESPONSE);
 
         String s = "Basic realm=\"Login for Bible API\"";
-        response.setHeader("WWW-Authenticate", s);
+//        response.setHeader("WWW-Authenticate", s);
+        response.headers().add(Header.WWW_AUTHENTICATE.set(s));
 
         // Get the Authorization header, if one was supplied
-        String authHeader = request.getHeader("Authorization");
+        Object authHeader = request.headers().get(Header.AUTHORIZATION);
         if (authHeader != null) {
-            StringTokenizer st = new StringTokenizer(authHeader);
+            StringTokenizer st = new StringTokenizer(authHeader.toString());
             if (st.hasMoreTokens()) {
                 String basic = st.nextToken();
 
@@ -721,9 +722,8 @@ public class lection extends AbstractApplication {
         // prompt you again.
 
         if (!valid) {
-            response.setHeader("WWW-Authenticate",
-                    "Basic realm=\"Login for Bible API\"");
-            response.setStatus(401);
+            response.headers().add(Header.WWW_AUTHENTICATE.set("Basic realm=\"Login for Bible API\""));
+            response.setStatus(ResponseStatus.UNAUTHORIZED);
 
             return "Forbidden! Authentication failed!";
         }

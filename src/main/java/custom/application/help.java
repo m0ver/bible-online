@@ -36,7 +36,12 @@ public class help extends AbstractApplication {
 		this.setAction("help", "privacy");
 		this.setAction("help/condition", "condition");
 		this.setAction("sitemap.xml", "sitemap");
-		
+	}
+
+	@Override
+	public void setLocale(Locale locale) {
+		super.setLocale(locale);
+
 		this.setText("page.condition.title");
 		this.setText("application.title");
 		this.setText("application.language.name");
@@ -58,7 +63,7 @@ public class help extends AbstractApplication {
 		this.setText("footer.api");
 		this.setText("footer.updates-rss");
 	}
-	
+
 	public void privacy() throws ApplicationException{
 		InputStream in = help.class.getClassLoader().getResourceAsStream("themes/privacy.view");
 		this.setTemplate(new DefaultTemplate(this, in));

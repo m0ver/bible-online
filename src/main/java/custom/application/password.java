@@ -24,6 +24,8 @@ import org.tinystruct.mail.SimpleMail;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.util.Locale;
+
 import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
 
 public class password extends AbstractApplication {
@@ -33,16 +35,21 @@ public class password extends AbstractApplication {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
+		this.setAction("user/password", "send");
+	}
+
+	@Override
+	public void setLocale(Locale locale) {
+		super.setLocale(locale);
+
 		this.setText("page.findlostpassword.title");
 		this.setText("login.user.email");
 		this.setText("login.verifycode.caption");
 		this.setText("login.lost-password");
 		this.setText("login.find-password.tips");
 		this.setText("login.get-password");
-		
-		this.setAction("user/password", "send");
 	}
-	
+
 	public Object send() throws ApplicationException
 	{
 		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());

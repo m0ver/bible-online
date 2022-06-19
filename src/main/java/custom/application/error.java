@@ -22,6 +22,10 @@ import org.tinystruct.application.Template;
 import org.tinystruct.application.Variables;
 import org.tinystruct.dom.Element;
 import org.tinystruct.handler.Reforward;
+import org.tinystruct.http.Request;
+import org.tinystruct.http.Response;
+import org.tinystruct.http.ResponseStatus;
+import org.tinystruct.http.Session;
 import org.tinystruct.system.template.variable.DataType;
 import org.tinystruct.system.template.variable.Variable;
 import org.tinystruct.system.util.TextFileLoader;
@@ -307,8 +311,8 @@ public class error extends AbstractApplication {
 	 */
 	public static final int HTTP_VERSION_NOT_SUPPORTED = 505;
 
-	private HttpServletRequest request;
-	private HttpServletResponse response;
+	private Request request;
+	private Response response;
 	private Reforward reforward;
 	private User usr;
 
@@ -317,7 +321,12 @@ public class error extends AbstractApplication {
 		// TODO Auto-generated method stub
 		this.setAction("error", "process");
 		this.setAction("404", "not_found");
-		
+	}
+
+	@Override
+	public void setLocale(Locale locale) {
+		super.setLocale(locale);
+
 		this.setText("page.404.title");
 		this.setText("navigator.404.caption");
 	}
@@ -330,14 +339,14 @@ public class error extends AbstractApplication {
 
 	public String not_found() throws ApplicationException {
 		final error app = this;
-		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
-		this.response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
-		this.response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+		this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
+		this.response.setStatus(ResponseStatus.NOT_FOUND);
 
 		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_ACTION").toString());
 		this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 		
-		HttpSession session = this.request.getSession();
+		Session session = this.request.getSession();
 		if(session.getAttribute("usr")!=null) {
 			this.usr = (User) session.getAttribute("usr");
 			
@@ -436,14 +445,14 @@ public class error extends AbstractApplication {
 	}
 
 	public void process() throws ApplicationException {
-		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
-		this.response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
-		this.response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+		this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
+		this.response.setStatus(ResponseStatus.FORBIDDEN);
 		this.reforward = new Reforward(this.request, this.response);
 
 		this.setVariable("from", this.reforward.getFromURL());
 
-		HttpSession session = this.request.getSession();
+		Session session = this.request.getSession();
 		if (session.getAttribute("error") != null) {
 			ApplicationException exception = (ApplicationException) session.getAttribute("error");
 
@@ -456,7 +465,7 @@ public class error extends AbstractApplication {
 			this.setVariable("exception.details", this.getDetail(exception)
 					.toString());
 
-			this.response.setStatus(Integer.valueOf(exception.getStatus()));
+			this.response.setStatus(ResponseStatus.valueOf(exception.getStatus()));
 		} else {
 			this.reforward.forward();
 		}
@@ -476,7 +485,7 @@ public class error extends AbstractApplication {
 
 		return errors;
 	}
-
+/*
 	public StringBuffer info() {
 		StringBuffer buffer = new StringBuffer();
 
@@ -512,5 +521,5 @@ public class error extends AbstractApplication {
 
 		return buffer;
 	}
-
+*/
 }

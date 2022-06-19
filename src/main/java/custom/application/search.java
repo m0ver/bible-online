@@ -35,6 +35,9 @@ import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Document;
 import org.tinystruct.dom.Element;
 import org.tinystruct.handler.Reforward;
+import org.tinystruct.http.Request;
+import org.tinystruct.http.Response;
+import org.tinystruct.http.Session;
 import org.tinystruct.system.util.StringUtilities;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,12 +56,28 @@ import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
 import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class search extends AbstractApplication {
-	private HttpServletRequest request;
-	private HttpServletResponse response;
+	private Request request;
+	private Response response;
 	private User usr;
 
 	@Override
 	public void init() {
+
+		this.setAction("bible/search", "query");
+		this.setAction("bible/advsearch", "advanced");
+
+		this.setVariable("TEMPLATES_DIR", "/themes", false);
+		this.setVariable("keyword", "");
+		this.setVariable("start", "0");
+		this.setVariable("end", "0");
+		this.setVariable("size", "0");
+		this.setVariable("value", "");
+	}
+
+	@Override
+	public void setLocale(Locale locale) {
+		super.setLocale(locale);
+
 		this.setText("application.title");
 		this.setText("application.language.name");
 
@@ -74,7 +93,7 @@ public class search extends AbstractApplication {
 		this.setText("navigator.reader.caption");
 		this.setText("navigator.controller.caption");
 		this.setText("navigator.help.caption");
-		
+
 		this.setText("holy.book.forward");
 		this.setText("holy.book.previous");
 		this.setText("holy.book.next");
@@ -105,15 +124,10 @@ public class search extends AbstractApplication {
 		this.setText("subscribe.article.plan");
 		this.setText("subscribe.submit.caption");
 		this.setText("subscribe.email.caption");
-
 		this.setText("user.lastlogin.caption");
-
 		this.setText("holy.bible.download");
 		this.setText("holy.bible.chinese.download");
 		this.setText("search.info", 0, 0, "", 0);
-
-		this.setVariable("TEMPLATES_DIR", "/themes", false);
-		this.setVariable("keyword", "");
 
 		String username = "";
 		if (this.getVariable("username") != null) {
@@ -121,15 +135,7 @@ public class search extends AbstractApplication {
 		}
 
 		this.setText("page.welcome.hello", (username == null || username.trim()
-		    .length() == 0) ? "" : username + "，");
-
-		this.setAction("bible/search", "query");
-		this.setAction("bible/advsearch", "advanced");
-
-		this.setVariable("start", "0");
-		this.setVariable("end", "0");
-		this.setVariable("size", "0");
-		this.setVariable("value", "");
+				.length() == 0) ? "" : username + "，");
 	}
 
 	@Override
@@ -139,7 +145,7 @@ public class search extends AbstractApplication {
 	}
 
 	public Object query() throws ApplicationException {
-		this.request = (HttpServletRequest) this.context
+		this.request = (Request) this.context
 		    .getAttribute(HTTP_REQUEST);
 		if (this.request.getParameter("keyword") != null)
 			return this.query(this.request.getParameter("keyword"));
@@ -153,7 +159,7 @@ public class search extends AbstractApplication {
 
 		int page = 1, pageSize = 20;
 
-		this.request = (HttpServletRequest) this.context
+		this.request = (Request) this.context
 		    .getAttribute(HTTP_REQUEST);
 		if (this.request.getParameter("page") == null
 		    || this.request.getParameter("page").toString().trim().length() <= 0) {
@@ -236,7 +242,7 @@ public class search extends AbstractApplication {
 				Table list = book.findWith("WHERE language=? and book_name=?",
 				    new Object[] { this.getLocale().toString(), query });
 				if (list.size() > 0) {
-					this.response = (HttpServletResponse) this.context
+					this.response = (Response) this.context
 					    .getAttribute(HTTP_RESPONSE);
 
 					Reforward reforward = new Reforward(request, response);
@@ -351,7 +357,7 @@ public class search extends AbstractApplication {
 
 		this.setText("search.info", start, end, query, pager.getSize());
 
-		HttpSession session = request.getSession();
+		Session session = request.getSession();
 		if (session.getAttribute("usr") != null) {
 			this.usr = (User) session.getAttribute("usr");
 
@@ -468,7 +474,7 @@ public class search extends AbstractApplication {
 		query = StringUtilities.htmlSpecialChars(query);
 
 		int page = 1, pageSize = 10, total = 0;
-		this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
+		this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
 		if (this.request.getParameter("page") == null
 		    || this.request.getParameter("page").toString().trim().length() == 0) {
@@ -565,7 +571,7 @@ public class search extends AbstractApplication {
 
 		this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST"))+this.context.getAttribute("REQUEST_ACTION").toString());
 
-		HttpSession session = request.getSession();
+		Session session = request.getSession();
 		if (session.getAttribute("usr") != null) {
 			this.usr = (User) session.getAttribute("usr");
 

@@ -24,6 +24,7 @@ import org.tinystruct.mail.SimpleMail;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
@@ -36,10 +37,14 @@ public class suggest extends AbstractApplication
 
 	@Override
 	public void init() {
-
 		this.setAction("suggestion", "send");
 		this.setAction("suggestion/post", "post");
-		
+	}
+
+	@Override
+	public void setLocale(Locale locale) {
+		super.setLocale(locale);
+
 		this.setText("application.title");
 		this.setText("application.language.name");
 
@@ -58,10 +63,10 @@ public class suggest extends AbstractApplication
 		this.setText("footer.privacy");
 		this.setText("footer.register");
 		this.setText("footer.api");
-		this.setText("footer.updates-rss");	
-		
+		this.setText("footer.updates-rss");
+
 		this.setText("page.suggestion.title");
-		
+
 		this.setText("suggestion.email.address");
 		this.setText("suggestion.content.text");
 		this.setText("suggestion.button.ok");
@@ -71,8 +76,8 @@ public class suggest extends AbstractApplication
 		this.setText("suggestion.send.success");
 		this.setText("suggestion.send.failure");
 	}
-	
-    public Object send() 
+
+	public Object send()
     {
     	StringBuffer html=new StringBuffer();
 

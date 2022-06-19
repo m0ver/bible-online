@@ -38,14 +38,19 @@ public class document extends AbstractApplication {
 
 	@Override
 	public void init() {
+		this.setAction("feed", "feed");
+	}
+
+	@Override
+	public void setLocale(Locale locale) {
+		super.setLocale(locale);
+
 		// TODO Auto-generated method stub
 		this.setText("search.confirm.caption");
 		this.setText("search.submit.caption");
 
 		this.setText("invite.confirm.caption");
 		this.setText("invite.submit.caption");
-
-		this.setAction("feed", "feed");
 	}
 
 	public String feed() throws ApplicationException {

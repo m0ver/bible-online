@@ -23,6 +23,9 @@ import org.tinystruct.data.component.Pager;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.handler.Reforward;
+import org.tinystruct.http.Request;
+import org.tinystruct.http.Response;
+import org.tinystruct.http.Session;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,21 +33,27 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
+import java.util.Locale;
 
 import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
 import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class dashboard extends AbstractApplication {
 
-    private HttpServletRequest request;
+    private Request request;
     private User user;
-    private HttpServletResponse response;
+    private Response response;
 
     @Override
     public void init() {
         // TODO Auto-generated method stub
         this.setAction("dashboard", "index");
         this.setAction("dashboard/profile", "condition");
+    }
+
+    @Override
+    public void setLocale(Locale locale) {
+        super.setLocale(locale);
 
         this.setText("page.dashboard.title");
         this.setText("application.title");
@@ -71,11 +80,11 @@ public class dashboard extends AbstractApplication {
     }
 
     public Object index() throws ApplicationException {
-        this.request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
         this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_ACTION").toString());
 
-        HttpSession session = request.getSession();
+        Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
             this.user = (User) session.getAttribute("usr");
             this.setVariable("user.status", "");
@@ -151,11 +160,11 @@ public class dashboard extends AbstractApplication {
             this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
             this.setVariable("user.profile", "");
 
-            this.response = (HttpServletResponse) this.context.getAttribute(HTTP_RESPONSE);
+            this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
 
             Reforward reforward = new Reforward(request, response);
             reforward.setDefault(this.getLink(this.config.get("default.login.page")) + "&from=" + this.getLink("dashboard"));
-            reforward.forward();
+            return reforward.forward();
         }
 
         this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_ACTION").toString());

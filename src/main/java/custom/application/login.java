@@ -22,10 +22,8 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import custom.objects.User;
-import custom.util.Security;
 import custom.util.ValidateCode;
 import custom.util.model.oAuth2Provider;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.Header;
 import org.apache.http.HeaderIterator;
 import org.apache.http.HttpResponse;
@@ -37,18 +35,14 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpProtocolParams;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
-import org.tinystruct.data.DatabaseOperator;
 import org.tinystruct.data.component.Builder;
 import org.tinystruct.data.component.Struct;
 import org.tinystruct.handler.Reforward;
+import org.tinystruct.http.*;
 import org.tinystruct.system.template.variable.ObjectVariable;
 import org.tinystruct.system.util.StringUtilities;
 import org.tinystruct.system.util.TextFileLoader;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -57,6 +51,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
 import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
@@ -92,22 +87,21 @@ public class login extends AbstractApplication {
 //		System.out.println(builder.get("client_id"));
 
 
-
     }
 
     public Object validate() {
-        HttpServletRequest request = (HttpServletRequest) this.context
+        Request request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
-        HttpServletResponse response = (HttpServletResponse) this.context
+        Response response = (Response) this.context
                 .getAttribute(HTTP_RESPONSE);
 
-        Cookie cookie = StringUtilities.getCookieByName(request.getCookies(),
+        Cookie cookie = StringUtilities.getCookieByName(request.cookies(),
                 "username");
         if (cookie != null) {
-            this.setVariable("username", cookie.getValue());
-            String user_field = cookie.getValue()
+            this.setVariable("username", cookie.value());
+            String user_field = cookie.value()
                     + "<input class=\"text\" id=\"username\" name=\"username\" type=\"hidden\" value=\""
-                    + cookie.getValue()
+                    + cookie.value()
                     + "\"/>  <a href=\"javascript:void(0)\" onclick=\"restoreField()\">[%login.user.change%]</a>";
 
             this.setVariable("user_field", user_field);
@@ -123,10 +117,10 @@ public class login extends AbstractApplication {
         try {
             Reforward reforward = new Reforward(request, response);
 
-            if (request.getMethod().equalsIgnoreCase("post")) {
+            if (request.method() == Method.POST) {
                 this.passport = new passport(request, response, "waslogined");
                 if (this.passport.login()) {
-                    reforward.forward();
+                    return reforward.forward();
                 }
             }
 
@@ -138,7 +132,7 @@ public class login extends AbstractApplication {
 
         this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_ACTION").toString());
 
-        HttpSession session = request.getSession();
+        Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
             this.usr = (User) session.getAttribute("usr");
 
@@ -154,28 +148,30 @@ public class login extends AbstractApplication {
             this.setVariable("user.profile", "");
         }
 
+        this.setVariable("code", this.toImage());
+
         return this;
     }
 
     public void logout() {
-        HttpServletRequest request = (HttpServletRequest) this.context
+        Request request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
-        HttpServletResponse response = (HttpServletResponse) this.context
+        Response response = (Response) this.context
                 .getAttribute(HTTP_RESPONSE);
 
         try {
             this.passport = new passport(request, response, "waslogined");
             this.passport.logout();
 
-            if (request.getCookies() != null) {
-                Cookie[] cookies = request.getCookies();
+            if (request.cookies() != null) {
+                Cookie[] cookies = request.cookies();
                 int i = 0;
                 Cookie cookie;
                 while (cookies.length > i) {
                     cookie = cookies[i];
                     cookie.setMaxAge(0);
                     cookie.setValue("");
-                    response.addCookie(cookie);
+                    response.addHeader(org.tinystruct.http.Header.SET_COOKIE.toString(), cookie.toString());
                     i++;
                 }
             }
@@ -195,7 +191,7 @@ public class login extends AbstractApplication {
         // TODO Auto-generated method stub
         this.setAction("user/login", "validate");
         this.setAction("user/logout", "logout");
-        this.setAction("validator/code", "toImage");
+//        this.setAction("validator/code", "toImage");
         this.setAction("user/account", "execute");
         this.setAction("oauth2callback", "oAuth2callback");
         this.setAction("oauth2_github_callback", "oAuth2_github_callback");
@@ -203,6 +199,12 @@ public class login extends AbstractApplication {
         this.setVariable("error", "");
         this.setVariable("service", "");
         this.setVariable("application.summary", "");
+
+    }
+
+    @Override
+    public void setLocale(Locale locale) {
+        super.setLocale(locale);
 
         this.setText("login");
         this.setText("login.user.caption");
@@ -248,23 +250,12 @@ public class login extends AbstractApplication {
                 .length() == 0) ? "" : username + "，");
     }
 
-    public void toImage() {
-
-        HttpServletRequest request = (HttpServletRequest) this.context
+    public String toImage() {
+        Request request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
-        HttpServletResponse response = (HttpServletResponse) this.context
-                .getAttribute(HTTP_RESPONSE);
 
-        response.setHeader("Pragma", "No-cache");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setDateHeader("Expires", 0);
-
-        try {
-            ValidateCode code = new ValidateCode(request);
-            code.toImage(response);
-        } catch (java.io.IOException io) {
-            io.printStackTrace();
-        }
+        ValidateCode code = new ValidateCode(request);
+        return code.getEstablishedCode();
     }
 
     protected String createRequestString(oAuth2Provider provider)
@@ -301,9 +292,9 @@ public class login extends AbstractApplication {
     }
 
     public String oAuth2callback() throws ApplicationException {
-        HttpServletRequest request = (HttpServletRequest) this.context
+        Request request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
-        HttpServletResponse response = (HttpServletResponse) this.context
+        Response response = (Response) this.context
                 .getAttribute(HTTP_RESPONSE);
         Reforward reforward = new Reforward(request, response);
         TokenResponse oauth2_response;
@@ -384,7 +375,7 @@ public class login extends AbstractApplication {
                 usr.setPassword("");
                 usr.setUsername(usr.getEmail());
 
-                usr.setLastloginIP(request.getRemoteAddr());
+//                usr.setLastloginIP(request.getRemoteAddr());
                 usr.setLastloginTime(new Date());
                 usr.setRegistrationTime(new Date());
                 usr.append();
@@ -409,9 +400,9 @@ public class login extends AbstractApplication {
     }
 
     public String oAuth2_github_callback() throws ApplicationException {
-        HttpServletRequest request = (HttpServletRequest) this.context
+        Request request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
-        HttpServletResponse response = (HttpServletResponse) this.context
+        Response response = (Response) this.context
                 .getAttribute(HTTP_RESPONSE);
         Reforward reforward = new Reforward(request, response);
 
@@ -480,7 +471,7 @@ public class login extends AbstractApplication {
                 usr.setPassword("");
                 usr.setUsername(usr.getEmail());
 
-                usr.setLastloginIP(request.getRemoteAddr());
+//                usr.setLastloginIP(request.getRemoteAddr());
                 usr.setLastloginTime(new Date());
                 usr.setRegistrationTime(new Date());
                 usr.append();
@@ -540,16 +531,16 @@ public class login extends AbstractApplication {
     }
 
     public void execute(String provider) throws ApplicationException {
-        HttpServletRequest http_request = (HttpServletRequest) this.context
+        Request http_request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
-        HttpServletResponse http_response = (HttpServletResponse) this.context
+        Response http_response = (Response) this.context
                 .getAttribute(HTTP_RESPONSE);
 
         Reforward reforward = new Reforward(http_request, http_response);
         this.setVariable("from", reforward.getFromURL());
         System.out.println("From:" + reforward.getFromURL());
         try {
-            HttpSession session = http_request.getSession();
+            Session session = http_request.getSession();
             if (session.getAttribute("usr") == null)
                 reforward.setDefault(createRequestString(oAuth2Provider
                         .valueOf(provider.toUpperCase())));
