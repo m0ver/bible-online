@@ -54,7 +54,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 		this.config.set("default.base_url", "http://www.ingod.today/?q=");
 		this.scheduler.schedule(new SchedulerTask() {
 
-			private Object o = new Object();
+			private final Object o = new Object();
 			private boolean next = false;
 
 			@Override

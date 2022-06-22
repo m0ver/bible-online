@@ -27,9 +27,6 @@ import org.tinystruct.http.Request;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.Session;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;

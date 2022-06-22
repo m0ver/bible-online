@@ -24,8 +24,10 @@ import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Element;
+import org.tinystruct.http.Header;
+import org.tinystruct.http.Response;
+import org.tinystruct.http.ResponseHeaders;
 
-import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -34,7 +36,7 @@ import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
 
 public class document extends AbstractApplication {
 
-	private HttpServletResponse response;
+	private Response response;
 
 	@Override
 	public void init() {
@@ -297,18 +299,15 @@ public class document extends AbstractApplication {
 		root.addElement(channel);
 		// end
 
-		this.response = (HttpServletResponse) this.context
+		this.response = (Response) this.context
 				.getAttribute(HTTP_RESPONSE);
+		ResponseHeaders headers = new ResponseHeaders(this.response);
+		headers.add(Header.CONTENT_TYPE.set("text/xml;charset="
+				+ this.config.get("charset")));
 
-		this.response.setContentType("text/xml;charset="
-				+ this.config.get("charset"));
-
-		StringBuffer xbuffer = new StringBuffer();
-		xbuffer.append("<?xml version=\"1.0\" encoding=\""
-				+ this.config.get("charset") + "\"?>\r\n");
-		xbuffer.append(root);
-
-		return xbuffer.toString();
+		return "<?xml version=\"1.0\" encoding=\""
+				+ this.config.get("charset") + "\"?>\r\n" +
+				root;
 	}
 
 	@Override
