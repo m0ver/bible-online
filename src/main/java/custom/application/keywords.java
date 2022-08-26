@@ -27,7 +27,7 @@ import org.tinystruct.system.util.StringUtilities;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 
-import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.http.Constants.HTTP_REQUEST;
 
 public class keywords extends AbstractApplication {
 

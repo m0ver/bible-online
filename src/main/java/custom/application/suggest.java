@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Logger;
 
-import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.http.Constants.HTTP_REQUEST;
 
 public class suggest extends AbstractApplication {
     private final Logger logger = Logger.getLogger("suggest.class");

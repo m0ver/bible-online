@@ -29,7 +29,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
+import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class help extends AbstractApplication {
 

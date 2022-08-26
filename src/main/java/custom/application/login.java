@@ -53,8 +53,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
-import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
+import static org.tinystruct.http.Constants.HTTP_REQUEST;
+import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class login extends AbstractApplication {
     /**

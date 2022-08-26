@@ -32,8 +32,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Locale;
 
-import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
-import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
+import static org.tinystruct.http.Constants.HTTP_REQUEST;
+import static org.tinystruct.http.Constants.HTTP_RESPONSE;
+
 
 public class dashboard extends AbstractApplication {
 

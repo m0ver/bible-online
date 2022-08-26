@@ -32,7 +32,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
+import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class document extends AbstractApplication {
 

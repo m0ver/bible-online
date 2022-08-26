@@ -14,7 +14,7 @@ import org.tinystruct.http.Session;
 import java.util.Iterator;
 import java.util.Locale;
 
-import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.http.Constants.HTTP_REQUEST;
 
 public class index extends AbstractApplication {
     private User usr;

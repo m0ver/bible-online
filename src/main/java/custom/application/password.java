@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 
 import java.util.Locale;
 
-import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.http.Constants.HTTP_REQUEST;
 
 public class password extends AbstractApplication {
 

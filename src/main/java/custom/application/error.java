@@ -36,8 +36,8 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
-import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
+import static org.tinystruct.http.Constants.HTTP_REQUEST;
+import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class error extends AbstractApplication {
 

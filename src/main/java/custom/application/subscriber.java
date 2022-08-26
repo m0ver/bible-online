@@ -6,81 +6,79 @@ import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.http.Request;
 
-import javax.servlet.http.HttpServletRequest;
-
-import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
+import static org.tinystruct.http.Constants.HTTP_REQUEST;
 
 public class subscriber extends AbstractApplication {
 
-	private Request request;
+    private Request request;
 
-	@Override
-	public void init() {
-		this.setAction("services/subscribe", "subscribe");
-		this.setAction("services/unsubscribe", "unsubscribe");
-	}
-	
-	public String subscribe() throws ApplicationException {
-		this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+    @Override
+    public void init() {
+        this.setAction("services/subscribe", "subscribe");
+        this.setAction("services/unsubscribe", "unsubscribe");
+    }
 
-		String mailto = "moverinfo@gmail.com";
-		if (this.request.getParameter("toemail") != null
-				&& this.request.getParameter("toemail").trim().length() > 0) {
-			mailto = this.request.getParameter("toemail");
-		} else
-			return "false";
+    public String subscribe() throws ApplicationException {
+        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
-		String list = null;
-		if (this.request.getParameter("bible") != null) {
-			list = "bible";
-		}
+        String mailto = "moverinfo@gmail.com";
+        if (this.request.getParameter("toemail") != null
+                && this.request.getParameter("toemail").trim().length() > 0) {
+            mailto = this.request.getParameter("toemail");
+        } else
+            return "false";
 
-		if (this.request.getParameter("article") != null) {
-			if (list == null)
-				list = "article";
-			else
-				list += ",article";
-		}
+        String list = null;
+        if (this.request.getParameter("bible") != null) {
+            list = "bible";
+        }
 
-		if (list == null)
-			return "empty";
+        if (this.request.getParameter("article") != null) {
+            if (list == null)
+                list = "article";
+            else
+                list += ",article";
+        }
 
-		String[] addresses = mailto.split(";");
+        if (list == null)
+            return "empty";
 
-		for (int i = 0; i < addresses.length; i++) {
-			if (addresses[i].indexOf('@') < 1
-					|| addresses[i].indexOf('@') >= addresses[i]
-							.lastIndexOf('.') + 1) {
-				return "invalid";
-			} else {
-				subscription subscription = new subscription();
-				subscription.setAvailable(true);
+        String[] addresses = mailto.split(";");
 
-				Row row = subscription.findOneByKey("email", addresses[i]);
-				if (row.size() == 0) {
-					subscription.setEmail(addresses[i]);
-					subscription.setList(list);
-					subscription.append();
-				}
-			}
-		}
+        for (int i = 0; i < addresses.length; i++) {
+            if (addresses[i].indexOf('@') < 1
+                    || addresses[i].indexOf('@') >= addresses[i]
+                    .lastIndexOf('.') + 1) {
+                return "invalid";
+            } else {
+                subscription subscription = new subscription();
+                subscription.setAvailable(true);
 
-		return "true";
-	}
+                Row row = subscription.findOneByKey("email", addresses[i]);
+                if (row.size() == 0) {
+                    subscription.setEmail(addresses[i]);
+                    subscription.setList(list);
+                    subscription.append();
+                }
+            }
+        }
 
-	public boolean unsubscribe(String id) throws ApplicationException {
-		subscription subscription = new subscription();
-		subscription.setId(id);
-		subscription.findOneById();
-		subscription.setAvailable(false);
-		
-		return subscription.update();
-	}
-	
-	@Override
-	public String version() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        return "true";
+    }
+
+    public boolean unsubscribe(String id) throws ApplicationException {
+        subscription subscription = new subscription();
+        subscription.setId(id);
+        subscription.findOneById();
+        subscription.setAvailable(false);
+
+        return subscription.update();
+    }
+
+    @Override
+    public String version() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

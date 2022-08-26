@@ -33,9 +33,8 @@ import org.tinystruct.system.template.variable.DataVariable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static org.tinystruct.handler.DefaultHandler.HTTP_REQUEST;
-import static org.tinystruct.handler.DefaultHandler.HTTP_RESPONSE;
-
+import static org.tinystruct.http.Constants.HTTP_REQUEST;
+import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class lection extends AbstractApplication {
     private int bookid;
