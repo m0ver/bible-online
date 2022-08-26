@@ -152,7 +152,7 @@ $(function(){
 			<a href="http://www.ingod.today/bible.pdf" target="_blank"> <span><strong>圣经</strong> <em>简体中文和合本</em> </span></a>
 			</div>
 			<div>
-			<a href="http://www.mozilla.org/products/download.html?product=firefox&amp;lang={%language%}" target="_blank"> <span><strong>下载安装 Firefox</strong> </span></a>
+			<a href="http://www.mozilla.org/products/download.html?product=firefox&amp;lang={%LANGUAGE%}" target="_blank"> <span><strong>下载安装 Firefox</strong> </span></a>
 			</div>
 		</div>
 	
