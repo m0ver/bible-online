@@ -259,7 +259,7 @@ $(function(){
 			"new_books_id":"new_book",
 			"new_chapters_id":"new_book_chapter"
 		});
-		bible.setLanguage("{%language%}");
+		bible.setLanguage("{%LANGUAGE%}");
 		bible.load({%book.bookId%},{%chapterid%},{%partid%});
 		//bible.show();
 	</script>
