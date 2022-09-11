@@ -58,27 +58,24 @@ public class lection extends AbstractApplication {
 
         this.book = new book();
         this.data = Cache.getInstance();
-        if (this.data.keySet().isEmpty()) {
-            try {
-                Table list = book.findAll();
 
-                Iterator<Row> item = list.iterator();
-                String bookName;
-                while (item.hasNext()) {
-                    book.setData(item.next());
+        try {
+            Table list = book.findAll();
 
-                    bookName = book.getBookName().trim();
-                    this.setAction(bookName, "viewByName");
-                    this.data.set(bookName, book.getBookId());
-                }
+            Iterator<Row> item = list.iterator();
+            String bookName;
+            while (item.hasNext()) {
+                book.setData(item.next());
 
-            } catch (ApplicationException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                bookName = book.getBookName().trim();
+                this.setAction(bookName, "viewByName");
+                this.data.set(bookName, book.getBookId());
             }
+
+        } catch (ApplicationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-
-
 
         this.setVariable("TEMPLATES_DIR", "/themes", false);
         this.setVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
