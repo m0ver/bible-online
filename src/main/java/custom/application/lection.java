@@ -301,17 +301,12 @@ public class lection extends AbstractApplication {
 
                 if (line != null) {
                     if (i == 0 && line.trim().length() > 0)
-                        line = "<span class='firstletter'>" + line.substring(0, 1)
-                                + "</span>" + line.substring(1, line.length());
+                        line = "<span class='firstletter'>" + line.charAt(0)
+                                + "</span>" + line.substring(1);
 
                     line = line.replaceAll("\n\n", "<br />");
-                    left_column
-                            .append("<li"
-                                    + (this.partid == bible.getPartId() ? " class=\"selected\""
-                                    : "")
-                                    + "><a class=\"sup\" onmousedown=\"rightMenu.show(event,'"
-                                    + bible.getId() + "')\">" + bible.getPartId()
-                                    + "</a>" + line + "</li>");
+                    left_column.append("<li").append(this.partid == bible.getPartId() ? " class=\"selected\""
+                            : "").append("><a class=\"sup\" onmousedown=\"rightMenu.show(event,'").append(bible.getId()).append("')\">").append(bible.getPartId()).append("</a>").append(line).append("</li>");
                 }
 
             }
@@ -541,38 +536,26 @@ public class lection extends AbstractApplication {
     }
 
     public Object bible(int bookid, int chapterid, int partid) throws ApplicationException {
-        StringBuffer xml = new StringBuffer();
+        StringBuilder xml = new StringBuilder();
         String finded = "";
 
         Table vtable = this.load(bookid, chapterid, partid);
 
-        xml.append("<?xml version=\"1.0\" encoding=\"" + this.context.getAttribute("charset")
-                + "\"?>");
-        xml.append("<book id=\"book\" name=\"book\" bookid=\"" + this.bookid
-                + "\" bookname=\"" + this.book.getBookName() + "\" chapterid=\""
-                + this.chapterid + "\" maxchapter=\"" + this.max_chapter
-                + "\" lastchapter=\"" + this.lastchapterid
-                + "\" nextchapter=\"" + this.nextchapterid + "\">\r\n");
+        xml.append("<?xml version=\"1.0\" encoding=\"").append(this.context.getAttribute("charset")).append("\"?>");
+        xml.append("<book id=\"book\" name=\"book\" bookid=\"").append(this.bookid).append("\" bookname=\"").append(this.book.getBookName()).append("\" chapterid=\"").append(this.chapterid).append("\" maxchapter=\"").append(this.max_chapter).append("\" lastchapter=\"").append(this.lastchapterid).append("\" nextchapter=\"").append(this.nextchapterid).append("\">\r\n");
         Field fields;
         for (Enumeration<Row> table = vtable.elements(); table
                 .hasMoreElements(); ) {
             Row row = table.nextElement();
-            Iterator<Field> iterator = row.iterator();
 
-            while (iterator.hasNext()) {
-                fields = iterator.next();
+            for (Field field : row) {
+                fields = field;
                 finded = fields.get("content").value().toString();
                 if (this.partid == Integer.parseInt(fields.get("part_id")
                         .value().toString())) {
-                    xml.append("<item uid=\""
-                            + fields.get("id").value().toString() + "\" id=\""
-                            + fields.get("part_id").value().toString()
-                            + "\" selected=\"true\">" + finded + "</item>");
+                    xml.append("<item uid=\"").append(fields.get("id").value().toString()).append("\" id=\"").append(fields.get("part_id").value().toString()).append("\" selected=\"true\">").append(finded).append("</item>");
                 } else {
-                    xml.append("<item uid=\""
-                            + fields.get("id").value().toString() + "\" id=\""
-                            + fields.get("part_id").value().toString()
-                            + "\" selected=\"false\">" + finded + "</item>");
+                    xml.append("<item uid=\"").append(fields.get("id").value().toString()).append("\" id=\"").append(fields.get("part_id").value().toString()).append("\" selected=\"false\">").append(finded).append("</item>");
                 }
             }
         }

@@ -378,14 +378,14 @@ public class search extends AbstractApplication {
         String[] keywords;
         boolean noResult = true;
 
-        int page = 1, pageSize = 20, startIndex = (page - 1) * pageSize;
+        int page = 1, pageSize = 20;
         if (this.request.getParameter("page") == null
                 || this.request.getParameter("page").toString().trim().length() <= 0) {
-            page = 1;
         } else {
             page = Integer.parseInt(this.request.getParameter("page").toString());
         }
 
+        int startIndex = (page - 1) * pageSize;
         if (query.trim().length() > 0) {
             keywords = query.split(" ");
         } else {
@@ -513,16 +513,15 @@ public class search extends AbstractApplication {
 
         next = pager.getStartIndex();// 此位置即为当前页的第一条记录的ID
         // opensearch:totalResults
-        StringBuffer html = new StringBuffer();
+        StringBuilder html = new StringBuilder();
         html.append("<ol class=\"searchresults\" start=\"" + next + "\">\r\n");
 
         Element element, title, link;
         List<Element> t;
         String summary;
 
-        Iterator<Element> item = vtable.iterator();
-        while (item.hasNext()) {
-            element = item.next();
+        for (Element value : vtable) {
+            element = value;
             n++;
             link = element.getElementsByTagName("id").get(0);
             title = element.getElementsByTagName("title").get(0);
@@ -535,9 +534,7 @@ public class search extends AbstractApplication {
             } else
                 summary = element.getElementsByTagName("summary").get(0).getData();
 
-            html.append("<li" + (n % 2 == 0 ? " class=\"even\"" : " class=\"odd\"")
-                    + "><a href=\"" + link.getData() + "\" target=\"_blank\">"
-                    + title.getData() + " </a><p>" + summary + "</p></li> \r\n");
+            html.append("<li").append(n % 2 == 0 ? " class=\"even\"" : " class=\"odd\"").append("><a href=\"").append(link.getData()).append("\" target=\"_blank\">").append(title.getData()).append(" </a><p>").append(summary).append("</p></li> \r\n");
             next++;
         }
 
@@ -551,10 +548,8 @@ public class search extends AbstractApplication {
         pager.setEndPageText(this.getProperty("page.end.text"));
         pager.setControlBarText(this.getProperty("page.controlbar.text"));
 
-        html.append("<div class=\"pagination\" style=\"cursor:default\">"
-                + pager.getPageControlBar(actionURL) + "</div>\r\n");
-        html.append("<!-- "
-                + String.valueOf(System.currentTimeMillis() - startTime) + " -->");
+        html.append("<div class=\"pagination\" style=\"cursor:default\">").append(pager.getPageControlBar(actionURL)).append("</div>\r\n");
+        html.append("<!-- ").append(System.currentTimeMillis() - startTime).append(" -->");
 
         int start = page - 1 == 0 ? 1 : (page - 1) * pageSize + 1, end = page
                 * pageSize;
@@ -566,7 +561,7 @@ public class search extends AbstractApplication {
 
         this.setText("search.info", start, end, query, pager.getSize());
 
-        this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_ACTION").toString());
+        this.setVariable("action", this.context.getAttribute("HTTP_HOST") + this.context.getAttribute("REQUEST_ACTION").toString());
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
@@ -588,16 +583,13 @@ public class search extends AbstractApplication {
     protected String createRequestString(String query, int start)
             throws UnsupportedEncodingException {
         String encoded_query = URLEncoder.encode(query, "utf8");
-        StringBuffer buffer = new StringBuffer();
 
-        buffer.append("https://www.googleapis.com/customsearch/v1?");
-        buffer.append("key=").append(API_KEY);
-        buffer.append("&cx=").append(CUSTOM_SEARCH_ENGINE_ID);
-        buffer.append("&q=").append(encoded_query);
-        buffer.append("&alt=atom");
-        buffer.append("&start=").append(start);
-
-        return buffer.toString();
+        return "https://www.googleapis.com/customsearch/v1?" +
+                "key=" + API_KEY +
+                "&cx=" + CUSTOM_SEARCH_ENGINE_ID +
+                "&q=" + encoded_query +
+                "&alt=atom" +
+                "&start=" + start;
     }
 
     private Document execute(String query, int start) throws ApplicationException {
