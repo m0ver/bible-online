@@ -80,8 +80,6 @@ public class lection extends AbstractApplication {
         this.setVariable("TEMPLATES_DIR", "/themes", false);
         this.setVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
         this.setVariable("metas", "");
-
-
     }
 
     @Override

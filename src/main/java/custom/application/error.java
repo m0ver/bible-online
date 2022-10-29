@@ -358,7 +358,7 @@ public class error extends AbstractApplication {
 
         this.setTemplate(new Template() {
 
-            ConcurrentHashMap<String, Variable<?>> variables = Variables
+            Map<String, Variable<?>> variables = Variables
                     .getInstance();
             private String template_path;
 
