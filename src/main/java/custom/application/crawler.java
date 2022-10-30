@@ -72,7 +72,7 @@ public class crawler extends AbstractApplication {
                     mat = pat.matcher(words);
 
                     while (mat.find()) {
-                        if (list.size() > 0 && list.firstElement().getFieldInfo("part_id").intValue() >= partId) {
+                        if (list.size() > 0 && list.get(0).getFieldInfo("part_id").intValue() >= partId) {
                             continue;
                         }
                         jpv.setPartId(partId++);
@@ -133,7 +133,7 @@ public class crawler extends AbstractApplication {
                         j++;
                     }
 
-                    if (null != list && !list.isEmpty() && list.firstElement().getFieldInfo("part_id").intValue() >= partId) {
+                    if (null != list && !list.isEmpty() && list.get(0).getFieldInfo("part_id").intValue() >= partId) {
                         continue;
                     }
 

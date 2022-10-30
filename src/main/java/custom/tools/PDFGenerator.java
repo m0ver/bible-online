@@ -173,20 +173,15 @@ public class PDFGenerator {
 	            Paragraph partNode=new Paragraph();
 	            partNode.setFirstLineIndent(10.0f);
 	            Field fields;
-	    		for(Enumeration<Row> ptable=vtable.elements();ptable.hasMoreElements();)
-	            {
-	    			Row row=ptable.nextElement();
-	    			Iterator<Field> piterator=row.iterator();
-	    			
-	    			while(piterator.hasNext())
-	    			{
-	    				fields=piterator.next();
-	    				String finded=fields.get("content").value().toString();
-	    				
-	    				partNode.add(new Chunk(fields.get("part_id").value().toString(),new Font(FontFamily.COURIER,9,4,BaseColor.RED)));
-	    				partNode.add(new Chunk(finded,NormalStyle));
-	    			}
-	            }
+				for (Row row : vtable) {
+					for (Field field : row) {
+						fields = field;
+						String finded = fields.get("content").value().toString();
+
+						partNode.add(new Chunk(fields.get("part_id").value().toString(), new Font(FontFamily.COURIER, 9, 4, BaseColor.RED)));
+						partNode.add(new Chunk(finded, NormalStyle));
+					}
+				}
 	    		
 	    		section.add(partNode);
 	    		section.add(Chunk.NEWLINE);

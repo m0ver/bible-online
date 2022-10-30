@@ -127,7 +127,7 @@ public class passport {
             Log log = new Log();
             Table logs = log.findWith("WHERE user_id=?", new Object[]{this.currentUser.getId()});
             if (logs.size() > 0) {
-                log.setData(logs.firstElement());
+                log.setData(logs.get(0));
                 log.setDate(new Date());
                 log.update();
             } else {

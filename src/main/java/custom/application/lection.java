@@ -225,7 +225,6 @@ public class lection extends AbstractApplication {
             book.setData(row);
         }
 
-
         this.setVariable(new DataVariable("book", book), true);
 
         bible bible = new bible();
@@ -465,8 +464,8 @@ public class lection extends AbstractApplication {
         int count = vtable.size();
         if (count > 0) {
             Field fields;
-            for (Enumeration<Row> table = vtable.elements(); table.hasMoreElements(); ) {
-                Row row = table.nextElement();
+            for (Iterator<Row> table = vtable.iterator(); table.hasNext(); ) {
+                Row row = table.next();
                 Iterator<Field> iterator = row.iterator();
 
                 while (iterator.hasNext()) {
@@ -542,10 +541,7 @@ public class lection extends AbstractApplication {
         xml.append("<?xml version=\"1.0\" encoding=\"").append(this.context.getAttribute("charset")).append("\"?>");
         xml.append("<book id=\"book\" name=\"book\" bookid=\"").append(this.bookid).append("\" bookname=\"").append(this.book.getBookName()).append("\" chapterid=\"").append(this.chapterid).append("\" maxchapter=\"").append(this.max_chapter).append("\" lastchapter=\"").append(this.lastchapterid).append("\" nextchapter=\"").append(this.nextchapterid).append("\">\r\n");
         Field fields;
-        for (Enumeration<Row> table = vtable.elements(); table
-                .hasMoreElements(); ) {
-            Row row = table.nextElement();
-
+        for (Row row : vtable) {
             for (Field field : row) {
                 fields = field;
                 finded = fields.get("content").value().toString();

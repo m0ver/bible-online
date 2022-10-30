@@ -44,7 +44,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -273,10 +272,10 @@ public class search extends AbstractApplication {
 
         String finded, word;
         Row row;
-        Enumeration<Row> table = vtable.elements();
+        Iterator<Row> table = vtable.iterator();
         int n = 0;
-        while (table.hasMoreElements()) {
-            row = table.nextElement();
+        while (table.hasNext()) {
+            row = table.next();
             Iterator<Field> iterator = row.iterator();
 
             n++;
@@ -380,9 +379,9 @@ public class search extends AbstractApplication {
 
         int page = 1, pageSize = 20;
         if (this.request.getParameter("page") == null
-                || this.request.getParameter("page").toString().trim().length() <= 0) {
+                || this.request.getParameter("page").trim().length() <= 0) {
         } else {
-            page = Integer.parseInt(this.request.getParameter("page").toString());
+            page = Integer.parseInt(this.request.getParameter("page"));
         }
 
         int startIndex = (page - 1) * pageSize;
@@ -393,11 +392,11 @@ public class search extends AbstractApplication {
         }
 
         String condition = "";
-        for (int i = 0; i < keywords.length; i++) {
+        for (String s : keywords) {
             if (condition.trim().length() == 0) {
-                condition = " content like '%" + keywords[i] + "%' ";
+                condition = " content like '%" + s + "%' ";
             } else {
-                condition += " or content like '%" + keywords[i] + "%' ";
+                condition += " or content like '%" + s + "%' ";
             }
         }
 
@@ -423,12 +422,9 @@ public class search extends AbstractApplication {
         Field field;
         int next = startIndex + 1;// 此位置即为当前页的第一条记录的ID
 
-        for (Enumeration<Row> table = vtable.elements(); table.hasMoreElements(); ) {
-            Row row = table.nextElement();
-            Iterator<Field> iterator = row.iterator();
-
-            while (iterator.hasNext()) {
-                field = iterator.next();
+        for (Row row : vtable) {
+            for (Field value : row) {
+                field = value;
                 finded = field.get("content").value().toString();
 
                 for (int j = 0; j < keywords.length; j++) {
