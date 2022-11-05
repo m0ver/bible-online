@@ -196,10 +196,9 @@ public class login extends AbstractApplication {
         this.setAction("oauth2callback", "oAuth2callback");
         this.setAction("oauth2_github_callback", "oAuth2_github_callback");
 
-        this.setVariable("error", "");
-        this.setVariable("service", "");
-        this.setVariable("application.summary", "");
-
+        this.setSharedVariable("error", "");
+        this.setSharedVariable("service", "");
+        this.setSharedVariable("application.summary", "");
     }
 
     @Override

@@ -220,7 +220,7 @@
 <div id="pagebody">
     <div class="wrapper">
         <div class="container" itemscope="" itemtype="http://schema.org/Article">
-            <h2 itemprop="name">[%holy.book.info%]</h2>
+            <h2 itemprop="name">{%book.bookName%} 第<b>{%chapterid%}</b>章 共<b>{%maxchapter%}</b>章</h2>
             <a class="clear-fix"></a>
             <div class="clear-fix">[%holy.book.forward%]：<a
                     href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up"

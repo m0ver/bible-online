@@ -77,9 +77,9 @@ public class lection extends AbstractApplication {
             e.printStackTrace();
         }
 
-        this.setVariable("TEMPLATES_DIR", "/themes", false);
-        this.setVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
-        this.setVariable("metas", "");
+        this.setSharedVariable("TEMPLATES_DIR", "/themes");
+        this.setSharedVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
+        this.setSharedVariable("metas", "");
     }
 
     @Override
@@ -278,7 +278,6 @@ public class lection extends AbstractApplication {
             }
         }
 
-        this.setText("holy.book.info", book.getBookName(), this.chapterid, this.max_chapter);
         String where = "WHERE book_id=? and chapter_id=? order by part_id";
         Table vtable = bible.setRequestFields("*").findWith(where, new Object[]{this.bookid, this.chapterid});
         int count = vtable.size();
@@ -612,7 +611,7 @@ public class lection extends AbstractApplication {
         this.nextchapterid = this.chapterid + 1 > this.max_chapter ? this.max_chapter
                 : this.chapterid + 1;
 
-        this.setText("holy.book.info", book.getBookName(), this.chapterid, this.max_chapter);
+        this.setVariable("maxchapter", String.valueOf(this.max_chapter));
 
         return vtable;
     }

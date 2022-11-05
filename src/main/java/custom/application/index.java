@@ -22,9 +22,9 @@ public class index extends AbstractApplication {
     public void init() {
         this.setAction("default", "start");
 
-        this.setVariable("TEMPLATES_DIR", "/themes", false);
-        this.setVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
-        this.setVariable("metas", "");
+        this.setSharedVariable("TEMPLATES_DIR", "/themes");
+        this.setSharedVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
+        this.setSharedVariable("metas", "");
     }
 
     @Override

@@ -226,7 +226,7 @@ $(function(){
 <div id="pagebody">
 <div class="wrapper">
 	<div class="container" itemscope=""  itemtype="http://schema.org/Article">
-	<h2 itemprop="name">[%holy.book.info%]</h2> 
+		<h2 itemprop="name">{%book.bookName%} <b>{%chapterid%}</b> / <b>{%maxchapter%}</b></h2>
 	<a class="clear-fix"></a>
 		<div class="clear-fix">[%holy.book.forward%]：<a href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | Chapter {%lastchapter%} | [%holy.bible%]">&#8249;&#8249; [%holy.book.previous%]</a> <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up" title="{%book.bookName%} | Chapter {%nextchapter%} | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a> [%holy.bible.version%] {%language.switch%}
 		</div>

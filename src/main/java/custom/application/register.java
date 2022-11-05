@@ -41,23 +41,23 @@ public class register extends AbstractApplication {
         // TODO Auto-generated method stub
         this.setAction("user/register", "post");
 
-        this.setVariable("error", "");
-        this.setVariable("lastname", "");
-        this.setVariable("firstname", "");
-        this.setVariable("city", "");
-        this.setVariable("postcode", "");
+        this.setSharedVariable("error", "");
+        this.setSharedVariable("lastname", "");
+        this.setSharedVariable("firstname", "");
+        this.setSharedVariable("city", "");
+        this.setSharedVariable("postcode", "");
 
-        this.setVariable("gender.male", "");
-        this.setVariable("gender.female", "");
-        this.setVariable("gender.security", "");
+        this.setSharedVariable("gender.male", "");
+        this.setSharedVariable("gender.female", "");
+        this.setSharedVariable("gender.security", "");
 
-        this.setVariable("telephone", "");
+        this.setSharedVariable("telephone", "");
 
-        this.setVariable("nickname", "");
-        this.setVariable("email", "");
-        this.setVariable("password", "");
-        this.setVariable("info", "");
-        this.setVariable("display", "block");
+        this.setSharedVariable("nickname", "");
+        this.setSharedVariable("email", "");
+        this.setSharedVariable("password", "");
+        this.setSharedVariable("info", "");
+        this.setSharedVariable("display", "block");
     }
 
     @Override

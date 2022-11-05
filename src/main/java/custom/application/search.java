@@ -71,12 +71,12 @@ public class search extends AbstractApplication {
         this.setAction("bible/search", "query");
         this.setAction("bible/advsearch", "advanced");
 
-        this.setVariable("TEMPLATES_DIR", "/themes", false);
-        this.setVariable("keyword", "");
-        this.setVariable("start", "0");
-        this.setVariable("end", "0");
-        this.setVariable("size", "0");
-        this.setVariable("value", "");
+        this.setSharedVariable("TEMPLATES_DIR", "/themes");
+        this.setSharedVariable("keyword", "");
+        this.setSharedVariable("start", "0");
+        this.setSharedVariable("end", "0");
+        this.setSharedVariable("size", "0");
+        this.setSharedVariable("value", "");
     }
 
     @Override
@@ -186,10 +186,10 @@ public class search extends AbstractApplication {
             query = query.trim();
             keywords = query.split(" ");
 
-            this.setVariable("keyword", query);
-            this.setVariable("search.title", query + " - ");
+            this.setSharedVariable("keyword", query);
+            this.setSharedVariable("search.title", query + " - ");
         } else {
-            this.setVariable("keyword", "");
+            this.setSharedVariable("keyword", "");
             return this;
         }
 
@@ -288,21 +288,9 @@ public class search extends AbstractApplication {
                     finded = StringUtilities.sign(finded, keywords[j++]);
                 }
 
-                html.append("<li"
-                        + (n % 2 == 0 ? " class=\"even\"" : " class=\"odd\"")
-                        + "><a href=\""
-                        + this.context.getAttribute("HTTP_HOST")
-                        + "bible/"
-                        + field.get("book_id").value().toString()
-                        + "/"
-                        + field.get("chapter_id").value().toString()
-                        + "/"
-                        + field.get("part_id").value().toString()
-                        + "\" target=\"_blank\">"
-                        + this.setText("search.bible.info", field.get("book_name").value()
+                html.append("<li").append(n % 2 == 0 ? " class=\"even\"" : " class=\"odd\"").append("><a href=\"").append(this.context.getAttribute("HTTP_HOST")).append("bible/").append(field.get("book_id").value().toString()).append("/").append(field.get("chapter_id").value().toString()).append("/").append(field.get("part_id").value().toString()).append("\" target=\"_blank\">").append(this.setText("search.bible.info", field.get("book_name").value()
                         .toString(), field.get("chapter_id").value().toString(), field
-                        .get("part_id").value().toString()) + "</a><p>" + finded
-                        + "</p></li> \r\n");
+                        .get("part_id").value().toString())).append("</a><p>").append(finded).append("</p></li> \r\n");
                 next++;
             }
         }
