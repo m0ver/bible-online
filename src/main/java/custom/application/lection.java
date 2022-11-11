@@ -247,14 +247,14 @@ public class lection extends AbstractApplication {
         if (this.getLocale().toString().equalsIgnoreCase(Locale.US.toString())) {
             bible.setTableName("NIV");
             this.setVariable("version", "NIV");
-            this.setVariable("language.switch", "<a href=\"?q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
+            this.setVariable("language.switch", "<a href=\"?version=zh-CN&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
         } else if (this.getLocale().toString().equalsIgnoreCase(Locale.UK.toString())) {
             bible.setTableName("KJV");
             this.setVariable("version", "KJV");
-            this.setVariable("language.switch", "<a href=\"?q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a>");
+            this.setVariable("language.switch", "<a href=\"?version=zh-CN&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a>");
         } else {
             this.setVariable("version", "");
-            this.setVariable("language.switch", "<a href=\"?version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
+            this.setVariable("language.switch", "<a href=\"?lang=en-US&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
         }
 
         if (request.getParameter("version") != null && !request.getParameter("version").isEmpty()) {
@@ -267,13 +267,18 @@ public class lection extends AbstractApplication {
                 case "ESV":
                     bible.setTableName("ESV");
                     this.setVariable("version", "ESV");
-                    this.setVariable("language.switch", "<a href=\"?q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-GB&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
+                    this.setVariable("language.switch", "<a href=\"?q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
                     break;
                 case "KJV":
-                default:
                     bible.setTableName("KJV");
                     this.setVariable("version", "KJV");
                     this.setVariable("language.switch", "<a href=\"?q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a>");
+                    break;
+                default:
+                    bible.setTableName("zh_CN");
+                    this.setVariable("version", "");
+                    this.setVariable("language.switch", "<a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
+
                     break;
             }
         }
