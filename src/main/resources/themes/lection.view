@@ -223,10 +223,10 @@
             <h2 itemprop="name">{%book.bookName%} 第<b>{%chapterid%}</b>章 共<b>{%maxchapter%}</b>章</h2>
             <a class="clear-fix"></a>
             <div class="clear-fix">[%holy.book.forward%]：<a
-                    href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up"
+                    href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}&amp;lang={%LANGUAGE%}#up"
                     title="{%book.bookName%} | 第{%lastchapter%}章 | [%holy.bible%]">&#8249;&#8249;
                 [%holy.book.previous%]</a> <a
-                    href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up"
+                    href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}&amp;lang={%LANGUAGE%}#up"
                     title="{%book.bookName%} | 第{%nextchapter%}章 | [%holy.bible%]">[%holy.book.next%] &#8250;&#8250;</a>
                 [%holy.bible.version%] {%language.switch%}
             </div>
