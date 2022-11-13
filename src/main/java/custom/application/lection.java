@@ -37,17 +37,6 @@ import static org.tinystruct.http.Constants.HTTP_REQUEST;
 import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class lection extends AbstractApplication {
-    private int bookid;
-    private int chapterid;
-    private int partid;
-
-    private int max_chapter = 0;
-    private int lastchapterid;
-    private int nextchapterid;
-    private Response response;
-    private book book;
-    private Request request;
-    private User usr;
     private Cache data = Cache.getInstance();
 
     @Override
@@ -56,7 +45,7 @@ public class lection extends AbstractApplication {
         this.setAction("bible/api", "api");
         this.setAction("bible/feed", "feed");
 
-        this.book = new book();
+        book book = new book();
         this.data = Cache.getInstance();
 
         try {
@@ -174,31 +163,31 @@ public class lection extends AbstractApplication {
         return this.read(1);
     }
 
-    public Object read(int bookid) throws ApplicationException {
-        return this.read(bookid, 1);
+    public Object read(int bookId) throws ApplicationException {
+        return this.read(bookId, 1);
     }
 
-    public Object read(int bookid, int chapterid) throws ApplicationException {
-        return this.read(bookid, chapterid, 0);
+    public Object read(int bookId, int chapterId) throws ApplicationException {
+        return this.read(bookId, chapterId, 0);
     }
 
-    public Object read(int bookid, int chapterid, int partid) throws ApplicationException {
-        if (bookid == 0) bookid = 1;
-        if (chapterid == 0) chapterid = 1;
+    public Object read(int bookId, int chapterId, int partId) throws ApplicationException {
+        if (bookId == 0) bookId = 1;
+        if (chapterId == 0) chapterId = 1;
 
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        Request request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
         String host = String.valueOf(this.context.getAttribute("HTTP_HOST"));
         // remove the default language for action
         this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + this.context.getAttribute("REQUEST_ACTION").toString());
         this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 
-        Session session = this.request.getSession(); //@TODO
+        Session session = request.getSession(); //@TODO
         if (session.getAttribute("usr") != null) {
-            this.usr = (User) session.getAttribute("usr");
+            User usr = (User) session.getAttribute("usr");
 
             this.setVariable("user.status", "");
-            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + this.usr.getEmail() + "</a>");
+            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + usr.getEmail() + "</a>");
             this.setVariable("scripts", "$.ajax({url:\"" + this.getLink("services/getwords") + "\",dataType:\"xml\",type:'GET'}).success(function(data){data=wordsXML(data);ldialog.show(data);});");
         } else {
             this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
@@ -206,11 +195,7 @@ public class lection extends AbstractApplication {
             this.setVariable("scripts", "");
         }
 
-        this.bookid = bookid;
-        this.chapterid = chapterid;
-        this.partid = partid;
-
-        book = book == null ? new book() : this.book;
+        book book = new book();
         String lang = this.getLocale().toString();
 
         if (lang.equalsIgnoreCase("en_GB")) {
@@ -218,7 +203,7 @@ public class lection extends AbstractApplication {
         }
 
         Table table = book.findWith("WHERE book_id=? AND language=?",
-                new Object[]{this.bookid, lang});
+                new Object[]{bookId, lang});
 
         if (table.size() > 0) {
             Row row = table.get(0);
@@ -230,31 +215,31 @@ public class lection extends AbstractApplication {
         bible bible = new bible();
         bible.setTableName("zh_CN");
 
-        this.max_chapter = bible.setRequestFields("max(chapter_id) as max_chapter").findWith("WHERE book_id=?",
-                new Object[]{this.bookid}).get(0).get(0).get("max_chapter").intValue();
+        int max_chapter = bible.setRequestFields("max(chapter_id) as max_chapter").findWith("WHERE book_id=?",
+                new Object[]{bookId}).get(0).get(0).get("max_chapter").intValue();
 
-        if (this.chapterid > this.max_chapter) this.chapterid = this.max_chapter;
+        if (chapterId > max_chapter) chapterId = max_chapter;
 
-        this.lastchapterid = this.chapterid - 1 <= 0 ? 1 : this.chapterid - 1;
-        this.nextchapterid = Math.min(this.chapterid + 1, this.max_chapter);
+        int lastchapterid = chapterId - 1 <= 0 ? 1 : chapterId - 1;
+        int nextchapterid = Math.min(chapterId + 1, max_chapter);
 
-        this.setVariable("chapterid", String.valueOf(this.chapterid));
-        this.setVariable("partid", String.valueOf(this.partid));
-        this.setVariable("maxchapter", String.valueOf(this.max_chapter));
-        this.setVariable("lastchapter", String.valueOf(this.lastchapterid));
-        this.setVariable("nextchapter", String.valueOf(this.nextchapterid));
+        this.setVariable("chapterid", String.valueOf(chapterId));
+        this.setVariable("partid", String.valueOf(partId));
+        this.setVariable("maxchapter", String.valueOf(max_chapter));
+        this.setVariable("lastchapter", String.valueOf(lastchapterid));
+        this.setVariable("nextchapter", String.valueOf(nextchapterid));
 
         if (this.getLocale().toString().equalsIgnoreCase(Locale.US.toString())) {
             bible.setTableName("NIV");
             this.setVariable("version", "NIV");
-            this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
+            this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
         } else if (this.getLocale().toString().equalsIgnoreCase(Locale.UK.toString())) {
             bible.setTableName("KJV");
             this.setVariable("version", "KJV");
-            this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a>");
+            this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a>");
         } else {
             this.setVariable("version", "");
-            this.setVariable("language.switch", "<a href=\"?lang=en-US&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
+            this.setVariable("language.switch", "<a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
         }
 
         if (request.getParameter("version") != null && !request.getParameter("version").isEmpty()) {
@@ -262,29 +247,29 @@ public class lection extends AbstractApplication {
                 case "NIV":
                     bible.setTableName("NIV");
                     this.setVariable("version", "NIV");
-                    this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
+                    this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
                     break;
                 case "ESV":
                     bible.setTableName("ESV");
                     this.setVariable("version", "ESV");
-                    this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
+                    this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
                     break;
                 case "KJV":
                     bible.setTableName("KJV");
                     this.setVariable("version", "KJV");
-                    this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a>");
+                    this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a>");
                     break;
                 default:
                     bible.setTableName("zh_CN");
                     this.setVariable("version", "");
-                    this.setVariable("language.switch", "<a href=\"?lang=en-GB&version=ESV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">ESV</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + this.bookid + "/" + this.chapterid + "/" + this.partid + "#up\">KJV</a>");
+                    this.setVariable("language.switch", "<a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
 
                     break;
             }
         }
 
         String where = "WHERE book_id=? and chapter_id=? order by part_id";
-        Table vtable = bible.setRequestFields("*").findWith(where, new Object[]{this.bookid, this.chapterid});
+        Table vtable = bible.setRequestFields("*").findWith(where, new Object[]{bookId, chapterId});
         int count = vtable.size();
         StringBuilder left_column = new StringBuilder();
         String line;
@@ -306,7 +291,7 @@ public class lection extends AbstractApplication {
                                 + "</span>" + line.substring(1);
 
                     line = line.replaceAll("\n\n", "<br />");
-                    left_column.append("<li").append(this.partid == bible.getPartId() ? " class=\"selected\""
+                    left_column.append("<li").append(partId == bible.getPartId() ? " class=\"selected\""
                             : "").append("><a class=\"sup\" onmousedown=\"rightMenu.show(event,'").append(bible.getId()).append("')\">").append(bible.getPartId()).append("</a>").append(line).append("</li>");
                 }
 
@@ -322,7 +307,7 @@ public class lection extends AbstractApplication {
         return this;
     }
 
-    public Object menu() throws ApplicationException {
+    public Object menu(int bookid) throws ApplicationException {
 
         int i = 0;
         Element ul = new Element("ol"), ul1 = new Element("ol"), li, a;
@@ -426,11 +411,27 @@ public class lection extends AbstractApplication {
         sy_updateFrequency.setData("1");
         channel.addElement(sy_updateFrequency);
 
-        Table vtable = this.load(bookId, chapterId, 0);
+        book book = new book();
+        try {
+            String lang = this.getLocale().toString();
+            if (this.getLocale().toString().equalsIgnoreCase("en_GB")) {
+                lang = "en_US";
+            }
+
+            Table table = book.findWith("WHERE book_id=? and language=?",
+                    new Object[]{bookId, lang});
+
+            if (table.size() > 0) {
+                Row row = table.get(0);
+                book.setData(row);
+            }
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+        }
 
         Element item = new Element("item");
         Element item_title = new Element("title");
-        item_title.setData("<![CDATA[" + this.book.getBookName() + " " + this.chapterid + "]]>");
+        item_title.setData("<![CDATA[" + book.getBookName() + " " + chapterId + "]]>");
         item.addElement(item_title);
 
         Element item_link = new Element("link");
@@ -462,24 +463,37 @@ public class lection extends AbstractApplication {
         item.addElement(guid);
 
         // start
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         String finded;
         buffer.append("<ol style=\"list-style-type: none;\">");
+
+        String condition;
+        if (chapterId == 0) {
+            condition = "book_id=" + bookId;
+        } else {
+            condition = "book_id=" + bookId + " and chapter_id="
+                    + chapterId;
+        }
+
+        String where = "WHERE " + condition + " order by part_id";
+        bible bible = new bible();
+
+        if (this.getLocale().toString().equalsIgnoreCase(Locale.UK.toString()))
+            bible.setTableName("ESV");
+        else if (this.getLocale().toString().equalsIgnoreCase(Locale.US.toString()))
+            bible.setTableName("NIV");
+        else
+            bible.setTableName(this.getLocale().toString());
+
+        Table vtable = bible.findWith(where, new Object[]{});
         int count = vtable.size();
         if (count > 0) {
             Field fields;
-            for (Iterator<Row> table = vtable.iterator(); table.hasNext(); ) {
-                Row row = table.next();
-                Iterator<Field> iterator = row.iterator();
-
-                while (iterator.hasNext()) {
-                    fields = iterator.next();
+            for (Row row : vtable) {
+                for (Field field : row) {
+                    fields = field;
                     finded = fields.get("content").value().toString();
-                    buffer.append("<li"
-                            + (this.partid == fields.get("part_id").intValue() ? " class=\"selected\""
-                            : "")
-                            + "><a class=\"sup\">" + fields.get("part_id").intValue()
-                            + "</a>" + finded + "</li>");
+                    buffer.append("<li><a class=\"sup\">").append(fields.get("part_id").intValue()).append("</a>").append(finded).append("</li>");
                 }
             }
             buffer.append("</ol>");
@@ -497,7 +511,7 @@ public class lection extends AbstractApplication {
         Element content_encoded = (Element) element.clone();
         content_encoded.setName("content:encoded");
         content_encoded.setData("<![CDATA["
-                + buffer.toString() + "]]>");
+                + buffer + "]]>");
         item.addElement(content_encoded);
 
         Element wfw_commentRss = (Element) element.clone();
@@ -515,11 +529,11 @@ public class lection extends AbstractApplication {
         root.addElement(channel);
         // end
 
-        this.response = (Response) this.context
+        Response response = (Response) this.context
                 .getAttribute(HTTP_RESPONSE);
 
 //        this.response.setContentType("text/xml;charset=" + this.config.get("charset"));
-        this.response.headers().add(Header.CONTENT_TYPE.set(this.config.get(Header.StandardValue.CHARSET.name())));
+        response.headers().add(Header.CONTENT_TYPE.set(this.config.get(Header.StandardValue.CHARSET.name())));
         return "<?xml version=\"1.0\" encoding=\"" + this.config.get("charset") + "\"?>\r\n" +
                 root;
     }
@@ -536,39 +550,11 @@ public class lection extends AbstractApplication {
         return this.bible(bookid, chapterid, 0);
     }
 
-    public Object bible(int bookid, int chapterid, int partid) throws ApplicationException {
+    public Object bible(int bookId, int chapterId, int partId) throws ApplicationException {
         StringBuilder xml = new StringBuilder();
-        String finded = "";
+        String finded;
 
-        Table vtable = this.load(bookid, chapterid, partid);
-
-        xml.append("<?xml version=\"1.0\" encoding=\"").append(this.context.getAttribute("charset")).append("\"?>");
-        xml.append("<book id=\"book\" name=\"book\" bookid=\"").append(this.bookid).append("\" bookname=\"").append(this.book.getBookName()).append("\" chapterid=\"").append(this.chapterid).append("\" maxchapter=\"").append(this.max_chapter).append("\" lastchapter=\"").append(this.lastchapterid).append("\" nextchapter=\"").append(this.nextchapterid).append("\">\r\n");
-        Field fields;
-        for (Row row : vtable) {
-            for (Field field : row) {
-                fields = field;
-                finded = fields.get("content").value().toString();
-                if (this.partid == Integer.parseInt(fields.get("part_id")
-                        .value().toString())) {
-                    xml.append("<item uid=\"").append(fields.get("id").value().toString()).append("\" id=\"").append(fields.get("part_id").value().toString()).append("\" selected=\"true\">").append(finded).append("</item>");
-                } else {
-                    xml.append("<item uid=\"").append(fields.get("id").value().toString()).append("\" id=\"").append(fields.get("part_id").value().toString()).append("\" selected=\"false\">").append(finded).append("</item>");
-                }
-            }
-        }
-        xml.append("</book>");
-
-        return xml.toString();
-    }
-
-    private Table load(int bookid, int chapterid, int partid) throws ApplicationException {
-
-        this.bookid = bookid;
-        this.chapterid = chapterid;
-        this.partid = partid;
-
-        book = new book();
+        book book = new book();
         try {
             String lang = this.getLocale().toString();
             if (this.getLocale().toString().equalsIgnoreCase("en_GB")) {
@@ -576,7 +562,7 @@ public class lection extends AbstractApplication {
             }
 
             Table table = book.findWith("WHERE book_id=? and language=?",
-                    new Object[]{this.bookid, lang});
+                    new Object[]{bookId, lang});
 
             if (table.size() > 0) {
                 Row row = table.get(0);
@@ -586,13 +572,13 @@ public class lection extends AbstractApplication {
             e.printStackTrace();
         }
 
-        String condition = "";
+        String condition;
 
-        if (this.chapterid == 0) {
-            condition = "book_id=" + this.bookid;
+        if (chapterId == 0) {
+            condition = "book_id=" + bookId;
         } else {
-            condition = "book_id=" + this.bookid + " and chapter_id="
-                    + this.chapterid;
+            condition = "book_id=" + bookId + " and chapter_id="
+                    + chapterId;
         }
 
         String where = "WHERE " + condition + " order by part_id";
@@ -607,18 +593,33 @@ public class lection extends AbstractApplication {
             bible.setTableName(this.getLocale().toString());
 
         Table vtable = bible.findWith(where, new Object[]{});
-
-        this.max_chapter = bible.setRequestFields(
+        int max_chapter = bible.setRequestFields(
                         "max(chapter_id) as max_chapter").findWith("WHERE book_id=?",
-                        new Object[]{this.bookid}).get(0).get(0).get("max_chapter")
+                        new Object[]{bookId}).get(0).get(0).get("max_chapter")
                 .intValue();
-        this.lastchapterid = this.chapterid - 1 <= 0 ? 1 : this.chapterid - 1;
-        this.nextchapterid = this.chapterid + 1 > this.max_chapter ? this.max_chapter
-                : this.chapterid + 1;
 
-        this.setVariable("maxchapter", String.valueOf(this.max_chapter));
+        this.setVariable("maxchapter", String.valueOf(max_chapter));
 
-        return vtable;
+        xml.append("<?xml version=\"1.0\" encoding=\"").append(this.context.getAttribute("charset")).append("\"?>");
+        int lastchapterId = chapterId - 1 <= 0 ? 1 : chapterId - 1;
+        int nextchapterId = Math.min(chapterId + 1, max_chapter);
+        xml.append("<book id=\"book\" name=\"book\" bookid=\"").append(bookId).append("\" bookname=\"").append(book.getBookName()).append("\" chapterid=\"").append(chapterId).append("\" maxchapter=\"").append(max_chapter).append("\" lastchapter=\"").append(lastchapterId).append("\" nextchapter=\"").append(nextchapterId).append("\">\r\n");
+        Field fields;
+        for (Row row : vtable) {
+            for (Field field : row) {
+                fields = field;
+                finded = fields.get("content").value().toString();
+                if (partId == Integer.parseInt(fields.get("part_id")
+                        .value().toString())) {
+                    xml.append("<item uid=\"").append(fields.get("id").value().toString()).append("\" id=\"").append(fields.get("part_id").value().toString()).append("\" selected=\"true\">").append(finded).append("</item>");
+                } else {
+                    xml.append("<item uid=\"").append(fields.get("id").value().toString()).append("\" id=\"").append(fields.get("part_id").value().toString()).append("\" selected=\"false\">").append(finded).append("</item>");
+                }
+            }
+        }
+        xml.append("</book>");
+
+        return xml.toString();
     }
 
     public Object api() throws ApplicationException {
