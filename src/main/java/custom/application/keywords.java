@@ -25,7 +25,6 @@ import org.tinystruct.http.Request;
 import org.tinystruct.system.util.StringUtilities;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
 
 import static org.tinystruct.http.Constants.HTTP_REQUEST;
 
@@ -49,9 +48,9 @@ public class keywords extends AbstractApplication {
         String keyword;
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
-        if (this.request.getParameter("keyword") != null && this.request.getParameter("keyword").equals("") == false && new StringUtilities(this.request.getParameter("keyword").toString()).safe()) {
+        if (this.request.getParameter("keyword") != null && !this.request.getParameter("keyword").equals("") && new StringUtilities(this.request.getParameter("keyword").toString()).safe()) {
             if (this.request.method() == Method.GET) {
-                keyword = this.request.getParameter("keyword").toString();
+                keyword = this.request.getParameter("keyword");
                 try {
                     keyword = new String(keyword.getBytes("ISO8859-1"), "UTF-8");
                 } catch (UnsupportedEncodingException e) {
@@ -59,38 +58,44 @@ public class keywords extends AbstractApplication {
                     e.printStackTrace();
                 }
             } else
-                keyword = this.request.getParameter("keyword").toString();
+                keyword = this.request.getParameter("keyword");
         } else {
             keyword = null;
         }
 
-        String javascript_block = "";
-        String keywordlist = "", keywordvisit = "";
+        assert keyword != null;
+        keyword = keyword.replaceAll("%|_", "");
 
-        keyword _keyword = new keyword();
-        Table findTable = _keyword.findWith(
-                "WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7",
-                new Object[]{"%" + keyword + "%"});
+        StringBuilder k = new StringBuilder();
+        StringBuilder v = new StringBuilder();
+        String k_item;
+        String v_item;
 
-        Row currentRow;
-        String k = new String(""), v = new String(""), k_item = new String(""), v_item = new String(
-                "");
+        String javascript_block;
+        String keywordlist, keywordvisit;
 
-        Iterator<Row> iterator = findTable.iterator();
-        while (iterator.hasNext()) {
-            currentRow = iterator.next();
-            k_item = currentRow.getFieldInfo("keyword").stringValue();
-            if (k != null && k.trim().length() > 0) {
-                k += ",\"" + k_item + "\"";
-            } else {
-                k = "\"" + k_item + "\"";
-            }
+        if (!keyword.equals("")) {
+            keyword _keyword = new keyword();
+            Table findTable = _keyword.findWith(
+                    "WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7",
+                    new Object[]{"%" + keyword + "%"});
 
-            v_item = currentRow.getFieldInfo("visit").stringValue();
-            if (v != null && v.trim().length() > 0) {
-                v += ",\"" + v_item + "\"";
-            } else {
-                v = "\"" + v_item + "\"";
+            Row currentRow;
+            for (Row fields : findTable) {
+                currentRow = fields;
+                k_item = currentRow.getFieldInfo("keyword").stringValue();
+                if (k.toString().trim().length() > 0) {
+                    k.append(",\"").append(k_item).append("\"");
+                } else {
+                    k = new StringBuilder("\"" + k_item + "\"");
+                }
+
+                v_item = currentRow.getFieldInfo("visit").stringValue();
+                if (v.toString().trim().length() > 0) {
+                    v.append(",\"").append(v_item).append("\"");
+                } else {
+                    v = new StringBuilder("\"" + v_item + "\"");
+                }
             }
         }
 

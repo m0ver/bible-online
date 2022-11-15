@@ -183,7 +183,7 @@ public class search extends AbstractApplication {
                 query = q[0];
             }
 
-            query = query.trim();
+            query = query.trim().replaceAll("%|_","");
             keywords = query.split(" ");
 
             this.setSharedVariable("keyword", query);
