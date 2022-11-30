@@ -1,0 +1,15 @@
+[Unit]
+Description=Bible online web server
+After=network.target
+Before=nextcloud-web.service
+
+[Service]
+ExecStart=/home/james/bible-online/bin/dispatcher start --import org.tinystruct.system.NettyHttpServer --server-port 777
+Type=notify
+Restart=always
+WorkingDirectory=/home/james/bible-online
+EnvironmentFile=/etc/environment
+
+[Install]
+WantedBy=default.target
+RequiredBy=network.target
