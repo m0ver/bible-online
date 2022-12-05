@@ -953,7 +953,7 @@ ul.testament li ol li {
 /* Mobile Landscape and Portrait */
 @media only screen and (max-width: 767px) {
     #header {
-    	background: #464646;
+    	background: #770707;
     }
     #headline h2, #header ul { display: none; }
     #header .wrapper, #header h1 a {
