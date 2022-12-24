@@ -187,7 +187,7 @@ public class search extends AbstractApplication {
             keywords = query.split(" ");
 
             this.setSharedVariable("keyword", query);
-            this.setSharedVariable("search.title", query + " - ");
+            this.setVariable("search.title", query + " - ");
         } else {
             this.setSharedVariable("keyword", "");
             return this;
