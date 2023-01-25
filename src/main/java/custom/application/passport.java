@@ -44,17 +44,16 @@ public class passport {
     private Request request;
     private Response response;
 
-    public passport(Request request, Response response, String sessionname) throws ApplicationException {
+    public passport(Request request, Response response, String sessionName) throws ApplicationException {
         this.request = request;
         this.response = response;
         this.currentUser = new User();
 
         this.session = this.request.getSession();
 
-        this.sessionName = sessionname;
-        if (this.session.getAttribute(sessionname) != null)
-            this.recognized = (Boolean) this.session.getAttribute(sessionname);
-
+        this.sessionName = sessionName;
+        if (this.session.getAttribute(sessionName) != null)
+            this.recognized = (Boolean) this.session.getAttribute(sessionName);
 
         Cookie language = StringUtilities.getCookieByName(request.cookies(), "language");
         if (language != null) {
@@ -65,7 +64,7 @@ public class passport {
         this.resource = Resource.getInstance(this.lang.toString());
     }
 
-    public passport(String username, String password, String api) {
+    public passport(String username, String password) {
         this.currentUser = new User();
         this.currentUser.setUsername(username);
         this.currentUser.setPassword(password);
@@ -94,7 +93,10 @@ public class passport {
         Cookie username = new CookieImpl("username");
         username.setValue(this.currentUser.getUsername());
         username.setMaxAge(24 * 3600);
-        this.response.addHeader(Header.SET_COOKIE.toString(), username);
+        username.setHttpOnly(true);
+        username.setSecure(true);
+        this.response.addHeader(Header.SET_COOKIE.name(), username);
+        this.response.addHeader(Header.SET_COOKIE.name(), "jsessionid = " + this.session.getId());
 
         Member member = new Member();
         Table members = member.findWith("WHERE user_id=?", new Object[]{this.currentUser.getId()});
@@ -151,23 +153,7 @@ public class passport {
         this.session.removeAttribute(this.sessionName);
         this.session.removeAttribute("usr");
         this.session.removeAttribute("rights");
-
-//			this.communicator.addCookie(new Cookie("autologin","false"));
     }
-//	
-//	public boolean validateCode()
-//	{
-//		String  CodeSessionName=org.mover.system.Security.ValidateCode.getSessionName(this.communicator.getRequest()),
-//				getSessionValue=(String)session.getAttribute(CodeSessionName),
-//
-//				lastformName=org.mover.system.Security.ValidateCode.getLastFormName(),
-//				getParameterValue=this.communicator.getParameter(lastformName);
-//
-//		if(getParameterValue!=null&&getParameterValue.equals(getSessionValue))
-//		this.authorized=true;
-//		
-//		return this.authorized;
-//	}
 
     public boolean checkUser() throws ApplicationException {
         Object[] parameters = new Object[]{};
