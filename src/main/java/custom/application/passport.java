@@ -82,10 +82,10 @@ public class passport {
         this.currentUser.setId(userId);
         this.currentUser.findOneById();
 
-        this.setlogin();
+        this.setLogin();
     }
 
-    private void setlogin() throws ApplicationException {
+    private void setLogin() throws ApplicationException {
         this.recognized = true;
         this.session.setAttribute(sessionName, Boolean.TRUE);
         this.session.setAttribute("usr", this.currentUser);
@@ -240,7 +240,7 @@ public class passport {
             throw new ApplicationException(this.resource.getLocaleString("login.usernotexists"));
         }
 
-        this.setlogin();
+        this.setLogin();
 
         return true;
     }
