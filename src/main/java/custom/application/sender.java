@@ -53,7 +53,7 @@ public class sender extends AbstractApplication {
     private Reforward reforward;
     private User user;
 
-    public boolean send() {
+    public boolean send() throws ApplicationException {
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
         if (this.request.getParameter("id") == null
                 || this.request.getParameter("text") == null
@@ -98,7 +98,7 @@ public class sender extends AbstractApplication {
 
         } catch (ApplicationException e) {
             // TODO Auto-generated catch block
-            return false;
+            throw new ApplicationException("Email send failed. please contact the administrator.", e);
         }
 
         return true;
@@ -120,12 +120,13 @@ public class sender extends AbstractApplication {
 
         String[] addresses = mailto.split(";");
 
-        for (int i = 0; i < addresses.length; i++)
-            if (addresses[i].indexOf('@') < 1
-                    || addresses[i].indexOf('@') >= addresses[i]
+        for (String address : addresses) {
+            if (address.indexOf('@') < 1
+                    || address.indexOf('@') >= address
                     .lastIndexOf('.') + 1) {
                 return "invalid";
             }
+        }
 
         SimpleMail mail = new SimpleMail();
         mail.setFrom(this.getProperty("mail.default.from"));
@@ -134,8 +135,8 @@ public class sender extends AbstractApplication {
         String randomKey = key.getRandomCode();
 
         String body = String.format(
-                this.getProperty("mail.invitation.content"), this
-                        .getProperty("application.title"),
+                this.getProperty("mail.invitation.content"),
+                this.getProperty("application.title"),
                 this.getLink("user/register") + "/" + randomKey);
         mail.setSubject(this.getProperty("mail.invitation.title"));
         mail.setBody(body);
