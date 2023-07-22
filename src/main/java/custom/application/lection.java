@@ -37,7 +37,7 @@ import static org.tinystruct.http.Constants.HTTP_REQUEST;
 import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class lection extends AbstractApplication {
-    private Cache data = Cache.getInstance();
+    private final static Cache data = Cache.getInstance();
 
     @Override
     public void init() {
@@ -46,7 +46,6 @@ public class lection extends AbstractApplication {
         this.setAction("bible/feed", "feed");
 
         book book = new book();
-        this.data = Cache.getInstance();
 
         try {
             Table list = book.findAll();
