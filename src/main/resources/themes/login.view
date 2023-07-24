@@ -33,8 +33,8 @@
 		profileMenu=new Menu();
 		languageMenu=new Menu();
 		
-		//profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/settings%]'","caption":"[%page.language-setting.title%]"});
-		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"[%page.logout.caption%]"});
+		//profileMenu.appendItem({"action":"javascript:location.href='{%LINK:user/settings%}'","caption":"{%page.language-setting.title%}"});
+		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"{%page.logout.caption%}"});
 		
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'.replace(/\&amp;/g,'&')","caption":"English(UK)"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'.replace(/\&amp;/g,'&')","caption":"English(US)"});
@@ -67,15 +67,15 @@ function login()
 	var username=document.getElementById("username").value;
 	var password=document.getElementById("password").value;
 	var authorize=document.getElementById("{%codename%}").value;
-	if (username=="" || username==null){ alert("[%login.username.invalid%]"); document.getElementById("username").focus(); return false; }
-	if (password=="" || password==null){ alert("[%login.password.invalid%]");   document.getElementById("password").focus(); return false; }
-	if (authorize=="" || authorize==null){ alert("[%login.authorized.invalid%]");   document.getElementById("{%codename%}").focus(); return false; }
+	if (username=="" || username==null){ alert("{%login.username.invalid%}"); document.getElementById("username").focus(); return false; }
+	if (password=="" || password==null){ alert("{%login.password.invalid%}");   document.getElementById("password").focus(); return false; }
+	if (authorize=="" || authorize==null){ alert("{%login.authorized.invalid%}");   document.getElementById("{%codename%}").focus(); return false; }
 	return true;
 }
 
 var __default_field='<input class="text" id="username" name="username" type="text" value=""/>',	user="{%username%}";
 window.onload=function(){
-	var __new_field=user?user+'<input class="text" id="username" name="username" type="hidden" value="'+user+'"/>  <a href="javascript:void(0)" onclick="restoreField()">[%login.user.change%]</a>':__default_field;
+	var __new_field=user?user+'<input class="text" id="username" name="username" type="hidden" value="'+user+'"/>  <a href="javascript:void(0)" onclick="restoreField()">{%login.user.change%}</a>':__default_field;
 	document.getElementById('__default_user').innerHTML=(__new_field);
 }
 function restoreField(){document.getElementById('__default_user').innerHTML=(__default_field);}
@@ -98,25 +98,25 @@ $(function(){
 });
 </script>
 <![endif]-->
-<title>[%navigator.login.caption%] | [%application.title%]{%application.summary%}</title>
+<title>{%navigator.login.caption%} | {%application.title%}{%application.summary%}</title>
 </head>
 <body>
 <div id="header">
 	<div class="wrapper">
-		<h1><a href="http://www.ingod.today">[%application.title%]</a></h1>
-		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
+		<h1><a href="http://www.ingod.today">{%application.title%}</a></h1>
+		<p class="welcome">{%page.welcome.hello%}{%page.welcome.caption%}  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">{%application.language.name%}</a> | {%user.profile%} {%user.status%}</p>
 		<ul>
-			<li><a class="current" href='[%LINK:user/login%]' title="[%navigator.login.caption%]">[%navigator.login.caption%]</a></li>
-			<li><a href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
-			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
-			<li id="download"><a href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+			<li><a class="current" href='{%LINK:user/login%}' title="{%navigator.login.caption%}">{%navigator.login.caption%}</a></li>
+			<li><a href='[%LINK:bible%]' title="{%navigator.bible.caption%}">{%navigator.bible.caption%}</a></li>
+			<li><a href='[%LINK:dashboard%]' title="{%navigator.controller.caption%}">{%navigator.controller.caption%}</a></li>
+			<li id="download"><a href='[%LINK:suggestion%]' title="{%navigator.help.caption%}">{%navigator.help.caption%}</a></li>
 		</ul>
 	</div>
 </div>
 
 <div id="headline">
 	<div class="wrapper">
-	<h2>[%page.login.title%]</h2>		
+	<h2>{%page.login.title%}</h2>
 	</div>
 </div>
 
@@ -126,17 +126,17 @@ $(function(){
 			<div class="gallery"></div>
 		</div>
 		<div class="sidebar">
-			<p><a href="/"> &#8250; </a>  [%login.tips.text%]  </p>
+			<p><a href="/"> &#8250; </a>  {%login.tips.text%}  </p>
 			<form class="form-columns" method="post" action="/?q=user/login&amp;from={%from%}" onsubmit="return login()">
 				<div> {%error%} </div>
 				<ul id="login">
-				<li><div class="label"><label for="username">[%login.user.caption%] </label></div><span id="__default_user">{%user_field%}</span></li>
-				<li><div class="label"><label for="password">[%login.password.caption%] </label></div><input class="text" id="password" name="password" value="" type="password" /></li>
-				<li><div class="label"><label for="{%codename%}">[%login.verifycode.caption%] </label></div><input class="text" name="{%codename%}" id="{%codename%}" size="6" maxlength="4" value="" type="text" /><img class="i-image" src="{%code%}" alt="validator" onclick="javascript:reload();" /></li>
-				<li><input id="autologin" name="autologin" value="true" type="checkbox" /> <label for="autologin">[%login.remember.caption%]</label> 	<input type="submit" class="button-secondary" value="[%login%] »" /></li> 
+				<li><div class="label"><label for="username">{%login.user.caption%} </label></div><span id="__default_user">{%user_field%}</span></li>
+				<li><div class="label"><label for="password">{%login.password.caption%} </label></div><input class="text" id="password" name="password" value="" type="password" /></li>
+				<li><div class="label"><label for="{%codename%}">{%login.verifycode.caption%} </label></div><input class="text" name="{%codename%}" id="{%codename%}" size="6" maxlength="4" value="" type="text" /><img class="i-image" src="{%code%}" alt="validator" onclick="javascript:reload();" /></li>
+				<li><input id="autologin" name="autologin" value="true" type="checkbox" /> <label for="autologin">{%login.remember.caption%}</label> 	<input type="submit" class="button-secondary" value="{%login%} »" /></li>
 				</ul>
 			</form>
-			<div>[%login.with.otheraccount%]:</div>
+			<div>{%login.with.otheraccount%}:</div>
 			    <div>
 			    	<a href="/?q=user/account/google&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/google.png" /></a>
 			    	<a href="/?q=user/account/github&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/github.png" /></a>
@@ -162,12 +162,12 @@ $(function(){
 <div id="footer">
 	<div class="wrapper">
 		<p>
-			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
-			<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
-			<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
-			<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
-			<a href="[%LINK:user/password%]">[%footer.forgot%]</a> | 
- 			<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
+			<a href="[%LINK:suggestion%]">{%footer.report-a-site-bug%}</a> |
+			<a href="[%LINK:help%]">{%footer.privacy%}</a> |
+			<a href="[%LINK:user/register%]">{%footer.register%}</a> |
+			<a href="[%LINK:bible/api%]">{%footer.api%}</a> |
+			<a href="[%LINK:user/password%]">{%footer.forgot%}</a> |
+ 			<a href="[%LINK:feed%]" class="rsslink">{%footer.updates-rss%}</a>
 		</p>
 	</div>
 </div>

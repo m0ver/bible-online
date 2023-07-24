@@ -65,67 +65,64 @@ public class lection extends AbstractApplication {
             e.printStackTrace();
         }
 
-        this.setSharedVariable("TEMPLATES_DIR", "/themes");
-        this.setSharedVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
-        this.setSharedVariable("metas", "");
     }
 
     @Override
     public void setLocale(Locale locale) {
         super.setLocale(locale);
 
-        this.setText("application.keywords");
-        this.setText("application.description");
-        this.setText("application.title");
-        this.setText("application.language.name");
+        this.setText("application.keywords", locale);
+        this.setText("application.description", locale);
+        this.setText("application.title", locale);
+        this.setText("application.language.name", locale);
 
-        this.setText("page.welcome.caption");
-        this.setText("page.language-setting.title");
-        this.setText("page.logout.caption");
-        this.setText("page.reading.title");
+        this.setText("page.welcome.caption", locale);
+        this.setText("page.language-setting.title", locale);
+        this.setText("page.logout.caption", locale);
+        this.setText("page.reading.title", locale);
 
-        this.setText("navigator.bible.caption");
-        this.setText("navigator.video.caption");
-        this.setText("navigator.document.caption");
-        this.setText("navigator.reader.caption");
-        this.setText("navigator.controller.caption");
-        this.setText("navigator.help.caption");
+        this.setText("navigator.bible.caption", locale);
+        this.setText("navigator.video.caption", locale);
+        this.setText("navigator.document.caption", locale);
+        this.setText("navigator.reader.caption", locale);
+        this.setText("navigator.controller.caption", locale);
+        this.setText("navigator.help.caption", locale);
 
-        this.setText("holy.book.forward");
-        this.setText("holy.book.previous");
-        this.setText("holy.book.next");
-        this.setText("holy.bible");
-        this.setText("holy.bible.old-testament");
-        this.setText("holy.bible.new-testament");
-        this.setText("holy.bible.directory");
-        this.setText("holy.book.find-and-reading");
-        this.setText("holy.book.tools");
-        this.setText("holy.bible.version");
+        this.setText("holy.book.forward", locale);
+        this.setText("holy.book.previous", locale);
+        this.setText("holy.book.next", locale);
+        this.setText("holy.bible", locale);
+        this.setText("holy.bible.old-testament", locale);
+        this.setText("holy.bible.new-testament", locale);
+        this.setText("holy.bible.directory", locale);
+        this.setText("holy.book.find-and-reading", locale);
+        this.setText("holy.book.tools", locale);
+        this.setText("holy.bible.version", locale);
 
-        this.setText("footer.report-a-site-bug");
-        this.setText("footer.privacy");
-        this.setText("footer.register");
-        this.setText("footer.api");
-        this.setText("footer.updates-rss");
-        this.setText("holy.book.select");
+        this.setText("footer.report-a-site-bug", locale);
+        this.setText("footer.privacy", locale);
+        this.setText("footer.register", locale);
+        this.setText("footer.api", locale);
+        this.setText("footer.updates-rss", locale);
+        this.setText("holy.book.select", locale);
 
-        this.setText("search.confirm.caption");
-        this.setText("search.submit.caption");
+        this.setText("search.confirm.caption", locale);
+        this.setText("search.submit.caption", locale);
 
-        this.setText("invite.confirm.caption");
-        this.setText("invite.submit.caption");
-        this.setText("invite.email.default.tips");
+        this.setText("invite.confirm.caption", locale);
+        this.setText("invite.submit.caption", locale);
+        this.setText("invite.email.default.tips", locale);
 
-        this.setText("subscribe.plan");
-        this.setText("subscribe.bible.plan");
-        this.setText("subscribe.article.plan");
-        this.setText("subscribe.submit.caption");
-        this.setText("subscribe.email.caption");
-        this.setText("subscribe.email.default.tips");
+        this.setText("subscribe.plan", locale);
+        this.setText("subscribe.bible.plan", locale);
+        this.setText("subscribe.article.plan", locale);
+        this.setText("subscribe.submit.caption", locale);
+        this.setText("subscribe.email.caption", locale);
+        this.setText("subscribe.email.default.tips", locale);
 
-        this.setText("user.lastlogin.caption");
-        this.setText("holy.bible.download");
-        this.setText("holy.bible.chinese.download");
+        this.setText("user.lastlogin.caption", locale);
+        this.setText("holy.bible.download", locale);
+        this.setText("holy.bible.chinese.download", locale);
 
         String username = "";
         if (this.getVariable("username") != null) {
@@ -133,7 +130,12 @@ public class lection extends AbstractApplication {
         }
 
         this.setText("page.welcome.hello", (username == null || username.trim()
-                .length() == 0) ? "" : username + "，");
+                .length() == 0) ? "" : username + "，", locale);
+
+        this.setVariable("TEMPLATES_DIR", "/themes");
+
+        this.setVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
+        this.setVariable("metas", "");
     }
 
     @Override

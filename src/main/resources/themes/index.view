@@ -3,14 +3,14 @@
 <head>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="[%application.keywords%]" />
-<meta name="description" content="[%application.description%]" />
+<meta name="keywords" content="{%application.keywords%}" />
+<meta name="description" content="{%application.description%}" />
 <meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
-<meta property="og:title" content="[%application.title%]"/>
+<meta property="og:title" content="{%application.title%}"/>
 <meta property="og:url" content="[%LINK:bible%]"/>
 <meta property="og:image" content="{%TEMPLATES_DIR%}/images/favicon.png"/>
-<meta property="og:site_name" content="[%application.title%]"/>
-<meta property="og:description" content="[%application.description%]"/>
+<meta property="og:site_name" content="{%application.title%}"/>
+<meta property="og:description" content="{%application.description%}"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" />
@@ -44,8 +44,8 @@
 		profileMenu=new Menu();
 		languageMenu=new Menu();
 		
-		//profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/settings%]'","caption":"[%page.language-setting.title%]"});
-		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"[%page.logout.caption%]"});
+		//profileMenu.appendItem({"action":"javascript:location.href='{%LINK:user/settings%}'","caption":"{%page.language-setting.title%}"});
+		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"{%page.logout.caption%}"});
 		
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'","caption":"English(UK)"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'","caption":"English(US)"});
@@ -90,17 +90,17 @@ $(function(){
 });
 </script>
 <![endif]-->
-<title>[%application.title%] - InGod.ASIA</title>
+<title>{%application.title%} - InGod.ASIA</title>
 </head>
 <body>
 <div id="header">
 	<div class="wrapper">
-		<h1><a href="/">[%application.title%]</a></h1>
-		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
+		<h1><a href="/">{%application.title%}</a></h1>
+		<p class="welcome">{%page.welcome.hello%}{%page.welcome.caption%}  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">{%application.language.name%}</a> | {%user.profile%} {%user.status%}</p>
 		<ul>
-			<li><a href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
-			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
-			<li id="download"><a href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+			<li><a href='[%LINK:bible%]' title="{%navigator.bible.caption%}">{%navigator.bible.caption%}</a></li>
+			<li><a href='[%LINK:dashboard%]' title="{%navigator.controller.caption%}">{%navigator.controller.caption%}</a></li>
+			<li id="download"><a href='[%LINK:suggestion%]' title="{%navigator.help.caption%}">{%navigator.help.caption%}</a></li>
 		</ul>
 	</div>
 </div>
@@ -110,27 +110,27 @@ $(function(){
 		<form name="f" id="f" action="[%LINK:bible/search%]" method="post">
 		<div class="container">
 		<input size="20" class="text glass" autocomplete="off" maxlength="2048" value="{%keyword%}" id="keyword" name="keyword"  />
-		<input class="button-secondary inputbutton" type="submit" value=" [%search.submit.caption%] " />
+		<input class="button-secondary inputbutton" type="submit" value=" {%search.submit.caption%} " />
 		</div>
 		</form>		
 	</div>
 </div>
 <div id="pagebody">
 	<div class="wrapper">
-	<div class="container"><p>[%holy.bible.introduction%]</p><div class="gallery"></div><p>[%holy.bible.introduction1%]</p>
+	<div class="container"><p>{%holy.bible.introduction%}</p><div class="gallery"></div><p>{%holy.bible.introduction1%}</p>
 		<div class="column">
-		<h2>[%holy.bible.old-testament%]</h2>
+		<h2>{%holy.bible.old-testament%}</h2>
 		{%old-testament%}</div>
 		<div class="column">
-		<h2>[%holy.bible.new-testament%]</h2>
+		<h2>{%holy.bible.new-testament%}</h2>
 		{%new-testament%}</div>
 		<a class="clear-fix"></a>
 	</div>
 	<div class="sidebar">
-		<label>[%holy.book.find-and-reading%]</label>
+		<label>{%holy.book.find-and-reading%}</label>
 	<ul>
-		<li><select name="old_book" id="old_book"><option value="0">[%holy.bible.old-testament%]</option></select><select name="old_book_chapter" id="old_book_chapter"><option value="0">[%holy.book.select%]</option></select></li>
-		<li><select name="new_book" id="new_book"><option value="0">[%holy.bible.new-testament%]</option></select><select name="new_book_chapter" id="new_book_chapter"><option value="0">[%holy.book.select%]</option></select></li>
+		<li><select name="old_book" id="old_book"><option value="0">{%holy.bible.old-testament%}</option></select><select name="old_book_chapter" id="old_book_chapter"><option value="0">{%holy.book.select%}</option></select></li>
+		<li><select name="new_book" id="new_book"><option value="0">{%holy.bible.new-testament%}</option></select><select name="new_book_chapter" id="new_book_chapter"><option value="0">{%holy.book.select%}</option></select></li>
 	</ul>
 
 	<script type="text/javascript">
@@ -149,29 +149,29 @@ $(function(){
 
 
 	<form method="post" onsubmit="return invite()">
-	<div class="container"><label for="email">[%invite.confirm.caption%]</label>
-	<textarea class="text" rows="3" cols="33" id="email" name="email" onfocus="this.value=''">[%invite.email.default.tips%]</textarea>
-	<input class="button-secondary" id="invite_button" type="submit" value=" [%invite.submit.caption%] " />
+	<div class="container"><label for="email">{%invite.confirm.caption%}</label>
+	<textarea class="text" rows="3" cols="33" id="email" name="email" onfocus="this.value=''">{%invite.email.default.tips%}</textarea>
+	<input class="button-secondary" id="invite_button" type="submit" value=" {%invite.submit.caption%} " />
 	<span id="invite-message"> </span>
 	</div>
 	</form>
 	
-	<label>[%subscribe.plan%]</label>
+	<label>{%subscribe.plan%}</label>
 	<form method="post" onsubmit="return subscribe();">
 	<ul>
-		<li><input type="checkbox" id="bible" name="bible" value="bible" checked="checked"/>  <label for="bible">[%subscribe.bible.plan%]</label></li>
-		<li><input type="checkbox" id="article" name="article" value="article" checked="checked"/>  <label for="article">[%subscribe.article.plan%]</label></li>
+		<li><input type="checkbox" id="bible" name="bible" value="bible" checked="checked"/>  <label for="bible">{%subscribe.bible.plan%}</label></li>
+		<li><input type="checkbox" id="article" name="article" value="article" checked="checked"/>  <label for="article">{%subscribe.article.plan%}</label></li>
 	</ul>
 	<div class="container">
-		<textarea class="text" rows="3" cols="33" id="toemail" name="toemail" onfocus="this.value=''">[%subscribe.email.default.tips%]</textarea>
-		<input class="button-secondary" id="subscribe_button" type="submit" value=" [%subscribe.submit.caption%] " />
+		<textarea class="text" rows="3" cols="33" id="toemail" name="toemail" onfocus="this.value=''">{%subscribe.email.default.tips%}</textarea>
+		<input class="button-secondary" id="subscribe_button" type="submit" value=" {%subscribe.submit.caption%} " />
 		<span id="subscribe-message"></span>
 	</div>
 	</form>
 	
-	<label>[%holy.bible.download%]</label>
+	<label>{%holy.bible.download%}</label>
 	<ul>
-		<li><a href="/bible.pdf" title="[%holy.bible.chinese.download%]">[%holy.bible.chinese.download%]</a></li>
+		<li><a href="/bible.pdf" title="{%holy.bible.chinese.download%}">{%holy.bible.chinese.download%}</a></li>
 		<li><a href="/English-Standard-Version.pdf" title="English Standard Version">English Standard Version</a></li>
 		<li><a href="/New-International-Version.pdf" title="New International Version">New International Version</a></li>
 	</ul>
@@ -184,11 +184,11 @@ $(function(){
 <div id="footer">
 	<div class="wrapper">
 		<p>
-			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
-			<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
-			<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
-			<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
- 			<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
+			<a href="[%LINK:suggestion%]">{%footer.report-a-site-bug%}</a> |
+			<a href="[%LINK:help%]">{%footer.privacy%}</a> |
+			<a href="[%LINK:user/register%]">{%footer.register%}</a> |
+			<a href="[%LINK:bible/api%]">{%footer.api%}</a> |
+ 			<a href="[%LINK:feed%]" class="rsslink">{%footer.updates-rss%}</a>
 		</p>
 	</div>
 </div>

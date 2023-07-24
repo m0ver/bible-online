@@ -76,7 +76,7 @@ public class login extends AbstractApplication {
             String user_field = cookie.value()
                     + "<input class=\"text\" id=\"username\" name=\"username\" type=\"hidden\" value=\""
                     + cookie.value()
-                    + "\"/>  <a href=\"javascript:void(0)\" onclick=\"restoreField()\">[%login.user.change%]</a>";
+                    + "\"/>  <a href=\"javascript:void(0)\" onclick=\"restoreField()\">[%login.user.change%}</a>";
 
             this.setVariable("user_field", user_field);
         } else {
@@ -173,10 +173,6 @@ public class login extends AbstractApplication {
         this.setAction("oauth2callback", "oAuth2callback");
         this.setAction("oauth2_github_callback", "oAuth2GithubCallback");
 
-        this.setSharedVariable("error", "");
-        this.setSharedVariable("service", "");
-        this.setSharedVariable("application.summary", "");
-
         TextFileLoader loader = new TextFileLoader();
         loader.setInputStream(login.class
                 .getResourceAsStream("/clients_secrets.json"));
@@ -234,6 +230,10 @@ public class login extends AbstractApplication {
 
         this.setText("page.welcome.hello", (username == null || username.trim()
                 .length() == 0) ? "" : username + "，");
+
+        this.setVariable("error", "");
+        this.setVariable("service", "");
+        this.setVariable("application.summary", "");
     }
 
     public String toImage() {
@@ -462,7 +462,6 @@ public class login extends AbstractApplication {
 
         Reforward reforward = new Reforward(http_request, http_response);
         this.setVariable("from", reforward.getFromURL());
-        System.out.println("From:" + reforward.getFromURL());
         try {
             Session session = http_request.getSession();
             if (session.getAttribute("usr") == null)

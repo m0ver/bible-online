@@ -70,13 +70,6 @@ public class search extends AbstractApplication {
 
         this.setAction("bible/search", "query");
         this.setAction("bible/advsearch", "advanced");
-
-        this.setSharedVariable("TEMPLATES_DIR", "/themes");
-        this.setSharedVariable("keyword", "");
-        this.setSharedVariable("start", "0");
-        this.setSharedVariable("end", "0");
-        this.setSharedVariable("size", "0");
-        this.setSharedVariable("value", "");
     }
 
     @Override
@@ -141,6 +134,13 @@ public class search extends AbstractApplication {
 
         this.setText("page.welcome.hello", (username == null || username.trim()
                 .length() == 0) ? "" : username + "，");
+
+        this.setVariable("TEMPLATES_DIR", "/themes");
+        this.setVariable("keyword", "");
+        this.setVariable("start", "0");
+        this.setVariable("end", "0");
+        this.setVariable("size", "0");
+        this.setVariable("value", "");
     }
 
     @Override

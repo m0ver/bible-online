@@ -40,24 +40,6 @@ public class register extends AbstractApplication {
     public void init() {
         // TODO Auto-generated method stub
         this.setAction("user/register", "post");
-
-        this.setSharedVariable("error", "");
-        this.setSharedVariable("lastname", "");
-        this.setSharedVariable("firstname", "");
-        this.setSharedVariable("city", "");
-        this.setSharedVariable("postcode", "");
-
-        this.setSharedVariable("gender.male", "");
-        this.setSharedVariable("gender.female", "");
-        this.setSharedVariable("gender.security", "");
-
-        this.setSharedVariable("telephone", "");
-
-        this.setSharedVariable("nickname", "");
-        this.setSharedVariable("email", "");
-        this.setSharedVariable("password", "");
-        this.setSharedVariable("info", "");
-        this.setSharedVariable("display", "block");
     }
 
     @Override
@@ -110,6 +92,24 @@ public class register extends AbstractApplication {
 
         this.setText("page.welcome.hello", (username == null || username.trim()
                 .length() == 0) ? "" : username + "，");
+
+        this.setVariable("error", "");
+        this.setVariable("lastname", "");
+        this.setVariable("firstname", "");
+        this.setVariable("city", "");
+        this.setVariable("postcode", "");
+
+        this.setVariable("gender.male", "");
+        this.setVariable("gender.female", "");
+        this.setVariable("gender.security", "");
+
+        this.setVariable("telephone", "");
+
+        this.setVariable("nickname", "");
+        this.setVariable("email", "");
+        this.setVariable("password", "");
+        this.setVariable("info", "");
+        this.setVariable("display", "block");
     }
 
     public Object post() {

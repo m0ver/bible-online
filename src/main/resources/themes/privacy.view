@@ -29,23 +29,23 @@ $(function(){
 });
 </script>
 <![endif]-->
-<title>[%page.condition.title%] - [%application.title%]</title>
+<title>{%page.condition.title%} - {%application.title%}</title>
 </head>
 <body>
 <div id="header">
 	<div class="wrapper">
-		<h1><a href="/">[%application.title%]</a></h1>
-		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
+		<h1><a href="/">{%application.title%}</a></h1>
+		<p class="welcome">{%page.welcome.hello%}{%page.welcome.caption%}  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">{%application.language.name%}</a> | {%user.profile%} {%user.status%}</p>
 		<ul>
-			<li><a href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
-			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
-			<li id="download"><a href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+			<li><a href='[%LINK:bible%]' title="{%navigator.bible.caption%}">{%navigator.bible.caption%}</a></li>
+			<li><a href='[%LINK:dashboard%]' title="{%navigator.controller.caption%}">{%navigator.controller.caption%}</a></li>
+			<li id="download"><a href='[%LINK:suggestion%]' title="{%navigator.help.caption%}">{%navigator.help.caption%}</a></li>
 		</ul>
 	</div>
 </div>
 <div id="headline">
 	<div class="wrapper">
-		<h2>[%page.condition.title%]</h2>
+		<h2>{%page.condition.title%}</h2>
 	</div>
 </div>
 
@@ -103,7 +103,7 @@ $(function(){
 		
 		<h4>更多信息</h4>
 		
-		<p>有关 本系统 的<a href="[%LINK:help/condition%]">使用条款</a>，请参阅<a href="[%LINK:help/condition%]">此处</a>。</p>
+		<p>有关 本系统 的<a href="{%LINK:help/condition%}">使用条款</a>，请参阅<a href="{%LINK:help/condition%}">此处</a>。</p>
 		
 		<p>有关隐私保护惯例的详细信息，请访问<a href="#privacypolicy.html">完整隐私政策</a>。有关产品或帐户的问题，请参阅<a href="#">InGod.asia 帮助</a>页面。</p>
 		
@@ -115,11 +115,11 @@ $(function(){
 <div id="footer">
 	<div class="wrapper">
 		<p>
-			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
-			<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
-			<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
-			<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
- 			<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
+			<a href="[%LINK:suggestion%]">{%footer.report-a-site-bug%}</a> |
+			<a href="[%LINK:help%]">{%footer.privacy%}</a> |
+			<a href="[%LINK:user/register%]">{%footer.register%}</a> |
+			<a href="[%LINK:bible/api%]">{%footer.api%}</a> |
+ 			<a href="[%LINK:feed%]" class="rsslink">{%footer.updates-rss%}</a>
 		</p>
 	</div>
 </div>

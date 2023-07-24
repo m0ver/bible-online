@@ -359,7 +359,7 @@ public class error extends AbstractApplication {
         this.setTemplate(new Template() {
 
             Map<String, Variable<?>> variables = Variables
-                    .getInstance();
+                    .getInstance(app.getLocale().toString()).getVariables();
             private String template_path;
 
             @Override

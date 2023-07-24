@@ -30,8 +30,8 @@
 		profileMenu=new Menu();
 		languageMenu=new Menu();
 		
-		//profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/settings%]'","caption":"[%page.language-setting.title%]"});
-		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"[%page.logout.caption%]"});
+		//profileMenu.appendItem({"action":"javascript:location.href='{%LINK:user/settings%}'","caption":"{%page.language-setting.title%}"});
+		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"{%page.logout.caption%}"});
 		
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'","caption":"English(UK)"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'","caption":"English(US)"});
@@ -66,59 +66,59 @@ $(function(){
 });
 </script>
 <![endif]-->
-<title>[%page.register.title%] - [%application.title%]</title>
+<title>{%page.register.title%} - {%application.title%}</title>
 </head>
 <body>
 <div id="header">
 	<div class="wrapper">
-		<h1><a href="/">[%application.title%]</a></h1>
-		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
+		<h1><a href="/">{%application.title%}</a></h1>
+		<p class="welcome">{%page.welcome.hello%}{%page.welcome.caption%}  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">{%application.language.name%}</a> | {%user.profile%} {%user.status%}</p>
 		<ul>
-			<li><a class="current" href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
-			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
-			<li id="download"><a href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+			<li><a class="current" href='[%LINK:bible%]' title="{%navigator.bible.caption%}">{%navigator.bible.caption%}</a></li>
+			<li><a href='[%LINK:dashboard%]' title="{%navigator.controller.caption%}">{%navigator.controller.caption%}</a></li>
+			<li id="download"><a href='[%LINK:suggestion%]' title="{%navigator.help.caption%}">{%navigator.help.caption%}</a></li>
 		</ul>
 	</div>
 </div>
 <div id="headline">
 	<div class="wrapper">
-		<h2>[%page.register.title%]</h2>
+		<h2>{%page.register.title%}</h2>
 	</div>
 </div>
 
 <div id="pagebody">
 	<div class="wrapper standard">
-			<p class="bbcrumb"><a href="/"> &#8250; </a> [%register%]</p>
+			<p class="bbcrumb"><a href="/"> &#8250; </a> {%register%}</p>
 	</div>
 	<div class="wrapper standard">
 			{%info%}
 			<form class="form-columns" method="post" action="[%LINK:user/register%]" style="display:{%display%}">
-			<p><span class="required">*</span>[%register.required-fields%]</p>
-			<p>[%register.tips%]</p>
-			<h3 class="header-border">[%register.account-details%]</h3>
+			<p><span class="required">*</span>{%register.required-fields%}</p>
+			<p>{%register.tips%}</p>
+			<h3 class="header-border">{%register.account-details%}</h3>
 			<!-- Screenname -->
 			<ul id="register">
 				<li>{%error%}</li>
-				<li><label for="nickname">[%register.screen-name.caption%] <input class="text" name="nickname" id="nickname" value="{%nickname%}" type="text" /> <span class="required">*</span> </label></li>
-				<li><label for="email">[%register.email.caption%] <span class="required">*</span> <input class="text" name="email" id="email" value="{%email%}" maxlength="255" type="text" /></label></li>
-				<li><label for="password">[%register.password.caption%] <span class="required">*</span> <input class="text" name="password" id="password" value="" maxlength="40" type="password" />
+				<li><label for="nickname">{%register.screen-name.caption%} <input class="text" name="nickname" id="nickname" value="{%nickname%}" type="text" /> <span class="required">*</span> </label></li>
+				<li><label for="email">{%register.email.caption%} <span class="required">*</span> <input class="text" name="email" id="email" value="{%email%}" maxlength="255" type="text" /></label></li>
+				<li><label for="password">{%register.password.caption%} <span class="required">*</span> <input class="text" name="password" id="password" value="" maxlength="40" type="password" />
 				(Must be between 6-12 characters) </label></li>
-				<li><label for="password-confirmation">[%register.confirm-password.caption%] <span class="required">*</span> <input class="text" name="up_password_confirmation" id="password-confirmation" value="" maxlength="40" type="password" /></label></li>
+				<li><label for="password-confirmation">{%register.confirm-password.caption%} <span class="required">*</span> <input class="text" name="up_password_confirmation" id="password-confirmation" value="" maxlength="40" type="password" /></label></li>
 				<li><hr /></li>
-				<li><label for="last-name">[%register.last-name.caption%] <span class="required">*</span>
+				<li><label for="last-name">{%register.last-name.caption%} <span class="required">*</span>
 					<input class="text" name="last-name" id="last-name" value="{%lastname%}" type="text" /></label></li>
-				<li><label for="first-name">[%register.first-name.caption%] <span class="required">*</span> 
+				<li><label for="first-name">{%register.first-name.caption%} <span class="required">*</span>
 					<input class="text" name="first-name" id="first-name" value="{%firstname%}" type="text" /></label></li>
-				<li>[%register.gender.caption%] <span class="required">*</span> 
-					<label><input type="radio" name="gender" value="0" checked="{%gender.male%}" /> [%user.gender.MALE%]</label>
-					<label><input type="radio" name="gender" value="1" checked="{%gender.female%}" /> [%user.gender.FEMALE%]</label>
-					<label><input type="radio" name="gender" value="2" checked="{%gender.security%}" /> [%user.gender.SECURITY%]</label>
+				<li>{%register.gender.caption%} <span class="required">*</span>
+					<label><input type="radio" name="gender" value="0" checked="{%gender.male%}" /> {%user.gender.MALE%}</label>
+					<label><input type="radio" name="gender" value="1" checked="{%gender.female%}" /> {%user.gender.FEMALE%}</label>
+					<label><input type="radio" name="gender" value="2" checked="{%gender.security%}" /> {%user.gender.SECURITY%}</label>
 					</li>
-				<li><label for="city">[%register.city.caption%] <span class="required">*</span>
+				<li><label for="city">{%register.city.caption%} <span class="required">*</span>
 					<input class="text" name="city" id="city" value="{%city%}" type="text" /></label></li>
-				<li><label for="country">[%register.country-region.caption%] <span class="required">*</span>
+				<li><label for="country">{%register.country-region.caption%} <span class="required">*</span>
 					<select name="country" id="country" class="wide" onchange="setCountry(true); setAffirmativeConsent(this.value);">
-							<option value="SELECT">[%register.select.country%]</option>
+							<option value="SELECT">{%register.select.country%}</option>
 							<option value="US">United States</option>
 							<option value="AU">Australia</option>
 							<option value="IO">British Indian Ocean</option>
@@ -126,11 +126,11 @@ $(function(){
 							<option value="CN">China</option>
 							<option value="EN">English</option>
 					</select></label></li>
-				<li><label for="zip-postal-code">[%register.postal-code.caption%] <span class="required">*</span>
+				<li><label for="zip-postal-code">{%register.postal-code.caption%} <span class="required">*</span>
 					<input class="text" name="zip-postal-code" id="zip-postal-code" value="{%postcode%}" type="text" /></label></li>
-				<li><label>[%register.phone.caption%]<span class="required"></span>
+				<li><label>{%register.phone.caption%}<span class="required"></span>
 					<input class="text" name="telephone" id="telephone" value="{%telephone%}" type="text" /></label></li>
-				<li><input class="button-secondary" value="[%register%]" type="submit" /></li>
+				<li><input class="button-secondary" value="{%register%}" type="submit" /></li>
 			</ul>
 			</form>
 			<div class="line-space"></div>
@@ -141,11 +141,11 @@ $(function(){
 <div id="footer">
 	<div class="wrapper">
 		<p>
-			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
-			<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
-			<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
-			<a href="[%LINK:bible/api%]">[%footer.api%]</a> |
- 			<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
+			<a href="[%LINK:suggestion%]">{%footer.report-a-site-bug%}</a> |
+			<a href="[%LINK:help%]">{%footer.privacy%}</a> |
+			<a href="[%LINK:user/register%]">{%footer.register%}</a> |
+			<a href="[%LINK:bible/api%]">{%footer.api%}</a> |
+ 			<a href="[%LINK:feed%]" class="rsslink">{%footer.updates-rss%}</a>
 		</p>
 	</div>
 </div>

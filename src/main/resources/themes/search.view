@@ -35,8 +35,8 @@
 		profileMenu=new Menu();
 		languageMenu=new Menu();
 		
-		//profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/settings%]'","caption":"[%page.language-setting.title%]"});
-		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"[%page.logout.caption%]"});
+		//profileMenu.appendItem({"action":"javascript:location.href='{%LINK:user/settings%}'","caption":"{%page.language-setting.title%}"});
+		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"{%page.logout.caption%}"});
 		
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'","caption":"English(UK)"});
 		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'","caption":"English(US)"});
@@ -81,24 +81,24 @@ $(function(){
 });
 </script>
 <![endif]-->
-<title>{%search.title%} [%application.title%][%search.submit.caption%]</title>
+<title>{%search.title%} {%application.title%}{%search.submit.caption%}</title>
 </head>
 <body>
 <div id="header">
 	<div class="wrapper">
-		<h1><a href="/">[%application.title%]</a></h1>
-		<p class="welcome">[%page.welcome.hello%][%page.welcome.caption%]  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">[%application.language.name%]</a> | {%user.profile%} {%user.status%}</p>
+		<h1><a href="/">{%application.title%}</a></h1>
+		<p class="welcome">{%page.welcome.hello%}{%page.welcome.caption%}  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">{%application.language.name%}</a> | {%user.profile%} {%user.status%}</p>
 		<ul>
-			<li><a class="current" href='[%LINK:bible%]' title="[%navigator.bible.caption%]">[%navigator.bible.caption%]</a></li>
-			<li><a href='[%LINK:dashboard%]' title="[%navigator.controller.caption%]">[%navigator.controller.caption%]</a></li>
-			<li id="download"><a href='[%LINK:suggestion%]' title="[%navigator.help.caption%]">[%navigator.help.caption%]</a></li>
+			<li><a class="current" href='[%LINK:bible%]' title="{%navigator.bible.caption%}">{%navigator.bible.caption%}</a></li>
+			<li><a href='[%LINK:dashboard%]' title="{%navigator.controller.caption%}">{%navigator.controller.caption%}</a></li>
+			<li id="download"><a href='[%LINK:suggestion%]' title="{%navigator.help.caption%}">{%navigator.help.caption%}</a></li>
 		</ul>
 	</div>
 </div>
 
 <div id="headline">
 	<div class="wrapper">
-		<h2>[%page.search.title%]</h2>
+		<h2>{%page.search.title%}</h2>
 	</div>
 </div>
 
@@ -108,11 +108,11 @@ $(function(){
 			<form name="sitesearch" id="sitesearch" action="[%LINK:bible/search%]" method="post">
 			<div class="i-font">
 				<input size="50" class="text" autocomplete="off" maxlength="2048" value="{%keyword%}" id="keyword" name="keyword" />
-				<input class="button inputbutton" type="submit" value=" [%search.submit.caption%] " /> <a href="[%LINK:bible/advsearch%]/{%keyword%}">[%search.advanced.mode%]</a>
+				<input class="button inputbutton" type="submit" value=" {%search.submit.caption%} " /> <a href="{%LINK:bible/advsearch%}/{%keyword%}">{%search.advanced.mode%}</a>
 			</div>
 			</form>
 			
-			<div class="search-tips">[%search.info%]</div>
+			<div class="search-tips">{%search.info%}</div>
 			
 			{%value%}
 			
@@ -123,11 +123,11 @@ $(function(){
 <div id="footer">
 	<div class="wrapper">
 		<p>
-			<a href="[%LINK:suggestion%]">[%footer.report-a-site-bug%]</a> | 
-			<a href="[%LINK:help%]">[%footer.privacy%]</a> | 
-			<a href="[%LINK:user/register%]">[%footer.register%]</a> | 
-			<a href="[%LINK:bible/api%]">[%footer.api%]</a> | 
- 			<a href="[%LINK:feed%]" class="rsslink">[%footer.updates-rss%]</a>
+			<a href="[%LINK:suggestion%]">{%footer.report-a-site-bug%}</a> |
+			<a href="[%LINK:help%]">{%footer.privacy%}</a> |
+			<a href="[%LINK:user/register%]">{%footer.register%}</a> |
+			<a href="[%LINK:bible/api%]">{%footer.api%}</a> |
+ 			<a href="[%LINK:feed%]" class="rsslink">{%footer.updates-rss%}</a>
 		</p>
 	</div>
 </div>
