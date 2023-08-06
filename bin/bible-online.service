@@ -1,14 +1,20 @@
 [Unit]
-Description=Bible online web server
+Description=Bible Online Web Server
 After=network.target
 Before=nextcloud-web.service
 
 [Service]
 ExecStart=/home/james/bible-online/bin/dispatcher start --import org.tinystruct.system.NettyHttpServer --server-port 777
-Type=notify
+Type=simple
 Restart=always
 WorkingDirectory=/home/james/bible-online
 EnvironmentFile=/etc/environment
+# User=james
+# Group=james
+# Add resource limits if necessary
+# LimitMEMLOCK=...
+# LimitNOFILE=...
+# Add logging configuration if needed
 
 [Install]
 WantedBy=default.target
