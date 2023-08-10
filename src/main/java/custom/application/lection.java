@@ -152,7 +152,7 @@ public class lection extends AbstractApplication {
     }
 
     public Object viewByName(int chapterId, int partId) throws ApplicationException {
-        String bookName = (String) this.context.getAttribute("REQUEST_ACTION");
+        String bookName = (String) this.context.getAttribute("REQUEST_PATH");
 
         if (bookName.indexOf('/') != -1)
             bookName = bookName.split("/")[0];
@@ -180,7 +180,7 @@ public class lection extends AbstractApplication {
 
         String host = String.valueOf(this.context.getAttribute("HTTP_HOST"));
         // remove the default language for action
-        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + this.context.getAttribute("REQUEST_ACTION").toString());
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + this.context.getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 
         Session session = request.getSession(); //@TODO

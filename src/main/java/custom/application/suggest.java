@@ -92,7 +92,7 @@ public class suggest extends AbstractApplication {
 
         this.setVariable("error", "");
         this.setVariable("value", html.toString());
-        this.setVariable("action", this.config.get("default.base_url") + this.context.getAttribute("REQUEST_ACTION").toString());
+        this.setVariable("action", this.config.get("default.base_url") + this.context.getAttribute("REQUEST_PATH").toString());
 
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
@@ -152,7 +152,7 @@ public class suggest extends AbstractApplication {
             logger.severe(e.getMessage());
             this.setVariable("error", "<div class=\"error\">" + this.getProperty("suggestion.send.failure") + "</div>");
         }
-        this.setVariable("action", this.context.getAttribute("HTTP_HOST") + this.context.getAttribute("REQUEST_ACTION").toString());
+        this.setVariable("action", this.context.getAttribute("HTTP_HOST") + this.context.getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {

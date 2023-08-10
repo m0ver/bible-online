@@ -340,7 +340,7 @@ public class error extends AbstractApplication {
         this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
         this.response.setStatus(ResponseStatus.NOT_FOUND);
 
-        this.setVariable("action", this.config.get("default.base_url") + this.context.getAttribute("REQUEST_ACTION").toString());
+        this.setVariable("action", this.config.get("default.base_url") + this.context.getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 
         Session session = this.request.getSession();

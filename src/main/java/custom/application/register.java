@@ -125,7 +125,7 @@ public class register extends AbstractApplication {
             this.setVariable("error", "<div class=\"error\">" + e.getMessage() + "</div>");
         }
 
-        this.setVariable("action", this.config.get("default.base_url") + this.context.getAttribute("REQUEST_ACTION").toString());
+        this.setVariable("action", this.config.get("default.base_url") + this.context.getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
@@ -169,7 +169,7 @@ public class register extends AbstractApplication {
         key.setValue(keyValue);
         response.addHeader(Header.SET_COOKIE.toString(), key);
 
-        this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_ACTION").toString());
+        this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (null != session.getAttribute("usr")) {

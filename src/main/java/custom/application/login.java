@@ -106,7 +106,7 @@ public class login extends AbstractApplication {
 
         String host = String.valueOf(this.context.getAttribute("HTTP_HOST"));
         // remove the default language for action
-        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + this.context.getAttribute("REQUEST_ACTION").toString());
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + this.context.getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {

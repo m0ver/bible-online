@@ -97,7 +97,7 @@ public class index extends AbstractApplication {
 
     public Object start() {
         Request request = (Request) this.context.getAttribute(HTTP_REQUEST);
-        this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_ACTION").toString());
+        this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
 
         Session session = request.getSession();
