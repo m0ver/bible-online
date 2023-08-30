@@ -16,8 +16,8 @@
 @import url("{%TEMPLATES_DIR%}/style/ie.css?9");
 </style>
 <![endif]-->
-<link href="{%LINK:bible/feed%}/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 " type="application/rss+xml" rel="alternate" />
-<link href="{%LINK:bible/feed%}/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 " type="application/atom+xml" rel="alternate" />
+<link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 " type="application/rss+xml" rel="alternate" />
+<link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 " type="application/atom+xml" rel="alternate" />
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/timer.js" charset="utf-8"></script>
