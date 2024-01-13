@@ -19,10 +19,9 @@ import custom.objects.User;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Table;
+import org.tinystruct.http.Request;
+import org.tinystruct.http.Session;
 import org.tinystruct.mail.SimpleMail;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import java.util.Locale;
 
@@ -54,8 +53,8 @@ public class password extends AbstractApplication {
 	{
 		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_PATH").toString());
 		
-		HttpServletRequest request = (HttpServletRequest) this.context.getAttribute(HTTP_REQUEST);
-		HttpSession session = request.getSession();
+		Request request = (Request) this.context.getAttribute(HTTP_REQUEST);
+		Session session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
 			this.usr = (User) session.getAttribute("usr");
 			

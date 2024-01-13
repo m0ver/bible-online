@@ -177,6 +177,21 @@ public class lection extends AbstractApplication {
         if (chapterId == 0) chapterId = 1;
 
         Request request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        book book = new book();
+
+        String lang = this.getLocale().toString();
+        if (lang.equalsIgnoreCase("en_GB")) {
+            lang = "en_US";
+        }
+
+        Table table = book.findWith("WHERE book_id=? AND language=?",
+                new Object[]{bookId, lang});
+        if (table.size() > 0) {
+            Row row = table.get(0);
+            book.setData(row);
+        }
+
+        this.setVariable(new DataVariable("book", book), true);
 
         String host = String.valueOf(this.context.getAttribute("HTTP_HOST"));
         // remove the default language for action
@@ -195,23 +210,6 @@ public class lection extends AbstractApplication {
             this.setVariable("user.profile", "");
             this.setVariable("scripts", "");
         }
-
-        book book = new book();
-        String lang = this.getLocale().toString();
-
-        if (lang.equalsIgnoreCase("en_GB")) {
-            lang = "en_US";
-        }
-
-        Table table = book.findWith("WHERE book_id=? AND language=?",
-                new Object[]{bookId, lang});
-
-        if (table.size() > 0) {
-            Row row = table.get(0);
-            book.setData(row);
-        }
-
-        this.setVariable(new DataVariable("book", book), true);
 
         bible bible = new bible();
         bible.setTableName("zh_CN");

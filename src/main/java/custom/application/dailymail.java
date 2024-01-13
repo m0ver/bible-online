@@ -27,8 +27,8 @@ import org.tinystruct.system.scheduling.Scheduler;
 import org.tinystruct.system.scheduling.SchedulerTask;
 import org.tinystruct.system.scheduling.TimeIterator;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
