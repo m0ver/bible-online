@@ -24,8 +24,7 @@
           rel="stylesheet"/>
     <!--[if IE]>
     <style type="text/css">
-@import url("{%TEMPLATES_DIR%}/style/ie.css?9");
-
+    @import url("{%TEMPLATES_DIR%}/style/ie.css?9");
     </style>
     <![endif]-->
     <link href="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}" title="{%book.bookName%} | 第{%chapterid%}章 "
@@ -124,12 +123,17 @@
 		};
 		
 		var hash=[];
+		var description=[];
 		location.hash = location.hash.replace(/up,+/g,'');
 		if(location.hash!='') {
 			hash = location.hash.substring(1).split(',');
 			for(var index=0;index < hash.length;index++) {
-				$("#documentation .column li:eq("+hash[index]+")").addClass('selected');
+				element = $("#documentation .column li:eq("+hash[index]+")");
+				element.addClass('selected');
+				description.push(element.text());
 			}
+
+			if(description.length > 0) document.querySelector('meta[property="og:description"]').setAttribute("content", description.join(''));
 		}
 
 		$("#documentation .column li").click(function(event){
@@ -140,15 +144,17 @@
 			if(element.hasClass('selected')){
 			  element.removeClass('selected');
 			  hash.remove(element.index()+"");
+			  description.remove(element.text());
 			}
 			else {
 			  element.addClass('selected');
 			  hash.push(element.index()+"");
+			  description.push(element.text());
 			}
 			
 			if(hash.length > 0) location.hash = hash.join(',');
+			if(description.length > 0) document.querySelector('meta[property="og:description"]').setAttribute("content", description.join(''));
 		});
-
 	});
 	
 	$(function(){
