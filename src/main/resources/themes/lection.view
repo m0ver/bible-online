@@ -165,7 +165,7 @@
 	});
 	
 	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-22425440-1']);
+	_gaq.push(['_setAccount', '392100062']);
 	_gaq.push(['_trackPageview']);
 	(function() {
 	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -190,6 +190,13 @@
     });
     </script>
     <![endif]-->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M4N6DS4N');</script>
+    <!-- End Google Tag Manager -->
     <title>{%book.bookName%} | 第{%chapterid%}章 | {%holy.bible%}</title>
 </head>
 <body itemscope="" itemtype="http://schema.org/WebPage" data-role="page">
