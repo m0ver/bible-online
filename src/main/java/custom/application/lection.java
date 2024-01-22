@@ -20,6 +20,7 @@ import custom.objects.bible;
 import custom.objects.book;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
+import org.tinystruct.application.SharedVariables;
 import org.tinystruct.data.component.Cache;
 import org.tinystruct.data.component.Field;
 import org.tinystruct.data.component.Row;
@@ -134,7 +135,7 @@ public class lection extends AbstractApplication {
 
         this.setVariable("TEMPLATES_DIR", "/themes");
 
-        this.setVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
+        this.setVariable("keyword", SharedVariables.getInstance().getVariable("keyword") == null ? "" : SharedVariables.getInstance().getVariable("keyword").getValue().toString());
         this.setVariable("metas", "");
     }
 
