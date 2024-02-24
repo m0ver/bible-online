@@ -6,10 +6,10 @@
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
 <meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
-<link rel="alternate" href="http://www.ingod.today{%action%}" hreflang="x-default" />
-<link rel="alternate" href="http://www.ingod.today{%action%}&amp;lang=en-GB" hreflang="en-gb" />
-<link rel="alternate" href="http://www.ingod.today{%action%}&amp;lang=en-US" hreflang="en-us" />
-<link rel="alternate" href="http://www.ingod.today{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
+<link rel="alternate" href="https://www.ingod.today{%action%}" hreflang="x-default" />
+<link rel="alternate" href="https://www.ingod.today{%action%}&amp;lang=en-GB" hreflang="en-gb" />
+<link rel="alternate" href="https://www.ingod.today{%action%}&amp;lang=en-US" hreflang="en-us" />
+<link rel="alternate" href="https://www.ingod.today{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
 <link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"></script>
@@ -132,7 +132,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 			
 			{%value%}
 			
-			</div>
+		</div>
 	</div>
 </div>
 

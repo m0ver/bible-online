@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta property="og:title" content="{%book.bookName%} | 第{%chapterid%}章 | {%holy.bible%}"/>
     <meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
-    <meta property="og:image" content="http://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png"/>
+    <meta property="og:image" content="https://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png"/>
     <meta property="og:site_name" content="{%application.title%}"/>
     <meta property="og:description" content="{%application.description%}"/>
     <meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)"/>
-    <link href="http://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
-    <link href="http://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+    <link href="https://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="https://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
     <link rel="canonical" href="{%base_url%}{%book.bookName%}/{%chapterid%}"/>
     <link rel="alternate" href="{%action%}" hreflang="x-default"/>
     <link rel="alternate" href="{%action%}&amp;lang=en-GB" hreflang="en-gb"/>
