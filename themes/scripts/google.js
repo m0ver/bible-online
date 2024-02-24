@@ -566,7 +566,7 @@ window.listener = {};
 
 		if (l) {
 			//$document.location.href="keyword.jsp?keyword="+(keyword);
-			var location = 'https:' == document.location.protocol ? 'https://www.ingod.today' : '');
+			var location = 'https:' == document.location.protocol ? 'https://www.ingod.today' : '';
 			l.open("POST", location + "/?q=bible/keywords", true);
 			l.setRequestHeader("Content-Type",
 					"application/x-www-form-urlencoded;charset=UTF-8");
