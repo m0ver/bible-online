@@ -30,6 +30,7 @@ import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Builder;
 import org.tinystruct.handler.Reforward;
 import org.tinystruct.http.*;
+import org.tinystruct.http.client.HttpRequestBuilder;
 import org.tinystruct.system.template.variable.ObjectVariable;
 import org.tinystruct.system.util.StringUtilities;
 import org.tinystruct.system.util.TextFileLoader;
