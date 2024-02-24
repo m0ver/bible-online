@@ -34,7 +34,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static org.tinystruct.http.Constants.HTTP_REQUEST;
 import static org.tinystruct.http.Constants.HTTP_RESPONSE;
@@ -334,7 +333,7 @@ public class error extends AbstractApplication {
         return null;
     }
 
-    public String not_found() throws ApplicationException {
+    public error not_found() throws ApplicationException {
         final error app = this;
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
         this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
@@ -436,7 +435,7 @@ public class error extends AbstractApplication {
             }
         });
 
-        return this.getOutputText();
+        return this;
     }
 
     public void process() throws ApplicationException {
