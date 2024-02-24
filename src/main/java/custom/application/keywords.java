@@ -22,6 +22,7 @@ import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.http.Method;
 import org.tinystruct.http.Request;
+import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.util.StringUtilities;
 
 import java.io.UnsupportedEncodingException;
@@ -35,7 +36,6 @@ public class keywords extends AbstractApplication {
     @Override
     public void init() {
         // TODO Auto-generated method stub
-        this.setAction("bible/keywords", "list");
     }
 
     @Override
@@ -44,6 +44,7 @@ public class keywords extends AbstractApplication {
         return null;
     }
 
+    @Action("bible/keywords")
     public String list() throws ApplicationException {
         String keyword;
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);

@@ -26,6 +26,7 @@ import org.tinystruct.http.Request;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.ResponseStatus;
 import org.tinystruct.http.Session;
+import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.template.variable.DataType;
 import org.tinystruct.system.template.variable.Variable;
 import org.tinystruct.system.util.TextFileLoader;
@@ -315,8 +316,6 @@ public class error extends AbstractApplication {
     @Override
     public void init() {
         // TODO Auto-generated method stub
-        this.setAction("error", "process");
-        this.setAction("404", "not_found");
     }
 
     @Override
@@ -333,6 +332,7 @@ public class error extends AbstractApplication {
         return null;
     }
 
+    @Action("404")
     public error not_found() throws ApplicationException {
         final error app = this;
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
@@ -438,6 +438,7 @@ public class error extends AbstractApplication {
         return this;
     }
 
+    @Action("process")
     public void process() throws ApplicationException {
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
         this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
