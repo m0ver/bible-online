@@ -133,7 +133,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 			<div class="gallery"></div>
 		</div>
 		<div class="sidebar">
-			<p><a href="/?lang={%LANGUAGE%}"> &#8250; </a>  {%login.tips.text%}  </p>
+			<p><a href="/?lang={%LANGUAGE_TAG%}"> &#8250; </a>  {%login.tips.text%}  </p>
 			<form class="form-columns" method="post" action="/?q=user/login&amp;from={%from%}" onsubmit="return login()">
 				<div> {%error%} </div>
 				<ul id="login">
