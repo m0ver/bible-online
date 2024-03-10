@@ -27,6 +27,7 @@ import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Element;
 import org.tinystruct.http.*;
+import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.security.Authentication;
 import org.tinystruct.system.security.Credential;
 import org.tinystruct.system.template.variable.DataVariable;
@@ -42,10 +43,6 @@ public class lection extends AbstractApplication {
 
     @Override
     public void init() {
-        this.setAction("bible", "read");
-        this.setAction("bible/api", "api");
-        this.setAction("bible/feed", "feed");
-
         book book = new book();
 
         try {
@@ -161,6 +158,7 @@ public class lection extends AbstractApplication {
         return this.read(Integer.parseInt((this.data.get(bookName).toString())), chapterId, partId);
     }
 
+    @Action("bible")
     public Object read() throws ApplicationException {
         return this.read(1);
     }
@@ -337,6 +335,7 @@ public class lection extends AbstractApplication {
         return this;
     }
 
+    @Action("bible/feed")
     public String feed() throws ApplicationException {
         return this.feed(1, 1);
     }
@@ -622,6 +621,7 @@ public class lection extends AbstractApplication {
         return xml.toString();
     }
 
+    @Action("bible/api")
     public Object api() throws ApplicationException {
         boolean valid = false;
 
