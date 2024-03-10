@@ -38,6 +38,7 @@ import org.tinystruct.handler.Reforward;
 import org.tinystruct.http.Request;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.Session;
+import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.util.StringUtilities;
 
 import java.io.IOException;
@@ -61,15 +62,8 @@ public class search extends AbstractApplication {
     private Response response;
     private User usr;
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        System.out.println(new search().createRequestString("hello", 1));
-    }
-
     @Override
     public void init() {
-
-        this.setAction("bible/search", "query");
-        this.setAction("bible/advsearch", "advanced");
     }
 
     @Override
@@ -149,6 +143,7 @@ public class search extends AbstractApplication {
         return null;
     }
 
+    @Action("bible/search")
     public Object query() throws ApplicationException {
         this.request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
@@ -227,8 +222,9 @@ public class search extends AbstractApplication {
         String SQL = "SELECT bible.*,book.book_name FROM " + bible.getTableName()
                 + " as bible left join " + book.getTableName()
                 + " as book on bible.book_id=book.book_id where " + condition
-                + " order by bible.book_id,bible.chapter_id limit " + startIndex + ","
+                + " order by bible.book_id,bible.chapter_id,bible.part_id limit " + startIndex + ","
                 + pageSize;
+
         String look = "SELECT count(bible.id) AS size FROM " + bible.getTableName()
                 + " as bible left join " + book.getTableName()
                 + " as book on bible.book_id=book.book_id where " + condition;
@@ -451,6 +447,7 @@ public class search extends AbstractApplication {
         return xml.toString();
     }
 
+    @Action("bible/advsearch")
     public Object advanced(String query) throws ApplicationException {
         if (query == null || query.trim().length() == 0) {
             return this;
