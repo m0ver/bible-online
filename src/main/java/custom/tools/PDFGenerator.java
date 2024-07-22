@@ -32,7 +32,7 @@ public class PDFGenerator extends AbstractApplication {
 
     @Action("English-Standard-Version.pdf")
     public void createESV() throws ApplicationException, DocumentException, IOException {
-        create("New-International-Version.pdf", "ESV");
+        create("English-Standard-Version.pdf", "ESV");
     }
 
     @Action("CUV.pdf")
