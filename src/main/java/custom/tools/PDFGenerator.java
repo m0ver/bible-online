@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Iterator;
 
+import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Field;
 import org.tinystruct.data.component.Row;
@@ -33,22 +34,25 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 
 import custom.objects.bible;
 import custom.objects.book;
+import org.tinystruct.system.annotation.Action;
 
-public class PDFGenerator {
+public class PDFGenerator extends AbstractApplication {
 
-	/**
-	 * @param args
-	 * @throws ApplicationException 
-	 * @throws DocumentException 
-	 * @throws IOException 
-	 */
-	public static void main(String[] args) throws DocumentException, ApplicationException, IOException {
-		// TODO Auto-generated method stub
-		new PDFGenerator().create("New-International-Version.pdf","NIV");
-		new PDFGenerator().create("English-Standard-Version.pdf","ESV");
-		new PDFGenerator().create("bible.pdf","zh_CN");
+	@Action("New-International-Version.pdf")
+	public void createNIV() throws ApplicationException, DocumentException, IOException {
+		create("New-International-Version.pdf", "NIV");
 	}
-	
+
+	@Action("English-Standard-Version.pdf")
+	public void createESV() throws ApplicationException, DocumentException, IOException {
+		create("New-International-Version.pdf", "ESV");
+	}
+
+	@Action("CUV.pdf")
+	public void createCUV() throws ApplicationException, DocumentException, IOException {
+		create("bible.pdf", "zh_CN");
+	}
+
 	public void create(String fileName, String tableName) throws DocumentException, ApplicationException, IOException
 	{
 	       // step 1
@@ -198,4 +202,21 @@ public class PDFGenerator {
 	}
 
 
+	/**
+	 * Initialize for an application once it's loaded.
+	 */
+	@Override
+	public void init() {
+
+	}
+
+	/**
+	 * Return the version of the application.
+	 *
+	 * @return version
+	 */
+	@Override
+	public String version() {
+		return null;
+	}
 }
