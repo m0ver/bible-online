@@ -201,7 +201,7 @@ public class PDFGenerator extends AbstractApplication {
      */
     @Override
     public void init() {
-
+        this.setTemplateRequired(false);
     }
 
     /**
