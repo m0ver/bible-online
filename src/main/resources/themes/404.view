@@ -220,7 +220,7 @@ $(function(){
 	
 	<label>{%holy.bible.download%}</label>
 	<ul>
-		<li><a href="/bible.pdf" title="{%holy.bible.chinese.download%}">{%holy.bible.chinese.download%}</a></li>
+		<li><a href="/CUV.pdf" title="{%holy.bible.chinese.download%}">{%holy.bible.chinese.download%}</a></li>
 	</ul>
 	</div>
 

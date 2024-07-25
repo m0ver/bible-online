@@ -332,7 +332,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 
             <label>{%holy.bible.download%}</label>
             <ul>
-                <li><a href="/bible.pdf" title="{%holy.bible.chinese.download%}">{%holy.bible.chinese.download%}</a>
+                <li><a href="/CUV-Traditional.pdf" title="{%holy.bible.chinese.download%}">{%holy.bible.chinese.download%}</a>
                 </li>
                 <li><a href="/English-Standard-Version.pdf" title="English Standard Version">English Standard
                     Version</a></li>

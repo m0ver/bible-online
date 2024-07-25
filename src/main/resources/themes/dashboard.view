@@ -157,7 +157,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 	
 	<label>{%holy.bible.download%}</label>
 	<ol>
-		<li><a href="/bible.pdf" title="{%holy.bible.chinese.download%}">{%holy.bible.chinese.download%}</a></li>
+		<li><a href="/CUV.pdf" title="{%holy.bible.chinese.download%}">{%holy.bible.chinese.download%}</a></li>
 	</ol>
 	</div>
 
