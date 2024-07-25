@@ -38,7 +38,7 @@ import java.util.*;
 import static org.tinystruct.http.Constants.HTTP_REQUEST;
 import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
-public class lection extends AbstractApplication {
+public class scripture extends AbstractApplication {
     private final static Cache data = Cache.getInstance();
 
     @Override
@@ -55,7 +55,7 @@ public class lection extends AbstractApplication {
 
                 bookName = book.getBookName().trim();
                 this.setAction(bookName, "viewByName");
-                this.data.set(bookName, book.getBookId());
+                data.set(bookName, book.getBookId());
             }
 
         } catch (ApplicationException e) {
@@ -227,14 +227,20 @@ public class lection extends AbstractApplication {
         this.setVariable("lastchapter", String.valueOf(lastchapterid));
         this.setVariable("nextchapter", String.valueOf(nextchapterid));
 
+        String chinese = "zh-CN";
+        if (lang.equalsIgnoreCase("zh_TW")) {
+            chinese = "zh-TW";
+            bible.setTableName("zh_TW");
+        }
+
         if (this.getLocale().toString().equalsIgnoreCase(Locale.US.toString())) {
             bible.setTableName("NIV");
             this.setVariable("version", "NIV");
-            this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
+            this.setVariable("language.switch", "<a href=\"?lang=" + chinese + "&version=CUV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
         } else if (this.getLocale().toString().equalsIgnoreCase(Locale.UK.toString())) {
             bible.setTableName("KJV");
             this.setVariable("version", "KJV");
-            this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a>");
+            this.setVariable("language.switch", "<a href=\"?lang=" + chinese + "&version=CUV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a>");
         } else {
             this.setVariable("version", "");
             this.setVariable("language.switch", "<a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
@@ -245,20 +251,19 @@ public class lection extends AbstractApplication {
                 case "NIV":
                     bible.setTableName("NIV");
                     this.setVariable("version", "NIV");
-                    this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
+                    this.setVariable("language.switch", "<a href=\"?lang=" + chinese + "&version=CUV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
                     break;
                 case "ESV":
                     bible.setTableName("ESV");
                     this.setVariable("version", "ESV");
-                    this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
+                    this.setVariable("language.switch", "<a href=\"?lang=" + chinese + "&version=CUV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
                     break;
                 case "KJV":
                     bible.setTableName("KJV");
                     this.setVariable("version", "KJV");
-                    this.setVariable("language.switch", "<a href=\"?lang=zh-CN&version=zh-CN&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a>");
+                    this.setVariable("language.switch", "<a href=\"?lang=" + chinese + "&version=CUV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">中文</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a>");
                     break;
                 default:
-                    bible.setTableName("zh_CN");
                     this.setVariable("version", "");
                     this.setVariable("language.switch", "<a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
 

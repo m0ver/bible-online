@@ -78,9 +78,9 @@ public class help extends AbstractApplication {
     }
 
     public Object sitemap() {
-        lection lection = (custom.application.lection) ApplicationManager.get(custom.application.lection.class.getName());
-        lection.init();
-        Map<String, CommandLine> commandLines = lection.getCommandLines();
+        scripture scripture = (scripture) ApplicationManager.get(scripture.class.getName());
+        scripture.init();
+        Map<String, CommandLine> commandLines = scripture.getCommandLines();
         Set<String> list = commandLines.keySet();
         StringBuffer buffer = new StringBuffer();
         buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">");
