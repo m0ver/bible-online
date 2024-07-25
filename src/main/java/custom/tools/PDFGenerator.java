@@ -145,9 +145,6 @@ public class PDFGenerator extends AbstractApplication {
             chapter.setTitle(graph);
             chapter.setBookmarkOpen(false);
 
-            bible m = new bible();
-            m.setTableName(tableName);
-
             int max_chapter = bible.setRequestFields("max(chapter_id) as max_chapter").findWith("WHERE book_id=?", new Object[]{book.getBookId()}).get(0).get(0).get("max_chapter").intValue();
             for (int k = 0; k < max_chapter; k++) {
                 Paragraph title = new Paragraph();
@@ -166,7 +163,7 @@ public class PDFGenerator extends AbstractApplication {
 
                 String where = "WHERE book_id=" + book.getBookId() + " and chapter_id=" + (k + 1) + " order by part_id";
 
-                Table vtable = m.findWith(where, new Object[]{});
+                Table vtable = bible.setRequestFields("*").findWith(where, new Object[]{});
 
                 Paragraph partNode = new Paragraph();
                 partNode.setFirstLineIndent(10.0f);
