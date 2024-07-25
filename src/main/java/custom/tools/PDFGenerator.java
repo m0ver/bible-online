@@ -37,7 +37,12 @@ public class PDFGenerator extends AbstractApplication {
 
     @Action("CUV.pdf")
     public void createCUV() throws ApplicationException, DocumentException, IOException {
-        create("bible.pdf", "zh_CN");
+        create("CUV.pdf", "zh_CN");
+    }
+
+    @Action("CUV-Traditional.pdf")
+    public void createCUVTraditional() throws ApplicationException, DocumentException, IOException {
+        create("CUV-Traditional.pdf", "zh_TW");
     }
 
     public void create(String fileName, String tableName) throws DocumentException, ApplicationException, IOException {
