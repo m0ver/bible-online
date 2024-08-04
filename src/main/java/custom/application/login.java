@@ -31,6 +31,7 @@ import org.tinystruct.data.component.Builder;
 import org.tinystruct.handler.Reforward;
 import org.tinystruct.http.*;
 import org.tinystruct.http.client.HttpRequestBuilder;
+import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.template.variable.ObjectVariable;
 import org.tinystruct.system.util.StringUtilities;
 import org.tinystruct.system.util.TextFileLoader;
@@ -64,6 +65,7 @@ public class login extends AbstractApplication {
     private passport passport;
     private User usr;
 
+    @Action("user/login")
     public Object validate() {
         Request request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
@@ -130,6 +132,7 @@ public class login extends AbstractApplication {
         return this;
     }
 
+    @Action("user/logout")
     public Response logout() {
         Request request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
@@ -166,14 +169,6 @@ public class login extends AbstractApplication {
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
-        this.setAction("user/login", "validate");
-        this.setAction("user/logout", "logout");
-//        this.setAction("validator/code", "toImage");
-        this.setAction("user/account", "execute");
-        this.setAction("oauth2callback", "oAuth2callback");
-        this.setAction("oauth2_github_callback", "oAuth2GithubCallback");
-
         TextFileLoader loader = new TextFileLoader();
         loader.setInputStream(login.class
                 .getResourceAsStream("/clients_secrets.json"));
@@ -237,6 +232,7 @@ public class login extends AbstractApplication {
         this.setVariable("application.summary", "");
     }
 
+    @Action("validator/code")
     public String toImage() {
         Request request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
@@ -283,6 +279,7 @@ public class login extends AbstractApplication {
         return _builder.toString();
     }
 
+    @Action("oauth2callback")
     public Response oAuth2callback() throws ApplicationException {
         Request request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
@@ -371,6 +368,7 @@ public class login extends AbstractApplication {
         return response;
     }
 
+    @Action("oauth2_github_callback")
     public Response oAuth2GithubCallback() throws ApplicationException {
         Request request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
@@ -455,6 +453,7 @@ public class login extends AbstractApplication {
         return response;
     }
 
+    @Action("user/account")
     public Response execute(String provider) throws ApplicationException {
         Request http_request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
