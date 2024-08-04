@@ -100,45 +100,48 @@ public class passport {
 
         Member member = new Member();
         Table members = member.findWith("WHERE user_id=?", new Object[]{this.currentUser.getId()});
-
-        if (members.size() > 0) {
+        if (!members.isEmpty()) {
             member.setData(members.get(0));
+        } else {
+            member.setUserId(currentUser.getId());
+            member.setGroupId("386e27c2-5db6-4f63-b28d-68a4adec2fd6");
+            member.append();
+        }
 
-            Group group = new Group();
-            group.setId(member.getGroupId());
-            group.findOneById();
+        Group group = new Group();
+        group.setId(member.getGroupId());
+        group.findOneById();
 
-            String[] roles = group.getRoles().split(",");
+        String[] roles = group.getRoles().split(",");
 
-            Vector<String> rights = new Vector<String>();
-            for (String roleId : roles) {
-                Role role = new Role();
-                role.setId(roleId);
-                role.findOneById();
+        Vector<String> rights = new Vector<String>();
+        for (String roleId : roles) {
+            Role role = new Role();
+            role.setId(roleId);
+            role.findOneById();
 
-                String[] _rights = role.getRights().split(",");
+            String[] _rights = role.getRights().split(",");
 
-                for (String rightId : _rights) {
-                    if (!rights.contains(rightId))
-                        rights.add(rightId);
-                }
+            for (String rightId : _rights) {
+                if (!rights.contains(rightId))
+                    rights.add(rightId);
             }
+        }
 
-            this.session.setAttribute("rights", rights);
+        this.session.setAttribute("rights", rights);
 
-            Log log = new Log();
-            Table logs = log.findWith("WHERE user_id=?", new Object[]{this.currentUser.getId()});
-            if (logs.size() > 0) {
-                log.setData(logs.get(0));
-                log.setDate(new Date());
-                log.update();
-            } else {
-                log.setUserId(this.currentUser.getId());
-                log.setAction("Logined Successful");
-                log.setActionType(0);
-                log.setDate(new Date());
-                log.append();
-            }
+        Log log = new Log();
+        Table logs = log.findWith("WHERE user_id=?", new Object[]{this.currentUser.getId()});
+        if (logs.size() > 0) {
+            log.setData(logs.get(0));
+            log.setDate(new Date());
+            log.update();
+        } else {
+            log.setUserId(this.currentUser.getId());
+            log.setAction("Logined Successful");
+            log.setActionType(0);
+            log.setDate(new Date());
+            log.append();
         }
 
     }
