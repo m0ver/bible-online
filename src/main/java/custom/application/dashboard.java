@@ -26,6 +26,7 @@ import org.tinystruct.handler.Reforward;
 import org.tinystruct.http.Request;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.Session;
+import org.tinystruct.system.annotation.Action;
 
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -45,8 +46,6 @@ public class dashboard extends AbstractApplication {
     @Override
     public void init() {
         // TODO Auto-generated method stub
-        this.setAction("dashboard", "index");
-        this.setAction("dashboard/profile", "condition");
     }
 
     @Override
@@ -77,6 +76,7 @@ public class dashboard extends AbstractApplication {
         this.setText("footer.updates-rss");
     }
 
+    @Action("dashboard")
     public Object index() throws ApplicationException {
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
