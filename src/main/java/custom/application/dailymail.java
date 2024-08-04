@@ -80,20 +80,18 @@ public class dailymail extends AbstractApplication implements ServletContextList
 						plan plan = new plan();
 						
 						Date date = new Date();
-						plan.findOneByKey("date", "2010-"+format.format(date)
-								.toString());
+						plan.findOneByKey("date", "2010-"+ format.format(date));
 
 						if (plan.getTask() == null) {
 							throw new ApplicationException("Task is not ready!");
 						}
 
 						// start
-
 						TaskDescriptor task = new TaskDescriptor();
 
 						bible bible = new bible();
 						
-						if(locale.toString().equalsIgnoreCase(Locale.US.toString())) 
+						if(locale.equalsIgnoreCase(Locale.US.toString()))
 							bible.setTableName("NIV");
 						else
 							bible.setTableName("zh_CN");
@@ -129,7 +127,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 						if (bibles.size() > 0)
 							res.add(bibles);
 						
-						StringBuffer buffer=new StringBuffer();
+						StringBuilder buffer=new StringBuilder();
 						buffer.append("<div style=\"background: none repeat scroll 0 0 -moz-field; border: 1px solid threedshadow; margin: 2em auto; padding: 2em;\">");
 						buffer.append("	<div>");
 						buffer.append("		<a style=\"-moz-margin-end: 0; -moz-margin-start: 0.6em; float: right; margin-bottom: 0; margin-top: 0;\">");
@@ -162,7 +160,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 								book.setData(row);
 							}
 							
-							buffer.append("<h3><a href=\""+mail.getLink("bible")+"/"+book.getBookId()+"\">"+book.getBookName()+"</a></h3>");
+							buffer.append("<h3><a href=\"").append(mail.getLink("bible")).append("/").append(book.getBookId()).append("\">").append(book.getBookName()).append("</a></h3>");
 							
 							Iterator<bible> iter = bs.iterator();
 							chapterId = 0;
@@ -205,21 +203,19 @@ public class dailymail extends AbstractApplication implements ServletContextList
 
 						subscription subscription = new subscription();
 						Table table = subscription.findWith("WHERE available = 1", new Object[]{});
-						Iterator<Row> iterator1 = table.iterator();
-						while (iterator1.hasNext()) {
-							subscription.setData(iterator1.next());
-							
+						for (Row fields : table) {
+							subscription.setData(fields);
+
 							footer.setAttribute("style",
-											"padding:10px;font-size:12px;color:#ccc;");
-							footer.setData("让我们一起来养成每天读经的好习惯...<br />如果您不能正常访问此站点(<a href=\"https://www.ingod.today\">https://www.ingod.today</a>)，请尝试通过VPN或运行代理程序(Freegate7.01)后，再进行访问，给您带来不便请谅解！如果你不想收到此邮件，请点击<a href=\"https://www.ingod.today/?q=services/unsubscribe/"+subscription.getId()+"\">退订</a>。");
+									"padding:10px;font-size:12px;color:#ccc;");
+							footer.setData("让我们一起来养成每天读经的好习惯...<br />如果您不能正常访问此站点(<a href=\"https://www.ingod.today\">https://www.ingod.today</a>)，请尝试通过VPN或运行代理程序(Freegate7.01)后，再进行访问，给您带来不便请谅解！如果你不想收到此邮件，请点击<a href=\"https://www.ingod.today/?q=services/unsubscribe/" + subscription.getId() + "\">退订</a>。");
 
 							themail.setBody(container.toString() + footer.toString());
 							themail.setTo(subscription.getEmail());
-							
+
 							try {
 								themail.send();
-							}
-							catch(ApplicationException e){
+							} catch (ApplicationException e) {
 								subscription.setAvailable(false);
 								subscription.update();
 							}
