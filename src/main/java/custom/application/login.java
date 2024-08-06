@@ -317,8 +317,6 @@ public class login extends AbstractApplication {
             oauth2_response = flow
                     .newTokenRequest(request.getParameter("code"))
                     .setRedirectUri(this.getLink("oauth2callback")).execute();
-
-            System.out.println("Ok:" + oauth2_response.toString());
         } catch (IOException e1) {
             // TODO Auto-generated catch block
             throw new ApplicationException(e1.getMessage(), e1);
@@ -335,14 +333,14 @@ public class login extends AbstractApplication {
             URLRequest urlRequest = new URLRequest(new URL("https://www.googleapis.com/oauth2/v1/userinfo"));
             byte[] bytes = urlRequest.send(builder);
 
-            Builder struct = new Builder();
-            struct.parse(new String(bytes));
+            Builder userinfo = new Builder();
+            userinfo.parse(new String(bytes));
+            System.out.println("Ok:" + userinfo);
 
-            if (struct.get("email") != null) {
+            if (userinfo.get("email") != null) {
                 this.usr = new User();
-                this.usr.setEmail(struct.get("email").toString());
-
-                if (this.usr.findOneByKey("email", this.usr.getEmail()).size() == 0) {
+                this.usr.setEmail(userinfo.get("email").toString());
+                if (this.usr.findOneByKey("email", this.usr.getEmail()).isEmpty()) {
                     usr.setPassword("");
                     usr.setUsername(usr.getEmail());
                     usr.setLastloginTime(new Date());
@@ -354,8 +352,7 @@ public class login extends AbstractApplication {
                         .setLoginAsUser(this.usr.getId());
 
                 reforward.setDefault(URLDecoder.decode(this.getVariable("from")
-                        .getValue().toString(), "utf8"));
-
+                        .getValue().toString(), StandardCharsets.UTF_8));
                 return reforward.forward();
             }
         } catch (IOException e) {
