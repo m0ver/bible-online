@@ -409,37 +409,42 @@ public class login extends AbstractApplication {
                     String value = token.substring(index + 1);
                     map.put(key, value);
                 }
-                HttpRequestBuilder builder = new HttpRequestBuilder();
-                Headers headers = new Headers();
-                headers.add(Header.AUTHORIZATION.set("Bearer " + map.get("access_token")));
-                builder.setHeaders(headers);
-                builder.setParameter("scope", map.get("scope"));
 
-                urlRequest.setUrl(new URL("https://api.github.com/user"));
-                byte[] bytes = urlRequest.send(builder);
+                if(!map.isEmpty()) {
+                    HttpRequestBuilder builder = new HttpRequestBuilder();
+                    Headers headers = new Headers();
+                    headers.add(Header.AUTHORIZATION.set("Bearer " + map.get("access_token")));
+                    builder.setHeaders(headers);
+                    builder.setParameter("scope", map.get("scope"));
 
-                Builder struct = new Builder();
-                struct.parse(new String(bytes));
+                    urlRequest.setUrl(new URL("https://api.github.com/user"));
+                    byte[] bytes = urlRequest.send(builder);
 
-                if (struct.get("email") != null) {
-                    this.usr = new User();
-                    this.usr.setEmail(struct.get("email").toString());
+                    Builder struct = new Builder();
+                    struct.parse(new String(bytes));
 
-                    if (this.usr.findOneByKey("email", this.usr.getEmail()).size() == 0) {
-                        usr.setPassword("");
-                        usr.setUsername(usr.getEmail());
-                        usr.setLastloginTime(new Date());
-                        usr.setRegistrationTime(new Date());
-                        usr.append();
+                    if (struct.get("email") != null) {
+                        this.usr = new User();
+                        this.usr.setEmail(struct.get("email").toString());
+
+                        if (this.usr.findOneByKey("email", this.usr.getEmail()).size() == 0) {
+                            usr.setPassword("");
+                            usr.setUsername(usr.getEmail());
+                            usr.setLastloginTime(new Date());
+                            usr.setRegistrationTime(new Date());
+                            usr.append();
+                        }
+
+                        new passport(request, response, "waslogined")
+                                .setLoginAsUser(this.usr.getId());
+
+                        reforward.setDefault(URLDecoder.decode(this.getVariable("from")
+                                .getValue().toString(), "utf8"));
+
+                        return reforward.forward();
                     }
-
-                    new passport(request, response, "waslogined")
-                            .setLoginAsUser(this.usr.getId());
-
-                    reforward.setDefault(URLDecoder.decode(this.getVariable("from")
-                            .getValue().toString(), "utf8"));
-
-                    return reforward.forward();
+                } else {
+                    throw new ApplicationException("Invalid Response.");
                 }
             } catch (IOException e) {
                 throw new ApplicationException(e.getMessage(), e);
