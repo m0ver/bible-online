@@ -43,6 +43,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.util.*;
 
@@ -380,15 +381,13 @@ public class login extends AbstractApplication {
         if (this.getVariable("github_client_secrets") == null) {
             if (clients.get("github") instanceof Builder) {
                 client = (Builder) clients.get("github");
-
-                System.out.println(client.get("client_secret"));
-                System.out.println(client.get("client_id"));
                 this.setVariable(new ObjectVariable("github_client_secrets",
                         client), false);
             }
-        } else
+        } else {
             client = (Builder) this.getVariable("github_client_secrets")
                     .getValue();
+        }
 
         if (client != null) {
             try {
@@ -410,12 +409,16 @@ public class login extends AbstractApplication {
                     map.put(key, value);
                 }
 
-                if(!map.isEmpty()) {
+                if (!map.isEmpty()) {
                     HttpRequestBuilder builder = new HttpRequestBuilder();
-                    Headers headers = new Headers();
-                    headers.add(Header.AUTHORIZATION.set("Bearer " + map.get("access_token")));
-                    builder.setHeaders(headers);
-                    builder.setParameter("scope", map.get("scope"));
+                    if (map.get("access_token") != null) {
+                        Headers headers = new Headers();
+                        headers.add(Header.AUTHORIZATION.set("Bearer " + map.get("access_token")));
+                        builder.setHeaders(headers);
+                    }
+                    if (map.get("scope") != null) {
+                        builder.setParameter("scope", map.get("scope"));
+                    }
 
                     urlRequest.setUrl(new URL("https://api.github.com/user"));
                     byte[] bytes = urlRequest.send(builder);
@@ -439,7 +442,7 @@ public class login extends AbstractApplication {
                                 .setLoginAsUser(this.usr.getId());
 
                         reforward.setDefault(URLDecoder.decode(this.getVariable("from")
-                                .getValue().toString(), "utf8"));
+                                .getValue().toString(), StandardCharsets.UTF_8));
 
                         return reforward.forward();
                     }
