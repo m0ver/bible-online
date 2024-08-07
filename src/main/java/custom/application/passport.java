@@ -96,7 +96,7 @@ public class passport {
         username.setHttpOnly(true);
         username.setSecure(true);
         this.response.addHeader(Header.SET_COOKIE.name(), username);
-        this.response.addHeader(Header.SET_COOKIE.name(), "jsessionid = " + this.session.getId());
+        this.response.addHeader(Header.SET_COOKIE.name(), "JSESSIONID = " + this.session.getId());
 
         Member member = new Member();
         Table members = member.findWith("WHERE user_id=?", new Object[]{this.currentUser.getId()});
@@ -132,7 +132,7 @@ public class passport {
 
         Log log = new Log();
         Table logs = log.findWith("WHERE user_id=?", new Object[]{this.currentUser.getId()});
-        if (logs.size() > 0) {
+        if (!logs.isEmpty()) {
             log.setData(logs.get(0));
             log.setDate(new Date());
             log.update();
