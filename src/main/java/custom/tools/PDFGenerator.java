@@ -154,10 +154,8 @@ public class PDFGenerator extends AbstractApplication {
             for (int k = 0; k < max_chapter; k++) {
                 Paragraph title = new Paragraph();
 
-                if (tableName.equalsIgnoreCase("zh_CN"))
-                    title.add(new Chunk("第" + (k + 1) + "章", NormalStyle));
-                else
-                    title.add(new Chunk("Chapter " + (k + 1), NormalStyle));
+                if (tableName.equalsIgnoreCase("zh_CN")) title.add(new Chunk("第" + (k + 1) + "章", NormalStyle));
+                else title.add(new Chunk("Chapter " + (k + 1), NormalStyle));
 
                 LineSeparator line = new LineSeparator();
                 line.setLineColor(BaseColor.GRAY);
@@ -188,15 +186,11 @@ public class PDFGenerator extends AbstractApplication {
             }
 
             document.add(chapter);
-
-
             i++;
         }
 
         document.close();
-
     }
-
 
     /**
      * Initialize for an application once it's loaded.
