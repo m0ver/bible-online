@@ -114,21 +114,21 @@ public class passport {
 
         String[] roles = group.getRoles().split(",");
 
-        Vector<String> rights = new Vector<String>();
+        Vector<String> permissions = new Vector<String>();
         for (String roleId : roles) {
             Role role = new Role();
             role.setId(roleId);
             role.findOneById();
 
-            String[] _rights = role.getRights().split(",");
+            String[] _permissions = role.getRights().split(",");
 
-            for (String rightId : _rights) {
-                if (!rights.contains(rightId))
-                    rights.add(rightId);
+            for (String permissionId : _permissions) {
+                if (!permissions.contains(permissionId))
+                    permissions.add(permissionId);
             }
         }
 
-        this.session.setAttribute("rights", rights);
+        this.session.setAttribute("permissions", permissions);
 
         Log log = new Log();
         Table logs = log.findWith("WHERE user_id=?", new Object[]{this.currentUser.getId()});
@@ -155,7 +155,7 @@ public class passport {
 
         this.session.removeAttribute(this.sessionName);
         this.session.removeAttribute("usr");
-        this.session.removeAttribute("rights");
+        this.session.removeAttribute("permissions");
     }
 
     public boolean checkUser() throws ApplicationException {
@@ -211,8 +211,6 @@ public class passport {
     }
 
     public boolean login() throws ApplicationException {
-//		String lastformName=org.mover.system.Security.ValidateCode.getLastFormName();
-
         if (this.request.getParameter("username") == null) {
             throw new ApplicationException(this.resource.getLocaleString("login.username.invalid"));
         } else {
@@ -228,11 +226,6 @@ public class passport {
         } else {
             this.currentUser.setPassword(new Security(this.currentUser.getUsername()).encode(this.request.getParameter("password")));
         }
-		
-/*		if(this.communicator.getParameter(lastformName)==null||this.communicator.getParameter(lastformName).trim().length()==0)
-		{
-			throw new ApplicationException(this.resource.getLocaleString("login.authorized.invalid"));
-		}*/
 
 //		if(!validateCode())
 //		{
