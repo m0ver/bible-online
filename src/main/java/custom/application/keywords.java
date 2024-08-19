@@ -65,7 +65,7 @@ public class keywords extends AbstractApplication {
         }
 
         assert keyword != null;
-        keyword = keyword.replaceAll("%|_", "");
+        keyword = keyword.replaceAll("[%_]", "");
 
         StringBuilder k = new StringBuilder();
         StringBuilder v = new StringBuilder();
@@ -75,7 +75,7 @@ public class keywords extends AbstractApplication {
         String javascript_block;
         String keywordlist, keywordvisit;
 
-        if (!keyword.equals("")) {
+        if (!keyword.isEmpty()) {
             keyword _keyword = new keyword();
             Table findTable = _keyword.findWith(
                     "WHERE keyword LIKE ? ORDER BY visit LIMIT 0,7",
@@ -85,14 +85,14 @@ public class keywords extends AbstractApplication {
             for (Row fields : findTable) {
                 currentRow = fields;
                 k_item = currentRow.getFieldInfo("keyword").stringValue();
-                if (k.toString().trim().length() > 0) {
+                if (!k.toString().trim().isEmpty()) {
                     k.append(",\"").append(k_item).append("\"");
                 } else {
                     k = new StringBuilder("\"" + k_item + "\"");
                 }
 
                 v_item = currentRow.getFieldInfo("visit").stringValue();
-                if (v.toString().trim().length() > 0) {
+                if (!v.toString().trim().isEmpty()) {
                     v.append(",\"").append(v_item).append("\"");
                 } else {
                     v = new StringBuilder("\"" + v_item + "\"");
