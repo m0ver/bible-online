@@ -31,6 +31,7 @@ import org.tinystruct.http.Request;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.Session;
 import org.tinystruct.mail.SimpleMail;
+import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.util.URLResourceLoader;
 
 import java.net.MalformedURLException;
@@ -50,6 +51,7 @@ public class sender extends AbstractApplication {
     private Reforward reforward;
     private User user;
 
+    @Action("services/report")
     public boolean send() throws ApplicationException {
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
         if (this.request.getParameter("id") == null
@@ -101,6 +103,7 @@ public class sender extends AbstractApplication {
         return true;
     }
 
+    @Action("friends/invite")
     public String invite() throws ApplicationException {
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
         Session session = request.getSession();
@@ -146,7 +149,7 @@ public class sender extends AbstractApplication {
         return "true";
     }
 
-
+    @Action("services/bible/update")
     public boolean update(String id) throws ApplicationException {
         report report = new report();
         report.setId(id);
@@ -183,19 +186,10 @@ public class sender extends AbstractApplication {
     }
 
     public void init() {
-        // TODO Auto-generated method stub
-        this.setAction("friends/invite", "invite");
-        this.setAction("services/report", "send");
-        this.setAction("services/bible/update", "update");
-        this.setAction("services/getword", "getWord");
-        this.setAction("services/translate", "getTranslate");
-        this.setAction("services/saveword", "saveWord");
-        this.setAction("services/getwords", "getAllWords");
-        this.setAction("services/deleteword", "deleteWord");
-
         this.setTemplateRequired(false);
     }
 
+    @Action("services/getword")
     public String getWord(String word) throws MalformedURLException, ApplicationException {
         String url = "http://dict.youdao.com/fsearch?client=deskdict&keyfrom=chrome.extension&q=" + word + "&pos=-1&doctype=xml&vendor=unknown&appVer=3.1.17.4208&le=eng";
 
@@ -254,6 +248,7 @@ public class sender extends AbstractApplication {
         return loader.getContent().toString();
     }
 
+    @Action("services/deleteword")
     public void deleteWord(String id) throws ApplicationException {
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
         Session session = request.getSession();
@@ -272,6 +267,7 @@ public class sender extends AbstractApplication {
         } else throw new ApplicationException("Permission Denied");
     }
 
+    @Action("services/getwords")
     public Object getAllWords() {
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
         Session session = request.getSession();
@@ -302,6 +298,7 @@ public class sender extends AbstractApplication {
         return null;
     }
 
+    @Action("services/translate")
     public StringBuilder getTranslate(String words) throws MalformedURLException, ApplicationException {
         String url = "http://fanyi.youdao.com/translate?client=deskdict&keyfrom=chrome.extension&xmlVersion=1.1&dogVersion=1.0&ue=utf8&i=" + (words) + "&doctype=xml";
 
