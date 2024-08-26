@@ -22,6 +22,7 @@ import org.tinystruct.data.component.Table;
 import org.tinystruct.http.Request;
 import org.tinystruct.http.Session;
 import org.tinystruct.mail.SimpleMail;
+import org.tinystruct.system.annotation.Action;
 
 import java.util.Locale;
 
@@ -34,7 +35,6 @@ public class password extends AbstractApplication {
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		this.setAction("user/password", "send");
 	}
 
 	@Override
@@ -49,6 +49,7 @@ public class password extends AbstractApplication {
 		this.setText("login.get-password");
 	}
 
+	@Action("user/password")
 	public Object send() throws ApplicationException
 	{
 		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_PATH").toString());
@@ -68,24 +69,25 @@ public class password extends AbstractApplication {
 
 		return this;
 	}
-	
+
+	@Action("user/password")
 	public boolean send(String mailto) throws ApplicationException
 	{
 		User user=new User();
 		Table table=user.findWith("WHERE email=?",new Object[]{mailto});
 		
-		if(table.size()>0)
+		if(!table.isEmpty())
 		{
 			org.tinystruct.data.component.Row row=table.get(0);
 		    try
 		    {
-		    	SimpleMail themail = new SimpleMail();
-		    	themail.setFrom(this.getProperty("mail.default.from"));
-		    	themail.setSubject("密码重置邮件");
-		    	themail.setBody("亲爱的"+row.getFieldInfo("username").stringValue()+"用户，我们刚刚收到您的密码找回请求。为了保证您能及时使用我们提供的服务，请您于24小时内点击此链接重置您的密码。");
-		    	themail.setTo(mailto);
+		    	SimpleMail email = new SimpleMail();
+		    	email.setFrom(this.getProperty("mail.default.from"));
+		    	email.setSubject("密码重置邮件");
+		    	email.setBody("亲爱的"+row.getFieldInfo("username").stringValue()+"用户，我们刚刚收到您的密码找回请求。为了保证您能及时使用我们提供的服务，请您于24小时内点击此链接重置您的密码。");
+		    	email.setTo(mailto);
 		    	
-		    	return themail.send();
+		    	return email.send();
 		    }
 		    catch (Exception ex)
 		    {
