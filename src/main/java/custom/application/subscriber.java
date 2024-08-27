@@ -5,6 +5,7 @@ import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.http.Request;
+import org.tinystruct.system.annotation.Action;
 
 import static org.tinystruct.http.Constants.HTTP_REQUEST;
 
@@ -14,10 +15,10 @@ public class subscriber extends AbstractApplication {
 
     @Override
     public void init() {
-        this.setAction("services/subscribe", "subscribe");
-        this.setAction("services/unsubscribe", "unsubscribe");
+        this.setTemplateRequired(false);
     }
 
+    @Action("services/subscribe")
     public String subscribe() throws ApplicationException {
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
@@ -66,6 +67,7 @@ public class subscriber extends AbstractApplication {
         return "true";
     }
 
+    @Action("services/unsubscribe")
     public boolean unsubscribe(String id) throws ApplicationException {
         subscription subscription = new subscription();
         subscription.setId(id);

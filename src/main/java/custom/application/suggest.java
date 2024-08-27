@@ -22,6 +22,7 @@ import org.tinystruct.ApplicationException;
 import org.tinystruct.http.Request;
 import org.tinystruct.http.Session;
 import org.tinystruct.mail.SimpleMail;
+import org.tinystruct.system.annotation.Action;
 
 import java.util.Date;
 import java.util.Locale;
@@ -36,8 +37,7 @@ public class suggest extends AbstractApplication {
 
     @Override
     public void init() {
-        this.setAction("suggestion", "send");
-        this.setAction("suggestion/post", "post");
+
     }
 
     @Override
@@ -76,6 +76,7 @@ public class suggest extends AbstractApplication {
         this.setText("suggestion.send.failure");
     }
 
+    @Action("suggestion")
     public Object send() {
         StringBuffer html = new StringBuffer();
 
@@ -110,6 +111,7 @@ public class suggest extends AbstractApplication {
         return this;
     }
 
+    @Action("suggestion/post")
     public Object post() throws ApplicationException {
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
