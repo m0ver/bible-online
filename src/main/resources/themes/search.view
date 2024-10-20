@@ -121,7 +121,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 <div id="pagebody">
 	<div class="wrapper">
 		<div class="col-12">
-			<form name="sitesearch" id="sitesearch" action="[%LINK:bible/search%]&amp;lang={%LANGUAGE_TAG%}" method="post">
+			<form name="sitesearch" id="sitesearch" action="[%LINK:bible/search%]" method="post">
+	        <input type="hidden" name="lang" value="{%LANGUAGE_TAG%}"/>
 			<div class="i-font">
 				<input size="50" class="text" autocomplete="off" maxlength="2048" value="{%keyword%}" id="keyword" name="keyword" />
 				<input class="button inputbutton" type="submit" value=" {%search.submit.caption%} " /> <a href="{%LINK:bible/advsearch%}/{%keyword%}">{%search.advanced.mode%}</a>
