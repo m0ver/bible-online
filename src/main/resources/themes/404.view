@@ -190,7 +190,7 @@ $(function(){
 	
 	<div class="clear"> </div>
 	
-	<form name="f" id="f" action="[%LINK:bible/search%]" method="post">
+	<form name="f" id="f" action="[%LINK:bible/search%]&amp;lang={%LANGUAGE_TAG%}" method="post">
 	<div class="container"><label for="keyword">{%search.confirm.caption%}</label>
 	<input size="20" class="text glass" autocomplete="off" maxlength="2048" value="{%keyword%}" id="keyword" name="keyword"  />
 	<input class="button-secondary inputbutton" type="submit" value=" {%search.submit.caption%} " />
