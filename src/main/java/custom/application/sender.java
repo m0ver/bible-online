@@ -191,7 +191,7 @@ public class sender extends AbstractApplication {
 
     @Action("services/getword")
     public String getWord(String word) throws MalformedURLException, ApplicationException {
-        String url = "http://dict.youdao.com/fsearch?client=deskdict&keyfrom=chrome.extension&q=" + word + "&pos=-1&doctype=xml&vendor=unknown&appVer=3.1.17.4208&le=eng";
+        String url = "http://dict.youdao.com/fsearch?client=deskdict&keyfrom=chrome.extension&q=" + word.trim() + "&pos=-1&doctype=xml&vendor=unknown&appVer=3.1.17.4208&le=eng";
 
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
@@ -207,20 +207,20 @@ public class sender extends AbstractApplication {
             vocabulary vocabulary = new vocabulary();
             vocabulary.setUserId(this.user.getId());
             vocabulary.setDate(LocalDateTime.now());
-            vocabulary.setReferenceLink(this.request.getParameter("referer").toString());
+            vocabulary.setReferenceLink(this.request.getParameter("referer"));
 
             List<Element> phrase = document.getElementsByTagName("return-phrase");
-            if (phrase.size() > 0) {
+            if (!phrase.isEmpty()) {
                 vocabulary.setWord(phrase.get(0).getData());
             }
 
             List<Element> phonetic_symbol = document.getElementsByTagName("phonetic-symbol");
-            if (phonetic_symbol.size() > 0) {
+            if (!phonetic_symbol.isEmpty()) {
                 vocabulary.setPhoneticSymbol(phonetic_symbol.get(0).getData());
             }
 
             List<Element> custom_translation = document.getElementsByTagName("custom-translation");
-            if (custom_translation.size() > 0) {
+            if (!custom_translation.isEmpty()) {
                 StringBuilder buff = new StringBuilder();
 
                 Iterator<Element> citerator = custom_translation.get(0).getElementsByTagName("translation").iterator();
@@ -275,7 +275,7 @@ public class sender extends AbstractApplication {
             this.user = (User) session.getAttribute("usr");
             StringBuffer buffer = new StringBuffer();
             buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
-            buffer.append("<list userId=\"" + this.user.getId() + "\">");
+            buffer.append("<list userId=\"").append(this.user.getId()).append("\">");
             vocabulary vocabulary = new vocabulary();
             try {
                 Table list = vocabulary.findWith("WHERE user_id=? order by date desc limit 0,7", new Object[]{this.user.getId()});
