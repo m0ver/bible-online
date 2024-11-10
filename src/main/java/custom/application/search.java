@@ -45,6 +45,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -126,8 +127,7 @@ public class search extends AbstractApplication {
             username = String.valueOf(this.getVariable("username").getValue());
         }
 
-        this.setText("page.welcome.hello", (username == null || username.trim()
-                .length() == 0) ? "" : username + "，");
+        this.setText("page.welcome.hello", (username == null || username.trim().isEmpty()) ? "" : username + "，");
 
         this.setVariable("TEMPLATES_DIR", "/themes");
         this.setVariable("keyword", "");
@@ -154,7 +154,7 @@ public class search extends AbstractApplication {
     }
 
     public Object query(String query) throws ApplicationException {
-        StringBuffer html = new StringBuffer();
+        StringBuilder html = new StringBuilder();
         String[] keywords;
 
         int page = 1, pageSize = 20;
@@ -162,7 +162,7 @@ public class search extends AbstractApplication {
         this.request = (Request) this.context
                 .getAttribute(HTTP_REQUEST);
         if (this.request.getParameter("page") == null
-                || this.request.getParameter("page").toString().trim().length() <= 0) {
+                || this.request.getParameter("page").trim().isEmpty()) {
             page = 1;
         } else {
             page = Integer.parseInt(this.request.getParameter("page").toString());
@@ -171,7 +171,7 @@ public class search extends AbstractApplication {
         int startIndex = (page - 1) * pageSize;
         this.setVariable("search.title", "无相关结果 - ");
 
-        if (query.trim().length() > 0) {
+        if (!query.trim().isEmpty()) {
             query = StringUtilities.htmlSpecialChars(query);
             if (query.indexOf('|') != -1) {
                 String[] q = query.split("|");
@@ -230,26 +230,23 @@ public class search extends AbstractApplication {
                 + " as book on bible.book_id=book.book_id where " + condition;
 
         Table vtable = bible.find(SQL, _keywords);
-        boolean noResult = vtable.size() > 0;
+        boolean noResult = !vtable.isEmpty();
 
-        if (!noResult && query.length() > 0) {
+        if (!noResult && !query.isEmpty()) {
             try {
                 Table list = book.findWith("WHERE language=? and book_name=?",
                         new Object[]{this.getLocale().toString(), query});
-                if (list.size() > 0) {
+                if (!list.isEmpty()) {
                     this.response = (Response) this.context
                             .getAttribute(HTTP_RESPONSE);
 
                     Reforward reforward = new Reforward(request, response);
-                    query = URLEncoder.encode(query, "utf-8");
+                    query = URLEncoder.encode(query, StandardCharsets.UTF_8);
                     reforward.setDefault(this.context.getAttribute("HTTP_HOST") + query);
                     reforward.forward();
                     return reforward;
                 }
             } catch (ApplicationException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
@@ -302,7 +299,7 @@ public class search extends AbstractApplication {
             ktable = keyword.setRequestFields("id,visit").findWith("WHERE keyword=?",
                     new Object[]{word});
 
-            if (ktable.size() == 0) {
+            if (ktable.isEmpty()) {
                 keyword.setVisit(0);
                 keyword.append();
             } else {
@@ -323,10 +320,8 @@ public class search extends AbstractApplication {
         pager.setEndPageText(this.getProperty("page.end.text"));
         pager.setControlBarText(this.getProperty("page.controlbar.text"));
 
-        html.append("<div class=\"pagination\" style=\"cursor:default\">"
-                + pager.getPageControlBar(actionURL) + "</div>\r\n");
-        html.append("<!-- "
-                + (System.currentTimeMillis() - startTime) + " -->");
+        html.append("<div class=\"pagination\" style=\"cursor:default\">").append(pager.getPageControlBar(actionURL)).append("</div>\r\n");
+        html.append("<!-- ").append(System.currentTimeMillis() - startTime).append(" -->");
 
         int start = page - 1 == 0 ? 1 : (page - 1) * pageSize + 1, end = page
                 * pageSize;
@@ -371,7 +366,7 @@ public class search extends AbstractApplication {
         }
 
         int startIndex = (page - 1) * pageSize;
-        if (query.trim().length() > 0) {
+        if (!query.trim().isEmpty()) {
             keywords = query.split(" ");
         } else {
             return "<result>Error</result>";
@@ -379,7 +374,7 @@ public class search extends AbstractApplication {
 
         String condition = "";
         for (String s : keywords) {
-            if (condition.trim().length() == 0) {
+            if (condition.trim().isEmpty()) {
                 condition = " content like '%" + s + "%' ";
             } else {
                 condition += " or content like '%" + s + "%' ";
@@ -395,7 +390,7 @@ public class search extends AbstractApplication {
 
         bible bible = new bible();
         Table vtable = bible.find(SQL, new Object[]{});
-        noResult = vtable.size() > 0;
+        noResult = !vtable.isEmpty();
 
         /*
          * Row found=bible.findOne(look, new Object[]{});
@@ -417,12 +412,7 @@ public class search extends AbstractApplication {
                     finded = StringUtilities.sign(finded, keywords[j]);
                 }
 
-                xml.append("<item id=\"" + next + "\" chapterid=\""
-                        + field.get("chapter_id").value().toString() + "\" bookid=\""
-                        + field.get("book_id").value().toString() + "\" "
-                        + field.get("book_name").value().toString() + " partid=\""
-                        + field.get("part_id").value().toString() + "\">" + finded
-                        + "</item>\r\n");
+                xml.append("<item id=\"").append(next).append("\" chapterid=\"").append(field.get("chapter_id").value().toString()).append("\" bookid=\"").append(field.get("book_id").value().toString()).append("\" ").append(field.get("book_name").value().toString()).append(" partid=\"").append(field.get("part_id").value().toString()).append("\">").append(finded).append("</item>\r\n");
                 next++;
             }
         }
@@ -434,7 +424,7 @@ public class search extends AbstractApplication {
                     "SELECT id,visit FROM keyword WHERE keyword='" + keywords[k] + "'",
                     new Object[]{});
 
-            if (findRow.size() == 0) {
+            if (findRow.isEmpty()) {
                 keyword.setVisit(0);
                 keyword.append();
             } else {
@@ -449,7 +439,7 @@ public class search extends AbstractApplication {
 
     @Action("bible/advsearch")
     public Object advanced(String query) throws ApplicationException {
-        if (query == null || query.trim().length() == 0) {
+        if (query == null || query.trim().isEmpty()) {
             return this;
         }
         query = StringUtilities.htmlSpecialChars(query);
@@ -458,7 +448,7 @@ public class search extends AbstractApplication {
         this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
 
         if (this.request.getParameter("page") == null
-                || this.request.getParameter("page").toString().trim().length() == 0) {
+                || this.request.getParameter("page").trim().isEmpty()) {
             page = 1;
         } else {
             page = Integer.parseInt(this.request.getParameter("page").toString());
@@ -476,7 +466,7 @@ public class search extends AbstractApplication {
         pager.setCurrentPage(page);
         pager.setListSize(total);
 
-        if (query == null || query.length() > 0) {
+        if (query == null || !query.isEmpty()) {
             this.setVariable("keyword", "");
         } else {
             this.setVariable("keyword", query);
@@ -486,7 +476,7 @@ public class search extends AbstractApplication {
         Document document = this.execute(query, pager.getStartIndex());
         Element root = document.getRoot();
         List<Element> vtable = root.getElementsByTagName("entry");
-        if (vtable.size() == 0) {
+        if (vtable.isEmpty()) {
             this.setVariable("value", "Sorry, we could not get any related results with this keyword! " + StringUtilities.htmlSpecialChars(root.toString()));
             return this;
         }
@@ -497,7 +487,7 @@ public class search extends AbstractApplication {
         next = pager.getStartIndex();// 此位置即为当前页的第一条记录的ID
         // opensearch:totalResults
         StringBuilder html = new StringBuilder();
-        html.append("<ol class=\"searchresults\" start=\"" + next + "\">\r\n");
+        html.append("<ol class=\"searchresults\" start=\"").append(next).append("\">\r\n");
 
         Element element, title, link;
         List<Element> t;
@@ -565,7 +555,7 @@ public class search extends AbstractApplication {
 
     protected String createRequestString(String query, int start)
             throws UnsupportedEncodingException {
-        String encoded_query = URLEncoder.encode(query, "utf8");
+        String encoded_query = URLEncoder.encode(query, StandardCharsets.UTF_8);
 
         return "https://www.googleapis.com/customsearch/v1?" +
                 "key=" + API_KEY +
