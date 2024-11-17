@@ -178,7 +178,7 @@ public class search extends AbstractApplication {
                 query = q[0];
             }
 
-            query = query.trim().replaceAll("%|_","");
+            query = query.trim().replaceAll("%|_", "");
             keywords = query.split(" ");
 
             this.setSharedVariable("keyword", query);
@@ -219,7 +219,7 @@ public class search extends AbstractApplication {
             bible.setTableName(locale.toString());
         }
 
-        String SQL = "SELECT bible.*,book.book_name FROM " + bible.getTableName()
+        String SQL = "SELECT bible.book_id, bible.chapter_id, bible.part_id, bible.content, book.book_name FROM " + bible.getTableName()
                 + " as bible left join " + book.getTableName()
                 + " as book on bible.book_id=book.book_id where " + condition
                 + " order by bible.book_id,bible.chapter_id,bible.part_id limit " + startIndex + ","

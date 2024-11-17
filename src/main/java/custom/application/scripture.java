@@ -127,8 +127,7 @@ public class scripture extends AbstractApplication {
             username = String.valueOf(this.getVariable("username").getValue());
         }
 
-        this.setText("page.welcome.hello", (username == null || username.trim()
-                .length() == 0) ? "" : username + "，", locale);
+        this.setText("page.welcome.hello", (username == null || username.trim().isEmpty()) ? "" : username + "，", locale);
 
         this.setVariable("TEMPLATES_DIR", "/themes");
 
@@ -185,7 +184,7 @@ public class scripture extends AbstractApplication {
 
         Table table = book.findWith("WHERE book_id=? AND language=?",
                 new Object[]{bookId, lang});
-        if (table.size() > 0) {
+        if (!table.isEmpty()) {
             Row row = table.get(0);
             book.setData(row);
         }
