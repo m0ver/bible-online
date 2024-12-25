@@ -68,9 +68,9 @@ public class login extends AbstractApplication {
 
     @Action("user/login")
     public Object validate() {
-        Request request = (Request) this.context
+        Request request = (Request) getContext()
                 .getAttribute(HTTP_REQUEST);
-        Response response = (Response) this.context
+        Response response = (Response) getContext()
                 .getAttribute(HTTP_RESPONSE);
 
         Cookie cookie = StringUtilities.getCookieByName(request.cookies(),
@@ -108,9 +108,9 @@ public class login extends AbstractApplication {
                     + e.getRootCause().getMessage() + "</div>");
         }
 
-        String host = String.valueOf(this.context.getAttribute("HTTP_HOST"));
+        String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
         // remove the default language for action
-        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + this.context.getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
@@ -135,9 +135,9 @@ public class login extends AbstractApplication {
 
     @Action("user/logout")
     public Response logout() {
-        Request request = (Request) this.context
+        Request request = (Request) getContext()
                 .getAttribute(HTTP_REQUEST);
-        Response response = (Response) this.context
+        Response response = (Response) getContext()
                 .getAttribute(HTTP_RESPONSE);
 
         try {
@@ -235,7 +235,7 @@ public class login extends AbstractApplication {
 
     @Action("validator/code")
     public String toImage() {
-        Request request = (Request) this.context
+        Request request = (Request) getContext()
                 .getAttribute(HTTP_REQUEST);
 
         ValidateCode code = new ValidateCode(request);
@@ -282,9 +282,9 @@ public class login extends AbstractApplication {
 
     @Action("oauth2callback")
     public Response oAuth2callback() throws ApplicationException {
-        Request request = (Request) this.context
+        Request request = (Request) getContext()
                 .getAttribute(HTTP_REQUEST);
-        Response response = (Response) this.context
+        Response response = (Response) getContext()
                 .getAttribute(HTTP_RESPONSE);
         Reforward reforward = new Reforward(request, response);
         TokenResponse oauth2_response;
@@ -368,9 +368,9 @@ public class login extends AbstractApplication {
 
     @Action("oauth2_github_callback")
     public Response oAuth2GithubCallback() throws ApplicationException {
-        Request request = (Request) this.context
+        Request request = (Request) getContext()
                 .getAttribute(HTTP_REQUEST);
-        Response response = (Response) this.context
+        Response response = (Response) getContext()
                 .getAttribute(HTTP_RESPONSE);
         Reforward reforward = new Reforward(request, response);
 
@@ -460,9 +460,9 @@ public class login extends AbstractApplication {
 
     @Action("user/account")
     public Response execute(String provider) throws ApplicationException {
-        Request http_request = (Request) this.context
+        Request http_request = (Request) getContext()
                 .getAttribute(HTTP_REQUEST);
-        Response http_response = (Response) this.context
+        Response http_response = (Response) getContext()
                 .getAttribute(HTTP_RESPONSE);
 
         Reforward reforward = new Reforward(http_request, http_response);

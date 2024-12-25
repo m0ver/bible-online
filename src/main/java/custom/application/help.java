@@ -110,7 +110,7 @@ public class help extends AbstractApplication {
 
         buffer.append("</urlset>");
 
-        Response response = (Response) this.context
+        Response response = (Response) getContext()
                 .getAttribute(HTTP_RESPONSE);
 
         ResponseHeaders headers = new ResponseHeaders(response);

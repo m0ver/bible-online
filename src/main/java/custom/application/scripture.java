@@ -57,7 +57,6 @@ public class scripture extends AbstractApplication {
                 this.setAction(bookName, "viewByName");
                 data.set(bookName, book.getBookId());
             }
-
         } catch (ApplicationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -149,7 +148,7 @@ public class scripture extends AbstractApplication {
     }
 
     public Object viewByName(int chapterId, int partId) throws ApplicationException {
-        String bookName = (String) this.context.getAttribute("REQUEST_PATH");
+        String bookName = (String) getContext().getAttribute("REQUEST_PATH");
 
         if (bookName.indexOf('/') != -1)
             bookName = bookName.split("/")[0];
@@ -174,7 +173,7 @@ public class scripture extends AbstractApplication {
         if (bookId == 0) bookId = 1;
         if (chapterId == 0) chapterId = 1;
 
-        Request request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        Request request = (Request) getContext().getAttribute(HTTP_REQUEST);
         book book = new book();
 
         String lang = this.getLocale().toString();
@@ -182,19 +181,27 @@ public class scripture extends AbstractApplication {
             lang = "en_US";
         }
 
-        Table table = book.findWith("WHERE book_id=? AND language=?",
-                new Object[]{bookId, lang});
-        if (!table.isEmpty()) {
-            Row row = table.get(0);
-            book.setData(row);
+        String book_meta_key = "book:" + bookId + ":lang:" + lang;
+        if(data.get(book_meta_key)!=null) {
+            book = (book) data.get(book_meta_key);
+        }
+        else {
+            Table table = book.findWith("WHERE book_id=? AND language=?",
+                    new Object[]{bookId, lang});
+            if (!table.isEmpty()) {
+                Row row = table.get(0);
+                book.setData(row);
+            }
+
+            data.set(book_meta_key, book);
         }
 
         this.setVariable(new DataVariable("book", book), true);
 
-        String host = String.valueOf(this.context.getAttribute("HTTP_HOST"));
+        String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
         // remove the default language for action
-        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + this.context.getAttribute("REQUEST_PATH").toString());
-        this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
         Session session = request.getSession(); //@TODO
         if (session.getAttribute("usr") != null) {
@@ -211,9 +218,16 @@ public class scripture extends AbstractApplication {
 
         bible bible = new bible();
         bible.setTableName("zh_CN");
+        int max_chapter;
 
-        int max_chapter = bible.setRequestFields("max(chapter_id) as max_chapter").findWith("WHERE book_id=?",
-                new Object[]{bookId}).get(0).get(0).get("max_chapter").intValue();
+        String max_chapter_key = "book:" + bookId + ":max_chapter";
+        if (data.get(max_chapter_key) != null) {
+            max_chapter = (int) (data.get(max_chapter_key));
+        } else {
+            max_chapter = bible.setRequestFields("max(chapter_id) as max_chapter").findWith("WHERE book_id=?",
+                    new Object[]{bookId}).get(0).get(0).get("max_chapter").intValue();
+            data.set(max_chapter_key, max_chapter);
+        }
 
         if (chapterId > max_chapter) chapterId = max_chapter;
 
@@ -288,7 +302,7 @@ public class scripture extends AbstractApplication {
                 line = bible.getContent();
 
                 if (line != null) {
-                    if (i == 0 && line.trim().length() > 0)
+                    if (i == 0 && !line.trim().isEmpty())
                         line = "<span class='firstletter'>" + line.charAt(0)
                                 + "</span>" + line.substring(1);
 
@@ -532,7 +546,7 @@ public class scripture extends AbstractApplication {
         root.addElement(channel);
         // end
 
-        Response response = (Response) this.context
+        Response response = (Response) getContext()
                 .getAttribute(HTTP_RESPONSE);
 
 //        this.response.setContentType("text/xml;charset=" + this.config.get("charset"));
@@ -603,7 +617,7 @@ public class scripture extends AbstractApplication {
 
         this.setVariable("maxchapter", String.valueOf(max_chapter));
 
-        xml.append("<?xml version=\"1.0\" encoding=\"").append(this.context.getAttribute("charset")).append("\"?>");
+        xml.append("<?xml version=\"1.0\" encoding=\"").append(getContext().getAttribute("charset")).append("\"?>");
         int lastchapterId = chapterId - 1 <= 0 ? 1 : chapterId - 1;
         int nextchapterId = Math.min(chapterId + 1, max_chapter);
         xml.append("<book id=\"book\" name=\"book\" bookid=\"").append(bookId).append("\" bookname=\"").append(book.getBookName()).append("\" chapterid=\"").append(chapterId).append("\" maxchapter=\"").append(max_chapter).append("\" lastchapter=\"").append(lastchapterId).append("\" nextchapter=\"").append(nextchapterId).append("\">\r\n");
@@ -629,8 +643,8 @@ public class scripture extends AbstractApplication {
     public Object api() throws ApplicationException {
         boolean valid = false;
 
-        Request request = (Request) this.context.getAttribute(HTTP_REQUEST);
-        Response response = (Response) this.context.getAttribute(HTTP_RESPONSE);
+        Request request = (Request) getContext().getAttribute(HTTP_REQUEST);
+        Response response = (Response) getContext().getAttribute(HTTP_RESPONSE);
 
         String s = "Basic realm=\"Login for Bible API\"";
 //        response.setHeader("WWW-Authenticate", s);

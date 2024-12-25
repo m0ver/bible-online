@@ -115,7 +115,7 @@ public class register extends AbstractApplication {
     public Object post() {
         this.setText("register.tips", this.getLink("help"), this.getLink("help/condition"));
 
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
         try {
             if (this.append()) {
                 this.setVariable("info", "<div class=\"info\">" + this.setText("register.success") + "</div>");
@@ -125,7 +125,7 @@ public class register extends AbstractApplication {
             this.setVariable("error", "<div class=\"error\">" + e.getMessage() + "</div>");
         }
 
-        this.setVariable("action", this.config.get("default.base_url") + this.context.getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", this.config.get("default.base_url") + getContext().getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
@@ -163,13 +163,13 @@ public class register extends AbstractApplication {
     public Object post(String keyValue) {
         this.setText("register.tips", this.getLink("help"), this.getLink("help/condition"));
 
-        Response response = (Response) this.context.getAttribute(HTTP_RESPONSE);
+        Response response = (Response) getContext().getAttribute(HTTP_RESPONSE);
         Cookie key = new CookieImpl("key");
         key.setMaxAge(24 * 3600 * 7);
         key.setValue(keyValue);
         response.addHeader(Header.SET_COOKIE.toString(), key);
 
-        this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", String.valueOf(getContext().getAttribute("HTTP_HOST")) + getContext().getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (null != session.getAttribute("usr")) {

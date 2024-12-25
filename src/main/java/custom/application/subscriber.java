@@ -20,7 +20,7 @@ public class subscriber extends AbstractApplication {
 
     @Action("services/subscribe")
     public String subscribe() throws ApplicationException {
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
 
         String mailto = "moverinfo@gmail.com";
         if (this.request.getParameter("toemail") != null

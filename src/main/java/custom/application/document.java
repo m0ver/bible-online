@@ -299,7 +299,7 @@ public class document extends AbstractApplication {
 		root.addElement(channel);
 		// end
 
-		this.response = (Response) this.context
+		this.response = (Response) getContext()
 				.getAttribute(HTTP_RESPONSE);
 		ResponseHeaders headers = new ResponseHeaders(this.response);
 		headers.add(Header.CONTENT_TYPE.set("text/xml;charset="

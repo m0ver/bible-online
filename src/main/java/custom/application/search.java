@@ -145,7 +145,7 @@ public class search extends AbstractApplication {
 
     @Action("bible/search")
     public Object query() throws ApplicationException {
-        this.request = (Request) this.context
+        this.request = (Request) getContext()
                 .getAttribute(HTTP_REQUEST);
         if (this.request.getParameter("keyword") != null)
             return this.query(this.request.getParameter("keyword"));
@@ -159,7 +159,7 @@ public class search extends AbstractApplication {
 
         int page = 1, pageSize = 20;
 
-        this.request = (Request) this.context
+        this.request = (Request) getContext()
                 .getAttribute(HTTP_REQUEST);
         if (this.request.getParameter("page") == null
                 || this.request.getParameter("page").trim().isEmpty()) {
@@ -237,12 +237,12 @@ public class search extends AbstractApplication {
                 Table list = book.findWith("WHERE language=? and book_name=?",
                         new Object[]{this.getLocale().toString(), query});
                 if (!list.isEmpty()) {
-                    this.response = (Response) this.context
+                    this.response = (Response) getContext()
                             .getAttribute(HTTP_RESPONSE);
 
                     Reforward reforward = new Reforward(request, response);
                     query = URLEncoder.encode(query, StandardCharsets.UTF_8);
-                    reforward.setDefault(this.context.getAttribute("HTTP_HOST") + query);
+                    reforward.setDefault(getContext().getAttribute("HTTP_HOST") + query);
                     reforward.forward();
                     return reforward;
                 }
@@ -283,7 +283,7 @@ public class search extends AbstractApplication {
                     finded = StringUtilities.sign(finded, keywords[j++]);
                 }
 
-                html.append("<li").append(n % 2 == 0 ? " class=\"even\"" : " class=\"odd\"").append("><a href=\"").append(this.context.getAttribute("HTTP_HOST")).append("bible/").append(field.get("book_id").value().toString()).append("/").append(field.get("chapter_id").value().toString()).append("/").append(field.get("part_id").value().toString()).append("\" target=\"_blank\">").append(this.setText("search.bible.info", field.get("book_name").value()
+                html.append("<li").append(n % 2 == 0 ? " class=\"even\"" : " class=\"odd\"").append("><a href=\"").append(getContext().getAttribute("HTTP_HOST")).append("bible/").append(field.get("book_id").value().toString()).append("/").append(field.get("chapter_id").value().toString()).append("/").append(field.get("part_id").value().toString()).append("\" target=\"_blank\">").append(this.setText("search.bible.info", field.get("book_name").value()
                         .toString(), field.get("chapter_id").value().toString(), field
                         .get("part_id").value().toString())).append("</a><p>").append(finded).append("</p></li> \r\n");
                 next++;
@@ -311,7 +311,7 @@ public class search extends AbstractApplication {
         }
         html.append("</ol>\r\n");
 
-        String actionURL = this.context.getAttribute("HTTP_HOST") + "bible/search/"
+        String actionURL = getContext().getAttribute("HTTP_HOST") + "bible/search/"
                 + query + "&page";
         pager.setFirstPageText(this.getProperty("page.first.text"));
         pager.setLastPageText(this.getProperty("page.last.text"));
@@ -331,7 +331,7 @@ public class search extends AbstractApplication {
         this.setVariable("size", String.valueOf(pager.getSize()));
         this.setVariable("value", html.toString());
         this.setVariable("action", this.config.get("default.base_url")
-                + this.context.getAttribute("REQUEST_PATH").toString());
+                + getContext().getAttribute("REQUEST_PATH").toString());
 
         this.setText("search.info", start, end, query, pager.getSize());
 
@@ -445,7 +445,7 @@ public class search extends AbstractApplication {
         query = StringUtilities.htmlSpecialChars(query);
 
         int page = 1, pageSize = 10, total = 0;
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
 
         if (this.request.getParameter("page") == null
                 || this.request.getParameter("page").trim().isEmpty()) {
@@ -513,7 +513,7 @@ public class search extends AbstractApplication {
 
         html.append("</ol>\r\n");
 
-        String actionURL = this.context.getAttribute("HTTP_HOST") + "bible/advsearch/" + query + "&amount=" + amount + "&page";
+        String actionURL = getContext().getAttribute("HTTP_HOST") + "bible/advsearch/" + query + "&amount=" + amount + "&page";
         pager.setFirstPageText(this.getProperty("page.first.text"));
         pager.setLastPageText(this.getProperty("page.last.text"));
         pager.setCurrentPageText(this.getProperty("page.current.text"));
@@ -534,7 +534,7 @@ public class search extends AbstractApplication {
 
         this.setText("search.info", start, end, query, pager.getSize());
 
-        this.setVariable("action", this.context.getAttribute("HTTP_HOST") + this.context.getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {

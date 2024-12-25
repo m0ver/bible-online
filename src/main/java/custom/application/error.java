@@ -335,12 +335,12 @@ public class error extends AbstractApplication {
     @Action("404")
     public error not_found() throws ApplicationException {
         final error app = this;
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
-        this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
+        this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
         this.response.setStatus(ResponseStatus.NOT_FOUND);
 
-        this.setVariable("action", this.config.get("default.base_url") + this.context.getAttribute("REQUEST_PATH").toString());
-        this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
+        this.setVariable("action", this.config.get("default.base_url") + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
         Session session = this.request.getSession();
         if (session.getAttribute("usr") != null) {
@@ -415,9 +415,9 @@ public class error extends AbstractApplication {
                     } else {
                         if (v.getKey().startsWith("[%LINK:")) {
                             String base_url;
-                            if (context != null
-                                    && context.getAttribute("HTTP_HOST") != null)
-                                base_url = context.getAttribute("HTTP_HOST")
+                            if (getContext() != null
+                                    && getContext().getAttribute("HTTP_HOST") != null)
+                                base_url = getContext().getAttribute("HTTP_HOST")
                                         .toString();
                             else
                                 base_url = config.get("default.base_url");
@@ -440,8 +440,8 @@ public class error extends AbstractApplication {
 
     @Action("process")
     public void process() throws ApplicationException {
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
-        this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
+        this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
         this.response.setStatus(ResponseStatus.FORBIDDEN);
         this.reforward = new Reforward(this.request, this.response);
 

@@ -78,9 +78,9 @@ public class dashboard extends AbstractApplication {
 
     @Action("dashboard")
     public Object index() throws ApplicationException {
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
 
-        this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", String.valueOf(getContext().getAttribute("HTTP_HOST")) + getContext().getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
@@ -158,14 +158,14 @@ public class dashboard extends AbstractApplication {
             this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
             this.setVariable("user.profile", "");
 
-            this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
+            this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
 
             Reforward reforward = new Reforward(request, response);
             reforward.setDefault(this.getLink(this.config.get("default.login.page")) + "&from=" + this.getLink("dashboard"));
             return reforward.forward();
         }
 
-        this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", String.valueOf(getContext().getAttribute("HTTP_HOST")) + getContext().getAttribute("REQUEST_PATH").toString());
 
         return this;
     }

@@ -52,9 +52,9 @@ public class password extends AbstractApplication {
 	@Action("user/password")
 	public Object send() throws ApplicationException
 	{
-		this.setVariable("action", this.config.get("default.base_url")+this.context.getAttribute("REQUEST_PATH").toString());
+		this.setVariable("action", this.config.get("default.base_url")+getContext().getAttribute("REQUEST_PATH").toString());
 		
-		Request request = (Request) this.context.getAttribute(HTTP_REQUEST);
+		Request request = (Request) getContext().getAttribute(HTTP_REQUEST);
 		Session session = request.getSession();
 		if(session.getAttribute("usr")!=null) {
 			this.usr = (User) session.getAttribute("usr");

@@ -47,7 +47,7 @@ public class keywords extends AbstractApplication {
     @Action("bible/keywords")
     public String list() throws ApplicationException {
         String keyword;
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
 
         if (this.request.getParameter("keyword") != null && !this.request.getParameter("keyword").equals("") && new StringUtilities(this.request.getParameter("keyword").toString()).safe()) {
             if (this.request.method() == Method.GET) {

@@ -53,7 +53,7 @@ public class sender extends AbstractApplication {
 
     @Action("services/report")
     public boolean send() throws ApplicationException {
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
         if (this.request.getParameter("id") == null
                 || this.request.getParameter("text") == null
                 || this.request.getParameter("text").trim().length() == 0) {
@@ -88,7 +88,7 @@ public class sender extends AbstractApplication {
             //你好！有一个用户发来的经文更新请求!<br />原文是：%s，建议更新为：%s <br/> --- <br />请点击此链接进行确认！(或复制此地址到浏览器访问):<br /> %s <br /><br /> InGod.asia工作小组
             String body = String.format(
                     this.getProperty("mail.report.content"), bible.getContent(), report.getUpdatedContent(),
-                    this.context.getAttribute("HTTP_HOST") + "services/bible/update/" + report.getId());
+                    getContext().getAttribute("HTTP_HOST") + "services/bible/update/" + report.getId());
             mail.setSubject(this.getProperty("mail.report.title"));
             mail.setBody(body);
             mail.addTo("moverinfo@gmail.com");
@@ -105,7 +105,7 @@ public class sender extends AbstractApplication {
 
     @Action("friends/invite")
     public String invite() throws ApplicationException {
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
             this.user = (User) session.getAttribute("usr");
@@ -171,8 +171,8 @@ public class sender extends AbstractApplication {
         report.setStatus(1);
 
         if (bible.update() && report.update()) {
-            this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
-            this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
+            this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
+            this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
 
             bible.findOneById();
 
@@ -193,7 +193,7 @@ public class sender extends AbstractApplication {
     public String getWord(String word) throws MalformedURLException, ApplicationException {
         String url = "http://dict.youdao.com/fsearch?client=deskdict&keyfrom=chrome.extension&q=" + word.trim() + "&pos=-1&doctype=xml&vendor=unknown&appVer=3.1.17.4208&le=eng";
 
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
@@ -250,7 +250,7 @@ public class sender extends AbstractApplication {
 
     @Action("services/deleteword")
     public void deleteWord(String id) throws ApplicationException {
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
             this.user = (User) session.getAttribute("usr");
@@ -259,7 +259,7 @@ public class sender extends AbstractApplication {
 
             vocabulary.delete();
 
-            this.response = (Response) this.context.getAttribute(HTTP_RESPONSE);
+            this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
 
             this.reforward = new Reforward(this.request, this.response);
             this.reforward.setDefault(this.getLink("dashboard"));
@@ -269,7 +269,7 @@ public class sender extends AbstractApplication {
 
     @Action("services/getwords")
     public Object getAllWords() {
-        this.request = (Request) this.context.getAttribute(HTTP_REQUEST);
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
             this.user = (User) session.getAttribute("usr");

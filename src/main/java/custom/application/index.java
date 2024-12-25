@@ -96,9 +96,9 @@ public class index extends AbstractApplication {
     }
 
     public Object start() {
-        Request request = (Request) this.context.getAttribute(HTTP_REQUEST);
-        this.setVariable("action", String.valueOf(this.context.getAttribute("HTTP_HOST")) + this.context.getAttribute("REQUEST_PATH").toString());
-        this.setVariable("base_url", String.valueOf(this.context.getAttribute("HTTP_HOST")));
+        Request request = (Request) getContext().getAttribute(HTTP_REQUEST);
+        this.setVariable("action", String.valueOf(getContext().getAttribute("HTTP_HOST")) + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
@@ -155,7 +155,7 @@ public class index extends AbstractApplication {
 
             bookName = book.getBookName();
 
-            a.setAttribute("href", this.context.getAttribute("HTTP_HOST") + bookName);
+            a.setAttribute("href", getContext().getAttribute("HTTP_HOST") + bookName);
             a.setAttribute("title", bookName);
             a.setData(bookName);
             li.addElement(a);
