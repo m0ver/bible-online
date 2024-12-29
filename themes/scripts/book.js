@@ -129,7 +129,7 @@ var Book=function()
 	{
 		var $this=arguments[0];
 		this.chapter_id=$this.options[$this.selectedIndex].value;
-		location.href="/?lang="+this.language.replace('_','-')+"&q=bible/"+this.book_id+"/"+this.chapter_id;
+		location.href="/?lang="+this.language.replace('_','-')+"&q=bible/"+this.book_id+"/"+this.chapter_id+"#up";
 	};
 	
 	this.show=function()
