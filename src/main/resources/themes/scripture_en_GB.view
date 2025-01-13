@@ -32,7 +32,7 @@
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/timer.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/struct.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/{%LANGUAGE%}.js" charset="utf-8"></script>
+<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/{%language%}.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/book.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/google.js" charset="utf-8"></script>
 <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/tools.js" charset="utf-8"></script>
@@ -98,10 +98,10 @@
 		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'.replace(/\&amp;/g,'&')","caption":"{%page.logout.caption%}"});
 		
 		languageMenu.setAutoReposition(true);
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'.replace(/\&amp;/g,'&')","caption":"English(UK)"});
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'.replace(/\&amp;/g,'&')","caption":"English(US)"});
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-CN'.replace(/\&amp;/g,'&')","caption":"简体中文"});
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-TW'.replace(/\&amp;/g,'&')","caption":"繁体中文"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%base_url%}bible/{%book.bookId%}/{%chapterid%}&lang=en-GB'.replace(/\&amp;/g,'&')","caption":"English(UK)"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%base_url%}bible/{%book.bookId%}/{%chapterid%}&lang=en-US'.replace(/\&amp;/g,'&')","caption":"English(US)"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%base_url%}bible/{%book.bookId%}/{%chapterid%}&lang=zh-CN'.replace(/\&amp;/g,'&')","caption":"简体中文"});
+		languageMenu.appendItem({"action":"javascript:location.href='{%base_url%}bible/{%book.bookId%}/{%chapterid%}&lang=zh-TW'.replace(/\&amp;/g,'&')","caption":"繁体中文"});
 	
 		var i=0;
 		var timer = new Timer(0.1,function(){});
@@ -275,7 +275,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 			"new_books_id":"new_book",
 			"new_chapters_id":"new_book_chapter"
 		});
-		bible.setLanguage("{%LANGUAGE%}");
+		bible.setLanguage("{%language%}");
 		bible.load({%book.bookId%},{%chapterid%},{%partid%});
 		//bible.show();
 	</script>

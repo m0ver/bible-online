@@ -74,6 +74,8 @@ public class dashboard extends AbstractApplication {
         this.setText("footer.register");
         this.setText("footer.api");
         this.setText("footer.updates-rss");
+
+        this.setVariable("TEMPLATES_DIR", "/themes");
     }
 
     @Action("dashboard")
@@ -161,7 +163,7 @@ public class dashboard extends AbstractApplication {
             this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
 
             Reforward reforward = new Reforward(request, response);
-            reforward.setDefault(this.getLink(this.config.get("default.login.page")) + "&from=" + this.getLink("dashboard"));
+            reforward.setDefault(this.getLink(getConfiguration().get("default.login.page")) + "&from=" + this.getLink("dashboard"));
             return reforward.forward();
         }
 

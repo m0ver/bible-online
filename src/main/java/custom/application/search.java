@@ -147,6 +147,20 @@ public class search extends AbstractApplication {
     public Object query() throws ApplicationException {
         this.request = (Request) getContext()
                 .getAttribute(HTTP_REQUEST);
+
+        Session session = request.getSession(); //@TODO
+        if (session.getAttribute("usr") != null) {
+            User usr = (User) session.getAttribute("usr");
+
+            this.setVariable("user.status", "");
+            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + usr.getEmail() + "</a>");
+            this.setVariable("scripts", "$.ajax({url:\"" + this.getLink("services/getwords") + "\",dataType:\"xml\",type:'GET'}).success(function(data){data=wordsXML(data);ldialog.show(data);});");
+        } else {
+            this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
+            this.setVariable("user.profile", "");
+            this.setVariable("scripts", "");
+        }
+
         if (this.request.getParameter("keyword") != null)
             return this.query(this.request.getParameter("keyword"));
 
@@ -204,6 +218,7 @@ public class search extends AbstractApplication {
         }
 
         Locale locale = this.getLocale();
+        String lang = locale.toLanguageTag();
         if (condition.length() == 0)
             condition.append(" book.language='").append(locale).append("' ");
         else
@@ -312,7 +327,7 @@ public class search extends AbstractApplication {
         html.append("</ol>\r\n");
 
         String actionURL = getContext().getAttribute("HTTP_HOST") + "bible/search/"
-                + query + "&page";
+                + query + "&lang="+lang+"&page";
         pager.setFirstPageText(this.getProperty("page.first.text"));
         pager.setLastPageText(this.getProperty("page.last.text"));
         pager.setCurrentPageText(this.getProperty("page.current.text"));
@@ -330,7 +345,7 @@ public class search extends AbstractApplication {
         this.setVariable("end", String.valueOf(end));
         this.setVariable("size", String.valueOf(pager.getSize()));
         this.setVariable("value", html.toString());
-        this.setVariable("action", this.config.get("default.base_url")
+        this.setVariable("action", getConfiguration().get("default.base_url")
                 + getContext().getAttribute("REQUEST_PATH").toString());
 
         this.setText("search.info", start, end, query, pager.getSize());
@@ -391,14 +406,6 @@ public class search extends AbstractApplication {
         bible bible = new bible();
         Table vtable = bible.find(SQL, new Object[]{});
         noResult = !vtable.isEmpty();
-
-        /*
-         * Row found=bible.findOne(look, new Object[]{});
-         *
-         * Pager pager = new Pager(); pager.pageSize = pageSize; pager.currentPage =
-         * page; pager.size=found.getFieldInfo("size").intValue();
-         * pager.setListSize(vtable.size());
-         */
 
         Field field;
         int next = startIndex + 1;// 此位置即为当前页的第一条记录的ID

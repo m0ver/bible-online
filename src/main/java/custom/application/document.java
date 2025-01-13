@@ -303,10 +303,10 @@ public class document extends AbstractApplication {
 				.getAttribute(HTTP_RESPONSE);
 		ResponseHeaders headers = new ResponseHeaders(this.response);
 		headers.add(Header.CONTENT_TYPE.set("text/xml;charset="
-				+ this.config.get("charset")));
+				+ getConfiguration().get("charset")));
 
 		return "<?xml version=\"1.0\" encoding=\""
-				+ this.config.get("charset") + "\"?>\r\n" +
+				+ getConfiguration().get("charset") + "\"?>\r\n" +
 				root;
 	}
 

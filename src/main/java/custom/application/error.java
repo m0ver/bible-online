@@ -324,6 +324,8 @@ public class error extends AbstractApplication {
 
         this.setText("page.404.title");
         this.setText("navigator.404.caption");
+
+        this.setVariable("TEMPLATES_DIR", "/themes");
     }
 
     @Override
@@ -339,7 +341,7 @@ public class error extends AbstractApplication {
         this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
         this.response.setStatus(ResponseStatus.NOT_FOUND);
 
-        this.setVariable("action", this.config.get("default.base_url") + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", getConfiguration().get("default.base_url") + getContext().getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
         Session session = this.request.getSession();
@@ -396,7 +398,7 @@ public class error extends AbstractApplication {
                         .getResourceAsStream(this.template_path);
 
                 TextFileLoader loader = new TextFileLoader(in);
-                loader.setCharset(config.get("charset").toString());
+                loader.setCharset(getConfiguration().get("charset").toString());
 
                 String tpl, value;
                 tpl = loader.getContent().toString();
@@ -420,7 +422,7 @@ public class error extends AbstractApplication {
                                 base_url = getContext().getAttribute("HTTP_HOST")
                                         .toString();
                             else
-                                base_url = config.get("default.base_url");
+                                base_url = getConfiguration().get("default.base_url");
 
                             value = base_url + variable.getValue();
                         } else

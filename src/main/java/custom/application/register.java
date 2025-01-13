@@ -90,6 +90,8 @@ public class register extends AbstractApplication {
             username = String.valueOf(this.getVariable("username").getValue());
         }
 
+        this.setVariable("TEMPLATES_DIR", "/themes");
+
         this.setText("page.welcome.hello", (username == null || username.trim()
                 .length() == 0) ? "" : username + "，");
 
@@ -125,7 +127,7 @@ public class register extends AbstractApplication {
             this.setVariable("error", "<div class=\"error\">" + e.getMessage() + "</div>");
         }
 
-        this.setVariable("action", this.config.get("default.base_url") + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", getConfiguration().get("default.base_url") + getContext().getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {

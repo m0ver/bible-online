@@ -391,8 +391,7 @@ window.listener = {};
 			tempField.disabled = false
 		}
 		
-		$form.action=$form.action+"/"+textbox.value;
-
+		// $form.action=$form.action+"/"+textbox.value;
 		return true
 	}
 

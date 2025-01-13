@@ -19,6 +19,7 @@ import custom.objects.User;
 import custom.objects.suggestion;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
+import org.tinystruct.application.SharedVariables;
 import org.tinystruct.http.Request;
 import org.tinystruct.http.Session;
 import org.tinystruct.mail.SimpleMail;
@@ -74,6 +75,19 @@ public class suggest extends AbstractApplication {
         this.setText("suggestion.email.invalid");
         this.setText("suggestion.send.success");
         this.setText("suggestion.send.failure");
+
+        this.setVariable("TEMPLATES_DIR", "/themes");
+        String username = "";
+        if (this.getVariable("username") != null) {
+            username = String.valueOf(this.getVariable("username").getValue());
+        }
+
+        this.setText("page.welcome.hello", (username == null || username.trim().isEmpty()) ? "" : username + "，", locale);
+
+        this.setVariable("TEMPLATES_DIR", "/themes");
+
+        this.setVariable("keyword", SharedVariables.getInstance(getLocale().toString()).getVariable("keyword") == null ? "" : SharedVariables.getInstance(getLocale().toString()).getVariable("keyword").getValue().toString());
+        this.setVariable("metas", "");
     }
 
     @Action("suggestion")
@@ -93,7 +107,7 @@ public class suggest extends AbstractApplication {
 
         this.setVariable("error", "");
         this.setVariable("value", html.toString());
-        this.setVariable("action", this.config.get("default.base_url") + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", getConfiguration().get("default.base_url") + getContext().getAttribute("REQUEST_PATH").toString());
 
         this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
 
@@ -114,8 +128,35 @@ public class suggest extends AbstractApplication {
     @Action("suggestion/post")
     public Object post() throws ApplicationException {
         this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
+        StringBuffer html = new StringBuffer();
+        html.append("<div>\r\n");
+        html.append("<form id=\"poster\" action=\"" + this.getLink("suggestion/post") + "\" method=\"post\">");
+        html.append("<ul>\r\n");
+        html.append("<li><label>" + this.getProperty("suggestion.email.address") + "<br /><input type=\"text\" value=\"\" name=\"iemail\" id=\"iemail\" class=\"text\"/></label></li>\r\n");
+        html.append("<li><label>" + this.getProperty("suggestion.content.text") + "<br /><textarea name=\"content\" id=\"content\" cols=\"45\" rows=\"8\"></textarea></label></li>\r\n");
+        html.append("<li><label><input type=\"submit\" class=\"button-secondary\" value=\"" + this.getProperty("suggestion.button.ok") + "\"/> </label><input type=\"reset\" class=\"button-secondary\" value=\"" + this.getProperty("suggestion.button.cancel") + " \" onclick=\"history.back()\"/></li>\r\n");
+        html.append("</ul>\r\n");
+        html.append("</form>\r\n");
+        html.append("</div>\r\n");
+        html.append("<div style=\"clear:both;height:10px\"></div>\r\n");
+        this.setVariable("value", html.toString());
+        String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
+        // remove the default language for action
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
-        suggestion suggestion = new suggestion();
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
+
+        Session session = request.getSession();
+        if (session.getAttribute("usr") != null) {
+            this.usr = (User) session.getAttribute("usr");
+
+            this.setVariable("user.status", "");
+            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + this.usr.getEmail() + "</a>");
+        } else {
+            this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
+            this.setVariable("user.profile", "");
+        }
 
         if (this.request.getParameter("content") == null || this.request.getParameter("content").trim().length() <= 0) {
             this.setVariable("error", "<div class=\"error\">" + this.getProperty("suggestion.content.invalid") + "</div>");
@@ -128,7 +169,7 @@ public class suggest extends AbstractApplication {
 
             return this;
         }
-
+        suggestion suggestion = new suggestion();
         String content = this.request.getParameter("content");
         String email = this.request.getParameter("iemail");
         suggestion.setContent(content);
@@ -154,19 +195,8 @@ public class suggest extends AbstractApplication {
             logger.severe(e.getMessage());
             this.setVariable("error", "<div class=\"error\">" + this.getProperty("suggestion.send.failure") + "</div>");
         }
+
         this.setVariable("action", getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
-
-        Session session = request.getSession();
-        if (session.getAttribute("usr") != null) {
-            this.usr = (User) session.getAttribute("usr");
-
-            this.setVariable("user.status", "");
-            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + this.usr.getEmail() + "</a>");
-        } else {
-            this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
-            this.setVariable("user.profile", "");
-        }
-
         return this;
     }
 

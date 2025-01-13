@@ -51,7 +51,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 	public boolean start() {
 		TimeIterator iterator = new TimeIterator(00, 00, 00);
 		iterator.setInterval(3600 * 24);
-		this.config.set("default.base_url", "https://www.ingod.today/?q=");
+		this.getConfiguration().set("default.base_url", "https://www.ingod.today/?q=");
 		this.scheduler.schedule(new SchedulerTask() {
 
 			private final Object o = new Object();

@@ -10,6 +10,7 @@ import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Element;
 import org.tinystruct.http.Request;
 import org.tinystruct.http.Session;
+import org.tinystruct.system.annotation.Action;
 
 import java.util.Iterator;
 import java.util.Locale;
@@ -22,7 +23,7 @@ public class index extends AbstractApplication {
     public void init() {
         this.setAction("default", "start");
 
-        this.setSharedVariable("TEMPLATES_DIR", "/themes");
+        this.setVariable("TEMPLATES_DIR", "/themes");
         this.setSharedVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
         this.setSharedVariable("metas", "");
     }
@@ -95,9 +96,9 @@ public class index extends AbstractApplication {
                 .length() == 0) ? "" : username + "，");
     }
 
-    public Object start() {
-        Request request = (Request) getContext().getAttribute(HTTP_REQUEST);
-        this.setVariable("action", String.valueOf(getContext().getAttribute("HTTP_HOST")) + getContext().getAttribute("REQUEST_PATH").toString());
+    @Action("default")
+    public Object start(Request request) {
+        this.setVariable("action", getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
         Session session = request.getSession();

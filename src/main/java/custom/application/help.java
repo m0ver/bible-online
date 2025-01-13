@@ -17,6 +17,7 @@ package custom.application;
 
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
+import org.tinystruct.application.ActionRegistry;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.ResponseHeaders;
 import org.tinystruct.system.ApplicationManager;
@@ -24,10 +25,7 @@ import org.tinystruct.system.cli.CommandLine;
 import org.tinystruct.system.template.DefaultTemplate;
 
 import java.io.InputStream;
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
@@ -65,6 +63,8 @@ public class help extends AbstractApplication {
         this.setText("footer.register");
         this.setText("footer.api");
         this.setText("footer.updates-rss");
+
+        this.setVariable("TEMPLATES_DIR", "/themes");
     }
 
     public void privacy() throws ApplicationException {
@@ -78,12 +78,9 @@ public class help extends AbstractApplication {
     }
 
     public Object sitemap() {
-        scripture scripture = (scripture) ApplicationManager.get(scripture.class.getName());
-        scripture.init();
-        Map<String, CommandLine> commandLines = scripture.getCommandLines();
-        Set<String> list = commandLines.keySet();
+        Collection<String> list = ActionRegistry.getInstance().paths();
         StringBuffer buffer = new StringBuffer();
-        buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">");
+        buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">\r\n");
         buffer.append("<url>\r\n");
         buffer.append("  <loc>https://www.ingod.today/</loc>\r\n");
         buffer.append("  <changefreq>daily</changefreq>\r\n");
@@ -97,12 +94,11 @@ public class help extends AbstractApplication {
         buffer.append("</url>\r\n");
 
         String path;
-        Iterator<String> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            path = iterator.next();
+        for (String s : list) {
+            path = s;
             if (path.equals("#") || this.getLink(path).equals("#")) continue;
             buffer.append("<url>\r\n");
-            buffer.append("  <loc>" + this.getLink(path).replace("&", "&amp;") + "</loc>\r\n");
+            buffer.append("  <loc>").append(this.getLink(path).replace("&", "&amp;")).append("</loc>\r\n");
             buffer.append("  <changefreq>weekly</changefreq>\r\n");
             buffer.append("  <priority>0.80</priority>\r\n");
             buffer.append("</url>\r\n");
@@ -115,7 +111,7 @@ public class help extends AbstractApplication {
 
         ResponseHeaders headers = new ResponseHeaders(response);
         headers.add(org.tinystruct.http.Header.CONTENT_TYPE.set("text/xml;charset="
-                + this.config.get("charset")));
+                + getConfiguration().getOrDefault("charset", "UTF-8")));
 
         return buffer;
     }

@@ -67,12 +67,7 @@ public class login extends AbstractApplication {
     private User usr;
 
     @Action("user/login")
-    public Object validate() {
-        Request request = (Request) getContext()
-                .getAttribute(HTTP_REQUEST);
-        Response response = (Response) getContext()
-                .getAttribute(HTTP_RESPONSE);
-
+    public Object validate(Request request, Response response) {
         Cookie cookie = StringUtilities.getCookieByName(request.cookies(),
                 "username");
         if (cookie != null) {
@@ -134,12 +129,7 @@ public class login extends AbstractApplication {
     }
 
     @Action("user/logout")
-    public Response logout() {
-        Request request = (Request) getContext()
-                .getAttribute(HTTP_REQUEST);
-        Response response = (Response) getContext()
-                .getAttribute(HTTP_RESPONSE);
-
+    public Response logout(Request request, Response response) {
         try {
             this.passport = new passport(request, response, "waslogined");
             this.passport.logout();
@@ -228,6 +218,8 @@ public class login extends AbstractApplication {
         this.setText("page.welcome.hello", (username == null || username.trim()
                 .length() == 0) ? "" : username + "，");
 
+        this.setVariable("TEMPLATES_DIR", "/themes");
+
         this.setVariable("error", "");
         this.setVariable("service", "");
         this.setVariable("application.summary", "");
@@ -281,11 +273,7 @@ public class login extends AbstractApplication {
     }
 
     @Action("oauth2callback")
-    public Response oAuth2callback() throws ApplicationException {
-        Request request = (Request) getContext()
-                .getAttribute(HTTP_REQUEST);
-        Response response = (Response) getContext()
-                .getAttribute(HTTP_RESPONSE);
+    public Response oAuth2callback(Request request, Response response) throws ApplicationException {
         Reforward reforward = new Reforward(request, response);
         TokenResponse oauth2_response;
 
@@ -314,9 +302,11 @@ public class login extends AbstractApplication {
                     GoogleNetHttpTransport.newTrustedTransport(), JSON_FACTORY,
                     clientSecrets, SCOPES).build();
 
+            String oauth2callback = this.getLink("oauth2callback");
+            oauth2callback = oauth2callback.substring(0, oauth2callback.indexOf('&'));
             oauth2_response = flow
                     .newTokenRequest(request.getParameter("code"))
-                    .setRedirectUri(this.getLink("oauth2callback")).execute();
+                    .setRedirectUri(oauth2callback).execute();
         } catch (IOException e1) {
             // TODO Auto-generated catch block
             throw new ApplicationException(e1.getMessage(), e1);
@@ -351,8 +341,9 @@ public class login extends AbstractApplication {
                 new passport(request, response, "waslogined")
                         .setLoginAsUser(this.usr.getId());
 
-                reforward.setDefault(URLDecoder.decode(this.getVariable("from")
-                        .getValue().toString(), StandardCharsets.UTF_8));
+                if (this.getVariable("from") != null)
+                    reforward.setDefault(URLDecoder.decode(this.getVariable("from")
+                            .getValue().toString(), StandardCharsets.UTF_8));
                 return reforward.forward();
             }
         } catch (IOException e) {
@@ -367,11 +358,7 @@ public class login extends AbstractApplication {
     }
 
     @Action("oauth2_github_callback")
-    public Response oAuth2GithubCallback() throws ApplicationException {
-        Request request = (Request) getContext()
-                .getAttribute(HTTP_REQUEST);
-        Response response = (Response) getContext()
-                .getAttribute(HTTP_RESPONSE);
+    public Response oAuth2GithubCallback(Request request, Response response) throws ApplicationException {
         Reforward reforward = new Reforward(request, response);
 
         Builder client = null;
@@ -459,16 +446,11 @@ public class login extends AbstractApplication {
     }
 
     @Action("user/account")
-    public Response execute(String provider) throws ApplicationException {
-        Request http_request = (Request) getContext()
-                .getAttribute(HTTP_REQUEST);
-        Response http_response = (Response) getContext()
-                .getAttribute(HTTP_RESPONSE);
-
-        Reforward reforward = new Reforward(http_request, http_response);
+    public Response execute(String provider, Request request, Response response) throws ApplicationException {
+        Reforward reforward = new Reforward(request, response);
         this.setVariable("from", reforward.getFromURL());
         try {
-            Session session = http_request.getSession();
+            Session session = request.getSession();
             if (session.getAttribute("usr") == null)
                 reforward.setDefault(createRequestString(oAuth2Provider
                         .valueOf(provider.toUpperCase())));

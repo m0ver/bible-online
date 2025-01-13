@@ -110,7 +110,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 		
 		<h4>更多信息</h4>
 		
-		<p>有关 本系统 的<a href="{%LINK:help/condition%}">使用条款</a>，请参阅<a href="{%LINK:help/condition%}">此处</a>。</p>
+		<p>有关 本系统 的<a href="[%LINK:help/condition%]">使用条款</a>，请参阅<a href="[%LINK:help/condition%]">此处</a>。</p>
 		
 		<p>有关隐私保护惯例的详细信息，请访问<a href="#privacypolicy.html">完整隐私政策</a>。有关产品或帐户的问题，请参阅<a href="#">InGod.asia 帮助</a>页面。</p>
 		

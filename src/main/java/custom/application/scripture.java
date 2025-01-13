@@ -54,8 +54,11 @@ public class scripture extends AbstractApplication {
                 book.setData(item.next());
 
                 bookName = book.getBookName().trim();
+                String[] lang = book.getLanguage().split("_");
+                Locale locale = new Locale(lang[0], lang[1]);
+
                 this.setAction(bookName, "viewByName");
-                data.set(bookName, book.getBookId());
+                data.set(bookName, book.getBookId() + ":" + locale);
             }
         } catch (ApplicationException e) {
             // TODO Auto-generated catch block
@@ -130,7 +133,7 @@ public class scripture extends AbstractApplication {
 
         this.setVariable("TEMPLATES_DIR", "/themes");
 
-        this.setVariable("keyword", SharedVariables.getInstance().getVariable("keyword") == null ? "" : SharedVariables.getInstance().getVariable("keyword").getValue().toString());
+        this.setVariable("keyword", SharedVariables.getInstance(getLocale().toString()).getVariable("keyword") == null ? "" : SharedVariables.getInstance(getLocale().toString()).getVariable("keyword").getValue().toString());
         this.setVariable("metas", "");
     }
 
@@ -153,7 +156,20 @@ public class scripture extends AbstractApplication {
         if (bookName.indexOf('/') != -1)
             bookName = bookName.split("/")[0];
 
-        return this.read(Integer.parseInt((this.data.get(bookName).toString())), chapterId, partId);
+        if (data.get(bookName) != null) {
+            String localeBook = data.get(bookName).toString();
+            if(localeBook.indexOf(':')!=-1) {
+                String[] book = localeBook.split(":");
+                int bookId = Integer.parseInt(book[0]);
+                this.setLocale(book[1]);
+                return this.read(bookId, chapterId, partId);
+            }
+        }
+
+        Response response = (Response) getContext().getAttribute(HTTP_RESPONSE);
+        response.setStatus(ResponseStatus.NOT_FOUND);
+
+        return response;
     }
 
     @Action("bible")
@@ -182,10 +198,9 @@ public class scripture extends AbstractApplication {
         }
 
         String book_meta_key = "book:" + bookId + ":lang:" + lang;
-        if(data.get(book_meta_key)!=null) {
+        if (data.get(book_meta_key) != null) {
             book = (book) data.get(book_meta_key);
-        }
-        else {
+        } else {
             Table table = book.findWith("WHERE book_id=? AND language=?",
                     new Object[]{bookId, lang});
             if (!table.isEmpty()) {
@@ -549,9 +564,9 @@ public class scripture extends AbstractApplication {
         Response response = (Response) getContext()
                 .getAttribute(HTTP_RESPONSE);
 
-//        this.response.setContentType("text/xml;charset=" + this.config.get("charset"));
-        response.headers().add(Header.CONTENT_TYPE.set(this.config.get(Header.StandardValue.CHARSET.name())));
-        return "<?xml version=\"1.0\" encoding=\"" + this.config.get("charset") + "\"?>\r\n" +
+//        this.response.setContentType("text/xml;charset=" + getConfiguration().get("charset"));
+        response.headers().add(Header.CONTENT_TYPE.set(getConfiguration().get(Header.StandardValue.CHARSET.name())));
+        return "<?xml version=\"1.0\" encoding=\"" + getConfiguration().get("charset") + "\"?>\r\n" +
                 root;
     }
 
