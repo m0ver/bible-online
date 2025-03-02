@@ -128,6 +128,7 @@ public class search extends AbstractApplication {
         this.setVariable("end", "0");
         this.setVariable("size", "0");
         this.setVariable("value", "");
+        this.setVariable("search.title", "");
     }
 
     @Override
