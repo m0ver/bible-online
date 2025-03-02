@@ -142,17 +142,7 @@ public class search extends AbstractApplication {
                 .getAttribute(HTTP_REQUEST);
 
         Session session = request.getSession(); //@TODO
-        if (session.getAttribute("usr") != null) {
-            User usr = (User) session.getAttribute("usr");
-
-            this.setVariable("user.status", "");
-            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + usr.getEmail() + "</a>");
-            this.setVariable("scripts", "$.ajax({url:\"" + this.getLink("services/getwords") + "\",dataType:\"xml\",type:'GET'}).success(function(data){data=wordsXML(data);ldialog.show(data);});");
-        } else {
-            this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
-            this.setVariable("user.profile", "");
-            this.setVariable("scripts", "");
-        }
+        initialize(session);
 
         if (this.request.getParameter("keyword") != null)
             return this.query(this.request.getParameter("keyword"));
@@ -441,6 +431,10 @@ public class search extends AbstractApplication {
     @Action("bible/advsearch")
     public Object advanced(Request request) throws ApplicationException {
         this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
+        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
+
+        Session session = request.getSession(); //@TODO
+        initialize(session);
 
         String query;
         if (request.getParameter("keyword") != null && !request.getParameter("keyword").isEmpty()) {
@@ -550,21 +544,21 @@ public class search extends AbstractApplication {
             throw new ApplicationException("Error performing advanced search: " + e.getMessage(), e);
         }
 
-        // Handle user session
-        Session session = request.getSession();
-        if (session.getAttribute("usr") != null) {
-            this.usr = (User) session.getAttribute("usr");
-            this.setVariable("user.status", "");
-            this.setVariable("user.profile",
-                    "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">"
-                            + this.usr.getEmail() + "</a>");
-        } else {
-            this.setVariable("user.status", "<a href=\"" + this.getLink("user/login")
-                    + "\">" + this.getProperty("page.login.caption") + "</a>");
-            this.setVariable("user.profile", "");
-        }
-
         return this;
+    }
+
+    private void initialize(Session session) {
+        if (session.getAttribute("usr") != null) {
+            User usr = (User) session.getAttribute("usr");
+
+            this.setVariable("user.status", "");
+            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + usr.getEmail() + "</a>");
+            this.setVariable("scripts", "$.ajax({url:\"" + this.getLink("services/getwords") + "\",dataType:\"xml\",type:'GET'}).success(function(data){data=wordsXML(data);ldialog.show(data);});");
+        } else {
+            this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
+            this.setVariable("user.profile", "");
+            this.setVariable("scripts", "");
+        }
     }
 
     private List<SearchResult> findRelevantVerses(String query) {
@@ -693,12 +687,12 @@ public class search extends AbstractApplication {
         String jsonResponse = makeOpenAIRequest(url, requestBuilder.toString());
         jsonResponse = jsonResponse.replaceAll("\\\\n", "\n");
         jsonResponse = jsonResponse.replaceAll("\\\\", "");
-        jsonResponse = jsonResponse.replaceAll("撒母耳记上","撒母耳记（上）");
-        jsonResponse = jsonResponse.replaceAll("撒母耳记下","撒母耳记（下）");
-        jsonResponse = jsonResponse.replaceAll("列王记上","列王记（上）");
-        jsonResponse = jsonResponse.replaceAll("列王记上","列王记（上）");
-        jsonResponse = jsonResponse.replaceAll("历代志上","历代志（上）");
-        jsonResponse = jsonResponse.replaceAll("历代志下","历代志（下）");
+        jsonResponse = jsonResponse.replaceAll("撒母耳记上", "撒母耳记（上）");
+        jsonResponse = jsonResponse.replaceAll("撒母耳记下", "撒母耳记（下）");
+        jsonResponse = jsonResponse.replaceAll("列王记上", "列王记（上）");
+        jsonResponse = jsonResponse.replaceAll("列王记上", "列王记（上）");
+        jsonResponse = jsonResponse.replaceAll("历代志上", "历代志（上）");
+        jsonResponse = jsonResponse.replaceAll("历代志下", "历代志（下）");
         try {
             // Parse the JSON response
             Builder resultBuilder = new Builder();
@@ -731,6 +725,10 @@ public class search extends AbstractApplication {
         URLHandler handler = URLHandlerFactory.getHandler(url);
         // Make the request
         URLResponse response = handler.handleRequest(request);
+
+        if (response.getStatusCode() != 200) {
+            throw new ApplicationException(response.getBody());
+        }
 
         // Parse JSON response using Builder
         Builder responseBuilder = new Builder();
