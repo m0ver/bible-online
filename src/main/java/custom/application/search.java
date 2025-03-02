@@ -19,49 +19,42 @@ import custom.objects.User;
 import custom.objects.bible;
 import custom.objects.book;
 import custom.objects.keyword;
-import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.HttpProtocolParams;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
-import org.tinystruct.data.component.Field;
-import org.tinystruct.data.component.Pager;
-import org.tinystruct.data.component.Row;
-import org.tinystruct.data.component.Table;
-import org.tinystruct.dom.Document;
-import org.tinystruct.dom.Element;
+import org.tinystruct.data.component.*;
 import org.tinystruct.handler.Reforward;
 import org.tinystruct.http.Request;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.Session;
+import org.tinystruct.net.URLHandler;
+import org.tinystruct.net.URLHandlerFactory;
+import org.tinystruct.net.URLResponse;
 import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.util.StringUtilities;
+import org.tinystruct.net.URLRequest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
+
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import static org.tinystruct.http.Constants.HTTP_REQUEST;
 import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class search extends AbstractApplication {
-    private static int i = 0;
-    private static String API_KEY = "AIzaSyCgMMCOs8drxcnBclraPiR0eU29qSF1vHM";
-    private static String CUSTOM_SEARCH_ENGINE_ID = "016436735745445346824:fgyqgo18wfm";
-    private final String[] ids = new String[]{"016436735745445346824:fgyqgo18wfm", "014099384324434647311:udrkfx4-ipk"};
-    private final String[] keys = new String[]{"AIzaSyCgMMCOs8drxcnBclraPiR0eU29qSF1vHM", "AIzaSyC-k_Cm_xClsqzeOGk8Dh5ECaZ449Vf6Ic"};
     private Request request;
     private Response response;
     private User usr;
+    private static final Logger logger = Logger.getLogger(search.class.getName());
 
     @Override
     public void init() {
@@ -106,8 +99,8 @@ public class search extends AbstractApplication {
 
         this.setText("search.confirm.caption");
         this.setText("search.submit.caption");
+        this.setText("ask.submit.caption");
         this.setText("search.strict.mode");
-        this.setText("search.advanced.mode");
 
         this.setText("invite.confirm.caption");
         this.setText("invite.submit.caption");
@@ -120,7 +113,7 @@ public class search extends AbstractApplication {
         this.setText("user.lastlogin.caption");
         this.setText("holy.bible.download");
         this.setText("holy.bible.chinese.download");
-        this.setText("search.info", 0, 0, "", 0);
+        this.setText("search.info", 0, 0, 0);
 
         String username = "";
         if (this.getVariable("username") != null) {
@@ -184,6 +177,7 @@ public class search extends AbstractApplication {
 
         int startIndex = (page - 1) * pageSize;
         this.setVariable("search.title", "无相关结果 - ");
+        this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
         if (!query.trim().isEmpty()) {
             query = StringUtilities.htmlSpecialChars(query);
@@ -327,7 +321,7 @@ public class search extends AbstractApplication {
         html.append("</ol>\r\n");
 
         String actionURL = getContext().getAttribute("HTTP_HOST") + "bible/search/"
-                + query + "&lang="+lang+"&page";
+                + query + "&lang=" + lang + "&page";
         pager.setFirstPageText(this.getProperty("page.first.text"));
         pager.setLastPageText(this.getProperty("page.last.text"));
         pager.setCurrentPageText(this.getProperty("page.current.text"));
@@ -348,7 +342,7 @@ public class search extends AbstractApplication {
         this.setVariable("action", getConfiguration().get("default.base_url")
                 + getContext().getAttribute("REQUEST_PATH").toString());
 
-        this.setText("search.info", start, end, query, pager.getSize());
+        this.setText("search.info", pager.getSize(), start, end);
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
@@ -445,108 +439,121 @@ public class search extends AbstractApplication {
     }
 
     @Action("bible/advsearch")
-    public Object advanced(String query) throws ApplicationException {
-        if (query == null || query.trim().isEmpty()) {
+    public Object advanced(Request request) throws ApplicationException {
+        this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
+
+        String query;
+        if (request.getParameter("keyword") != null && !request.getParameter("keyword").isEmpty()) {
+            query = request.getParameter("keyword");
+        } else {
             return this;
         }
+
         query = StringUtilities.htmlSpecialChars(query);
 
         int page = 1, pageSize = 10, total = 0;
         this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
 
-        if (this.request.getParameter("page") == null
-                || this.request.getParameter("page").trim().isEmpty()) {
+        if (this.request.getParameter("page") == null || this.request.getParameter("page").trim().isEmpty()) {
             page = 1;
         } else {
             page = Integer.parseInt(this.request.getParameter("page").toString());
         }
 
-        if (this.request.getParameter("amount") == null || this.request.getParameter("amount").toString().trim().length() == 0) {
-            total = 1;
-        } else {
-            total = Integer.parseInt(this.request.getParameter("amount").toString());
-        }
-
+        // Initialize search components
+        StringBuilder html = new StringBuilder();
         long startTime = System.currentTimeMillis();
-        Pager pager = new Pager();
-        pager.setPageSize(pageSize);
-        pager.setCurrentPage(page);
-        pager.setListSize(total);
 
-        if (query == null || !query.isEmpty()) {
-            this.setVariable("keyword", "");
-        } else {
+        try {
+            // Use OpenAI to find relevant verses
+            List<SearchResult> searchResults = findRelevantVerses(query);
+
+            // Sort by relevance score
+            Collections.sort(searchResults, Comparator.comparingDouble(SearchResult::getRelevance).reversed());
+
+            // Calculate pagination
+            int startIndex = (page - 1) * pageSize;
+            total = searchResults.size();
+            int endIndex = Math.min(startIndex + pageSize, total);
+
+            List<SearchResult> pageResults = searchResults.subList(startIndex, endIndex);
+
+            // Setup pagination
+            Pager pager = new Pager();
+            pager.setPageSize(pageSize);
+            pager.setCurrentPage(page);
+            pager.setListSize(total);
+
+            // Build results HTML
+            html.append("<ol class=\"searchresults\" start=\"").append(startIndex + 1).append("\">\r\n");
+
+            for (SearchResult result : pageResults) {
+                String content = result.getContent();
+                String bookName = result.getBookName();
+                String chapterId = result.getChapterId();
+                String partId = result.getPartId();
+                String bookId = result.getBookId();
+                double relevance = result.getRelevance();
+                String explanation = result.getExplanation();
+
+                // Highlight matching terms
+                content = highlightMatchingTerms(content, query);
+
+                html.append("<li class=\"").append(startIndex % 2 == 0 ? "even" : "odd").append("\">")
+                        .append("<a href=\"").append(getContext().getAttribute("HTTP_HOST"))
+                        .append("bible/").append(bookId).append("/")
+                        .append(chapterId).append("/").append(partId)
+                        .append("\" target=\"_blank\">")
+                        .append(this.setText("search.bible.info", bookName, chapterId, partId))
+                        .append("</a>")
+                        .append("<p>").append(content).append("</p>")
+                        .append("<div class=\"relevance\">")
+                        .append("Relevance Score: ").append(String.format("%.2f", relevance))
+                        .append("</div>")
+                        .append("<div class=\"explanation\">").append(explanation).append("</div>")
+                        .append("</li>\r\n");
+
+                startIndex++;
+            }
+
+            html.append("</ol>\r\n");
+
+            // Add pagination
+            String actionURL = getContext().getAttribute("HTTP_HOST") + "bible/advsearch/" + query + "&page";
+            pager.setFirstPageText(this.getProperty("page.first.text"));
+            pager.setLastPageText(this.getProperty("page.last.text"));
+            pager.setCurrentPageText(this.getProperty("page.current.text"));
+            pager.setNextPageText(this.getProperty("page.next.text"));
+            pager.setEndPageText(this.getProperty("page.end.text"));
+            pager.setControlBarText(this.getProperty("page.controlbar.text"));
+
+            html.append("<div class=\"pagination\" style=\"cursor:default\">")
+                    .append(pager.getPageControlBar(actionURL))
+                    .append("</div>\r\n");
+            html.append("<!-- Search completed in ").append(System.currentTimeMillis() - startTime).append("ms -->");
+
+            // Set response variables
+            int start = (page - 1) * pageSize + 1;
+            int end = Math.min(page * pageSize, total);
+
+            this.setVariable("start", String.valueOf(start));
+            this.setVariable("end", String.valueOf(end));
+            this.setVariable("size", String.valueOf(total));
+            this.setVariable("value", html.toString());
             this.setVariable("keyword", query);
             this.setVariable("search.title", query + " - ");
+            this.setVariable("action", getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
+
+            this.setText("search.info", total, start, end);
+
+        } catch (Exception e) {
+            throw new ApplicationException("Error performing advanced search: " + e.getMessage(), e);
         }
 
-        Document document = this.execute(query, pager.getStartIndex());
-        Element root = document.getRoot();
-        List<Element> vtable = root.getElementsByTagName("entry");
-        if (vtable.isEmpty()) {
-            this.setVariable("value", "Sorry, we could not get any related results with this keyword! " + StringUtilities.htmlSpecialChars(root.toString()));
-            return this;
-        }
-
-        int n = 0, next, amount = Integer.parseInt(root.getElementsByTagName("opensearch:totalResults").get(0).getData());
-        pager.setListSize(amount);
-
-        next = pager.getStartIndex();// 此位置即为当前页的第一条记录的ID
-        // opensearch:totalResults
-        StringBuilder html = new StringBuilder();
-        html.append("<ol class=\"searchresults\" start=\"").append(next).append("\">\r\n");
-
-        Element element, title, link;
-        List<Element> t;
-        String summary;
-
-        for (Element value : vtable) {
-            element = value;
-            n++;
-            link = element.getElementsByTagName("id").get(0);
-            title = element.getElementsByTagName("title").get(0);
-
-            t = element.getElementsByTagName("cse:PageMap").get(0)
-                    .getElementsByTagName("cse:DataObject");
-            if (t.size() >= 3) {
-                t = t.get(1).getElementsByTagName("cse:Attribute");
-                summary = t.get(1).getAttribute("value");
-            } else
-                summary = element.getElementsByTagName("summary").get(0).getData();
-
-            html.append("<li").append(n % 2 == 0 ? " class=\"even\"" : " class=\"odd\"").append("><a href=\"").append(link.getData()).append("\" target=\"_blank\">").append(title.getData()).append(" </a><p>").append(summary).append("</p></li> \r\n");
-            next++;
-        }
-
-        html.append("</ol>\r\n");
-
-        String actionURL = getContext().getAttribute("HTTP_HOST") + "bible/advsearch/" + query + "&amount=" + amount + "&page";
-        pager.setFirstPageText(this.getProperty("page.first.text"));
-        pager.setLastPageText(this.getProperty("page.last.text"));
-        pager.setCurrentPageText(this.getProperty("page.current.text"));
-        pager.setNextPageText(this.getProperty("page.next.text"));
-        pager.setEndPageText(this.getProperty("page.end.text"));
-        pager.setControlBarText(this.getProperty("page.controlbar.text"));
-
-        html.append("<div class=\"pagination\" style=\"cursor:default\">").append(pager.getPageControlBar(actionURL)).append("</div>\r\n");
-        html.append("<!-- ").append(System.currentTimeMillis() - startTime).append(" -->");
-
-        int start = page - 1 == 0 ? 1 : (page - 1) * pageSize + 1, end = page
-                * pageSize;
-
-        this.setVariable("start", String.valueOf(start));
-        this.setVariable("end", String.valueOf(end));
-        this.setVariable("size", String.valueOf(pager.getSize()));
-        this.setVariable("value", html.toString());
-
-        this.setText("search.info", start, end, query, pager.getSize());
-
-        this.setVariable("action", getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
-
+        // Handle user session
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
             this.usr = (User) session.getAttribute("usr");
-
             this.setVariable("user.status", "");
             this.setVariable("user.profile",
                     "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">"
@@ -560,52 +567,250 @@ public class search extends AbstractApplication {
         return this;
     }
 
-    protected String createRequestString(String query, int start)
-            throws UnsupportedEncodingException {
-        String encoded_query = URLEncoder.encode(query, StandardCharsets.UTF_8);
+    private List<SearchResult> findRelevantVerses(String query) {
+        List<SearchResult> results = new ArrayList<>();
 
-        return "https://www.googleapis.com/customsearch/v1?" +
-                "key=" + API_KEY +
-                "&cx=" + CUSTOM_SEARCH_ENGINE_ID +
-                "&q=" + encoded_query +
-                "&alt=atom" +
-                "&start=" + start;
-    }
-
-    private Document execute(String query, int start) throws ApplicationException {
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpget;
         try {
-            httpget = new HttpGet(createRequestString(query, start == 0 ? 1 : start));
-            httpClient.getParams().setParameter(HttpProtocolParams.HTTP_CONTENT_CHARSET, "UTF-8");
+            // Get the current locale
+            Locale locale = this.getLocale();
 
-            HttpResponse response = httpClient.execute(httpget);
-            InputStream instream = response.getEntity().getContent();
+            // First analyze the query using OpenAI with language context
+            Builder analysisResult = getOpenAIAnalysis(query, locale);
 
-            Document document = new Document();
-            document.load(instream);
-            if (document.getRoot().getElementsByTagName("errors").size() > 0) {
-                if (i++ > ids.length - 1) i = 0;
+            if (analysisResult == null) return results;
 
-                CUSTOM_SEARCH_ENGINE_ID = ids[i];
-                API_KEY = keys[i];
+            // Extract verse references from analysis
+            Builders verseRefs = (Builders) analysisResult.get("verses");
+            if (verseRefs != null && !verseRefs.isEmpty()) {
+                // Build SQL condition for the referenced verses
+                StringBuilder condition = new StringBuilder();
+                List<Object> params = new ArrayList<>();
 
-                httpget = new HttpGet(createRequestString(query, start == 0 ? 1 : start));
+                for (Builder ref : verseRefs) {
+                    if (condition.length() > 0) {
+                        condition.append(" OR ");
+                    }
+                    condition.append("(book.book_name = ? AND bible.chapter_id = ? AND bible.part_id = ?)");
+                    params.add(ref.get("book"));
+                    params.add(ref.get("chapter"));
+                    params.add(ref.get("verse"));
+                }
 
-                response = httpClient.execute(httpget);
-                instream = response.getEntity().getContent();
+                bible bible = new bible();
+                book book = new book();
 
-                document.load(instream);
+                // Set the Bible version based on locale
+                if (locale.toString().equalsIgnoreCase(Locale.US.toString())) {
+                    bible.setTableName("NIV");
+                } else if (locale.toString().equalsIgnoreCase(Locale.UK.toString())) {
+                    bible.setTableName("ESV");
+                } else {
+                    bible.setTableName(locale.toString());
+                }
+
+                // Get only the referenced verses from database
+                String bibleSQL = "SELECT bible.book_id, bible.chapter_id, bible.part_id, bible.content, " +
+                        "book.book_name " +
+                        "FROM " + bible.getTableName() + " as bible " +
+                        "LEFT JOIN " + book.getTableName() + " as book ON bible.book_id = book.book_id " +
+                        "WHERE (" + condition + ") AND book.language = ?";
+                params.add(locale.toString());
+
+                Table relevantVerses;
+                relevantVerses = bible.find(bibleSQL, params.toArray());
+
+                // Convert to SearchResult objects
+                for (Row row : relevantVerses) {
+                    String content = row.getFieldInfo("content").value().toString();
+                    String bookName = row.getFieldInfo("book_name").value().toString();
+                    String chapterId = row.getFieldInfo("chapter_id").value().toString();
+                    String partId = row.getFieldInfo("part_id").value().toString();
+                    String bookId = row.getFieldInfo("book_id").value().toString();
+
+                    // Find matching explanation from OpenAI analysis
+                    String explanation = "";
+                    double relevance = 0;
+                    for (Map<String, Object> ref : verseRefs) {
+                        if (ref.get("book").equals(bookName) &&
+                                ref.get("chapter").toString().equals(chapterId) &&
+                                ref.get("verse").toString().equals(partId)) {
+                            relevance = Double.parseDouble(ref.get("relevance").toString());
+                            explanation = (String) ref.get("explanation");
+                            break;
+                        }
+                    }
+
+                    results.add(new SearchResult(
+                            bookId, bookName, chapterId, partId,
+                            content, relevance, explanation
+                    ));
+                }
             }
-
-            return document;
-        } catch (ClientProtocolException e) {
-            throw new ApplicationException(e.getMessage(), e);
-        } catch (IOException e) {
-            throw new ApplicationException(e.getMessage(), e);
-        } catch (ParseException e) {
-            throw new ApplicationException(e.getMessage(), e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+        return results;
     }
+
+    public static void main(String[] args) throws ApplicationException {
+        String s = "\\n\\n{\\n  \\\"verses\\\": [\\n    {\\n      \\\"book\\\": \\\"约翰福音\\\",\\n      \\\"chapter\\\": 3,\\n      \\\"verse\\\": 16,\\n      \\\"relevance\\\": 1,\\n      \\\"explanation\\\": \\\"This verse talks about how God loved the world so much that He gave His only Son, Jesus, to save us from our sins.\\\"\\n    },\\n    {\\n      \\\"book\\\": \\\"马太福音\\\",\\n      \\\"chapter\\\": 1,\\n      \\\"verse\\\": 21,\\n      \\\"relevance\\\": 0.8,\\n      \\\"explanation\\\": \\\"This verse talks about how the angel told Joseph to name the baby Jesus because He will save His people from their sins.\\\"\\n    },\\n    {\\n      \\\"book\\\": \\\"约翰福音\\\",\\n      \\\"chapter\\\": 14,\\n      \\\"verse\\\": 6,\\n      \\\"relevance\\\": 0.7,\\n      \\\"explanation\\\": \\\"This verse talks about how Jesus is the way, the truth, and the life, and no one can come to the Father except through Him.\\\"\\n    },\\n    {\\n      \\\"book\\\": \\\"马太福音\\\",\\n      \\\"chapter\\\": 11,\\n      \\\"verse\\\": 28,\\n      \\\"relevance\\\": 0.6,\\n      \\\"explanation\\\": \\\"This verse talks about how Jesus invites us to come to Him when we are weary and burdened, and He will give us rest.\\\"\\n    },\\n    {\\n      \\\"book\\\": \\\"约翰福音\\\",\\n      \\\"chapter\\\": 8,\\n      \\\"verse\\\": 12,\\n      \\\"relevance\\\": 0.5,\\n      \\\"explanation\\\": \\\"This verse talks about how Jesus is the light of the world and whoever follows Him will never walk in darkness, but will have the light of life.\\\"\\n    }\\n  ]\\n}";
+        s = s.replaceAll("\\\\n", "\n");
+        s = s.replaceAll("\\\\", "");
+        Builder builder = new Builder();
+        builder.parse(s);
+    }
+
+    private Builder getOpenAIAnalysis(String query, Locale locale) throws Exception {
+        // Prepare the request body
+        Builder requestBuilder = new Builder();
+        requestBuilder.put("model", "openai/gpt-3.5-turbo-instruct");
+
+        // Create prompt with language context
+        String promptTemplate = "Given this Bible search query in %s: '%s'\n" +
+                "Find the most relevant Bible verses and return them in this JSON format:\n" +
+                "{\n" +
+                "  \"verses\": [\n" +
+                "    {\n" +
+                "      \"book\": \"BookName\",\n" +
+                "      \"chapter\": ChapterNumber,\n" +
+                "      \"verse\": VerseNumber,\n" +
+                "      \"relevance\": RelevanceScore,\n" +
+                "      \"explanation\": \"Why this verse is relevant\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}\n" +
+                "Include up to 5 most relevant verses. Relevance score should be between 0 and 1.";
+
+        String prompt = String.format(promptTemplate, locale.getDisplayLanguage(), query);
+        requestBuilder.put("prompt", prompt);
+        requestBuilder.put("max_tokens", 700);
+        requestBuilder.put("temperature", 0.3);
+
+        // Make the API request
+        String api = "/v1/completions";
+        String url = getConfiguration().get("openai.api_endpoint") + api;
+        String jsonResponse = makeOpenAIRequest(url, requestBuilder.toString());
+        jsonResponse = jsonResponse.replaceAll("\\\\n", "\n");
+        jsonResponse = jsonResponse.replaceAll("\\\\", "");
+        jsonResponse = jsonResponse.replaceAll("撒母耳记上","撒母耳记（上）");
+        jsonResponse = jsonResponse.replaceAll("撒母耳记下","撒母耳记（下）");
+        jsonResponse = jsonResponse.replaceAll("列王记上","列王记（上）");
+        jsonResponse = jsonResponse.replaceAll("列王记上","列王记（上）");
+        jsonResponse = jsonResponse.replaceAll("历代志上","历代志（上）");
+        jsonResponse = jsonResponse.replaceAll("历代志下","历代志（下）");
+        try {
+            // Parse the JSON response
+            Builder resultBuilder = new Builder();
+            resultBuilder.parse(jsonResponse);
+
+            return resultBuilder;
+        } catch (ApplicationException e) {
+            logger.severe(e.getMessage() + ":\n" + jsonResponse);
+        }
+
+        return null;
+    }
+
+    private String makeOpenAIRequest(String urlString, String requestBody) throws Exception {
+        URL url = new URL(urlString);
+        URLRequest request = new URLRequest(url);
+
+        String OPENAI_API_KEY = getConfiguration().get("openai.api_key");
+
+        // Set headers
+        request.setHeader("Content-Type", "application/json");
+        request.setHeader("Authorization", "Bearer " + OPENAI_API_KEY);
+        request.setHeader("Referer", "Test");
+        request.setHeader("User-Agent", "Test");
+
+        // Set request method and body
+        request.setMethod("POST");
+        request.setBody(requestBody);
+
+        URLHandler handler = URLHandlerFactory.getHandler(url);
+        // Make the request
+        URLResponse response = handler.handleRequest(request);
+
+        // Parse JSON response using Builder
+        Builder responseBuilder = new Builder();
+        responseBuilder.parse(response.getBody());
+
+        // Extract text content from choices array
+        Builders choices = (Builders) responseBuilder.get("choices");
+        if (choices != null && !choices.isEmpty()) {
+            Builder firstChoice = choices.get(0);
+            return firstChoice.get("text").toString().trim();
+        }
+
+        throw new ApplicationException("No text content found in OpenAI response");
+    }
+
+    // Helper class to store search results
+    private static class SearchResult {
+        private final String bookId;
+        private final String bookName;
+        private final String chapterId;
+        private final String partId;
+        private final String content;
+        private final double relevance;
+        private final String explanation;
+
+        public SearchResult(String bookId, String bookName, String chapterId, String partId,
+                            String content, double relevance, String explanation) {
+            this.bookId = bookId;
+            this.bookName = bookName;
+            this.chapterId = chapterId;
+            this.partId = partId;
+            this.content = content;
+            this.relevance = relevance;
+            this.explanation = explanation;
+        }
+
+        public String getBookId() {
+            return bookId;
+        }
+
+        public String getBookName() {
+            return bookName;
+        }
+
+        public String getChapterId() {
+            return chapterId;
+        }
+
+        public String getPartId() {
+            return partId;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public double getRelevance() {
+            return relevance;
+        }
+
+        public String getExplanation() {
+            return explanation;
+        }
+    }
+
+    private String highlightMatchingTerms(String content, String query) {
+        // Split query into words
+        String[] queryWords = query.toLowerCase().split("\\s+");
+
+        // Highlight each matching word
+        for (String word : queryWords) {
+            if (word.length() > 2) { // Only highlight words longer than 2 characters
+                content = content.replaceAll(
+                        "(?i)(" + Pattern.quote(word) + ")",
+                        "<span class=\"highlight\">$1</span>"
+                );
+            }
+        }
+
+        return content;
+    }
+
 }
