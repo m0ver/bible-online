@@ -28,29 +28,24 @@ import org.tinystruct.http.Response;
 import org.tinystruct.http.Session;
 import org.tinystruct.net.URLHandler;
 import org.tinystruct.net.URLHandlerFactory;
+import org.tinystruct.net.URLRequest;
 import org.tinystruct.net.URLResponse;
 import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.util.StringUtilities;
-import org.tinystruct.net.URLRequest;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Map;
-
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.tinystruct.http.Constants.HTTP_REQUEST;
 import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class search extends AbstractApplication {
+    protected static final String MODEL = "deepseek/deepseek-r1:free";
     private Request request;
     private Response response;
     private User usr;
@@ -648,18 +643,10 @@ public class search extends AbstractApplication {
         return results;
     }
 
-    public static void main(String[] args) throws ApplicationException {
-        String s = "\\n\\n{\\n  \\\"verses\\\": [\\n    {\\n      \\\"book\\\": \\\"约翰福音\\\",\\n      \\\"chapter\\\": 3,\\n      \\\"verse\\\": 16,\\n      \\\"relevance\\\": 1,\\n      \\\"explanation\\\": \\\"This verse talks about how God loved the world so much that He gave His only Son, Jesus, to save us from our sins.\\\"\\n    },\\n    {\\n      \\\"book\\\": \\\"马太福音\\\",\\n      \\\"chapter\\\": 1,\\n      \\\"verse\\\": 21,\\n      \\\"relevance\\\": 0.8,\\n      \\\"explanation\\\": \\\"This verse talks about how the angel told Joseph to name the baby Jesus because He will save His people from their sins.\\\"\\n    },\\n    {\\n      \\\"book\\\": \\\"约翰福音\\\",\\n      \\\"chapter\\\": 14,\\n      \\\"verse\\\": 6,\\n      \\\"relevance\\\": 0.7,\\n      \\\"explanation\\\": \\\"This verse talks about how Jesus is the way, the truth, and the life, and no one can come to the Father except through Him.\\\"\\n    },\\n    {\\n      \\\"book\\\": \\\"马太福音\\\",\\n      \\\"chapter\\\": 11,\\n      \\\"verse\\\": 28,\\n      \\\"relevance\\\": 0.6,\\n      \\\"explanation\\\": \\\"This verse talks about how Jesus invites us to come to Him when we are weary and burdened, and He will give us rest.\\\"\\n    },\\n    {\\n      \\\"book\\\": \\\"约翰福音\\\",\\n      \\\"chapter\\\": 8,\\n      \\\"verse\\\": 12,\\n      \\\"relevance\\\": 0.5,\\n      \\\"explanation\\\": \\\"This verse talks about how Jesus is the light of the world and whoever follows Him will never walk in darkness, but will have the light of life.\\\"\\n    }\\n  ]\\n}";
-        s = s.replaceAll("\\\\n", "\n");
-        s = s.replaceAll("\\\\", "");
-        Builder builder = new Builder();
-        builder.parse(s);
-    }
-
     private Builder getOpenAIAnalysis(String query, Locale locale) throws Exception {
         // Prepare the request body
         Builder requestBuilder = new Builder();
-        requestBuilder.put("model", "openai/gpt-3.5-turbo-instruct");
+        requestBuilder.put("model", MODEL);
 
         // Create prompt with language context
         String promptTemplate = "Given this Bible search query in %s: '%s'\n" +
@@ -675,17 +662,18 @@ public class search extends AbstractApplication {
                 "    }\n" +
                 "  ]\n" +
                 "}\n" +
-                "Include up to 5 most relevant verses. Relevance score should be between 0 and 1.";
+                "Include up to 5 most relevant verses, but each item only one verse. Relevance score should be between 0 and 1.";
 
         String prompt = String.format(promptTemplate, locale.getDisplayLanguage(), query);
         requestBuilder.put("prompt", prompt);
-        requestBuilder.put("max_tokens", 700);
+        requestBuilder.put("max_tokens", 3000);
         requestBuilder.put("temperature", 0.3);
 
         // Make the API request
         String api = "/v1/completions";
         String url = getConfiguration().get("openai.api_endpoint") + api;
         String jsonResponse = makeOpenAIRequest(url, requestBuilder.toString());
+        jsonResponse = processAIResponse(jsonResponse);
         jsonResponse = jsonResponse.replaceAll("\\\\n", "\n");
         jsonResponse = jsonResponse.replaceAll("\\\\", "");
         jsonResponse = jsonResponse.replaceAll("撒母耳记上", "撒母耳记（上）");
@@ -743,6 +731,24 @@ public class search extends AbstractApplication {
         }
 
         throw new ApplicationException("No text content found in OpenAI response");
+    }
+
+    private String processAIResponse(String response) throws ApplicationException {
+        // Regex to detect PlantUML code block - either in markdown format or raw format
+        Pattern pattern = Pattern.compile("```json(.*?)```", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(response);
+        if (matcher.find()) {
+            String result = matcher.group(0);
+            return result.replaceAll("```json", "").replaceAll("```", "");
+        }
+
+        pattern = Pattern.compile("\\{.*\\}", Pattern.DOTALL);
+        matcher = pattern.matcher(response);
+        if (matcher.find()) {
+            return matcher.group(0);
+        }
+
+        return "{}";
     }
 
     // Helper class to store search results
