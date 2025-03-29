@@ -35,14 +35,15 @@ import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.template.variable.ObjectVariable;
 import org.tinystruct.system.util.StringUtilities;
 import org.tinystruct.system.util.TextFileLoader;
+import org.tinystruct.net.URLRequest;
+import org.tinystruct.net.URLHandler;
+import org.tinystruct.net.URLHandlerFactory;
+import org.tinystruct.net.URLResponse;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.util.*;
@@ -317,11 +318,11 @@ public class login extends AbstractApplication {
 
         try {
 //            String url = "https://www.google.com/m8/feeds/contacts/default/full";
-            HttpRequestBuilder builder = new HttpRequestBuilder();
-            builder.setParameter("access_token", oauth2_response.getAccessToken());
-
             URLRequest urlRequest = new URLRequest(new URL("https://www.googleapis.com/oauth2/v1/userinfo"));
-            byte[] bytes = urlRequest.send(builder);
+            urlRequest.setParameter("access_token", oauth2_response.getAccessToken());
+            URLHandler handler = URLHandlerFactory.getHandler(urlRequest.getURL());
+            URLResponse urlResponse = handler.handleRequest(urlRequest);
+            byte[] bytes = urlResponse.getBody().getBytes();
 
             Builder userinfo = new Builder();
             userinfo.parse(new String(bytes));
@@ -349,8 +350,6 @@ public class login extends AbstractApplication {
         } catch (IOException e) {
             throw new ApplicationException(e.getMessage(), e);
         } catch (ParseException e) {
-            throw new ApplicationException(e.getMessage(), e);
-        } catch (URISyntaxException e) {
             throw new ApplicationException(e.getMessage(), e);
         }
 
@@ -381,8 +380,9 @@ public class login extends AbstractApplication {
                         + client.get("client_secret")
                         + "&code="
                         + request.getParameter("code")));
-                byte[] resp = urlRequest.send(new HttpRequestBuilder());
-                String tokens = new String(resp);
+                URLHandler handler = URLHandlerFactory.getHandler(urlRequest.getURL());
+                URLResponse urlResponse = handler.handleRequest(urlRequest);
+                String tokens = urlResponse.getBody();
                 StringTokenizer tokenizer = new StringTokenizer(tokens, "&");
                 HashMap<String, String> map = new HashMap<>();
                 while (tokenizer.hasMoreTokens()) {
@@ -394,21 +394,19 @@ public class login extends AbstractApplication {
                 }
 
                 if (!map.isEmpty()) {
-                    HttpRequestBuilder builder = new HttpRequestBuilder();
+                    urlRequest = new URLRequest(URI.create("https://api.github.com/user").toURL());
                     if (map.get("access_token") != null) {
-                        Headers headers = new Headers();
-                        headers.add(Header.AUTHORIZATION.set("Bearer " + map.get("access_token")));
-                        builder.setHeaders(headers);
+                        urlRequest.setHeader("Authorization", "Bearer " + map.get("access_token"));
                     }
                     if (map.get("scope") != null) {
-                        builder.setParameter("scope", map.get("scope"));
+                        urlRequest.setParameter("scope", map.get("scope"));
                     }
 
-                    urlRequest.setUrl(new URL("https://api.github.com/user"));
-                    byte[] bytes = urlRequest.send(builder);
+                    handler = URLHandlerFactory.getHandler(urlRequest.getURL());
+                    urlResponse = handler.handleRequest(urlRequest);
 
                     Builder struct = new Builder();
-                    struct.parse(new String(bytes));
+                    struct.parse(urlResponse.getBody());
 
                     if (struct.get("email") != null) {
                         this.usr = new User();
@@ -425,8 +423,9 @@ public class login extends AbstractApplication {
                         new passport(request, response, "waslogined")
                                 .setLoginAsUser(this.usr.getId());
 
-                        reforward.setDefault(URLDecoder.decode(this.getVariable("from")
-                                .getValue().toString(), StandardCharsets.UTF_8));
+                        if (this.getVariable("from") != null)
+                            reforward.setDefault(URLDecoder.decode(this.getVariable("from")
+                                    .getValue().toString(), StandardCharsets.UTF_8));
 
                         return reforward.forward();
                     }
@@ -436,8 +435,6 @@ public class login extends AbstractApplication {
             } catch (IOException e) {
                 throw new ApplicationException(e.getMessage(), e);
             } catch (ParseException e) {
-                throw new ApplicationException(e.getMessage(), e);
-            } catch (URISyntaxException e) {
                 throw new ApplicationException(e.getMessage(), e);
             }
         }

@@ -177,14 +177,17 @@ public class scripture extends AbstractApplication {
         return this.read(1);
     }
 
+    @Action("bible")
     public Object read(int bookId) throws ApplicationException {
         return this.read(bookId, 1);
     }
 
+    @Action("bible")
     public Object read(int bookId, int chapterId) throws ApplicationException {
         return this.read(bookId, chapterId, 0);
     }
 
+    @Action("bible")
     public Object read(int bookId, int chapterId, int partId) throws ApplicationException {
         if (bookId == 0) bookId = 1;
         if (chapterId == 0) chapterId = 1;
