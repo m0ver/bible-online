@@ -177,7 +177,7 @@ public class sender extends AbstractApplication {
             bible.findOneById();
 
             this.reforward = new Reforward(this.request, this.response);
-            this.reforward.setDefault(this.getLink("bible") + "/" + bible.getBookId() + "/" + bible.getChapterId() + "/" + bible.getPartId());
+            this.reforward.setDefault(this.getLink("bible", null) + "/" + bible.getBookId() + "/" + bible.getChapterId() + "/" + bible.getPartId());
             this.reforward.forward();
             return true;
         }
