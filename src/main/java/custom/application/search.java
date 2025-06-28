@@ -146,6 +146,7 @@ public class search extends AbstractApplication {
         return this;
     }
 
+    @Action("bible/search")
     public Object query(String query) throws ApplicationException {
         StringBuilder html = new StringBuilder();
         String[] keywords;
