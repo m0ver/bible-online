@@ -353,18 +353,45 @@ var Menu=function(){
 		}
 
 		var text="";
+		// Improved text extraction for scripture verses
+		var verseNumber = "";
+		var verseText = "";
+
+		// First, try to get the verse number from the clicked element
+		if (currentElement.tagName === "A" && currentElement.className === "sup") {
+			verseNumber = currentElement.textContent || currentElement.innerText || "";
+		}
+
+		// Extract the main text content
 		for(var i=1;i<currentElement.parentNode.childNodes.length;i++)
 		{
-			if(currentElement.parentNode.childNodes[i].tagName=="SPAN") {
-				text+=(currentElement.parentNode.childNodes[i].childNodes[0].nodeValue);
+			var node = currentElement.parentNode.childNodes[i];
+			if(node.tagName=="SPAN") {
+				if (node.childNodes && node.childNodes.length > 0) {
+					verseText += (node.childNodes[0].nodeValue || "");
+				}
 			}
 			else {
-				if(currentElement.parentNode.childNodes[i].nodeValue!=null) {
-					text+=(currentElement.parentNode.childNodes[i].nodeValue);
+				if (node.nodeValue != null && node.nodeValue.trim() !== "") {
+					verseText += node.nodeValue;
 				}
 			}
 		}
-		text=text.replace(/'/g,"\\'");
+		
+		// Clean up the text and format it properly
+		verseText = verseText.replace(/\s+/g, ' ').trim();
+		
+		// Combine verse number and text for better copy format
+		if (verseNumber && verseText) {
+			text = verseText;
+		} else if (verseText) {
+			text = verseText;
+		} else if (verseNumber) {
+			text = verseNumber;
+		}
+		
+		// Escape single quotes for JavaScript
+		text = text.replace(/'/g,"\\'");
 		this.items=document.createElement("ul");
 		for(var i=0;i<this.itemlist.length;i++)
 		{
@@ -646,39 +673,152 @@ var TDialog=function(){
 	}
 }
 
-function copyToClipboard(txt) {       
-     if(window.clipboardData) {       
-              window.clipboardData.clearData();       
-              window.clipboardData.setData("Text", txt);
-              alert("复制成功！");          
-      } else if(navigator.userAgent.indexOf("Opera") != -1) {       
-           window.location = txt;       
-      } else if (window.netscape) {       
-		  try 
-		  {       
-		        netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");       
-		   } catch (e) {       
-		        alert("被浏览器拒绝！\n请在浏览器地址栏输入'about:config'并回车\n然后将'signed.applets.codebase_principal_support'设置为'true'");       
-		   }       
-          var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);       
-          if (!clip)       
-               return;       
-          var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);       
-          if (!trans)       
-               return;       
-           trans.addDataFlavor('text/unicode');       
-          var str = new Object();       
-          var len = new Object();       
-          var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);       
-          var copytext = txt;       
-           str.data = copytext;       
-           trans.setTransferData("text/unicode",str,copytext.length*2);       
-          var clipid = Components.interfaces.nsIClipboard;       
-          if (!clip)       
-               return false;       
-           clip.setData(trans,null,clipid.kGlobalClipboard);       
-           alert("复制成功！");       
-      }       
+function copyToClipboard(txt) {
+    // Modern Clipboard API implementation
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(txt).then(function() {
+            showCopySuccessMessage();
+        }).catch(function(err) {
+            console.error('Clipboard API failed:', err);
+            fallbackCopyToClipboard(txt);
+        });
+    } else {
+        // Fallback for older browsers or non-secure contexts
+        fallbackCopyToClipboard(txt);
+    }
+}
+
+function fallbackCopyToClipboard(txt) {
+    // Create a temporary textarea element
+    const textArea = document.createElement('textarea');
+    textArea.value = txt;
+    
+    // Make it invisible but keep it in the DOM
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    textArea.style.opacity = '0';
+    
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            showCopySuccessMessage();
+        } else {
+            showCopyErrorMessage();
+        }
+    } catch (err) {
+        console.error('Fallback copy failed:', err);
+        showCopyErrorMessage();
+    }
+    
+    // Clean up
+    document.body.removeChild(textArea);
+}
+
+function showCopySuccessMessage() {
+    // Get current language from document or default to English
+    const lang = document.documentElement.lang || 
+                 document.querySelector('meta[http-equiv="content-language"]')?.content || 
+                 'en';
+    
+    const messages = {
+        'en': 'Copied to clipboard!',
+        'en-US': 'Copied to clipboard!',
+        'en-GB': 'Copied to clipboard!',
+        'zh-CN': '复制成功！',
+        'zh-TW': '複製成功！',
+        'zh': '复制成功！'
+    };
+    
+    const message = messages[lang] || messages['en'];
+    
+    // Create a temporary success notification
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 4px;
+        z-index: 10000;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        animation: slideIn 0.3s ease-out;
+    `;
+    
+    // Add CSS animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    document.body.appendChild(notification);
+    
+    // Remove notification after 3 seconds
+    setTimeout(function() {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+        if (style.parentNode) {
+            style.parentNode.removeChild(style);
+        }
+    }, 3000);
+}
+
+function showCopyErrorMessage() {
+    const lang = document.documentElement.lang || 
+                 document.querySelector('meta[http-equiv="content-language"]')?.content || 
+                 'en';
+    
+    const messages = {
+        'en': 'Copy failed. Please copy manually.',
+        'en-US': 'Copy failed. Please copy manually.',
+        'en-GB': 'Copy failed. Please copy manually.',
+        'zh-CN': '复制失败，请手动复制。',
+        'zh-TW': '複製失敗，請手動複製。',
+        'zh': '复制失败，请手动复制。'
+    };
+    
+    const message = messages[lang] || messages['en'];
+    
+    // Show error message
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #f44336;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 4px;
+        z-index: 10000;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        animation: slideIn 0.3s ease-out;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Remove notification after 5 seconds
+    setTimeout(function() {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 5000);
 }
 
 function subscribe()
@@ -887,4 +1027,64 @@ var ImageBox=function(){
 			
 			return this.image_list;
 	}
+}
+
+function getCopyButtonTitle() {
+    const lang = document.documentElement.lang || 
+                 document.querySelector('meta[http-equiv="content-language"]')?.content || 
+                 'en';
+    
+    const titles = {
+        'en': 'Copy verse',
+        'en-US': 'Copy verse',
+        'en-GB': 'Copy verse',
+        'zh-CN': '复制经文',
+        'zh-TW': '複製經文',
+        'zh': '复制经文'
+    };
+    
+    return titles[lang] || titles['en'];
+}
+
+// Enhanced function to handle dynamic content loading
+function initializeCopyButtons() {
+    
+    // Watch for dynamic content changes
+    if (typeof MutationObserver !== 'undefined') {
+        const observer = new MutationObserver(function(mutations) {
+            let shouldUpdate = false;
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    // Check if new verses were added
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                            if (node.matches && (node.matches('li') || node.querySelector('li'))) {
+                                shouldUpdate = true;
+                            }
+                        }
+                    });
+                }
+            });
+
+        });
+        
+        // Start observing
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+}
+
+// Auto-add copy buttons when page loads
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add copy buttons after a short delay to ensure content is loaded
+        setTimeout(initializeCopyButtons, 500);
+    });
+    
+    // Also handle cases where content loads after DOMContentLoaded
+    window.addEventListener('load', function() {
+        setTimeout(initializeCopyButtons, 200);
+    });
 }

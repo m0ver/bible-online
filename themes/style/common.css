@@ -432,3 +432,84 @@ p.button {
 .error a {
 	color: #c00;
 }
+
+/* Copy Button Styles */
+.verse-copy-btn {
+    background: none !important;
+    border: 1px solid #ddd !important;
+    border-radius: 3px !important;
+    padding: 2px 6px !important;
+    margin-left: 8px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    opacity: 0 !important;
+    transition: all 0.2s ease !important;
+    vertical-align: middle !important;
+    color: #666 !important;
+    line-height: 1.2 !important;
+    min-width: 24px !important;
+    height: 20px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    right: 10px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+/* Show copy button when hovering over verse container */
+.verse-container:hover .verse-copy-btn,
+.verse:hover .verse-copy-btn,
+li:hover .verse-copy-btn {
+    opacity: 0.8 !important;
+}
+
+.verse-copy-btn:hover {
+    opacity: 1 !important;
+    background-color: #f0f0f0 !important;
+    border-color: #bbb !important;
+    color: #333 !important;
+}
+
+.verse-copy-btn:active {
+    background-color: #e0e0e0 !important;
+    transform: translateY(-50%) scale(0.95) !important;
+}
+
+.verse-copy-btn:focus {
+    outline: 2px solid #2583ad !important;
+    outline-offset: 2px !important;
+    opacity: 1 !important;
+}
+
+/* Make verse containers relative positioned for absolute positioning of copy buttons */
+.verse-container,
+.verse,
+#documentation .column li {
+    position: relative !important;
+}
+
+/* Responsive design for copy buttons */
+@media (max-width: 768px) {
+    .verse-copy-btn {
+        padding: 4px 8px !important;
+        font-size: 14px !important;
+        margin-left: 6px !important;
+        right: 5px !important;
+    }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+    .verse-copy-btn {
+        border-color: #555 !important;
+        color: #ccc !important;
+    }
+    
+    .verse-copy-btn:hover {
+        background-color: #333 !important;
+        border-color: #777 !important;
+        color: #fff !important;
+    }
+}
