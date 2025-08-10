@@ -41,7 +41,7 @@ body {
 
 /* -------------------------------------------- */
 /* Enhanced interactive with Firefox */
-* : :-moz-selection {
+*::-moz-selection {
 	background-color: #2583AD;
 	color: #ffffff
 }
@@ -625,23 +625,32 @@ a.clear-fix {
 	padding: 0px;
 	text-align: justify;
 	text-justify: inter-ideograph;
+	float: none;
+	width: auto;
+}
+#documentation .column ol {
+	/* Multi-column layout applied to the list so items flow across columns */
+	-webkit-column-count: 3;
+	-moz-column-count: 3;
+	column-count: 3;
+	-webkit-column-gap: 2rem;
+	-moz-column-gap: 2rem;
+	column-gap: 2rem;
+}
+#documentation .column li {
+	/* Prevent awkward splits across columns */
+	break-inside: avoid;
+	-webkit-column-break-inside: avoid;
+	page-break-inside: avoid;
+	margin-bottom: 0.6em;
 }
 
-#documentation .spilter {
-	background-color: #CCCCCC;
-	float: left;
-	height: 40em;
-	margin-left: 1%;
-	margin-right: 1%;
-	padding: 0 1px 0 0;
-	width: 0;
+/* Responsive column counts */
+@media only screen and (max-width: 1200px) {
+	#documentation .column ol { -webkit-column-count: 2; -moz-column-count: 2; column-count: 2; }
 }
-
-#documentation .firstletter {
-	font-size: 2em;
-	line-height: 1em;
-	/*font-family: Georgia, Times, "Times New Roman", serif;*/
-	color: #2583ad;
+@media only screen and (max-width: 959px) {
+	#documentation .column ol { -webkit-column-count: 1; -moz-column-count: 1; column-count: 1; }
 }
 
 /*
@@ -1155,5 +1164,282 @@ ul.testament li ol li {
 *::-moz-selection {
     background-color: #2583AD;
     color: #ffffff;
+}
+
+/* Sidebar Toggle Button Styles */
+.sidebar-toggle-container {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    background: #007bff;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle-btn {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 12px 8px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 60px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle-btn:hover {
+    background: rgba(255,255,255,0.1);
+    transform: scale(1.05);
+}
+
+.sidebar-toggle-btn:active {
+    background: rgba(255,255,255,0.2);
+}
+
+.toggle-icon {
+    font-size: 20px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+/* Chapter Navigation Button Styles */
+.chapter-nav-container {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    background: #6c757d;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.chapter-nav-container.left {
+    left: 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.chapter-nav-container.right {
+    right: 0;
+    border-radius: 8px 0 0 8px;
+}
+
+.chapter-nav-btn {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 60px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.chapter-nav-btn:hover {
+    background: rgba(255,255,255,0.1);
+    transform: scale(1.05);
+}
+
+.chapter-nav-btn:active {
+    background: rgba(255,255,255,0.2);
+}
+
+.chapter-nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.chapter-nav-btn:disabled:hover {
+    background: transparent;
+    transform: none;
+}
+
+.chapter-nav-icon {
+    font-size: 18px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+/* Left dock: Previous chapter button */
+.chapter-nav-container.left .chapter-nav-btn {
+    color: #fff;
+}
+
+.chapter-nav-container.left:hover {
+    background: #5a6268;
+}
+
+/* Right dock: Next chapter button */
+.chapter-nav-container.right .chapter-nav-btn {
+    color: #fff;
+}
+
+.chapter-nav-container.right:hover {
+    background: #5a6268;
+}
+
+/* Ensure proper spacing between dock elements */
+.sidebar-toggle-container {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.chapter-nav-container.left {
+    left: 0;
+    top: 35%;
+    transform: translateY(-50%);
+}
+
+.chapter-nav-container.right {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Sidebar Toggle Functionality */
+.sidebar.hidden {
+    display: none;
+}
+
+/* Container width adjustment when sidebar is hidden */
+#pagebody .wrapper .sidebar.hidden ~ .container {
+    width: 100% !important;
+    float: none !important;
+}
+
+/* Alternative approach: when sidebar is hidden, adjust container */
+#pagebody .wrapper .sidebar.hidden + .container {
+    width: 100% !important;
+    float: none !important;
+}
+
+/* Force container to full width when sidebar is hidden */
+#pagebody .wrapper .sidebar.hidden ~ .container {
+    width: 100% !important;
+    float: none !important;
+}
+
+/* Ensure proper layout when sidebar is hidden */
+#pagebody .wrapper .sidebar.hidden ~ .container {
+    width: 100% !important;
+    float: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Adjust wrapper layout when sidebar is hidden */
+#pagebody .wrapper:has(.sidebar.hidden) .container {
+    width: 100% !important;
+    float: none !important;
+}
+
+/* Alternative approach using JavaScript class on body */
+body.sidebar-hidden .container {
+    width: 100% !important;
+    float: none !important;
+}
+
+/* Smooth transitions for layout changes */
+.container, .sidebar {
+    transition: all 0.3s ease;
+}
+
+/* Visual feedback when sidebar is hidden */
+body.sidebar-hidden .sidebar-toggle-container {
+    background: #28a745;
+}
+
+body.sidebar-hidden .sidebar-toggle-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Responsive adjustments for dock toggle */
+@media only screen and (max-width: 959px) {
+    .sidebar-toggle-container {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .sidebar-toggle-btn {
+        min-width: 35px;
+        min-height: 50px;
+        padding: 10px 6px;
+    }
+    
+    .toggle-icon {
+        font-size: 16px;
+    }
+    
+    /* Chapter navigation responsive adjustments */
+    .chapter-nav-container {
+        min-width: 35px;
+        min-height: 50px;
+    }
+    
+    .chapter-nav-btn {
+        min-width: 35px;
+        min-height: 50px;
+    }
+    
+    .chapter-nav-icon {
+        font-size: 16px;
+    }
+    
+    /* Adjust positioning for mobile */
+    .chapter-nav-container.left {
+        top: 30%;
+    }
+    
+    .chapter-nav-container.right {
+        top: 45%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .sidebar-toggle-container {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .sidebar-toggle-btn {
+        min-width: 30px;
+        min-height: 45px;
+        padding: 8px 5px;
+    }
+    
+    .toggle-icon {
+        font-size: 14px;
+    }
+    
+    /* Chapter navigation responsive adjustments */
+    .chapter-nav-container {
+        min-width: 30px;
+        min-height: 45px;
+    }
+    
+    .chapter-nav-btn {
+        min-width: 30px;
+        min-height: 45px;
+        padding: 8px 5px;
+    }
+    
+    .chapter-nav-icon {
+        font-size: 14px;
+    }
 }
 

@@ -234,10 +234,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 	</div>
 </div>
 <div id="headline">
-	<div class="wrapper">
-		<h2>{%page.reading.title%}</h2>
-	</div>
+    <div class="wrapper">
+        <h2>{%page.reading.title%}</h2>
+    </div>
 </div>
+
+<!-- Sidebar Toggle Button -->
+<div class="sidebar-toggle-container">
+    <button id="sidebar-toggle" class="sidebar-toggle-btn" title="Toggle Sidebar">
+        <span class="toggle-icon">☰</span>
+    </button>
+</div>
+
+<!-- Chapter Navigation Buttons -->
+<div class="chapter-nav-container left">
+    <a href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up" 
+       class="chapter-nav-btn" 
+       title="{%holy.book.previous%} Chapter">
+        <span class="chapter-nav-icon">‹</span>
+    </a>
+</div>
+
+<div class="chapter-nav-container right">
+    <a href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up" 
+       class="chapter-nav-btn" 
+       title="{%holy.book.next%} Chapter">
+        <span class="chapter-nav-icon">›</span>
+    </a>
+</div>
+
 <a name="up"></a>
 <div id="pagebody">
 <div class="wrapper">
@@ -335,6 +360,63 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 <div id="__base__"></div>
 <script type="text/javascript">
 window.listener.install(document.getElementById("f"),document.getElementById("keyword"),"keyword.jsp",false,"×");
+</script>
+
+<!-- Sidebar Toggle JavaScript -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const toggleIcon = sidebarToggle.querySelector('.toggle-icon');
+    
+    // Check if sidebar state is saved in localStorage
+    const sidebarHidden = localStorage.getItem('sidebarHidden') === 'true';
+    if (sidebarHidden) {
+        sidebar.classList.add('hidden');
+        document.body.classList.add('sidebar-hidden');
+        toggleIcon.textContent = '☰';
+    }
+    
+    sidebarToggle.addEventListener('click', function() {
+        if (sidebar.classList.contains('hidden')) {
+            // Show sidebar
+            sidebar.classList.remove('hidden');
+            document.body.classList.remove('sidebar-hidden');
+            toggleIcon.textContent = '☰';
+            localStorage.setItem('sidebarHidden', 'false');
+        } else {
+            // Hide sidebar
+            sidebar.classList.add('hidden');
+            document.body.classList.add('sidebar-hidden');
+            toggleIcon.textContent = '☰';
+            localStorage.setItem('sidebarHidden', 'true');
+        }
+    });
+    
+    // Keyboard shortcut (Ctrl/Cmd + B) to toggle sidebar
+    document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+            e.preventDefault();
+            sidebarToggle.click();
+        }
+        // Chapter navigation with arrow keys
+        if (e.key === 'ArrowLeft' && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+            e.preventDefault();
+            const prevBtn = document.querySelector('.chapter-nav-container.left .chapter-nav-btn');
+            if (prevBtn && !prevBtn.style.opacity) {
+                prevBtn.click();
+            }
+        }
+        
+        if (e.key === 'ArrowRight' && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+            e.preventDefault();
+            const nextBtn = document.querySelector('.chapter-nav-container.right .chapter-nav-btn');
+            if (nextBtn && !nextBtn.style.opacity) {
+                nextBtn.click();
+            }
+        }
+    });
+});
 </script>
 </body>
 </html>
