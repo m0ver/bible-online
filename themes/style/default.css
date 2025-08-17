@@ -149,7 +149,7 @@ em,cite {
 
 #header ul li a.current,#header ul li#download a.current {
 	color: #555;
-	background: #e4f2fd;
+	background: #ffffff;
 	-moz-border-radius-topleft: 0.3em;
 	-khtml-border-top-left-radius: 0.3em;
 	-webkit-border-top-left-radius: 0.3em;
@@ -322,6 +322,7 @@ p.button {
 	background: #e4f2fd;
 	border-bottom: 1px solid #c6d9e9;
 	padding: 0 3em;
+	display: none;
 }
 
 #headline h2 {
