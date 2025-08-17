@@ -69,7 +69,7 @@ public class sender extends AbstractApplication {
 
         report.setModifiedTime(new Date());
         try {
-            report.append();
+            report.appendAndGetId();
 
             bible bible = new bible();
             if (this.getLocale().toString().equalsIgnoreCase(Locale.US.toString())) {
