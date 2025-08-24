@@ -543,7 +543,16 @@ blockquote {
 	border-bottom-right-radius: 0.3em;
 }
 
+.info {
+	padding: 0.5em;
+	padding-left: 1em;
+    background-color: #e3f6e9;
+    border: 1px solid #0ba51f;
+}
+
 .wrap,.updated {
+	padding: 0.5em;
+	padding-left: 1em;
 	background-color: #e4f2fd;
 	border: 1px solid #2583ad;
 }
@@ -1033,6 +1042,7 @@ ul.testament li ol li {
     	position: fixed;
     	top:0;
     	width:100%;
+    	z-index: 1000; /* Ensure header stays on top */
     }
     #header .welcome {
 	    padding: 1em 0;
@@ -1047,6 +1057,7 @@ ul.testament li ol li {
 	}
 	#pagebody {
 	    padding: 1em 1.500em;
+	    margin-top: 1em; /* Add margin to ensure content doesn't get covered */
 	}
 	#footer {
 	    padding: 0 1.500em;
@@ -1146,6 +1157,7 @@ ul.testament li ol li {
 @media only screen and (max-width: 480px) {
     .search-container {
         padding: 0 10px;
+        margin-top: 20px; /* Add top margin to avoid fixed header */
     }
     
     .search-input,
@@ -1165,6 +1177,32 @@ ul.testament li ol li {
 *::-moz-selection {
     background-color: #2583AD;
     color: #ffffff;
+}
+
+/* Mobile search page specific fixes */
+@media only screen and (max-width: 480px) {
+    /* Ensure search page content is properly spaced from fixed header */
+    #pagebody .search-container {
+        margin-top: 30px; /* Extra spacing for search container specifically */
+    }
+    
+    /* Ensure the first search container in pagebody has proper spacing */
+    #pagebody > .wrapper > .col-12 > .search-container {
+        margin-top: 25px;
+    }
+    
+    /* Additional fix for search page headline spacing */
+    #headline + #pagebody .search-container {
+        margin-top: 2.5em;
+    }
+}
+
+/* Additional mobile fixes for search functionality */
+@media only screen and (max-width: 767px) {
+    /* Ensure search container has proper spacing on all mobile devices */
+    #pagebody .search-container {
+        margin-top: 15px;
+    }
 }
 
 /* Sidebar Toggle Button Styles */
