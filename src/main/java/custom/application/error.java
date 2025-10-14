@@ -21,7 +21,7 @@ import org.tinystruct.ApplicationException;
 import org.tinystruct.application.Template;
 import org.tinystruct.application.Variables;
 import org.tinystruct.dom.Element;
-import org.tinystruct.handler.Reforward;
+import org.tinystruct.http.Reforward;
 import org.tinystruct.http.Request;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.ResponseStatus;

@@ -28,9 +28,8 @@ import org.apache.http.ParseException;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Builder;
-import org.tinystruct.handler.Reforward;
+import org.tinystruct.http.Reforward;
 import org.tinystruct.http.*;
-import org.tinystruct.http.client.HttpRequestBuilder;
 import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.template.variable.ObjectVariable;
 import org.tinystruct.system.util.StringUtilities;
@@ -49,7 +48,6 @@ import java.security.GeneralSecurityException;
 import java.util.*;
 
 import static org.tinystruct.http.Constants.HTTP_REQUEST;
-import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class login extends AbstractApplication {
     /**

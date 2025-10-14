@@ -26,7 +26,7 @@ import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Document;
 import org.tinystruct.dom.Element;
-import org.tinystruct.handler.Reforward;
+import org.tinystruct.http.Reforward;
 import org.tinystruct.http.Request;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.Session;

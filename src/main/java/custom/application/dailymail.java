@@ -23,19 +23,18 @@ import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.dom.Element;
 import org.tinystruct.mail.SimpleMail;
+import org.tinystruct.system.Event;
+import org.tinystruct.system.EventDispatcher;
 import org.tinystruct.system.scheduling.Scheduler;
 import org.tinystruct.system.scheduling.SchedulerTask;
 import org.tinystruct.system.scheduling.TimeIterator;
 
-import jakarta.servlet.ServletContextEvent;
-import jakarta.servlet.ServletContextListener;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class dailymail extends AbstractApplication implements ServletContextListener {
+public class dailymail extends AbstractApplication {
 
 	private final Scheduler scheduler;
-//	private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss.SSS");
 	private suggestion suggestion;
 	private String locale;
 	private dailymail mail;
@@ -43,8 +42,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 	public dailymail() throws ApplicationException {
 		// TODO Auto-generated constructor stub
 		this.scheduler = new Scheduler(true);
-		this.locale = this.getLocale().toString();
-		
+
 		mail = this;
 	}
 
@@ -65,13 +63,8 @@ public class dailymail extends AbstractApplication implements ServletContextList
 
 			@Override
 			public void start() {
-				// TODO Auto-generated method stub
-
 				synchronized (o) {
-//					System.out.println("\r\nstart..." + dateFormat.format(new Date()));
-
 					try {
-
 						SimpleMail themail = new SimpleMail();
 						themail.setFrom("国际圣经在线");
 
@@ -90,11 +83,11 @@ public class dailymail extends AbstractApplication implements ServletContextList
 						TaskDescriptor task = new TaskDescriptor();
 
 						bible bible = new bible();
-						
-						if(locale.equalsIgnoreCase(Locale.US.toString()))
-							bible.setTableName("NIV");
-						else
+                        locale = getLocale().toString();
+						if(locale.equalsIgnoreCase(Locale.CHINA.toString()))
 							bible.setTableName("zh_CN");
+						else
+							bible.setTableName("NIV");
 
 						StringBuffer where = task.parse(plan.getTask());
 
@@ -134,7 +127,6 @@ public class dailymail extends AbstractApplication implements ServletContextList
 						buffer.append("			<img id=\"feedTitleImage\" src=\"https://www.ingod.today/themes/images/favicon-b.png\"/> </a>");
 						buffer.append("		<div style=\"-moz-margin-end: 0.6em; -moz-margin-start: 0; margin-bottom: 0; margin-top: 0;\">");
 						buffer.append("			<h1 style=\"border-bottom: 2px solid threedlightshadow; font-size: 160%; margin: 0 0 0.2em;\">国际圣经在线</h1>");
-//						buffer.append("			<h2 style=\"color: #C0C0C0; font-weight: normal; margin: 0 0 0.6em;\">国际圣经在线为立志跟随主耶稣基督的朋友提供圣经阅读、圣经收听、圣经检索、福音电影分享以及资源下载等服务</h2>");
 						buffer.append("		</div>");
 						buffer.append("	</div>");
 						buffer.append("	<div id=\"feedContent\">");
@@ -197,7 +189,7 @@ public class dailymail extends AbstractApplication implements ServletContextList
 						container.setData(buffer.toString());
 
 						themail.setSubject("每日读经["
-								+ format.format(new Date()).toString() + "]");
+								+ format.format(new Date()) + "]");
 
 						Element footer = new Element("div");
 
@@ -220,8 +212,6 @@ public class dailymail extends AbstractApplication implements ServletContextList
 								subscription.update();
 							}
 						}
-
-						// themail.attachFile("E:\\常用应用软件\\网络代理\\freegate7.01.rar");
 
 						Thread.sleep(1);
 					} catch (ApplicationException e) {
@@ -249,9 +239,6 @@ public class dailymail extends AbstractApplication implements ServletContextList
 					} finally {
 						this.next = true;
 					}
-
-//					System.out.println("\r\nstarted");
-//					System.out.println("\r\nend..."	+ dateFormat.format(new Date()));
 				}
 			}
 
@@ -272,47 +259,9 @@ public class dailymail extends AbstractApplication implements ServletContextList
 		dailymail mailing = new dailymail();
 		mailing.start();
 	}
-
-	public void contextDestroyed(ServletContextEvent sce) {
-		// TODO Auto-generated method stub
-		suggestion = new suggestion();
-		suggestion.setEmail("services@ingod.asia");
-		suggestion.setIP("-");
-		suggestion.setPostDate(new Date());
-		suggestion.setStatus(false);
-		suggestion.setTitle("Task has been cancelled!");
-		suggestion.setContent("Task has been cancelled at " + new Date());
-		try {
-			suggestion.append();
-		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		this.scheduler.cancel();
-	}
-
-	public void contextInitialized(ServletContextEvent sce) {
-		this.start();
-		
-		suggestion = new suggestion();
-		suggestion.setEmail("services@ingod.asia");
-		suggestion.setIP("-");
-		suggestion.setPostDate(new Date());
-		suggestion.setStatus(false);
-		suggestion.setTitle("Task has been started!");
-		suggestion.setContent("Task has been started at " + new Date());
-		try {
-			suggestion.append();
-		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	public void note(Throwable e,suggestion suggestion) {
 		// TODO Auto-generated method stub
-		
 		StackTraceElement[] trace = e.getStackTrace();
 
 		StringBuffer errors = new StringBuffer("Details:\r\n");
@@ -344,10 +293,87 @@ public class dailymail extends AbstractApplication implements ServletContextList
 	public void init() {
 		// TODO Auto-generated method stub
 		this.setAction("start", "start");
-	}
+
+        suggestion = new suggestion();
+        suggestion.setEmail("services@ingod.today");
+        suggestion.setIP("-");
+        suggestion.setPostDate(new Date());
+        suggestion.setStatus(false);
+
+        EventDispatcher dispatcher = EventDispatcher.getInstance();
+        dispatcher.registerHandler(DailyMailStartEvent.class, m-> {
+            suggestion payload = m.getPayload();
+            assert payload != null;
+            payload.setTitle("Task has been started!");
+            payload.setContent("Task has been started at " + new Date());
+            try {
+                payload.append();
+            } catch (ApplicationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            start();
+        });
+
+        dispatcher.registerHandler(DailyMailEndEvent.class, m-> {
+            suggestion payload = m.getPayload();
+            assert payload != null;
+            payload.setTitle("Task has been cancelled!");
+            payload.setContent("Task has been cancelled at " + new Date());
+            try {
+                payload.append();
+            } catch (ApplicationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            scheduler.cancel();
+        });
+
+        dispatcher.dispatch(new DailyMailStartEvent(suggestion));
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> dispatcher.dispatch(new DailyMailEndEvent(suggestion))));
+
+    }
 
 	public String version() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+    private static class DailyMailStartEvent implements Event<suggestion> {
+        private final suggestion suggestion;
+
+        private DailyMailStartEvent(suggestion suggestion) {
+            this.suggestion = suggestion;
+        }
+
+        @Override
+        public String getName() {
+            return "Daily Mail Start";
+        }
+
+        @Override
+        public suggestion getPayload() {
+            return this.suggestion;
+        }
+    }
+    private static class DailyMailEndEvent implements Event<suggestion> {
+        private final suggestion suggestion;
+
+        private DailyMailEndEvent(suggestion suggestion) {
+            this.suggestion = suggestion;
+        }
+
+        @Override
+        public String getName() {
+            return "Daily Mail End";
+        }
+
+        @Override
+        public suggestion getPayload() {
+            return this.suggestion;
+        }
+    }
 }

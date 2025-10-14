@@ -20,8 +20,6 @@ import org.tinystruct.ApplicationException;
 import org.tinystruct.application.ActionRegistry;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.ResponseHeaders;
-import org.tinystruct.system.ApplicationManager;
-import org.tinystruct.system.cli.CommandLine;
 import org.tinystruct.system.template.DefaultTemplate;
 
 import java.io.InputStream;
@@ -37,6 +35,8 @@ public class help extends AbstractApplication {
         this.setAction("help", "privacy");
         this.setAction("help/condition", "condition");
         this.setAction("sitemap.xml", "sitemap");
+
+        this.setTemplateRequired(false);
     }
 
     @Override
@@ -67,14 +67,14 @@ public class help extends AbstractApplication {
         this.setVariable("TEMPLATES_DIR", "/themes");
     }
 
-    public void privacy() throws ApplicationException {
+    public String privacy() throws ApplicationException {
         InputStream in = help.class.getClassLoader().getResourceAsStream("themes/privacy.view");
-        this.setTemplate(new DefaultTemplate(this, in));
+        return this.setTemplate(new DefaultTemplate(this, in));
     }
 
-    public void condition() throws ApplicationException {
+    public String condition() throws ApplicationException {
         InputStream in = help.class.getClassLoader().getResourceAsStream("themes/condition.view");
-        this.setTemplate(new DefaultTemplate(this, in));
+        return this.setTemplate(new DefaultTemplate(this, in));
     }
 
     public Object sitemap() {
