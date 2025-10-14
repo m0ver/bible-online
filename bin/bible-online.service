@@ -4,7 +4,7 @@ After=network.target
 Before=nextcloud-web.service
 
 [Service]
-ExecStart=/home/james/bible-online/bin/dispatcher start --import org.tinystruct.system.NettyHttpServer --server-port 777
+ExecStart=/home/james/bible-online/bin/dispatcher start --import org.tinystruct.system.HttpServer --server-port 777
 Type=simple
 Restart=always
 WorkingDirectory=/home/james/bible-online
