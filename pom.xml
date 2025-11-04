@@ -12,7 +12,7 @@
         <dependency>
             <groupId>org.tinystruct</groupId>
             <artifactId>tinystruct</artifactId>
-            <version>1.7.7</version>
+            <version>1.7.8</version>
         </dependency>
         <dependency>
             <groupId>org.tinystruct</groupId>
