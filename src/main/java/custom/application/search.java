@@ -45,7 +45,7 @@ import static org.tinystruct.http.Constants.HTTP_REQUEST;
 import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class search extends AbstractApplication {
-    protected static final String MODEL = "deepseek/deepseek-r1:free";
+    protected static final String MODEL = "tngtech/deepseek-r1t2-chimera:free";
     private Request request;
     private Response response;
     private User usr;
