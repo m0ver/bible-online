@@ -412,6 +412,53 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.remove('sidebar-hidden');
             toggleIcon.textContent = '☰';
             localStorage.setItem('sidebarHidden', 'false');
+            
+            // Auto-scroll to sidebar with smooth animation
+            setTimeout(function() {
+                // Enhanced scroll function that adapts to layout changes
+                function scrollToSidebar() {
+                    // Get the sidebar element
+                    const sidebar = document.querySelector('.sidebar');
+                    if (!sidebar) return;
+                    
+                    // Check if sidebar is visible and has dimensions
+                    const sidebarRect = sidebar.getBoundingClientRect();
+                    const headerHeight = document.querySelector('#header') ? document.querySelector('#header').offsetHeight : 0;
+                    
+                    // If sidebar is visible and has dimensions, scroll to it directly
+                    if (sidebarRect.height > 0 && sidebarRect.width > 0) {
+                        const sidebarTop = sidebar.offsetTop;
+                        const scrollPosition = sidebarTop - headerHeight - 10; // 10px buffer
+                        
+                        if (window.scrollTo) {
+                            window.scrollTo({
+                                top: scrollPosition,
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            window.scrollTo(0, scrollPosition);
+                        }
+                    } else {
+                        // Fallback: scroll to pagebody area
+                        const pagebody = document.getElementById('pagebody');
+                        if (pagebody) {
+                            const pagebodyTop = pagebody.offsetTop;
+                            const scrollPosition = pagebodyTop - headerHeight - 10;
+                            
+                            if (window.scrollTo) {
+                                window.scrollTo({
+                                    top: scrollPosition,
+                                    behavior: 'smooth'
+                                });
+                            } else {
+                                window.scrollTo(0, scrollPosition);
+                            }
+                        }
+                    }
+                }
+                
+                scrollToSidebar();
+            }, 150); // Slightly longer delay to ensure layout is stable
         } else {
             // Hide sidebar
             sidebar.classList.add('hidden');
