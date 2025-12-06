@@ -1396,18 +1396,6 @@ body.sidebar-hidden .container {
     transition: all 0.3s ease;
 }
 
-/* Ensure smooth scrolling behavior */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Fallback for browsers that don't support scroll-behavior: smooth */
-@media (prefers-reduced-motion: no-preference) {
-    html {
-        scroll-behavior: smooth;
-    }
-}
-
 /* Visual feedback when sidebar is hidden */
 body.sidebar-hidden .sidebar-toggle-container {
     background: #28a745;
