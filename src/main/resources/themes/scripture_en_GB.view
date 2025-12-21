@@ -219,7 +219,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 
       gtag('config', 'G-4NLGCC5K7C');
     </script>
-<title>{%book.bookName%} | Chapter {%chapterid%} | {%holy.bible%}</title>
+<title>{%book.bookName%} - Chapter {%chapterid%} - {%holy.bible%}</title>
 </head>
 <body itemscope=""  itemtype="http://schema.org/WebPage" data-role="page">
 <div id="header" data-role="header">
