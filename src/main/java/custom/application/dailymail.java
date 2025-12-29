@@ -42,18 +42,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class dailymail extends AbstractApplication {
 
-    private final Scheduler scheduler;
+    private Scheduler scheduler;
     private suggestion suggestion;
-    private String locale;
-    private dailymail mail;
-    private AtomicBoolean next = new AtomicBoolean(false);
-
-    public dailymail() throws ApplicationException {
-        // TODO Auto-generated constructor stub
-        this.scheduler = new Scheduler(true);
-
-        mail = this;
-    }
+    private final AtomicBoolean next = new AtomicBoolean(false);
 
     private void loadBible() {
         try {
@@ -78,7 +69,7 @@ public class dailymail extends AbstractApplication {
             TaskDescriptor task = new TaskDescriptor();
 
             String tableName;
-            locale = getLocale().toString();
+            String locale = getLocale().toString();
             if (locale.equalsIgnoreCase(Locale.UK.toString()))
                 tableName = "KJV";
             else if (locale.equalsIgnoreCase(Locale.US.toString()))
@@ -166,7 +157,7 @@ public class dailymail extends AbstractApplication {
                     book.setData(row);
                 }
 
-                buffer.append("<h3><a href=\"").append(mail.getLink("bible")).append("/")
+                buffer.append("<h3><a href=\"").append(this.getLink("bible")).append("/")
                         .append(book.getBookId()).append("\">").append(book.getBookName())
                         .append("</a></h3>");
 
@@ -176,7 +167,7 @@ public class dailymail extends AbstractApplication {
                     bible bi = iter.next();
 
                     if (chapterId != bi.getChapterId()) {
-                        buffer.append("<h4><a href=\"").append(mail.getLink("bible")).append("/")
+                        buffer.append("<h4><a href=\"").append(this.getLink("bible")).append("/")
                                 .append(book.getBookId()).append("/").append(bi.getChapterId()).append("\">")
                                 .append(bi.getChapterId()).append("章</a></h4>");
                         chapterId = bi.getChapterId();
@@ -186,10 +177,9 @@ public class dailymail extends AbstractApplication {
                 }
             }
             Element element = new Element();
-            buffer.append("<br /><a href=\"").append(mail.getLink("bible"))
+            buffer.append("<br /><a href=\"").append(this.getLink("bible"))
                     .append("\" style=\"float:right\">")
-                    .append(mail.getProperty("subscribe.continue.caption")).append("</a>");
-
+                    .append(this.getProperty("subscribe.continue.caption")).append("</a>");
             buffer.append("			</div>");
             buffer.append("		</div>");
             buffer.append("		<div style=\"clear: both;\"></div>");
@@ -319,7 +309,11 @@ public class dailymail extends AbstractApplication {
         }
     }
 
+    @Override
     public void init() {
+        // TODO Auto-generated constructor stub
+        this.scheduler = new Scheduler(true);
+
         suggestion = new suggestion();
         suggestion.setEmail("services@ingod.today");
         suggestion.setIP("-");
