@@ -420,7 +420,7 @@
             var bible = $('#bible').is(':checked') ? 'bible' : '';
             var article = $('#article').is(':checked') ? 'article' : '';
             $.post('[%LINK:services/subscribe%]', {toemail: email, bible: bible, article: article, lang: '{%LANGUAGE_TAG%}', version: '{%version%}'}, function(data){
-                if(data.indexOf('success') != -1) {
+                if(data.indexOf('true') != -1) {
                     $('#toemail').val('');
                     $('#bible').prop('checked', true);
                     $('#article').prop('checked', true);
