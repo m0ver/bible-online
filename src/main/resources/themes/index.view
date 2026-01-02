@@ -408,7 +408,7 @@
         function invite() {
             var email = $('#email').val();
             if(email == '' || email == '{%invite.email.default.tips%}') return false;
-            $.post('[%LINK:suggestion/invite%]', {email: email}, function(data){
+            $.post('[%LINK:friends/invite%]', {email: email}, function(data){
                 $('#invite-message').html(data).fadeIn();
             });
             return false;
