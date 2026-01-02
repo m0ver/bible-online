@@ -70,6 +70,8 @@ public class index extends AbstractApplication {
 
         this.setText("search.confirm.caption");
         this.setText("search.submit.caption");
+        this.setText("ask.submit.caption");
+        this.setText("ask.prompt");
 
         this.setText("invite.confirm.caption");
         this.setText("invite.submit.caption");

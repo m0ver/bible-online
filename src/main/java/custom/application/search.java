@@ -95,6 +95,7 @@ public class search extends AbstractApplication {
         this.setText("search.confirm.caption");
         this.setText("search.submit.caption");
         this.setText("ask.submit.caption");
+        this.setText("ask.prompt");
         this.setText("search.strict.mode");
 
         this.setText("invite.confirm.caption");
@@ -134,7 +135,7 @@ public class search extends AbstractApplication {
 
     @Action("bible/search")
     public Object query(Request request) throws ApplicationException {
-        Session session = request.getSession(); //@TODO
+        Session session = request.getSession(); // @TODO
         initialize(session);
 
         if (request.getParameter("keyword") != null)
@@ -161,7 +162,8 @@ public class search extends AbstractApplication {
         this.setVariable("search.title", "无相关结果 - ");
 
         String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
-        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q="
+                + getContext().getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
         if (!query.trim().isEmpty()) {
@@ -213,7 +215,8 @@ public class search extends AbstractApplication {
             bible.setTableName(locale.toString());
         }
 
-        String SQL = "SELECT bible.book_id, bible.chapter_id, bible.part_id, bible.content, book.book_name FROM " + bible.getTableName()
+        String SQL = "SELECT bible.book_id, bible.chapter_id, bible.part_id, bible.content, book.book_name FROM "
+                + bible.getTableName()
                 + " as bible left join " + book.getTableName()
                 + " as book on bible.book_id=book.book_id where " + condition
                 + " order by bible.book_id,bible.chapter_id,bible.part_id limit " + startIndex + ","
@@ -229,7 +232,7 @@ public class search extends AbstractApplication {
         if (!noResult && !query.isEmpty()) {
             try {
                 Table list = book.findWith("WHERE language=? and book_name=?",
-                        new Object[]{this.getLocale().toString(), query});
+                        new Object[] { this.getLocale().toString(), query });
                 if (!list.isEmpty()) {
                     this.response = (Response) getContext()
                             .getAttribute(HTTP_RESPONSE);
@@ -277,9 +280,16 @@ public class search extends AbstractApplication {
                     finded = StringUtilities.sign(finded, keywords[j++]);
                 }
 
-                html.append("<li").append(n % 2 == 0 ? " class=\"even\"" : " class=\"odd\"").append("><a href=\"").append(getContext().getAttribute("HTTP_HOST")).append("bible/").append(field.get("book_id").value().toString()).append("/").append(field.get("chapter_id").value().toString()).append("/").append(field.get("part_id").value().toString()).append("\" target=\"_blank\">").append(this.setText("search.bible.info", field.get("book_name").value()
-                        .toString(), field.get("chapter_id").value().toString(), field
-                        .get("part_id").value().toString())).append("</a><p>").append(finded).append("</p></li> \r\n");
+                html.append("<li").append(n % 2 == 0 ? " class=\"even\"" : " class=\"odd\"").append("><a href=\"")
+                        .append(getContext().getAttribute("HTTP_HOST")).append("bible/")
+                        .append(field.get("book_id").value().toString()).append("/")
+                        .append(field.get("chapter_id").value().toString()).append("/")
+                        .append(field.get("part_id").value().toString()).append("\" target=\"_blank\">")
+                        .append(this.setText("search.bible.info", field.get("book_name").value()
+                                .toString(), field.get("chapter_id").value().toString(),
+                                field
+                                        .get("part_id").value().toString()))
+                        .append("</a><p>").append(finded).append("</p></li> \r\n");
                 next++;
             }
         }
@@ -291,7 +301,7 @@ public class search extends AbstractApplication {
             keyword keyword = new keyword();
             keyword.setKeyword(word);
             ktable = keyword.setRequestFields("id,visit").findWith("WHERE keyword=?",
-                    new Object[]{word});
+                    new Object[] { word });
 
             if (ktable.isEmpty()) {
                 keyword.setVisit(0);
@@ -314,7 +324,8 @@ public class search extends AbstractApplication {
         pager.setEndPageText(this.getProperty("page.end.text"));
         pager.setControlBarText(this.getProperty("page.controlbar.text"));
 
-        html.append("<div class=\"pagination\" style=\"cursor:default\">").append(pager.getPageControlBar(actionURL)).append("</div>\r\n");
+        html.append("<div class=\"pagination\" style=\"cursor:default\">").append(pager.getPageControlBar(actionURL))
+                .append("</div>\r\n");
         html.append("<!-- ").append(System.currentTimeMillis() - startTime).append(" -->");
 
         int start = page - 1 == 0 ? 1 : (page - 1) * pageSize + 1, end = page
@@ -383,7 +394,7 @@ public class search extends AbstractApplication {
         // String look = "SELECT FOUND_ROWS() AS size";
 
         bible bible = new bible();
-        Table vtable = bible.find(SQL, new Object[]{});
+        Table vtable = bible.find(SQL, new Object[] {});
         noResult = !vtable.isEmpty();
 
         Field field;
@@ -398,7 +409,12 @@ public class search extends AbstractApplication {
                     finded = StringUtilities.sign(finded, keywords[j]);
                 }
 
-                xml.append("<item id=\"").append(next).append("\" chapterid=\"").append(field.get("chapter_id").value().toString()).append("\" bookid=\"").append(field.get("book_id").value().toString()).append("\" ").append(field.get("book_name").value().toString()).append(" partid=\"").append(field.get("part_id").value().toString()).append("\">").append(finded).append("</item>\r\n");
+                xml.append("<item id=\"").append(next).append("\" chapterid=\"")
+                        .append(field.get("chapter_id").value().toString()).append("\" bookid=\"")
+                        .append(field.get("book_id").value().toString()).append("\" ")
+                        .append(field.get("book_name").value().toString()).append(" partid=\"")
+                        .append(field.get("part_id").value().toString()).append("\">").append(finded)
+                        .append("</item>\r\n");
                 next++;
             }
         }
@@ -408,7 +424,7 @@ public class search extends AbstractApplication {
             keyword.setKeyword(keywords[k]);
             Row findRow = keyword.findOne(
                     "SELECT id,visit FROM keyword WHERE keyword='" + keywords[k] + "'",
-                    new Object[]{});
+                    new Object[] {});
 
             if (findRow.isEmpty()) {
                 keyword.setVisit(0);
@@ -426,10 +442,11 @@ public class search extends AbstractApplication {
     @Action("bible/advsearch")
     public Object advanced(Request request) throws ApplicationException {
         String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
-        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q="
+                + getContext().getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
-        Session session = request.getSession(); //@TODO
+        Session session = request.getSession(); // @TODO
         initialize(session);
 
         String query;
@@ -531,7 +548,8 @@ public class search extends AbstractApplication {
             this.setVariable("value", html.toString());
             this.setVariable("keyword", query);
             this.setVariable("search.title", query + " - ");
-            this.setVariable("action", getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
+            this.setVariable("action",
+                    getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
 
             this.setText("search.info", total, start, end);
 
@@ -547,10 +565,14 @@ public class search extends AbstractApplication {
             User usr = (User) session.getAttribute("usr");
 
             this.setVariable("user.status", "");
-            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + usr.getEmail() + "</a>");
-            this.setVariable("scripts", "$.ajax({url:\"" + this.getLink("services/getwords") + "\",dataType:\"xml\",type:'GET'}).success(function(data){data=wordsXML(data);ldialog.show(data);});");
+            this.setVariable("user.profile",
+                    "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + usr.getEmail()
+                            + "</a>");
+            this.setVariable("scripts", "$.ajax({url:\"" + this.getLink("services/getwords")
+                    + "\",dataType:\"xml\",type:'GET'}).success(function(data){data=wordsXML(data);ldialog.show(data);});");
         } else {
-            this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
+            this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">"
+                    + this.getProperty("page.login.caption") + "</a>");
             this.setVariable("user.profile", "");
             this.setVariable("scripts", "");
         }
@@ -566,7 +588,8 @@ public class search extends AbstractApplication {
             // First analyze the query using OpenAI with language context
             Builder analysisResult = getOpenAIAnalysis(query, locale);
 
-            if (analysisResult == null) return results;
+            if (analysisResult == null)
+                return results;
 
             // Extract verse references from analysis
             Builders verseRefs = (Builders) analysisResult.get("verses");
@@ -631,8 +654,7 @@ public class search extends AbstractApplication {
 
                     results.add(new SearchResult(
                             bookId, bookName, chapterId, partId,
-                            content, relevance, explanation
-                    ));
+                            content, relevance, explanation));
                 }
             }
         } catch (Exception e) {
@@ -761,7 +783,7 @@ public class search extends AbstractApplication {
         private final String explanation;
 
         public SearchResult(String bookId, String bookName, String chapterId, String partId,
-                            String content, double relevance, String explanation) {
+                String content, double relevance, String explanation) {
             this.bookId = bookId;
             this.bookName = bookName;
             this.chapterId = chapterId;
@@ -809,8 +831,7 @@ public class search extends AbstractApplication {
             if (word.length() > 2) { // Only highlight words longer than 2 characters
                 content = content.replaceAll(
                         "(?i)(" + Pattern.quote(word) + ")",
-                        "<span class=\"highlight\">$1</span>"
-                );
+                        "<span class=\"highlight\">$1</span>");
             }
         }
 

@@ -137,7 +137,7 @@ public class sender extends AbstractApplication {
         String body = String.format(
                 this.getProperty("mail.invitation.content"),
                 this.getProperty("application.title"),
-                this.getLink("user/register") + "/" + randomKey);
+                this.getLink("user/register/" + randomKey));
         mail.setSubject(this.getProperty("mail.invitation.title"));
         mail.setBody(body);
         mail.setTo(mailto);

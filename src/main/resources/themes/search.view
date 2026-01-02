@@ -338,7 +338,7 @@
             <form name="sitesearch" id="sitesearch" action="[%LINK:bible/advsearch%]" method="post">
                 <div class="search-container">
                     <input type="hidden" name="lang" value="{%LANGUAGE_TAG%}"/>
-                    <input type="text" id="keyword" name="keyword" autocomplete="off" maxlength="100" value="{%keyword%}" placeholder="{%search.submit.caption%}..." />
+                    <input type="text" id="keyword" name="keyword" autocomplete="off" maxlength="100" value="{%keyword%}" placeholder="{%ask.prompt%}..." />
                     <button class="inputbutton" type="submit" id="searchButton">
                         <span class="spinner"></span>
                         <span class="button-text">{%ask.submit.caption%}</span>
