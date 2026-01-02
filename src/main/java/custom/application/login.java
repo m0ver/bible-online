@@ -239,6 +239,7 @@ public class login extends AbstractApplication {
         switch (provider) {
             case GITHUB:
                 Builder builder = (Builder) clients.get("github");
+                String oauth2GithubCallback = this.getLink("oauth2_github_callback");
                 _builder
                         .append("https://github.com/login/oauth/authorize?")
                         .append("client_id=")
@@ -248,7 +249,7 @@ public class login extends AbstractApplication {
                         .append("&response_type=code")
                         .append("&redirect_uri=")
                         .append(URLEncoder.encode(
-                                this.getLink("oauth2_github_callback"), "utf8"));
+                                oauth2GithubCallback.substring(0, oauth2GithubCallback.indexOf("&")), "utf8"));
                 break;
 
             default:
@@ -260,8 +261,9 @@ public class login extends AbstractApplication {
                         String.join(" ", SCOPES), "utf-8"));
                 _builder.append("&state=profile");
                 _builder.append("&redirect_uri=");
+                String oauth2callback = this.getLink("oauth2callback");
                 _builder.append(URLEncoder.encode(
-                        this.getLink("oauth2callback"), "utf8"));
+                        oauth2callback.substring(0, oauth2callback.indexOf("&")), "utf8"));
                 _builder.append("&response_type=code");
                 _builder.append("&client_id=").append(builder.get("client_id"));
                 break;
