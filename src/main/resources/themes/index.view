@@ -420,7 +420,14 @@
             var bible = $('#bible').is(':checked') ? 'bible' : '';
             var article = $('#article').is(':checked') ? 'article' : '';
             $.post('[%LINK:services/subscribe%]', {toemail: email, bible: bible, article: article, lang: '{%LANGUAGE_TAG%}', version: '{%version%}'}, function(data){
-                $('#subscribe-message').html(data).fadeIn();
+                if(data.indexOf('success') != -1) {
+                    $('#toemail').val('');
+                    $('#bible').prop('checked', true);
+                    $('#article').prop('checked', true);
+                    $('#subscribe-message').html("<div style='color: #059669;'>{%subscribe.send.success%}</div>").fadeIn();
+                } else {
+                    $('#subscribe-message').html("<div style='color: #dc2626;'>{%subscribe.send.failure%}</div>").fadeIn();
+                }
             });
             return false;
         }

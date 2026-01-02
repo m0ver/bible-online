@@ -30,7 +30,9 @@ public class index extends AbstractApplication {
         super.setLocale(locale);
 
         this.setVariable("TEMPLATES_DIR", "/themes");
-        this.setVariable("keyword", SharedVariables.getInstance(getLocale().toString()).getVariable("keyword") == null ? "" : SharedVariables.getInstance(getLocale().toString()).getVariable("keyword").getValue().toString());
+        this.setVariable("keyword", SharedVariables.getInstance(getLocale().toString()).getVariable("keyword") == null
+                ? ""
+                : SharedVariables.getInstance(getLocale().toString()).getVariable("keyword").getValue().toString());
         this.setVariable("metas", "");
 
         this.setText("application.keywords");
@@ -79,6 +81,8 @@ public class index extends AbstractApplication {
         this.setText("subscribe.submit.caption");
         this.setText("subscribe.email.caption");
         this.setText("subscribe.email.default.tips");
+        this.setText("subscribe.send.success");
+        this.setText("subscribe.send.failure");
 
         this.setText("user.lastlogin.caption");
 
