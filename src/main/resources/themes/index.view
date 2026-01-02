@@ -419,7 +419,7 @@
             if(email == '' || email == '{%subscribe.email.default.tips%}') return false;
             var bible = $('#bible').is(':checked') ? 'bible' : '';
             var article = $('#article').is(':checked') ? 'article' : '';
-            $.post('[%LINK:subscriber/subscribe%]', {toemail: email, bible: bible, article: article, lang: '{%LANGUAGE_TAG%}', version: '{%version%}'}, function(data){
+            $.post('[%LINK:services/subscribe%]', {toemail: email, bible: bible, article: article, lang: '{%LANGUAGE_TAG%}', version: '{%version%}'}, function(data){
                 $('#subscribe-message').html(data).fadeIn();
             });
             return false;
