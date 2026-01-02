@@ -16,8 +16,8 @@
         </dependency>
         <dependency>
             <groupId>org.tinystruct</groupId>
-            <artifactId>tinystruct-netty-http-server</artifactId>
-            <version>1.0.4</version>
+            <artifactId>tinystruct-tomcat-server</artifactId>
+            <version>1.0.5</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
         <dependency>
