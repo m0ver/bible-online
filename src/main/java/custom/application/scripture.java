@@ -25,6 +25,10 @@ import org.tinystruct.data.component.Cache;
 import org.tinystruct.data.component.Field;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
+import org.tinystruct.data.DatabaseOperator;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import org.tinystruct.dom.Element;
 import org.tinystruct.http.*;
 import org.tinystruct.system.annotation.Action;
@@ -510,30 +514,31 @@ public class scripture extends AbstractApplication {
                     + chapterId;
         }
 
-        String where = "WHERE " + condition + " order by part_id";
-        bible bible = new bible();
-
+        String tableName;
         if (this.getLocale().toString().equalsIgnoreCase(Locale.UK.toString()))
-            bible.setTableName("ESV");
+            tableName = "ESV";
         else if (this.getLocale().toString().equalsIgnoreCase(Locale.US.toString()))
-            bible.setTableName("NIV");
+            tableName = "NIV";
         else
-            bible.setTableName(this.getLocale().toString());
+            tableName = this.getLocale().toString();
 
-        Table vtable = bible.findWith(where, new Object[]{});
-        int count = vtable.size();
-        if (count > 0) {
-            Field fields;
-            for (Row row : vtable) {
-                for (Field field : row) {
-                    fields = field;
-                    finded = fields.get("content").value().toString();
-                    buffer.append("<li><a class=\"sup\">").append(fields.get("part_id").intValue()).append("</a>").append(finded).append("</li>");
-                }
+        try (DatabaseOperator operator = new DatabaseOperator()) {
+            String sql = "SELECT * FROM " + tableName + " WHERE " + condition + " order by part_id";
+            PreparedStatement preparedStatement = operator.preparedStatement(sql, new Object[] {});
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                do {
+                    finded = resultSet.getString("content");
+                    buffer.append("<li><a class=\"sup\">").append(resultSet.getInt("part_id")).append("</a>")
+                            .append(finded).append("</li>");
+                } while (resultSet.next());
+                buffer.append("</ol>");
+            } else {
+                buffer.append("暂时没有任何内容");
             }
-            buffer.append("</ol>");
-        } else {
-            buffer.append("暂时没有任何内容");
+        } catch (SQLException e) {
+            throw new ApplicationException(e.getMessage(), e);
         }
 
         Element item_description = (Element) element.clone();
@@ -567,7 +572,8 @@ public class scripture extends AbstractApplication {
         Response response = (Response) getContext()
                 .getAttribute(HTTP_RESPONSE);
 
-//        this.response.setContentType("text/xml;charset=" + getConfiguration().get("charset"));
+        // this.response.setContentType("text/xml;charset=" +
+        // getConfiguration().get("charset"));
         response.headers().add(Header.CONTENT_TYPE.set(getConfiguration().get(Header.StandardValue.CHARSET.name())));
         return "<?xml version=\"1.0\" encoding=\"" + getConfiguration().get("charset") + "\"?>\r\n" +
                 root;
@@ -712,7 +718,8 @@ public class scripture extends AbstractApplication {
                                 }
 
                                 @Override
-                                public void identify(Credential credential, Map<String, Object> map) throws ApplicationException {
+                                public void identify(Credential credential, Map<String, Object> map)
+                                        throws ApplicationException {
 
                                 }
 

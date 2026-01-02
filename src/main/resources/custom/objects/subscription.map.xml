@@ -6,5 +6,7 @@
   <property name="email" column="email" length="50" type="varchar"/>
   <property name="list" column="list" length="50" type="varchar"/>
   <property name="available" column="available" length="1" type="bit"/>
+  <property name="language" column="language" length="10" type="varchar"/>
+  <property name="bible_version" column="bible_version" length="10" type="varchar"/>
  </class>
 </mapping>

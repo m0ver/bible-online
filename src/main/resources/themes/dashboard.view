@@ -5,6 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
 <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+<meta name="keywords" content="{%application.keywords%}" />
+<meta name="description" content="{%application.description%}" />
+<meta name="robots" content="noindex, nofollow" />
 <meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
 <link rel="prev" href="[%LINK:bible%]/{%book.bookId%}/{%lastchapter%}#up" />
 <link rel="next" href="[%LINK:bible%]/{%book.bookId%}/{%nextchapter%}#up" />
@@ -150,6 +153,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 		<li><input type="checkbox" id="article" name="article" value="article" checked="checked"/>  <label for="article">{%subscribe.article.plan%}</label></li>
 	</ul>
 	<div class="container">
+		<input type="hidden" id="lang" name="lang" value="{%LANGUAGE_TAG%}"/>
+		<input type="hidden" id="version" name="version" value="{%version%}"/>
 		<textarea class="text" rows="3" cols="33" id="toemail" name="toemail" onfocus="this.value=''">{%subscribe.email.default.tips%}</textarea>
 		<input class="button-secondary" id="subscribe_button" type="submit" value=" {%subscribe.submit.caption%} " />
 		<span id="subscribe-message"></span>

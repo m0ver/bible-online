@@ -133,37 +133,35 @@ public class search extends AbstractApplication {
     }
 
     @Action("bible/search")
-    public Object query() throws ApplicationException {
-        this.request = (Request) getContext()
-                .getAttribute(HTTP_REQUEST);
-
+    public Object query(Request request) throws ApplicationException {
         Session session = request.getSession(); //@TODO
         initialize(session);
 
-        if (this.request.getParameter("keyword") != null)
-            return this.query(this.request.getParameter("keyword"));
+        if (request.getParameter("keyword") != null)
+            return this.query(request, request.getParameter("keyword"));
 
         return this;
     }
 
     @Action("bible/search")
-    public Object query(String query) throws ApplicationException {
+    public Object query(Request request, String query) throws ApplicationException {
         StringBuilder html = new StringBuilder();
         String[] keywords;
 
         int page = 1, pageSize = 20;
 
-        this.request = (Request) getContext()
-                .getAttribute(HTTP_REQUEST);
-        if (this.request.getParameter("page") == null
-                || this.request.getParameter("page").trim().isEmpty()) {
+        if (request.getParameter("page") == null
+                || request.getParameter("page").trim().isEmpty()) {
             page = 1;
         } else {
-            page = Integer.parseInt(this.request.getParameter("page").toString());
+            page = Integer.parseInt(request.getParameter("page").toString());
         }
 
         int startIndex = (page - 1) * pageSize;
         this.setVariable("search.title", "无相关结果 - ");
+
+        String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
         if (!query.trim().isEmpty()) {
@@ -355,10 +353,10 @@ public class search extends AbstractApplication {
         boolean noResult = true;
 
         int page = 1, pageSize = 20;
-        if (this.request.getParameter("page") == null
-                || this.request.getParameter("page").trim().length() <= 0) {
+        if (request.getParameter("page") == null
+                || request.getParameter("page").trim().length() <= 0) {
         } else {
-            page = Integer.parseInt(this.request.getParameter("page"));
+            page = Integer.parseInt(request.getParameter("page"));
         }
 
         int startIndex = (page - 1) * pageSize;
@@ -427,8 +425,9 @@ public class search extends AbstractApplication {
 
     @Action("bible/advsearch")
     public Object advanced(Request request) throws ApplicationException {
+        String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
 
         Session session = request.getSession(); //@TODO
         initialize(session);
@@ -443,12 +442,11 @@ public class search extends AbstractApplication {
         query = StringUtilities.htmlSpecialChars(query);
 
         int page = 1, pageSize = 10, total = 0;
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
 
-        if (this.request.getParameter("page") == null || this.request.getParameter("page").trim().isEmpty()) {
+        if (request.getParameter("page") == null || request.getParameter("page").trim().isEmpty()) {
             page = 1;
         } else {
-            page = Integer.parseInt(this.request.getParameter("page").toString());
+            page = Integer.parseInt(request.getParameter("page").toString());
         }
 
         // Initialize search components

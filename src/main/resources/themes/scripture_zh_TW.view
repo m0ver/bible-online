@@ -3,7 +3,10 @@
 <head>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta property="og:title" content="{%book.bookName%} | 第{%chapterid%}章 | {%holy.bible%}"/>
+    <meta name="keywords" content="聖經, 聖經經文, 基督徒, 基督教, {%application.keywords%}"/>
+    <meta name="description" content="{%application.description%}"/>
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="{%book.bookName%} | 第{%chapterid%}章 | {%holy.bible%} - 今日有道"/>
     <meta property="og:url" content="[%LINK:bible/feed%]/{%book.bookId%}/{%chapterid%}"/>
     <meta property="og:image" content="https://www.ingod.today{%TEMPLATES_DIR%}/images/favicon.png"/>
     <meta property="og:site_name" content="{%application.title%}"/>
@@ -200,7 +203,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 
       gtag('config', 'G-4NLGCC5K7C');
     </script>
-    <title>{%book.bookName%} - 第{%chapterid%}章 - {%holy.bible%}</title>
+    <title>{%book.bookName%} 第{%chapterid%}章 - 今日有道 - 聖經查詢與靈修指南</title>
 </head>
 <body itemscope="" itemtype="http://schema.org/WebPage" data-role="page">
 <div id="header" data-role="header">
@@ -348,7 +351,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
                     <li><input type="checkbox" id="article" name="article" value="article" checked="checked"/> <label
                             for="article">{%subscribe.article.plan%}</label></li>
                 </ul>
-                <div class="container">
+                	<div class="container">
+		<input type="hidden" id="lang" name="lang" value="{%LANGUAGE_TAG%}"/>
+		<input type="hidden" id="version" name="version" value="{%version%}"/>
                     <textarea class="text" rows="3" cols="33" id="toemail" name="toemail" onfocus="this.value=''">{%subscribe.email.default.tips%}</textarea>
                     <input class="button-secondary" id="subscribe_button" type="submit"
                            value=" {%subscribe.submit.caption%} "/>

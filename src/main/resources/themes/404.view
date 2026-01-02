@@ -4,6 +4,9 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 {%metas%}
+<meta name="keywords" content="{%application.keywords%}" />
+<meta name="description" content="{%application.description%}" />
+<meta name="robots" content="noindex, follow" />
 <meta property="og:title" content="404 | {%holy.bible%}"/>
 <meta property="og:url" content="[%LINK:404%]"/>
 <meta property="og:image" content="{%TEMPLATES_DIR%}/images/favicon.png"/>
@@ -213,6 +216,8 @@ $(function(){
 		<li><input type="checkbox" id="article" name="article" value="article" checked="checked"/>  <label for="article">{%subscribe.article.plan%}</label></li>
 	</ul>
 	<div class="container">
+		<input type="hidden" id="lang" name="lang" value="{%LANGUAGE_TAG%}"/>
+		<input type="hidden" id="version" name="version" value="{%version%}"/>
 		<textarea class="text" rows="3" cols="33" id="toemail" name="toemail" onfocus="this.value=''">{%subscribe.email.default.tips%}</textarea>
 		<input class="button-secondary" id="subscribe_button" type="submit" value=" {%subscribe.submit.caption%} " />
 		<span id="subscribe-message"></span>

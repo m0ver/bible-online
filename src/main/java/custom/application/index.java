@@ -4,6 +4,7 @@ import custom.objects.User;
 import custom.objects.book;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
+import org.tinystruct.application.SharedVariables;
 import org.tinystruct.data.component.Cache;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
@@ -21,16 +22,16 @@ public class index extends AbstractApplication {
     private User usr;
 
     public void init() {
-        this.setAction("default", "start");
 
-        this.setVariable("TEMPLATES_DIR", "/themes");
-        this.setSharedVariable("keyword", this.getVariable("keyword") == null ? "" : this.getVariable("keyword").getValue().toString());
-        this.setSharedVariable("metas", "");
     }
 
     @Override
     public void setLocale(Locale locale) {
         super.setLocale(locale);
+
+        this.setVariable("TEMPLATES_DIR", "/themes");
+        this.setVariable("keyword", SharedVariables.getInstance(getLocale().toString()).getVariable("keyword") == null ? "" : SharedVariables.getInstance(getLocale().toString()).getVariable("keyword").getValue().toString());
+        this.setVariable("metas", "");
 
         this.setText("application.keywords");
         this.setText("application.description");
@@ -98,18 +99,25 @@ public class index extends AbstractApplication {
 
     @Action("default")
     public Object start(Request request) {
-        this.setVariable("action", getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action",
+                getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
+        this.setVariable("LANGUAGE_TAG", this.getLocale().toLanguageTag());
+        this.setVariable("chapterid", "1");
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
             this.usr = (User) session.getAttribute("usr");
 
             this.setVariable("user.status", "");
-            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + this.usr.getEmail() + "</a>");
-            this.setVariable("scripts", "$.ajax({url:\"" + this.getLink("services/getwords") + "\",dataType:\"xml\",type:'GET'}).success(function(data){data=wordsXML(data);ldialog.show(data);});");
+            this.setVariable("user.profile",
+                    "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + this.usr.getEmail()
+                            + "</a>");
+            this.setVariable("scripts", "$.ajax({url:\"" + this.getLink("services/getwords")
+                    + "\",dataType:\"xml\",type:'GET'}).success(function(data){data=wordsXML(data);ldialog.show(data);});");
         } else {
-            this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
+            this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">"
+                    + this.getProperty("page.login.caption") + "</a>");
             this.setVariable("user.profile", "");
             this.setVariable("scripts", "");
         }
@@ -133,7 +141,7 @@ public class index extends AbstractApplication {
         String _locale = this.getLocale().toString();
         if ((menu = data.get("cache-menu" + _locale)) == null) {
             try {
-                list = book.findWith("WHERE language=? order by book_id", new Object[]{_locale});
+                list = book.findWith("WHERE language=? order by book_id", new Object[] { _locale });
                 data.set("cache-menu" + _locale, list);
             } catch (ApplicationException e) {
                 // TODO Auto-generated catch block

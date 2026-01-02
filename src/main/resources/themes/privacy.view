@@ -61,58 +61,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
 		<!-- header end -->
 		<div>
 		<ul class="nav">
-			<li><a href="#">InGod.asia 概述</a></li>
+			<li><a href="#">InGod.today 概述</a></li>
 			<li><a href="#">新功能</a></li>
-			<li><a href="#">InGod.asia 帮助中心</a></li>
+			<li><a href="#">InGod.today 帮助中心</a></li>
 			<li><a href="[%LINK:user/register%]">创建帐户</a></li>
 		</ul>
 		</div>
 		<div>
-		<h2 style="border: medium none;">InGod.asia 隐私声明</h2>
+		<h2 style="border: medium none;">InGod.today 隐私声明</h2>
 		<h4>2010 年 1 月 1 日</h4>
-		<p><a href="#privacy.html">InGod.asia 隐私政策</a>介绍了在您使用
-		InGod.asia 的产品和服务时我们如何处理个人信息，包括您在使用 本系统 时提供的信息。此外，下面还将介绍 本系统
+		<p><a href="#privacy.html">InGod.today 隐私政策</a>介绍了在您使用
+		InGod.today 的产品和服务时我们如何处理个人信息，包括您在使用 本系统 时提供的信息。此外，下面还将介绍 本系统
 		特有的隐私保护惯例。</p>
 		
 		<h4>个人信息</h4>
 		<ul class="bodylist">
 			<li>您需要 <a
-				href="#account">InGod.asia
-			帐户</a>才能访问 本系统。创建 InGod.asia 帐户时，InGod.asia
-			会要求您提供一些个人信息，包括您的备用联系信息和一个密码，这可以用来保护您的帐户免遭未经授权的访问。InGod.asia 帐户允许您访问
-			InGod.asia 的许多要求注册的服务。</li>
+				href="#account">InGod.today
+			帐户</a>才能访问 本系统。创建 InGod.today 帐户时，InGod.today
+			会要求您提供一些个人信息，包括您的备用联系信息和一个密码，这可以用来保护您的帐户免遭未经授权的访问。InGod.today 帐户允许您访问
+			InGod.today 的许多要求注册的服务。</li>
 			<li>本系统 可存储、处理和维护你的评论文章、上传的视频、联系人列表及您的帐户的其他相关数据，从而为您提供服务。</li>
-			<li>当您使用 本系统 时，InGod.asia 的服务器会自动记录您对 本系统	的使用的特定信息。与其他网络服务类似，InGod.asia 会记录一些信息，例如帐户活动（包括存储空间使用率、登录次数）、显示的数据或点击情况（包括对 UI 元素、链接的点击），以及其他<a
+			<li>当您使用 本系统 时，InGod.today 的服务器会自动记录您对 本系统	的使用的特定信息。与其他网络服务类似，InGod.today 会记录一些信息，例如帐户活动（包括存储空间使用率、登录次数）、显示的数据或点击情况（包括对 UI 元素、链接的点击），以及其他<a
 				href="#toc-terms-server-logs">日志信息</a>（包括浏览器类型、IP地址、访问的日期和时间、Cookie ID 和引用网址）。</li>
 		</ul>
 		
 		<h4>使用</h4>
 		<ul class="bodylist">
-			<li>InGod.asia 维护并处理您的 InGod 帐户及其内容，从而为您提供 本系统 服务并改进我们的服务。本系统
+			<li>InGod.today 维护并处理您的 InGod 帐户及其内容，从而为您提供 本系统 服务并改进我们的服务。本系统
 			服务包括相关链接、内容，以及与使用 本系统 相关的其他信息。</li>
-			<li>InGod.asia 会向您发送与您的 本系统 帐户或其他 InGod.asia 服务相关的信息。</li>
+			<li>InGod.today 会向您发送与您的 本系统 帐户或其他 InGod.today 服务相关的信息。</li>
 		</ul>
 		
 		<h4>信息共享和转发</h4>
 		<ul class="bodylist">
-			<li>当您发布一些个人信息文章或上传文件时，InGod.asia 会包含类似个人昵称和电子邮件地址本身等信息来作为文章的一部分。</li>
-			<li>我们不会向任何第三方销售、出租或共享您的个人信息，除非在 <a	href="#">InGod.asia 隐私政策</a>中说明的有限情况下，例如，当我们确信必须根据法律这样做时。</li>
+			<li>当您发布一些个人信息文章或上传文件时，InGod.today 会包含类似个人昵称和电子邮件地址本身等信息来作为文章的一部分。</li>
+			<li>我们不会向任何第三方销售、出租或共享您的个人信息，除非在 <a	href="#">InGod.today 隐私政策</a>中说明的有限情况下，例如，当我们确信必须根据法律这样做时。</li>
 		
 		</ul>
 		
 		<h4>您的选择</h4>
 		<ul class="bodylist">
 			<li>您可以通过 本系统“设置”部分更改 本系统 帐户设置。</li>
-			<li>您可以通过 本系统 帐户管理或删除属于你个人的私人内容，或通过 本系统 设置的“InGod.asia	帐户”部分终止您的帐户。这类删除或终止会立刻在您的帐户视图中生效。被删除内容和帐户的其他副本最多可保留 60
+			<li>您可以通过 本系统 帐户管理或删除属于你个人的私人内容，或通过 本系统 设置的“InGod.today	帐户”部分终止您的帐户。这类删除或终止会立刻在您的帐户视图中生效。被删除内容和帐户的其他副本最多可保留 60
 			天，然后才会再从活动服务器中删除，而且可以继续保留在脱机备份系统中。</li>
-			<li>您可以选择使用其他 系统 功能，例如聊天，它会连接到 InGod.asia 网络。</li>
+			<li>您可以选择使用其他 系统 功能，例如聊天，它会连接到 InGod.today 网络。</li>
 		</ul>
 		
 		<h4>更多信息</h4>
 		
 		<p>有关 本系统 的<a href="[%LINK:help/condition%]">使用条款</a>，请参阅<a href="[%LINK:help/condition%]">此处</a>。</p>
 		
-		<p>有关隐私保护惯例的详细信息，请访问<a href="#privacypolicy.html">完整隐私政策</a>。有关产品或帐户的问题，请参阅<a href="#">InGod.asia 帮助</a>页面。</p>
+		<p>有关隐私保护惯例的详细信息，请访问<a href="#privacypolicy.html">完整隐私政策</a>。有关产品或帐户的问题，请参阅<a href="#">InGod.today 帮助</a>页面。</p>
 		
 		</div>
 		

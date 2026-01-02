@@ -123,7 +123,6 @@ public class login extends AbstractApplication {
         }
 
         this.setVariable("code", this.toImage());
-
         return this;
     }
 

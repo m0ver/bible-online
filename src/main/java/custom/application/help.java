@@ -15,11 +15,16 @@
  *******************************************************************************/
 package custom.application;
 
+import custom.objects.User;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.application.ActionRegistry;
+import org.tinystruct.application.Variables;
+import org.tinystruct.http.Request;
 import org.tinystruct.http.Response;
 import org.tinystruct.http.ResponseHeaders;
+import org.tinystruct.http.Session;
+import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.template.DefaultTemplate;
 
 import java.io.InputStream;
@@ -31,11 +36,6 @@ public class help extends AbstractApplication {
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
-        this.setAction("help", "privacy");
-        this.setAction("help/condition", "condition");
-        this.setAction("sitemap.xml", "sitemap");
-
         this.setTemplateRequired(false);
     }
 
@@ -43,40 +43,90 @@ public class help extends AbstractApplication {
     public void setLocale(Locale locale) {
         super.setLocale(locale);
 
-        this.setText("page.condition.title");
-        this.setText("application.title");
-        this.setText("application.language.name");
+        this.setText("page.condition.title", locale);
+        this.setText("application.title", locale);
+        this.setText("application.language.name", locale);
 
-        this.setText("page.welcome.caption");
-        this.setText("page.language-setting.title");
-        this.setText("page.logout.caption");
+        this.setText("page.welcome.caption", locale);
+        this.setText("page.language-setting.title", locale);
+        this.setText("page.logout.caption", locale);
 
-        this.setText("navigator.bible.caption");
-        this.setText("navigator.video.caption");
-        this.setText("navigator.document.caption");
-        this.setText("navigator.reader.caption");
-        this.setText("navigator.controller.caption");
-        this.setText("navigator.help.caption");
+        this.setText("navigator.bible.caption", locale);
+        this.setText("navigator.video.caption", locale);
+        this.setText("navigator.document.caption", locale);
+        this.setText("navigator.reader.caption", locale);
+        this.setText("navigator.controller.caption", locale);
+        this.setText("navigator.help.caption", locale);
 
-        this.setText("footer.report-a-site-bug");
-        this.setText("footer.privacy");
-        this.setText("footer.register");
-        this.setText("footer.api");
-        this.setText("footer.updates-rss");
+        this.setText("footer.report-a-site-bug", locale);
+        this.setText("footer.privacy", locale);
+        this.setText("footer.register", locale);
+        this.setText("footer.api", locale);
+        this.setText("footer.updates-rss", locale);
 
         this.setVariable("TEMPLATES_DIR", "/themes");
+
+        String username = "";
+        if (this.getVariable("username") != null) {
+            username = String.valueOf(this.getVariable("username").getValue());
+        }
+
+        this.setText("page.welcome.hello", (username == null || username.trim().isEmpty()) ? "" : username + "，");
     }
 
-    public String privacy() throws ApplicationException {
+    @Action("help")
+    public String privacy(Request request) throws ApplicationException {
+        String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
+        // remove the default language for action
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
+
+        Session session = request.getSession();
+        if (session.getAttribute("usr") != null) {
+            User usr = (User) session.getAttribute("usr");
+
+            this.setVariable("user.status", "");
+            this.setVariable("user.profile",
+                    "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">"
+                            + usr.getEmail() + "</a>");
+        } else {
+            this.setVariable(
+                    "user.status",
+                    "<a href=\"" + this.getLink("user/login") + "\">"
+                            + this.getProperty("page.login.caption") + "</a>");
+            this.setVariable("user.profile", "");
+        }
+
         InputStream in = help.class.getClassLoader().getResourceAsStream("themes/privacy.view");
-        return this.setTemplate(new DefaultTemplate(this, in));
+        return this.setTemplate(new DefaultTemplate(this, in, Variables.getInstance(getLocale().toString()).getVariables()));
     }
 
-    public String condition() throws ApplicationException {
+    @Action("help/condition")
+    public String condition(Request request) throws ApplicationException {
+        String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
+        // remove the default language for action
+        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
+
+        Session session = request.getSession();
+        if (session.getAttribute("usr") != null) {
+            User usr = (User) session.getAttribute("usr");
+
+            this.setVariable("user.status", "");
+            this.setVariable("user.profile",
+                    "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">"
+                            + usr.getEmail() + "</a>");
+        } else {
+            this.setVariable(
+                    "user.status",
+                    "<a href=\"" + this.getLink("user/login") + "\">"
+                            + this.getProperty("page.login.caption") + "</a>");
+            this.setVariable("user.profile", "");
+        }
+
         InputStream in = help.class.getClassLoader().getResourceAsStream("themes/condition.view");
-        return this.setTemplate(new DefaultTemplate(this, in));
+        return this.setTemplate(new DefaultTemplate(this, in, Variables.getInstance(getLocale().toString()).getVariables()));
     }
 
+    @Action("sitemap.xml")
     public Object sitemap() {
         Collection<String> list = ActionRegistry.getInstance().paths();
         StringBuffer buffer = new StringBuffer();

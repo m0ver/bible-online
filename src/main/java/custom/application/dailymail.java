@@ -46,204 +46,6 @@ public class dailymail extends AbstractApplication {
     private suggestion suggestion;
     private final AtomicBoolean next = new AtomicBoolean(false);
 
-    private void loadBible() {
-        try {
-            this.next.set(false);
-            this.setText("application.title");
-            String title = Resource.getInstance(getLocale()).getLocaleString("application.title");
-            SimpleMail themail = new SimpleMail();
-            themail.setFrom(title);
-
-            SimpleDateFormat format = new SimpleDateFormat(
-                    "MM-dd");
-            plan plan = new plan();
-
-            Date date = new Date();
-            plan.findOneByKey("date", "2010-" + format.format(date));
-
-            if (plan.getTask() == null) {
-                throw new ApplicationException("Task is not ready!");
-            }
-
-            // start
-            TaskDescriptor task = new TaskDescriptor();
-
-            String tableName;
-            String locale = getLocale().toString();
-            if (locale.equalsIgnoreCase(Locale.UK.toString()))
-                tableName = "KJV";
-            else if (locale.equalsIgnoreCase(Locale.US.toString()))
-                tableName = "NIV";
-            else if (locale.equalsIgnoreCase(Locale.TAIWAN.toString()))
-                tableName = "zh_TW";
-            else
-                tableName = "zh_CN";
-
-            ArrayList<List<bible>> res = new ArrayList<List<bible>>();
-
-            List<bible> bibles = new ArrayList<bible>();
-            int bookId = 0, chapterId = 0;
-
-            // Fetch the bible verses from database
-            try (DatabaseOperator operator = new DatabaseOperator();) {
-                operator.disableSafeCheck();
-                StringBuffer where = task.parse(plan.getTask());
-                String sql = "SELECT * FROM " + tableName + " WHERE " + where;
-                PreparedStatement preparedStatement = operator.preparedStatement(sql, new Object[]{});
-                ResultSet resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    bible bib = new bible();
-                    bib.setBookId(resultSet.getInt("book_id"));
-                    bib.setChapterId(resultSet.getInt("chapter_id"));
-                    bib.setPartId(resultSet.getInt("part_id"));
-                    bib.setContent(resultSet.getString("content"));
-
-                    if (bookId != bib.getBookId()) {
-                        bookId = bib.getBookId();
-
-                        if (!bibles.isEmpty())
-                            res.add(bibles);
-
-                        bibles = new ArrayList<>();
-                    }
-
-                    bibles.add(bib);
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            if (!bibles.isEmpty())
-                res.add(bibles);
-
-            StringBuilder buffer = new StringBuilder();
-            buffer.append(
-                    "<div style=\"background: none repeat scroll 0 0 -moz-field; border: 1px solid threedshadow; margin: 2em auto; padding: 2em;\">");
-            buffer.append("	<div>");
-            buffer.append(
-                    "		<a style=\"-moz-margin-end: 0; -moz-margin-start: 0.6em; float: right; margin-bottom: 0; margin-top: 0;\">");
-            buffer.append(
-                    "			<img id=\"feedTitleImage\" src=\"https://www.ingod.today/themes/images/favicon-b.png\"/> </a>");
-            buffer.append(
-                    "		<div style=\"-moz-margin-end: 0.6em; -moz-margin-start: 0; margin-bottom: 0; margin-top: 0;\">");
-            buffer.append(
-                    "			<h1 style=\"border-bottom: 2px solid threedlightshadow; font-size: 160%; margin: 0 0 0.2em;\">" + title + "</h1>");
-            buffer.append("		</div>");
-            buffer.append("	</div>");
-            buffer.append("	<div id=\"feedContent\">");
-            buffer.append("		<div class=\"entry\">");
-            buffer.append("			<h2>");
-
-            String date_string = new SimpleDateFormat("MM/dd").format(date);
-
-            buffer.append("				<a href=\"https://www.ingod.today/?lang=zh-CN&amp;q=feed/")
-                    .append(date_string).append("\">每日读经 ").append(date_string).append("</a>");
-            buffer.append("			</h2>");
-            buffer.append(
-                    "			<div base=\"https://www.ingod.today/?lang=zh-CN&amp;q=feed\" class=\"feedEntryContent\">");
-
-            Iterator<List<bible>> iterator = res.iterator();
-
-            book book = new book();
-            while (iterator.hasNext()) {
-                List<bible> bs = iterator.next();
-
-                Table table = book.findWith("WHERE book_id=? and language=?",
-                        new Object[]{bs.get(0).getBookId(),
-                                locale.equalsIgnoreCase(Locale.US.toString()) ? Locale.US.toString()
-                                        : "zh_CN"});
-                if (!table.isEmpty()) {
-                    Row row = table.get(0);
-                    book.setData(row);
-                }
-
-                buffer.append("<h3><a href=\"").append(this.getLink("bible")).append("/")
-                        .append(book.getBookId()).append("\">").append(book.getBookName())
-                        .append("</a></h3>");
-
-                Iterator<bible> iter = bs.iterator();
-                chapterId = 0;
-                while (iter.hasNext()) {
-                    bible bi = iter.next();
-
-                    if (chapterId != bi.getChapterId()) {
-                        buffer.append("<h4><a href=\"").append(this.getLink("bible")).append("/")
-                                .append(book.getBookId()).append("/").append(bi.getChapterId()).append("\">")
-                                .append(bi.getChapterId()).append("章</a></h4>");
-                        chapterId = bi.getChapterId();
-                    }
-
-                    buffer.append(" ").append(bi.getPartId()).append(" ").append(bi.getContent());
-                }
-            }
-            Element element = new Element();
-            buffer.append("<br /><a href=\"").append(this.getLink("bible"))
-                    .append("\" style=\"float:right\">")
-                    .append(this.getProperty("subscribe.continue.caption")).append("</a>");
-            buffer.append("			</div>");
-            buffer.append("		</div>");
-            buffer.append("		<div style=\"clear: both;\"></div>");
-            buffer.append("	</div>");
-            buffer.append("</div>");
-
-            Element container = (Element) element.clone();
-            container.setName("div");
-            container.setAttribute("style", "background-color:#f5f5f5;text-align:justify");
-            container.setData(buffer.toString());
-
-            themail.setSubject("每日读经["
-                    + format.format(new Date()) + "]");
-
-            Element footer = new Element("div");
-
-            subscription subscription = new subscription();
-            Table table = subscription.findWith("WHERE available = 1", new Object[]{});
-            for (Row fields : table) {
-                subscription.setData(fields);
-
-                footer.setAttribute("style",
-                        "padding:10px;font-size:12px;color:#ccc;");
-                footer.setData(
-                        "让我们一起来养成每天读经的好习惯...<br />如果您不能正常访问此站点(<a href=\"https://www.ingod.today\">https://www.ingod.today</a>)，请尝试通过VPN进行访问，给您带来不便请谅解！如果你不想收到此邮件，请点击<a href=\"https://www.ingod.today/?q=services/unsubscribe/"
-                                + subscription.getId() + "\">退订</a>。");
-
-                themail.setBody(container + footer.toString());
-                themail.setTo(subscription.getEmail());
-                try {
-                    themail.send();
-                } catch (ApplicationException e) {
-                    subscription.setAvailable(false);
-                    subscription.update();
-                }
-            }
-
-            Thread.sleep(1);
-        } catch (ApplicationException e) {
-            suggestion = new suggestion();
-            suggestion.setEmail("services@ingod.today");
-            suggestion.setIP("-");
-            suggestion.setPostDate(new Date());
-            suggestion.setStatus(false);
-            suggestion.setTitle(e.getMessage() != null ? e
-                    .getMessage() : "");
-
-            note(e, suggestion);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            suggestion = new suggestion();
-            suggestion.setEmail("services@ingod.today");
-            suggestion.setIP("-");
-            suggestion.setPostDate(new Date());
-            suggestion.setStatus(false);
-            suggestion.setTitle(e.getMessage() != null ? e
-                    .getMessage() : "");
-
-            note(e, suggestion);
-        } finally {
-            this.next.set(true);
-        }
-    }
-
     @Action("start")
     public void start() {
         TimeIterator iterator = new TimeIterator(00, 00, 00);
@@ -272,12 +74,177 @@ public class dailymail extends AbstractApplication {
         }, iterator);
     }
 
-    public static void main(String[] args) throws ApplicationException {
-        dailymail mailing = new dailymail();
-        ApplicationManager.init();
-        ApplicationManager.install(mailing);
-        mailing.setLocale(Locale.US);
-        mailing.loadBible();
+    private void loadBible() {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("MM-dd");
+            plan plan = new plan();
+            Date date = new Date();
+            plan.findOneByKey("date", "2010-" + format.format(date));
+
+            if (plan.getTask() == null) {
+                throw new ApplicationException("Task is not ready!");
+            }
+
+            subscription subscription = new subscription();
+            Table subscribersTable = subscription.findWith("WHERE available = 1", new Object[] {});
+
+            // Group subscribers by language and bible version
+            Map<String, List<subscription>> groups = new HashMap<>();
+            for (Row fields : subscribersTable) {
+                subscription s = new subscription();
+                s.setData(fields);
+                String lang = s.getLanguage();
+                if (lang == null || lang.trim().isEmpty())
+                    lang = "zh_CN";
+                String version = s.getBibleVersion();
+                if (version == null || version.trim().isEmpty())
+                    version = "auto";
+
+                String key = lang + ":" + version;
+                groups.computeIfAbsent(key, k -> new ArrayList<>()).add(s);
+            }
+
+            TaskDescriptor task = new TaskDescriptor();
+            for (Map.Entry<String, List<subscription>> entry : groups.entrySet()) {
+                String[] parts = entry.getKey().split(":");
+                String lang = parts[0];
+                String version = parts[1];
+
+                Locale locale = Locale.forLanguageTag(lang.replace('_', '-'));
+                this.setLocale(locale);
+
+                String tableName = version;
+                if ("auto".equals(version)) {
+                    if (lang.equalsIgnoreCase(Locale.UK.toString()))
+                        tableName = "KJV";
+                    else if (lang.equalsIgnoreCase(Locale.US.toString()))
+                        tableName = "NIV";
+                    else if (lang.equalsIgnoreCase(Locale.TAIWAN.toString()))
+                        tableName = "zh_TW";
+                    else
+                        tableName = "zh_CN";
+                }
+
+                String title = Resource.getInstance(locale).getLocaleString("application.title");
+                SimpleMail themail = new SimpleMail();
+                themail.setFrom(title);
+                themail.setSubject(Resource.getInstance(locale).getLocaleString("subscribe.bible.plan") + "["
+                        + format.format(new Date()) + "]");
+
+                ArrayList<List<bible>> res = new ArrayList<>();
+                List<bible> bibles = new ArrayList<>();
+                int bookId = 0, chapterId = 0;
+
+                try (DatabaseOperator operator = new DatabaseOperator()) {
+                    operator.disableSafeCheck();
+                    StringBuffer where = task.parse(plan.getTask());
+                    String sql = "SELECT * FROM " + tableName + " WHERE " + where;
+                    PreparedStatement preparedStatement = operator.preparedStatement(sql, new Object[] {});
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+                        bible bib = new bible();
+                        bib.setBookId(resultSet.getInt("book_id"));
+                        bib.setChapterId(resultSet.getInt("chapter_id"));
+                        bib.setPartId(resultSet.getInt("part_id"));
+                        bib.setContent(resultSet.getString("content"));
+
+                        if (bookId != bib.getBookId()) {
+                            bookId = bib.getBookId();
+                            if (!bibles.isEmpty())
+                                res.add(bibles);
+                            bibles = new ArrayList<>();
+                        }
+                        bibles.add(bib);
+                    }
+                } catch (SQLException e) {
+                    continue; // Skip this group if table not found or error
+                }
+
+                if (!bibles.isEmpty())
+                    res.add(bibles);
+                if (res.isEmpty())
+                    continue;
+
+                StringBuilder buffer = new StringBuilder();
+                buffer.append(
+                        "<div style=\"background: none repeat scroll 0 0 -moz-field; border: 1px solid threedshadow; margin: 2em auto; padding: 2em;\">");
+                buffer.append(
+                        "	<div><a style=\"float: right;\"><img src=\"https://www.ingod.today/themes/images/favicon-b.png\"/> </a>");
+                buffer.append(
+                        "		<div><h1 style=\"border-bottom: 2px solid threedlightshadow; font-size: 160%; margin: 0 0 0.2em;\">"
+                                + title + "</h1></div>");
+                buffer.append("	</div>");
+                buffer.append("	<div id=\"feedContent\"><div class=\"entry\"><h2>");
+
+                String date_string = new SimpleDateFormat("MM/dd").format(date);
+                buffer.append("<a href=\"https://www.ingod.today/?lang=").append(lang.replace('_', '-'))
+                        .append("&amp;q=feed/").append(date_string).append("\">")
+                        .append(Resource.getInstance(locale).getLocaleString("subscribe.bible.plan")).append(" ")
+                        .append(date_string).append("</a></h2>");
+                buffer.append("<div class=\"feedEntryContent\">");
+
+                book book = new book();
+                for (List<bible> bs : res) {
+                    Table table = book.findWith("WHERE book_id=? and language=?",
+                            new Object[] { bs.get(0).getBookId(), lang.contains("en") ? "en_US" : "zh_CN" });
+                    if (!table.isEmpty()) {
+                        book.setData(table.get(0));
+                    }
+
+                    buffer.append("<h3><a href=\"").append(this.getLink("bible/" + book.getBookId())).append("\">")
+                            .append(book.getBookName()).append("</a></h3>");
+
+                    chapterId = 0;
+                    for (bible bi : bs) {
+                        if (chapterId != bi.getChapterId()) {
+                            buffer.append("<h4><a href=\"")
+                                    .append(this.getLink("bible/" + book.getBookId() + "/" + bi.getChapterId()))
+                                    .append("\">")
+                                    .append(this.setText("mail.bible.chapter", bi.getChapterId()))
+                                    .append("</a></h4>");
+                            chapterId = bi.getChapterId();
+                        }
+                        buffer.append(" ").append(bi.getPartId()).append(" ").append(bi.getContent());
+                    }
+                }
+                buffer.append("<br /><a href=\"").append(this.getLink("bible")).append("\" style=\"float:right\">")
+                        .append(this.getProperty("subscribe.continue.caption")).append("</a>");
+                buffer.append("</div></div><div style=\"clear: both;\"></div></div></div>");
+
+                String content = buffer.toString();
+                for (subscription s : entry.getValue()) {
+                    String unsubscribeLink = "https://www.ingod.today/?q=services/unsubscribe/" + s.getId();
+                    String footerContent = Resource.getInstance(locale).getLocaleString("mail.footer.message")
+                            + "<br />"
+                            + Resource.getInstance(locale).getLocaleString("mail.footer.unsubscribe")
+                            + "<a href=\"" + unsubscribeLink + "\">"
+                            + Resource.getInstance(locale).getLocaleString("mail.footer.unsubscribe.link.text")
+                            + "</a>" + (lang.contains("zh") ? "\u3002" : ".");
+
+                    themail.setBody("<div style=\"background-color:#f5f5f5;text-align:justify\">" + content
+                            + "<div style=\"padding:10px;font-size:12px;color:#ccc;\">" + footerContent
+                            + "</div></div>");
+                    themail.setTo(s.getEmail());
+                    try {
+                        themail.send();
+                    } catch (ApplicationException e) {
+                        s.setAvailable(false);
+                        s.update();
+                    }
+                }
+            }
+            Thread.sleep(1);
+        } catch (ApplicationException | InterruptedException e) {
+            suggestion = new suggestion();
+            suggestion.setEmail("services@ingod.today");
+            suggestion.setIP("-");
+            suggestion.setPostDate(new Date());
+            suggestion.setStatus(false);
+            suggestion.setTitle(e.getMessage() != null ? e.getMessage() : "");
+            note(e, suggestion);
+        } finally {
+            this.next.set(true);
+        }
     }
 
     public void note(Throwable e, suggestion suggestion) {
@@ -395,5 +362,13 @@ public class dailymail extends AbstractApplication {
         public suggestion getPayload() {
             return this.suggestion;
         }
+    }
+
+    public static void main(String[] args) throws ApplicationException {
+        dailymail mailing = new dailymail();
+        ApplicationManager.init();
+        ApplicationManager.install(mailing);
+        mailing.setLocale(Locale.US);
+        mailing.loadBible();
     }
 }

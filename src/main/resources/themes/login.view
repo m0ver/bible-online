@@ -1,182 +1,420 @@
 <!DOCTYPE html>
 <html lang="{%language_code%}">
 <head>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
-<link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
-<meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
-<link rel="alternate" href="https://www.ingod.today{%action%}" hreflang="x-default" />
-<link rel="alternate" href="https://www.ingod.today{%action%}&amp;lang=en-GB" hreflang="en-gb" />
-<link rel="alternate" href="https://www.ingod.today{%action%}&amp;lang=en-US" hreflang="en-us" />
-<link rel="alternate" href="https://www.ingod.today{%action%}&amp;lang=zh-TW" hreflang="zh-tw" />
-<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/default.css" media="screen" charset="utf-8" />
-<link type="text/css" rel="stylesheet" href="{%TEMPLATES_DIR%}/style/dropdown.css" media="screen" charset="utf-8" />
-<link media="only screen and (max-device-width: 480px)" href="{%TEMPLATES_DIR%}/style/iphone.css" type="text/css" rel="stylesheet" />
-<!--[if IE]>
-<style type="text/css">
-@import url("{%TEMPLATES_DIR%}/style/ie.css?9");
-</style>
-<![endif]-->
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"> </script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/timer.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/struct.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/tools.js" charset="utf-8"></script>
-<script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery.corner-builder.js" charset="utf-8"> </script>
-<script type="text/javascript">
-//<![CDATA[
-	var profileMenu;
-	var languageMenu;
-	var dialog;
-	struct.attachOnLoadEvent(
-	function(){
-		profileMenu=new Menu();
-		languageMenu=new Menu();
-		
-		//profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/settings%]'","caption":"{%page.language-setting.title%}"});
-		profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"{%page.logout.caption%}"});
-		
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'.replace(/\&amp;/g,'&')","caption":"English(UK)"});
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'.replace(/\&amp;/g,'&')","caption":"English(US)"});
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-CN'.replace(/\&amp;/g,'&')","caption":"简体中文"});
-		languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-TW'.replace(/\&amp;/g,'&')","caption":"繁体中文"});
-		
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', '392100062']);
-		_gaq.push(['_trackPageview']);
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="{%application.keywords%}" />
+    <meta name="description" content="{%application.description%}" />
+    <meta name="generator" content="tinystruct 2.0 (http://tinystruct.org)" />
+    <meta name="robots" content="index, follow" />
+    <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="{%TEMPLATES_DIR%}/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2583ad;
+            --accent: #2583ad;
+            --bg-soft: #fcfcfc;
+            --border-color: #e2e8f0;
+            --text-color: #334155;
+            --text-light: #64748b;
+            --hover-bg: #f8fafc;
+        }
 
-		(function() {
-		  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-		
-		var i=0;
-		var timer = new Timer(0.1,function(){});
-		timer.setAction(function() {
-			if(i == 1920) i = 0;
-			$('#header').css({"background-position": (i++)+"px 50%"});
-			
-			this.start();
-		});
-		timer.start().complete(function(){});
-	});
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-soft);
+            margin: 0;
+            line-height: 1.7;
+        }
 
-function login()
-{
-	var username=document.getElementById("username").value;
-	var password=document.getElementById("password").value;
-	var authorize=document.getElementById("{%codename%}").value;
-	if (username=="" || username==null){ alert("{%login.username.invalid%}"); document.getElementById("username").focus(); return false; }
-	if (password=="" || password==null){ alert("{%login.password.invalid%}");   document.getElementById("password").focus(); return false; }
-	if (authorize=="" || authorize==null){ alert("{%login.authorized.invalid%}");   document.getElementById("{%codename%}").focus(); return false; }
-	return true;
-}
+        h1, h2, h3, .serif-font {
+            font-family: 'Crimson Pro', serif;
+        }
 
-var __default_field='<input class="text" id="username" name="username" type="text" value=""/>',	user="{%username%}";
-window.onload=function(){
-	var __new_field=user?user+'<input class="text" id="username" name="username" type="hidden" value="'+user+'"/>  <a href="javascript:void(0)" onclick="restoreField()">{%login.user.change%}</a>':__default_field;
-	document.getElementById('__default_user').innerHTML=(__new_field);
-}
-function restoreField(){document.getElementById('__default_user').innerHTML=(__default_field);}
-function reload(){location.reload();}
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-//]]>
-</script>
-<!--[if (gt IE 6)&(lt IE 9)]>
-<script type="text/javascript">
-$(function(){
-	var corner={
-		src:"{%TEMPLATES_DIR%}/images/circle.png",
-		width:"7px",
-		height:"7px",
-		background:"#464646",
-		positions: ["topleft","topright"]
-	};
+        #header {
+            background-color: #ffffff;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-	$("#header ul li a.current").addCorners("topleft,topright",corner);
-});
-</script>
-<![endif]-->
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-M4N6DS4N');</script>
-	<!-- End Google Tag Manager -->
-<title>{%navigator.login.caption%} | {%application.title%}{%application.summary%}</title>
+        #header .wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #header h1 { margin: 0; line-height: 1; }
+        #header h1 a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.75rem;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .welcome {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .welcome a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .top-menu {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .top-menu li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .top-menu li a:hover {
+            color: var(--accent);
+        }
+
+        #headline {
+            background-color: var(--primary);
+            padding: 3rem 0;
+            color: white;
+            text-align: center;
+            background-image: radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.8), #0f172a);
+        }
+
+        #headline h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+            color: white;
+        }
+
+        #pagebody {
+            padding: 4rem 0;
+            min-height: 400px;
+        }
+
+        .login-card {
+            max-width: 450px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .login-card h3 {
+            margin-top: 0;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.75rem;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(37, 131, 173, 0.1);
+        }
+
+        .verify-code-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .verify-code-group img {
+            cursor: pointer;
+            border-radius: 4px;
+            height: 42px;
+        }
+
+        .inputbutton {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .inputbutton:hover { opacity: 0.9; }
+
+        .form-footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .social-login {
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .social-login p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-buttons img {
+            height: 36px;
+            transition: transform 0.2s;
+        }
+
+        .social-buttons img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Framework Menu/Dropdown Styling Override */
+        #menu, #dialog, #tdialog {
+            background: white !important;
+            border: 1px solid var(--border-color) !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+            border-radius: 8px !important;
+            padding: 8px 0 !important;
+            z-index: 9999 !important;
+        }
+
+        #menu ul li a {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 0.9rem !important;
+            padding: 8px 20px !important;
+            color: var(--text-color) !important;
+        }
+
+        #menu ul li a:hover {
+            background: var(--hover-bg) !important;
+            color: var(--accent) !important;
+        }
+
+        #footer {
+            background: #0f172a;
+            padding: 5rem 0;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        #footer .wrapper p { margin-bottom: 2rem; }
+
+        #footer a {
+            color: #e2e8f0;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        #footer a:hover { opacity: 1; color: white; }
+
+        @media (max-width: 900px) {
+            #header .wrapper { flex-direction: column; gap: 1.5rem; text-align: center; }
+            .header-nav { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/jquery-1.5.1.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/timer.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/struct.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{%TEMPLATES_DIR%}/scripts/tools.js" charset="utf-8"></script>
+    
+    <script type="text/javascript">
+    //<![CDATA[
+        var profileMenu;
+        var languageMenu;
+        struct.attachOnLoadEvent(function(){
+            profileMenu = new Menu();
+            languageMenu = new Menu();
+            
+            profileMenu.appendItem({"action":"javascript:location.href='[%LINK:user/logout%]'","caption":"{%page.logout.caption%}"});
+            
+            languageMenu.setAutoReposition(true);
+            languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-GB'.replace(/\&amp;/g,'&')","caption":"English(UK)"});
+            languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=en-US'.replace(/\&amp;/g,'&')","caption":"English(US)"});
+            languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-CN'.replace(/\&amp;/g,'&')","caption":"简体中文"});
+            languageMenu.appendItem({"action":"javascript:location.href='{%action%}&lang=zh-TW'.replace(/\&amp;/g,'&')","caption":"繁体中文"});
+
+            var i=0;
+            var timer = new Timer(0.1,function(){});
+            timer.setAction(function() {
+                if(i == 1920) i = 0;
+                $('#header').css({"background-position": (i++)+"px 50%"});
+                
+                this.start();
+            });
+            timer.start().complete(function(){});
+        });
+
+        function login() {
+            var username=document.getElementById("username").value;
+            var password=document.getElementById("password").value;
+            var authorize=document.getElementById("{%codename%}").value;
+            if (username=="" || username==null){ alert("{%login.username.invalid%}"); document.getElementById("username").focus(); return false; }
+            if (password=="" || password==null){ alert("{%login.password.invalid%}"); document.getElementById("password").focus(); return false; }
+            if (authorize=="" || authorize==null){ alert("{%login.authorized.invalid%}"); document.getElementById("{%codename%}").focus(); return false; }
+            return true;
+        }
+
+        var __default_field='<input class="form-control" id="username" name="username" type="text" value=""/>', user="{%username%}";
+        window.onload=function(){
+            var __new_field=user?user+'<input id="username" name="username" type="hidden" value="'+user+'"/>  <a href="javascript:void(0)" onclick="restoreField()">{%login.user.change%}</a>':__default_field;
+            document.getElementById('__default_user').innerHTML=(__new_field);
+        }
+        function restoreField(){document.getElementById('__default_user').innerHTML=(__default_field);}
+        function reload(){location.reload();}
+    //]]>
+    </script>
+    <title>{%navigator.login.caption%} - {%application.title%}</title>
 </head>
-<body>
-<div id="header">
-	<div class="wrapper">
-		<h1><a href="https://www.ingod.today">{%application.title%}</a></h1>
-		<p class="welcome">{%page.welcome.hello%}{%page.welcome.caption%}  <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">{%application.language.name%}</a> | {%user.profile%} {%user.status%}</p>
-		<ul>
-			<li><a class="current" href='[%LINK:user/login%]' title="{%navigator.login.caption%}">{%navigator.login.caption%}</a></li>
-			<li><a href='[%LINK:bible%]' title="{%navigator.bible.caption%}">{%navigator.bible.caption%}</a></li>
-			<li><a href='[%LINK:dashboard%]' title="{%navigator.controller.caption%}">{%navigator.controller.caption%}</a></li>
-			<li id="download"><a href='[%LINK:suggestion%]' title="{%navigator.help.caption%}">{%navigator.help.caption%}</a></li>
-		</ul>
-	</div>
-</div>
+<body itemscope="" itemtype="http://schema.org/WebPage">
+    <div id="header">
+        <div class="wrapper" itemscope="" itemtype="http://schema.org/Organization">
+            <h1><a href="/?lang={%LANGUAGE_TAG%}">{%application.title%}</a></h1>
+            <div class="header-nav">
+                <p class="welcome">{%page.welcome.hello%}{%page.welcome.caption%} <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">{%application.language.name%}</a> | {%user.profile%} {%user.status%}</p>
+                <ul class="top-menu">
+                    <li><a href='[%LINK:bible%]' title="{%navigator.bible.caption%}">{%navigator.bible.caption%}</a></li>
+                    <li><a href='[%LINK:dashboard%]' title="{%navigator.controller.caption%}">{%navigator.controller.caption%}</a></li>
+                    <li><a href='[%LINK:suggestion%]' title="{%navigator.help.caption%}">{%navigator.help.caption%}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-<div id="headline">
-	<div class="wrapper">
-	<h2>{%page.login.title%}</h2>
-	</div>
-</div>
+    <div id="headline">
+        <div class="wrapper">
+            <h2>{%page.login.title%}</h2>
+        </div>
+    </div>
 
-<div id="pagebody">
-	<div class="wrapper">
-		<div class="container">
-			<div class="gallery"></div>
-		</div>
-		<div class="sidebar">
-			<p><a href="/?lang={%LANGUAGE_TAG%}"> &#8250; </a>  {%login.tips.text%}  </p>
-			<form class="form-columns" method="post" action="/?q=user/login&amp;from={%from%}" onsubmit="return login()">
-				<div> {%error%} </div>
-				<ul id="login">
-				<li><div class="label"><label for="username">{%login.user.caption%} </label></div><span id="__default_user">{%user_field%}</span></li>
-				<li><div class="label"><label for="password">{%login.password.caption%} </label></div><input class="text" id="password" name="password" value="" type="password" /></li>
-				<li><div class="label"><label for="{%codename%}">{%login.verifycode.caption%} </label></div><input class="text" name="{%codename%}" id="{%codename%}" size="6" maxlength="4" value="" type="text" /><img class="i-image" src="{%code%}" alt="validator" onclick="javascript:reload();" /></li>
-				<li><input id="autologin" name="autologin" value="true" type="checkbox" /> <label for="autologin">{%login.remember.caption%}</label> 	<input type="submit" class="button-secondary" value="{%login%} »" /></li>
-				</ul>
-			</form>
-			<div>{%login.with.otheraccount%}:</div>
-			    <div>
-			    	<a href="/?q=user/account/google&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/google.png" /></a>
-			    	<a href="/?q=user/account/github&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/github.png" /></a>
-			    	<!-- 
-			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/sinat.png"></a>
-			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/qq.png"></a>
-			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/linkedin.png"></a>
-			        
-			        <a href="#"><img src="{%TEMPLATES_DIR%}/images/button/baidu.png"></a>
-			         -->
-			    </div>
-			<div>
-			<a href="https://www.ingod.today/CUV.pdf" target="_blank"> <span><strong>圣经</strong> <em>简体中文和合本</em> </span></a>
-			</div>
-			<div>
-			<a href="http://www.mozilla.org/products/download.html?product=firefox&amp;lang={%language%}" target="_blank"> <span><strong>下载安装 Firefox</strong> </span></a>
-			</div>
-		</div>
-	
-	</div>
-</div>
+    <div id="pagebody">
+        <div class="wrapper">
+            <div class="login-card">
+                <h3>{%login%}</h3>
+                <form method="post" action="/?q=user/login&amp;from={%from%}" onsubmit="return login()">
+                    <div style="color: #ef4444; margin-bottom: 1rem; font-size: 0.9rem; text-align: center;"> {%error%} </div>
+                    
+                    <div class="form-group">
+                        <label for="username">{%login.user.caption%}</label>
+                        <span id="__default_user">{%user_field%}</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">{%login.password.caption%}</label>
+                        <input class="form-control" id="password" name="password" value="" type="password" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{%codename%}">{%login.verifycode.caption%}</label>
+                        <div class="verify-code-group">
+                            <input class="form-control" name="{%codename%}" id="{%codename%}" size="6" maxlength="4" value="" type="text" />
+                            <img src="{%code%}" alt="validator" onclick="javascript:reload();" title="Click to reload" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-light);">
+                        <input id="autologin" name="autologin" value="true" type="checkbox" />
+                        <label for="autologin" style="margin-bottom: 0;">{%login.remember.caption%}</label>
+                    </div>
+                    
+                    <input type="submit" class="inputbutton" value="{%login%}" />
+                </form>
 
-<div id="footer">
-	<div class="wrapper">
-		<p>
-			<a href="[%LINK:suggestion%]">{%footer.report-a-site-bug%}</a> |
-			<a href="[%LINK:help%]">{%footer.privacy%}</a> |
-			<a href="[%LINK:user/register%]">{%footer.register%}</a> |
-			<a href="[%LINK:bible/api%]">{%footer.api%}</a> |
-			<a href="[%LINK:user/password%]">{%footer.forgot%}</a> |
- 			<a href="[%LINK:feed%]" class="rsslink">{%footer.updates-rss%}</a>
-		</p>
-	</div>
-</div>
+                <div class="social-login">
+                    <p>{%login.with.otheraccount%}</p>
+                    <div class="social-buttons">
+                        <a href="/?q=user/account/google&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/google.png" alt="Google" /></a>
+                        <a href="/?q=user/account/github&amp;from={%from%}"><img src="{%TEMPLATES_DIR%}/images/button/github.png" alt="GitHub" /></a>
+                    </div>
+                </div>
+
+                <div class="form-footer">
+                    <a href="[%LINK:user/register%]">{%footer.register%}</a> | 
+                    <a href="[%LINK:user/password%]">{%footer.forgot%}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="wrapper">
+            <p>
+                <a href="[%LINK:suggestion%]">{%footer.report-a-site-bug%}</a>
+                <a href="[%LINK:help%]">{%footer.privacy%}</a>
+                <a href="[%LINK:user/register%]">{%footer.register%}</a>
+                <a href="[%LINK:bible/api%]">{%footer.api%}</a>
+                <a href="[%LINK:feed%]" class="rsslink">{%footer.updates-rss%}</a>
+            </p>
+            <div style="font-size: 0.8rem; opacity: 0.5; margin-top: 2rem;">&copy; In God .today - tinystruct framework</div>
+        </div>
+    </div>
 </body>
 </html>

@@ -54,14 +54,14 @@ $(function(){
 <!-- header end -->
 <div>
 <ul class="nav">
-	<li><a href="#">InGod.asia 概述</a></li>
+	<li><a href="#">InGod.today 概述</a></li>
 	<li><a href="#">新功能</a></li>
-	<li><a href="#">InGod.asia 帮助中心</a></li>
+	<li><a href="#">InGod.today 帮助中心</a></li>
 	<li><a href="[%LINK:user/register%]">创建帐户</a></li>
 </ul>
 </div>
 <div>
-<h2 style="border: medium none;">InGod.asia 使用条款</h2>
+<h2 style="border: medium none;">InGod.today 使用条款</h2>
 <h4>2010 年 1 月 1 日</h4>
 <p>本站提供的各项服务仅供个人使用。<br />
 欢迎您进入本站网站！用户使用本站的网站或其他服务，即表示用户同意接受此条款的约束（以下简称“使用条款”）。此协议下的“本站服务”不包括目前或将来任何本站的分支机构或公告中的内容。</p>
