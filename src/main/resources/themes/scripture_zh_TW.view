@@ -379,7 +379,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
     <div class="wrapper">
         <a href="[%LINK:suggestion%]">{%footer.report-a-site-bug%}</a> |
         <a href="[%LINK:help%]">{%footer.privacy%}</a> |
-        <a href="[%LINK:user/register%]">{%footer.register%}</a> |
         <a href="[%LINK:bible/api%]">{%footer.api%}</a> |
         <a href="[%LINK:feed%]" class="rsslink">{%footer.updates-rss%}</a>
     </div>
