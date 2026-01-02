@@ -450,16 +450,16 @@
 
     <div id="headline">
         <div class="wrapper">
-            <form name="f" id="f" action="[%LINK:bible/advsearch%]" method="post">
+            <form name="sitesearch" id="sitesearch" action="[%LINK:bible/advsearch%]" method="post">
                 <div class="search-container">
                     <input type="hidden" name="lang" value="{%LANGUAGE_TAG%}"/>
-                    <input size="20" placeholder="{%search.confirm.caption%}..." id="keyword" name="keyword" autocomplete="off" maxlength="2048" value="{%keyword%}" />
+                    <input type="text" id="keyword" name="keyword" autocomplete="off" maxlength="100" value="{%keyword%}" placeholder="{%ask.prompt%}..." />
                     <button class="inputbutton" type="submit" id="searchButton">
                         <span class="spinner"></span>
-                        <span class="button-text">{%search.submit.caption%}</span>
+                        <span class="button-text">{%ask.submit.caption%}</span>
                     </button>
                 </div>
-            </form>		
+            </form>
         </div>
     </div>
 
@@ -559,12 +559,12 @@
     </div>
 
     <script type="text/javascript">
-        if(document.getElementById("f") && document.getElementById("keyword")) {
-            window.listener.install(document.getElementById("f"), document.getElementById("keyword"), "keyword.jsp", false, "×");
+        if(document.sitesearch && document.sitesearch.keyword) {
+            window.listener.install(document.sitesearch, document.sitesearch.keyword, "keyword.jsp", false, "×");
         }
 
         $(document).ready(function() {
-            $('#f').submit(function() {
+            $('#sitesearch').submit(function() {
                 var keyword = $('#keyword').val();
                 if (keyword) keyword = keyword.trim();
                 if (!keyword || keyword === "") return false;
@@ -572,10 +572,10 @@
                 var btn = $('#searchButton');
                 // Use .attr() because jQuery 1.5.1 does not support .prop()
                 btn.addClass('searching');
-                btn.find('.button-text').text('Searching...');
+                btn.find('.button-text').text('Thinking...');
                 
-                // Use a slight delay to disable the button
-                setTimeout(function() {
+                // Use a slight delay to disable the button, ensuring the form still posts in all browsers
+                var timer = setTimeout(function() {
                     btn.attr('disabled', 'disabled');
                 }, 20);
             });
