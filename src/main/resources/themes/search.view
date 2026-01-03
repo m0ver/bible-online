@@ -315,7 +315,7 @@
         });
     //]]>
     </script>
-    <title>{%search.title%} - {%application.title%}</title>
+    <title>{%search.title%}</title>
 </head>
 <body itemscope="" itemtype="http://schema.org/WebPage">
     <div id="header">
