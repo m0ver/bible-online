@@ -151,11 +151,9 @@ public class search extends AbstractApplication {
 
         int page = 1, pageSize = 20;
 
-        if (request.getParameter("page") == null
-                || request.getParameter("page").trim().isEmpty()) {
-            page = 1;
-        } else {
-            page = Integer.parseInt(request.getParameter("page").toString());
+        if (request.getParameter("page") != null
+                && !request.getParameter("page").isEmpty()) {
+            page = Integer.parseInt(request.getParameter("page"));
         }
 
         int startIndex = (page - 1) * pageSize;
@@ -166,7 +164,7 @@ public class search extends AbstractApplication {
                 + getContext().getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
-        if (!query.trim().isEmpty()) {
+        if (query != null && !query.isEmpty()) {
             query = StringUtilities.htmlSpecialChars(query);
             if (query.indexOf('|') != -1) {
                 String[] q = query.split("|");
@@ -232,7 +230,7 @@ public class search extends AbstractApplication {
         if (!noResult && !query.isEmpty()) {
             try {
                 Table list = book.findWith("WHERE language=? and book_name=?",
-                        new Object[] { this.getLocale().toString(), query });
+                        new Object[]{this.getLocale().toString(), query});
                 if (!list.isEmpty()) {
                     this.response = (Response) getContext()
                             .getAttribute(HTTP_RESPONSE);
@@ -286,7 +284,7 @@ public class search extends AbstractApplication {
                         .append(field.get("chapter_id").value().toString()).append("/")
                         .append(field.get("part_id").value().toString()).append("\" target=\"_blank\">")
                         .append(this.setText("search.bible.info", field.get("book_name").value()
-                                .toString(), field.get("chapter_id").value().toString(),
+                                        .toString(), field.get("chapter_id").value().toString(),
                                 field
                                         .get("part_id").value().toString()))
                         .append("</a><p>").append(finded).append("</p></li> \r\n");
@@ -301,7 +299,7 @@ public class search extends AbstractApplication {
             keyword keyword = new keyword();
             keyword.setKeyword(word);
             ktable = keyword.setRequestFields("id,visit").findWith("WHERE keyword=?",
-                    new Object[] { word });
+                    new Object[]{word});
 
             if (ktable.isEmpty()) {
                 keyword.setVisit(0);
@@ -394,7 +392,7 @@ public class search extends AbstractApplication {
         // String look = "SELECT FOUND_ROWS() AS size";
 
         bible bible = new bible();
-        Table vtable = bible.find(SQL, new Object[] {});
+        Table vtable = bible.find(SQL, new Object[]{});
         noResult = !vtable.isEmpty();
 
         Field field;
@@ -424,7 +422,7 @@ public class search extends AbstractApplication {
             keyword.setKeyword(keywords[k]);
             Row findRow = keyword.findOne(
                     "SELECT id,visit FROM keyword WHERE keyword='" + keywords[k] + "'",
-                    new Object[] {});
+                    new Object[]{});
 
             if (findRow.isEmpty()) {
                 keyword.setVisit(0);
@@ -783,7 +781,7 @@ public class search extends AbstractApplication {
         private final String explanation;
 
         public SearchResult(String bookId, String bookName, String chapterId, String partId,
-                String content, double relevance, String explanation) {
+                            String content, double relevance, String explanation) {
             this.bookId = bookId;
             this.bookName = bookName;
             this.chapterId = chapterId;
