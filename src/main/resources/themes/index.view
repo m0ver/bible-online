@@ -116,7 +116,7 @@
 
         .search-container {
             max-width: 700px;
-            margin: 2rem auto 0 auto;
+            margin: 0 auto;
             display: flex;
             background: white;
             border-radius: 8px;
@@ -128,7 +128,7 @@
         #keyword {
             flex: 1;
             border: none;
-            padding: 1rem 1.5rem;
+            padding: 0.8rem 1.5rem;
             font-size: 1.1rem;
             outline: none;
             color: var(--primary);
@@ -138,7 +138,7 @@
             background-color: var(--accent);
             color: white;
             border: none;
-            padding: 0 2.5rem;
+            padding: 0 2rem;
             font-weight: 600;
             cursor: pointer;
             border-radius: 4px;
@@ -149,7 +149,7 @@
             gap: 0.5rem;
         }
 
-        .inputbutton:hover { background-color: #1e6a8d; }
+        .inputbutton:hover { opacity: 0.9; }
 
         .inputbutton:disabled {
             background-color: var(--text-light);
@@ -176,8 +176,12 @@
             margin-right: 8px;
         }
 
+        .searching .button-text {
+            opacity: 0.8;
+        }
+
         #pagebody {
-            padding: 4rem 0;
+            padding: 3rem 0;
         }
 
         .intro-text {
