@@ -159,7 +159,7 @@ public class search extends AbstractApplication {
         }
 
         int startIndex = (page - 1) * pageSize;
-        this.setVariable("search.title", "无相关结果 - ");
+        this.setVariable("search.title", this.setText("application.title"));
 
         String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
         this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q="
@@ -177,7 +177,7 @@ public class search extends AbstractApplication {
             keywords = query.split(" ");
 
             this.setSharedVariable("keyword", query);
-            this.setVariable("search.title", query + " - ");
+            this.setVariable("search.title", query + " - " + this.setText("application.title"));
             this.setVariable("keyword", query);
         } else {
             this.setSharedVariable("keyword", "");
@@ -547,7 +547,7 @@ public class search extends AbstractApplication {
             this.setVariable("size", String.valueOf(total));
             this.setVariable("value", html.toString());
             this.setVariable("keyword", query);
-            this.setVariable("search.title", query + " - ");
+            this.setVariable("search.title", query + " - " + this.setText("application.title"));
             this.setVariable("action",
                     getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
 
