@@ -45,7 +45,7 @@ import static org.tinystruct.http.Constants.HTTP_REQUEST;
 import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class search extends AbstractApplication {
-    protected static final String MODEL = "tngtech/deepseek-r1t2-chimera:free";
+    protected static final String MODEL = "deepseek-ai/deepseek-v3.1-terminus";
     private Request request;
     private Response response;
     private User usr;
@@ -685,11 +685,21 @@ public class search extends AbstractApplication {
 
         String prompt = String.format(promptTemplate, locale.getDisplayLanguage(), query);
         requestBuilder.put("prompt", prompt);
+        Builders builders = new Builders();
+        Builder message = new Builder();
+        message.put("role", "user");
+        message.put("content", prompt);
+        builders.add(message);
+
+        requestBuilder.put("messages", builders);
         requestBuilder.put("max_tokens", 3000);
         requestBuilder.put("temperature", 0.3);
+        Builder extra = new Builder();
+        extra.parse("{\"chat_template_kwargs\":{\"thinking\":false}}");
+        requestBuilder.put("extra_body",extra);
 
         // Make the API request
-        String api = "/v1/completions";
+        String api = "/v1/chat/completions";
         String url = getConfiguration().get("openai.api_endpoint") + api;
         String jsonResponse = makeOpenAIRequest(url, requestBuilder.toString());
         jsonResponse = processAIResponse(jsonResponse);
@@ -746,7 +756,7 @@ public class search extends AbstractApplication {
         Builders choices = (Builders) responseBuilder.get("choices");
         if (choices != null && !choices.isEmpty()) {
             Builder firstChoice = choices.get(0);
-            return firstChoice.get("text").toString().trim();
+            return ((Builder)(firstChoice.get("message"))).get("content").toString().trim();
         }
 
         throw new ApplicationException("No text content found in OpenAI response");
