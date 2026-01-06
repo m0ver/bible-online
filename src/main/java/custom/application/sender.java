@@ -46,26 +46,22 @@ import static org.tinystruct.http.Constants.HTTP_REQUEST;
 import static org.tinystruct.http.Constants.HTTP_RESPONSE;
 
 public class sender extends AbstractApplication {
-    private Request request;
-    private Response response;
     private Reforward reforward;
-    private User user;
 
     @Action("services/report")
-    public boolean send() throws ApplicationException {
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
-        if (this.request.getParameter("id") == null
-                || this.request.getParameter("text") == null
-                || this.request.getParameter("text").trim().length() == 0) {
+    public boolean send(Request request) throws ApplicationException {
+        if (request.getParameter("id") == null
+                || request.getParameter("text") == null
+                || request.getParameter("text").trim().length() == 0) {
             return false;
         }
 
         report report = new report();
-        report.setBibleId(this.request.getParameter("id"));
+        report.setBibleId(request.getParameter("id"));
         report.setLanguageId(0);
         report.setUserId("-");
         report.setStatus(0);
-        report.setUpdatedContent(this.request.getParameter("text"));
+        report.setUpdatedContent(request.getParameter("text"));
 
         report.setModifiedTime(new Date());
         try {
@@ -104,19 +100,19 @@ public class sender extends AbstractApplication {
     }
 
     @Action("friends/invite")
-    public String invite() throws ApplicationException {
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
+    public String invite(Request request) throws ApplicationException {
         Session session = request.getSession();
+        User user;
         if (session.getAttribute("usr") != null) {
-            this.user = (User) session.getAttribute("usr");
+            user = (User) session.getAttribute("usr");
         } else return "false";
 
         String mailto = "moverinfo@gmail.com";
-        if (this.request.getParameter("mailto") == null
-                || this.request.getParameter("mailto").trim().length() == 0) {
+        if (request.getParameter("mailto") == null
+                || request.getParameter("mailto").trim().isEmpty()) {
             return "false";
         } else
-            mailto = this.request.getParameter("mailto");
+            mailto = request.getParameter("mailto");
 
         String[] addresses = mailto.split(";");
 
@@ -150,7 +146,7 @@ public class sender extends AbstractApplication {
     }
 
     @Action("services/bible/update")
-    public boolean update(String id) throws ApplicationException {
+    public boolean update(String id, Request request, Response response) throws ApplicationException {
         report report = new report();
         report.setId(id);
         report.findOneById();
@@ -171,12 +167,9 @@ public class sender extends AbstractApplication {
         report.setStatus(1);
 
         if (bible.update() && report.update()) {
-            this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
-            this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
-
             bible.findOneById();
 
-            this.reforward = new Reforward(this.request, this.response);
+            this.reforward = new Reforward(request, response);
             this.reforward.setDefault(this.getLink("bible", null) + "/" + bible.getBookId() + "/" + bible.getChapterId() + "/" + bible.getPartId());
             this.reforward.forward();
             return true;
@@ -190,14 +183,12 @@ public class sender extends AbstractApplication {
     }
 
     @Action("services/getword")
-    public String getWord(String word) throws MalformedURLException, ApplicationException {
+    public String getWord(Request request, String word) throws MalformedURLException, ApplicationException {
         String url = "http://dict.youdao.com/fsearch?client=deskdict&keyfrom=chrome.extension&q=" + word.trim() + "&pos=-1&doctype=xml&vendor=unknown&appVer=3.1.17.4208&le=eng";
-
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
-
+        User user;
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
-            this.user = (User) session.getAttribute("usr");
+            user = (User) session.getAttribute("usr");
             Document doc = new Document();
             doc.load(new URL(url));
             Element document = doc.getRoot();
@@ -205,9 +196,9 @@ public class sender extends AbstractApplication {
                 throw new ApplicationException("The dictionary resource is temporarily unavailable");
 
             vocabulary vocabulary = new vocabulary();
-            vocabulary.setUserId(this.user.getId());
+            vocabulary.setUserId(user.getId());
             vocabulary.setDate(LocalDateTime.now());
-            vocabulary.setReferenceLink(this.request.getParameter("referer"));
+            vocabulary.setReferenceLink(request.getParameter("referer"));
 
             List<Element> phrase = document.getElementsByTagName("return-phrase");
             if (!phrase.isEmpty()) {
@@ -231,7 +222,7 @@ public class sender extends AbstractApplication {
                 vocabulary.setInterpretation(buff.toString());
             }
 
-            Table words = vocabulary.findWith("WHERE word=? and user_id=?", new Object[]{vocabulary.getWord(), this.user.getId()});
+            Table words = vocabulary.findWith("WHERE word=? and user_id=?", new Object[]{vocabulary.getWord(), user.getId()});
             if (words.isEmpty()) {
                 vocabulary.append();
             } else {
@@ -249,43 +240,38 @@ public class sender extends AbstractApplication {
     }
 
     @Action("services/deleteword")
-    public void deleteWord(String id) throws ApplicationException {
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
+    public void deleteWord(Request request, Response response, String id) throws ApplicationException {
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
-            this.user = (User) session.getAttribute("usr");
+            User user = (User) session.getAttribute("usr");
             vocabulary vocabulary = new vocabulary();
             vocabulary.setId(id);
 
             vocabulary.delete();
 
-            this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
-
-            this.reforward = new Reforward(this.request, this.response);
+            this.reforward = new Reforward(request, response);
             this.reforward.setDefault(this.getLink("dashboard"));
             this.reforward.forward();
         } else throw new ApplicationException("Permission Denied");
     }
 
     @Action("services/getwords")
-    public Object getAllWords() {
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
+    public Object getAllWords(Request request) {
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
-            this.user = (User) session.getAttribute("usr");
+            User user = (User) session.getAttribute("usr");
             StringBuffer buffer = new StringBuffer();
             buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
-            buffer.append("<list userId=\"").append(this.user.getId()).append("\">");
+            buffer.append("<list userId=\"").append(user.getId()).append("\">");
             vocabulary vocabulary = new vocabulary();
             try {
-                Table list = vocabulary.findWith("WHERE user_id=? order by date desc limit 0,7", new Object[]{this.user.getId()});
+                Table list = vocabulary.findWith("WHERE user_id=? order by date desc limit 0,7", new Object[]{user.getId()});
                 Iterator<Row> rows = list.iterator();
                 while (rows.hasNext()) {
                     vocabulary.setData(rows.next());
 
                     buffer.append("<item word=\"").append(vocabulary.getWord()).append("\" phoneticSymbol=\"").append(vocabulary.getPhoneticSymbol()).append("\">").append(vocabulary.getInterpretation()).append("</item>");
                 }
-
             } catch (ApplicationException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

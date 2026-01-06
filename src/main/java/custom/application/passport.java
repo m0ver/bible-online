@@ -49,7 +49,7 @@ public class passport {
         this.response = response;
         this.currentUser = new User();
 
-        this.session = this.request.getSession();
+        this.session = request.getSession();
 
         this.sessionName = sessionName;
         if (this.session.getAttribute(sessionName) != null)
@@ -193,9 +193,9 @@ public class passport {
                 currentUser.setData(found);
 
                 currentUser.setLastloginTime(new Date());
-//                currentUser.setLastloginIP(this.request.getRemoteAddr());
+//                currentUser.setLastloginIP(request.getRemoteAddr());
 
-                if (this.request.getParameter("autologin") != null) {
+                if (request.getParameter("autologin") != null) {
                     Cookie autologin = new CookieImpl("autologin");
                     autologin.setValue(currentUser.getId());
                     autologin.setMaxAge(24 * 3600 * 30);
@@ -211,20 +211,20 @@ public class passport {
     }
 
     public boolean login() throws ApplicationException {
-        if (this.request.getParameter("username") == null) {
+        if (request.getParameter("username") == null) {
             throw new ApplicationException(this.resource.getLocaleString("login.username.invalid"));
         } else {
-            if (this.request.getParameter("username").indexOf('@') != -1) {
-                this.currentUser.setEmail(this.request.getParameter("username"));
+            if (request.getParameter("username").indexOf('@') != -1) {
+                this.currentUser.setEmail(request.getParameter("username"));
             } else {
-                this.currentUser.setUsername(this.request.getParameter("username"));
+                this.currentUser.setUsername(request.getParameter("username"));
             }
         }
 
-        if (this.request.getParameter("password") == null) {
+        if (request.getParameter("password") == null) {
             throw new ApplicationException(this.resource.getLocaleString("login.password.invalid"));
         } else {
-            this.currentUser.setPassword(new Security(this.currentUser.getUsername()).encode(this.request.getParameter("password")));
+            this.currentUser.setPassword(new Security(this.currentUser.getUsername()).encode(request.getParameter("password")));
         }
 
 //		if(!validateCode())

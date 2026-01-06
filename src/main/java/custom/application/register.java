@@ -24,22 +24,15 @@ import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.http.*;
+import org.tinystruct.system.annotation.Action;
 
 import java.util.Date;
 import java.util.Locale;
 
-import static org.tinystruct.http.Constants.HTTP_REQUEST;
-import static org.tinystruct.http.Constants.HTTP_RESPONSE;
-
 public class register extends AbstractApplication {
-    private User user;
-    private Session session;
-    private Request request;
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
-        this.setAction("user/register", "post");
     }
 
     @Override
@@ -114,12 +107,12 @@ public class register extends AbstractApplication {
         this.setVariable("display", "block");
     }
 
-    public Object post() {
+    @Action(value = "user/register", mode = Action.Mode.HTTP_POST)
+    public Object post(Request request) {
         this.setText("register.tips", this.getLink("help"), this.getLink("help/condition"));
 
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
         try {
-            if (this.append()) {
+            if (this.append(request)) {
                 this.setVariable("info", "<div class=\"info\">" + this.setText("register.success") + "</div>");
                 this.setVariable("display", "none");
             }
@@ -131,10 +124,10 @@ public class register extends AbstractApplication {
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
-            this.user = (User) session.getAttribute("usr");
+            User user = (User) session.getAttribute("usr");
 
             this.setVariable("user.status", "");
-            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + this.user.getEmail() + "</a>");
+            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + user.getEmail() + "</a>");
         } else {
             this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
             this.setVariable("user.profile", "");
@@ -147,10 +140,10 @@ public class register extends AbstractApplication {
         return null;
     }
 
-    public Cookie getCookieByName(String name) {
+    public Cookie getCookieByName(Request request, String name) {
 
-        if (this.request.cookies() != null) {
-            Cookie[] cookies = this.request.cookies();
+        if (request.cookies() != null) {
+            Cookie[] cookies = request.cookies();
             int i = 0;
             while (cookies.length > i) {
                 if (cookies[i].name().equalsIgnoreCase(name))
@@ -162,23 +155,23 @@ public class register extends AbstractApplication {
         return null;
     }
 
-    public Object post(String keyValue) {
+    @Action(value = "user/register", mode = Action.Mode.HTTP_POST)
+    public Object post(Request request, Response response, String keyValue) {
         this.setText("register.tips", this.getLink("help"), this.getLink("help/condition"));
 
-        Response response = (Response) getContext().getAttribute(HTTP_RESPONSE);
         Cookie key = new CookieImpl("key");
         key.setMaxAge(24 * 3600 * 7);
         key.setValue(keyValue);
         response.addHeader(Header.SET_COOKIE.toString(), key);
 
-        this.setVariable("action", String.valueOf(getContext().getAttribute("HTTP_HOST")) + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("action", getContext().getAttribute("HTTP_HOST") + getContext().getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (null != session.getAttribute("usr")) {
-            this.user = (User) session.getAttribute("usr");
+            User user = (User) session.getAttribute("usr");
 
             this.setVariable("user.status", "");
-            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + this.user.getEmail() + "</a>");
+            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + user.getEmail() + "</a>");
         } else {
             this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
             this.setVariable("user.profile", "");
@@ -187,10 +180,8 @@ public class register extends AbstractApplication {
         return this;
     }
 
-    public boolean append() throws ApplicationException {
-
-        Cookie cookie = this.getCookieByName("key");
-
+    public boolean append(Request request) throws ApplicationException {
+        Cookie cookie = this.getCookieByName(request,"key");
         if (cookie == null) {
             throw new ApplicationException(this.getProperty("register.status"));
         }
@@ -200,7 +191,7 @@ public class register extends AbstractApplication {
 
         serial serial = new serial();
         Table t = serial.findWith("WHERE number like ?", new Object[]{number});
-        if (t.size() > 0) {
+        if (!t.isEmpty()) {
             throw new ApplicationException(this.getProperty("register.code.used"));
         }
 
@@ -213,61 +204,63 @@ public class register extends AbstractApplication {
             throw new ApplicationException(this.getProperty("register.code.expired"));
         }
 
-        if (this.request.getParameter("nickname") == null || this.request.getParameter("nickname").trim().length() == 0) {
+        User user;
+        Session session;
+        if (request.getParameter("nickname") == null || request.getParameter("nickname").trim().isEmpty()) {
             throw new ApplicationException(this.getProperty("register.invalid.nickname"));
         } else {
-            this.user = new User();
-            this.user.setNickname(this.request.getParameter("nickname"));
-            this.user.setUsername(this.user.getNickname());
+            user = new User();
+            user.setNickname(request.getParameter("nickname"));
+            user.setUsername(user.getNickname());
 
-            this.setVariable("nickname", this.user.getNickname());
+            this.setVariable("nickname", user.getNickname());
 
-            this.session = this.request.getSession();
-            this.session.setAttribute("usr", this.user);
+            session = request.getSession();
+            session.setAttribute("usr", user);
         }
 
-        if (this.request.getParameter("email") == null || this.request.getParameter("email").trim().length() == 0) {
+        if (request.getParameter("email") == null || request.getParameter("email").trim().isEmpty()) {
             throw new ApplicationException(this.getProperty("register.invalid.email"));
         } else {
-            this.user.setEmail(this.request.getParameter("email"));
-            this.setVariable("email", this.user.getEmail());
-            this.session.setAttribute("usr", this.user);
+            user.setEmail(request.getParameter("email"));
+            this.setVariable("email", user.getEmail());
+            session.setAttribute("usr", user);
         }
 
-        if (this.request.getParameter("password") == null || this.request.getParameter("password").trim().length() == 0) {
+        if (request.getParameter("password") == null || request.getParameter("password").trim().isEmpty()) {
             throw new ApplicationException(this.getProperty("register.invalid.password"));
         } else {
-            this.user.setPassword(this.request.getParameter("password"));
+            user.setPassword(request.getParameter("password"));
 
-            this.session.setAttribute("usr", this.user);
+            session.setAttribute("usr", user);
         }
 
-        if (user.setRequestFields("count(*) as p").findWith("WHERE email=?", new Object[]{this.user.getEmail()}).get(0).getFieldInfo("p").intValue() == 0) {
-            user.setPassword(new Security(user.getEmail()).encodePassword(this.user.getPassword()));
-            user.setUsername(this.user.getEmail());
+        if (user.setRequestFields("count(*) as p").findWith("WHERE email=?", new Object[]{user.getEmail()}).get(0).getFieldInfo("p").intValue() == 0) {
+            user.setPassword(new Security(user.getEmail()).encodePassword(user.getPassword()));
+            user.setUsername(user.getEmail());
 
             user.setLastloginIP("");
             user.setLastloginTime(new Date());
             user.setRegistrationTime(new Date());
 
-            if (this.request.getParameter("last-name") == null || this.request.getParameter("last-name").trim().length() == 0 || this.request.getParameter("first-name") == null || this.request.getParameter("first-name").trim().length() == 0) {
+            if (request.getParameter("last-name") == null || request.getParameter("last-name").trim().isEmpty() || request.getParameter("first-name") == null || request.getParameter("first-name").trim().length() == 0) {
                 throw new ApplicationException(this.getProperty("register.invalid.gender"));
             } else {
-                this.user.setLastName(this.request.getParameter("last-name"));
-                this.user.setFirstName(this.request.getParameter("first-name"));
+                user.setLastName(request.getParameter("last-name"));
+                user.setFirstName(request.getParameter("first-name"));
 
-                this.setVariable("lastname", this.user.getLastName());
-                this.setVariable("firstname", this.user.getFirstName());
+                this.setVariable("lastname", user.getLastName());
+                this.setVariable("firstname", user.getFirstName());
 
-                this.session.setAttribute("usr", this.user);
+                session.setAttribute("usr", user);
             }
 
-            if (this.request.getParameter("gender") == null || this.request.getParameter("gender").trim().length() == 0) {
+            if (request.getParameter("gender") == null || request.getParameter("gender").trim().isEmpty()) {
                 throw new ApplicationException(this.getProperty("register.invalid.gender"));
             } else {
-                this.user.setGender(Integer.parseInt(this.request.getParameter("gender")));
+                user.setGender(Integer.parseInt(request.getParameter("gender")));
 
-                switch (this.user.getGender()) {
+                switch (user.getGender()) {
                     case 0:
                         this.setVariable("gender.male", "checked");
                         break;
@@ -281,30 +274,30 @@ public class register extends AbstractApplication {
                         break;
                 }
 
-                this.session.setAttribute("usr", this.user);
+                session.setAttribute("usr", user);
             }
 
-            if (this.request.getParameter("country") == null || this.request.getParameter("country").trim().length() == 0 || this.request.getParameter("city") == null || this.request.getParameter("city").trim().length() == 0) {
+            if (request.getParameter("country") == null || request.getParameter("country").trim().length() == 0 || request.getParameter("city") == null || request.getParameter("city").trim().length() == 0) {
                 throw new ApplicationException(this.getProperty("register.invalid.country"));
             } else {
-                this.user.setCountry(this.request.getParameter("country"));
-                this.user.setCity(this.request.getParameter("city"));
+                user.setCountry(request.getParameter("country"));
+                user.setCity(request.getParameter("city"));
 
-                this.setVariable("city", this.user.getCity());
-                this.setVariable("postcode", this.user.getPostcode());
+                this.setVariable("city", user.getCity());
+                this.setVariable("postcode", user.getPostcode());
 
 
-                this.session.setAttribute("usr", this.user);
+                session.setAttribute("usr", user);
             }
 
-            if (this.request.getParameter("zip-postal-code") == null || this.request.getParameter("zip-postal-code").trim().length() == 0) {
+            if (request.getParameter("zip-postal-code") == null || request.getParameter("zip-postal-code").trim().length() == 0) {
                 throw new ApplicationException(this.getProperty("register.invalid.postcode"));
             } else {
-                this.user.setPostcode(this.request.getParameter("zip-postal-code"));
+                user.setPostcode(request.getParameter("zip-postal-code"));
 
-                this.setVariable("telephone", this.user.getTelephone());
+                this.setVariable("telephone", user.getTelephone());
 
-                this.session.setAttribute("usr", this.user);
+                session.setAttribute("usr", user);
             }
 
             user.append();

@@ -40,15 +40,15 @@ public class ValidateCode {
     private BufferedImage image = null;
 
     public ValidateCode(Request request) {
-        this.request = request;
-        this.session = this.request.getSession();
+        request = request;
+        this.session = request.getSession();
     }
 
     public ValidateCode(Request request, Response response) throws IOException {
         temp = formName;
-        this.request = request;
+        request = request;
         this.response = response;
-        this.session = this.request.getSession();
+        this.session = request.getSession();
 
 //			if(sessionName!=null&&sessionName.trim().length()!=0)	this.session.removeAttribute(sessionName);
 //			if(session.getAttribute(sessionName)==null)this.beRemoved=true;

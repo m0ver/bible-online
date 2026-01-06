@@ -27,11 +27,7 @@ import org.tinystruct.system.util.StringUtilities;
 
 import java.io.UnsupportedEncodingException;
 
-import static org.tinystruct.http.Constants.HTTP_REQUEST;
-
 public class keywords extends AbstractApplication {
-
-    private Request request;
 
     @Override
     public void init() {
@@ -45,13 +41,11 @@ public class keywords extends AbstractApplication {
     }
 
     @Action("bible/keywords")
-    public String list() throws ApplicationException {
+    public String list(Request request) throws ApplicationException {
         String keyword;
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
-
-        if (this.request.getParameter("keyword") != null && !this.request.getParameter("keyword").equals("") && new StringUtilities(this.request.getParameter("keyword").toString()).safe()) {
-            if (this.request.method() == Method.GET) {
-                keyword = this.request.getParameter("keyword");
+        if (request.getParameter("keyword") != null && !request.getParameter("keyword").equals("") && new StringUtilities(request.getParameter("keyword").toString()).safe()) {
+            if (request.method() == Method.GET) {
+                keyword = request.getParameter("keyword");
                 try {
                     keyword = new String(keyword.getBytes("ISO8859-1"), "UTF-8");
                 } catch (UnsupportedEncodingException e) {
@@ -59,7 +53,7 @@ public class keywords extends AbstractApplication {
                     e.printStackTrace();
                 }
             } else
-                keyword = this.request.getParameter("keyword");
+                keyword = request.getParameter("keyword");
         } else {
             keyword = null;
         }

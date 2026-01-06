@@ -308,10 +308,7 @@ public class error extends AbstractApplication {
      */
     public static final int HTTP_VERSION_NOT_SUPPORTED = 505;
 
-    private Request request;
-    private Response response;
     private Reforward reforward;
-    private User usr;
 
     @Override
     public void init() {
@@ -335,21 +332,19 @@ public class error extends AbstractApplication {
     }
 
     @Action("404")
-    public error not_found() throws ApplicationException {
+    public error not_found(Request request, Response response) throws ApplicationException {
         final error app = this;
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
-        this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
-        this.response.setStatus(ResponseStatus.NOT_FOUND);
+        response.setStatus(ResponseStatus.NOT_FOUND);
 
         this.setVariable("action", getConfiguration().get("default.base_url") + getContext().getAttribute("REQUEST_PATH").toString());
         this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
 
-        Session session = this.request.getSession();
+        Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
-            this.usr = (User) session.getAttribute("usr");
+            User usr = (User) session.getAttribute("usr");
 
             this.setVariable("user.status", "");
-            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + this.usr.getEmail() + "</a>");
+            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + usr.getEmail() + "</a>");
             this.setVariable("scripts", "$.ajax({url:\"" + this.getLink("services/getwords") + "\",dataType:\"xml\",type:'GET'}).success(function(data){data=wordsXML(data);ldialog.show(data);});");
         } else {
             this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
@@ -441,15 +436,13 @@ public class error extends AbstractApplication {
     }
 
     @Action("process")
-    public void process() throws ApplicationException {
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
-        this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
-        this.response.setStatus(ResponseStatus.FORBIDDEN);
-        this.reforward = new Reforward(this.request, this.response);
+    public void process(Request request, Response response) throws ApplicationException {
+        response.setStatus(ResponseStatus.FORBIDDEN);
+        this.reforward = new Reforward(request, response);
 
         this.setVariable("from", this.reforward.getFromURL());
 
-        Session session = this.request.getSession();
+        Session session = request.getSession();
         if (session.getAttribute("error") != null) {
             ApplicationException exception = (ApplicationException) session.getAttribute("error");
 
@@ -462,7 +455,7 @@ public class error extends AbstractApplication {
             this.setVariable("exception.details", this.getDetail(exception)
                     .toString());
 
-            this.response.setStatus(ResponseStatus.valueOf(exception.getStatus()));
+            response.setStatus(ResponseStatus.valueOf(exception.getStatus()));
         } else {
             this.reforward.forward();
         }
@@ -486,35 +479,35 @@ public class error extends AbstractApplication {
 	public StringBuffer info() {
 		StringBuffer buffer = new StringBuffer();
 
-		buffer.append("Protocol: " + this.request.getProtocol() + "\r\n");
-		buffer.append("Scheme: " + this.request.getScheme() + "\r\n");
-		buffer.append("Server Name: " + this.request.getServerName() + "\r\n");
-		buffer.append("Server Port: " + this.request.getServerPort() + "\r\n");
-		buffer.append("Protocol: " + this.request.getProtocol() + "\r\n");
+		buffer.append("Protocol: " + request.getProtocol() + "\r\n");
+		buffer.append("Scheme: " + request.getScheme() + "\r\n");
+		buffer.append("Server Name: " + request.getServerName() + "\r\n");
+		buffer.append("Server Port: " + request.getServerPort() + "\r\n");
+		buffer.append("Protocol: " + request.getProtocol() + "\r\n");
 		// buffer.append("Server Info: " +
 		// getServletConfig().getServletContext().getServerInfo()+"\r\n");
-		buffer.append("Remote Addr: " + this.request.getRemoteAddr() + "\r\n");
-		buffer.append("Remote Host: " + this.request.getRemoteHost() + "\r\n");
-		buffer.append("Character Encoding: " + this.request.getCharacterEncoding() + "\r\n");
-		buffer.append("Content Length: " + this.request.getContentLength() + "\r\n");
-		buffer.append("Content Type: " + this.request.getContentType() + "\r\n");
-		buffer.append("Auth Type: " + this.request.getAuthType() + "\r\n");
-		buffer.append("HTTP Method: " + this.request.getMethod() + "\r\n");
-		buffer.append("Path Info: " + this.request.getPathInfo() + "\r\n");
-		buffer.append("Path Trans: " + this.request.getPathTranslated() + "\r\n");
-		buffer.append("Query String: " + this.request.getQueryString() + "\r\n");
-		buffer.append("Remote User: " + this.request.getRemoteUser() + "\r\n");
-		buffer.append("Session Id: " + this.request.getRequestedSessionId() + "\r\n");
-		buffer.append("Request URI: " + this.request.getRequestURI() + "\r\n");
-		buffer.append("Servlet Path: " + this.request.getServletPath() + "\r\n");
-		buffer.append("Accept: " + this.request.getHeader("Accept") + "\r\n");
-		buffer.append("Host: " + this.request.getHeader("Host") + "\r\n");
-		buffer.append("Referer : " + this.request.getHeader("Referer") + "\r\n");
-		buffer.append("Accept-Language : " + this.request.getHeader("Accept-Language") + "\r\n");
-		buffer.append("Accept-Encoding : " + this.request.getHeader("Accept-Encoding") + "\r\n");
-		buffer.append("User-Agent : " + this.request.getHeader("User-Agent") + "\r\n");
-		buffer.append("Connection : " + this.request.getHeader("Connection") + "\r\n");
-		buffer.append("Cookie : " + this.request.getHeader("Cookie") + "\r\n");
+		buffer.append("Remote Addr: " + request.getRemoteAddr() + "\r\n");
+		buffer.append("Remote Host: " + request.getRemoteHost() + "\r\n");
+		buffer.append("Character Encoding: " + request.getCharacterEncoding() + "\r\n");
+		buffer.append("Content Length: " + request.getContentLength() + "\r\n");
+		buffer.append("Content Type: " + request.getContentType() + "\r\n");
+		buffer.append("Auth Type: " + request.getAuthType() + "\r\n");
+		buffer.append("HTTP Method: " + request.getMethod() + "\r\n");
+		buffer.append("Path Info: " + request.getPathInfo() + "\r\n");
+		buffer.append("Path Trans: " + request.getPathTranslated() + "\r\n");
+		buffer.append("Query String: " + request.getQueryString() + "\r\n");
+		buffer.append("Remote User: " + request.getRemoteUser() + "\r\n");
+		buffer.append("Session Id: " + request.getRequestedSessionId() + "\r\n");
+		buffer.append("Request URI: " + request.getRequestURI() + "\r\n");
+		buffer.append("Servlet Path: " + request.getServletPath() + "\r\n");
+		buffer.append("Accept: " + request.getHeader("Accept") + "\r\n");
+		buffer.append("Host: " + request.getHeader("Host") + "\r\n");
+		buffer.append("Referer : " + request.getHeader("Referer") + "\r\n");
+		buffer.append("Accept-Language : " + request.getHeader("Accept-Language") + "\r\n");
+		buffer.append("Accept-Encoding : " + request.getHeader("Accept-Encoding") + "\r\n");
+		buffer.append("User-Agent : " + request.getHeader("User-Agent") + "\r\n");
+		buffer.append("Connection : " + request.getHeader("Connection") + "\r\n");
+		buffer.append("Cookie : " + request.getHeader("Cookie") + "\r\n");
 
 		return buffer;
 	}

@@ -28,20 +28,12 @@ import org.tinystruct.http.Response;
 import org.tinystruct.http.Session;
 import org.tinystruct.system.annotation.Action;
 
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Locale;
 
-import static org.tinystruct.http.Constants.HTTP_REQUEST;
-import static org.tinystruct.http.Constants.HTTP_RESPONSE;
-
 
 public class dashboard extends AbstractApplication {
-
-    private Request request;
-    private User user;
-    private Response response;
 
     @Override
     public void init() {
@@ -79,34 +71,32 @@ public class dashboard extends AbstractApplication {
     }
 
     @Action("dashboard")
-    public Object index() throws ApplicationException {
-        this.request = (Request) getContext().getAttribute(HTTP_REQUEST);
-
+    public Object index(Request request, Response response) throws ApplicationException {
         this.setVariable("action", String.valueOf(getContext().getAttribute("HTTP_HOST")) + getContext().getAttribute("REQUEST_PATH").toString());
 
         Session session = request.getSession();
         if (session.getAttribute("usr") != null) {
-            this.user = (User) session.getAttribute("usr");
+            User user = (User) session.getAttribute("usr");
             this.setVariable("user.status", "");
-            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + this.user.getEmail() + "</a>");
+            this.setVariable("user.profile", "<a href=\"javascript:void(0)\" onmousedown=\"profileMenu.show(event,'1')\">" + user.getEmail() + "</a>");
             this.setVariable("scripts", "$.ajax({url:\"" + this.getLink("services/getwords") + "\",dataType:\"xml\",type:'GET'}).success(function(data){data=wordsXML(data);ldialog.show(data);});");
 
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             vocabulary vocabulary = new vocabulary();
             try {
                 long startTime = System.currentTimeMillis();
                 int page = 1, pageSize = 20;
 
-                if (this.request.getParameter("page") == null || this.request.getParameter("page").toString().trim().length() <= 0) {
+                if (request.getParameter("page") == null || request.getParameter("page").toString().trim().length() <= 0) {
                     page = 1;
                 } else {
-                    page = Integer.parseInt(this.request.getParameter("page").toString());
+                    page = Integer.parseInt(request.getParameter("page").toString());
                 }
 
-                Row found = vocabulary.findOne("SELECT count(user_id) AS size FROM " + vocabulary.getTableName() + " WHERE user_id=? ", new Object[]{this.user.getId()});
+                Row found = vocabulary.findOne("SELECT count(user_id) AS size FROM " + vocabulary.getTableName() + " WHERE user_id=? ", new Object[]{user.getId()});
 
                 int startIndex = (page - 1) * pageSize;
-                Table list = vocabulary.findWith("WHERE user_id=? order by date desc limit " + startIndex + "," + pageSize, new Object[]{this.user.getId()});
+                Table list = vocabulary.findWith("WHERE user_id=? order by date desc limit " + startIndex + "," + pageSize, new Object[]{user.getId()});
 
                 Pager pager = new Pager();
                 pager.setPageSize(pageSize);
@@ -118,7 +108,6 @@ public class dashboard extends AbstractApplication {
                 buffer.append("<ol class=\"searchresults\" start=\"" + next + "\">\r\n");
                 Iterator<Row> rows = list.iterator();
 
-                SimpleDateFormat format = new SimpleDateFormat(this.getConfiguration("default.date.format"));
                 while (rows.hasNext()) {
                     vocabulary.setData(rows.next());
 
@@ -159,8 +148,6 @@ public class dashboard extends AbstractApplication {
             this.setVariable("words.list", "");
             this.setVariable("user.status", "<a href=\"" + this.getLink("user/login") + "\">" + this.getProperty("page.login.caption") + "</a>");
             this.setVariable("user.profile", "");
-
-            this.response = (Response) getContext().getAttribute(HTTP_RESPONSE);
 
             Reforward reforward = new Reforward(request, response);
             reforward.setDefault(this.getLink(getConfiguration().get("default.login.page")) + "&from=" + this.getLink("dashboard"));
