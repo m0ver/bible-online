@@ -242,7 +242,6 @@ public class dailymail extends AbstractApplication {
                     try {
                         themail.send();
                     } catch (ApplicationException e) {
-                        s.setAvailable(false);
                         s.update();
                     }
                 }
