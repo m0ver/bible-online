@@ -1,18 +1,3 @@
-/*******************************************************************************
- * Copyright  (c) 2013 Mover Zhou
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *******************************************************************************/
 package custom.application;
 
 import custom.objects.*;
@@ -39,42 +24,55 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class dailymail extends AbstractApplication {
 
-    private Scheduler scheduler;
+    private volatile Scheduler scheduler;
     private suggestion suggestion;
-    private final AtomicBoolean next = new AtomicBoolean(false);
+    private final AtomicBoolean isTaskRunning = new AtomicBoolean(false);
+    private final AtomicBoolean shouldContinue = new AtomicBoolean(true);
+    private final ReentrantLock taskLock = new ReentrantLock();
 
     @Action("start")
     public void start() {
         TimeIterator iterator = new TimeIterator(00, 00, 00);
         iterator.setInterval(3600 * 24);
         this.getConfiguration().getOrDefault("default.base_url", "https://www.ingod.today/?q=");
-        this.scheduler.schedule(new SchedulerTask() {
-            private final Object o = new Object();
 
+        this.scheduler.schedule(new SchedulerTask() {
             @Override
             public void cancel() {
-                // TODO Auto-generated method stub
+                shouldContinue.set(false);
                 scheduler.cancel();
             }
 
             @Override
             public void start() {
-                synchronized (o) {
-                    loadBible();
+                // Prevent concurrent execution
+                if (isTaskRunning.compareAndSet(false, true)) {
+                    try {
+                        loadBible();
+                    } finally {
+                        isTaskRunning.set(false);
+                    }
                 }
             }
 
             @Override
             public boolean next() {
-                return next.get();
+                return shouldContinue.get();
             }
         }, iterator);
     }
 
     private void loadBible() {
+        // Acquire lock to ensure only one execution at a time
+        if (!taskLock.tryLock()) {
+            // Another thread is already executing, skip this run
+            return;
+        }
+
         try {
             SimpleDateFormat format = new SimpleDateFormat("MM-dd");
             plan plan = new plan();
@@ -106,6 +104,11 @@ public class dailymail extends AbstractApplication {
 
             TaskDescriptor task = new TaskDescriptor();
             for (Map.Entry<String, List<subscription>> entry : groups.entrySet()) {
+                // Check if we should continue processing
+                if (!shouldContinue.get()) {
+                    break;
+                }
+
                 String[] parts = entry.getKey().split(":");
                 String lang = parts[0];
                 String version = parts[1];
@@ -133,31 +136,37 @@ public class dailymail extends AbstractApplication {
 
                 ArrayList<List<bible>> res = new ArrayList<>();
                 List<bible> bibles = new ArrayList<>();
-                int bookId = 0, chapterId = 0;
+                int bookId = 0;
 
                 try (DatabaseOperator operator = new DatabaseOperator()) {
                     operator.disableSafeCheck();
                     StringBuffer where = task.parse(plan.getTask());
                     String sql = "SELECT * FROM " + tableName + " WHERE " + where;
-                    PreparedStatement preparedStatement = operator.preparedStatement(sql, new Object[] {});
-                    ResultSet resultSet = preparedStatement.executeQuery();
-                    while (resultSet.next()) {
-                        bible bib = new bible();
-                        bib.setBookId(resultSet.getInt("book_id"));
-                        bib.setChapterId(resultSet.getInt("chapter_id"));
-                        bib.setPartId(resultSet.getInt("part_id"));
-                        bib.setContent(resultSet.getString("content"));
 
-                        if (bookId != bib.getBookId()) {
-                            bookId = bib.getBookId();
-                            if (!bibles.isEmpty())
-                                res.add(bibles);
-                            bibles = new ArrayList<>();
+                    try (PreparedStatement preparedStatement = operator.preparedStatement(sql, new Object[] {});
+                            ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                        while (resultSet.next()) {
+                            bible bib = new bible();
+                            bib.setBookId(resultSet.getInt("book_id"));
+                            bib.setChapterId(resultSet.getInt("chapter_id"));
+                            bib.setPartId(resultSet.getInt("part_id"));
+                            bib.setContent(resultSet.getString("content"));
+
+                            if (bookId != bib.getBookId()) {
+                                bookId = bib.getBookId();
+                                if (!bibles.isEmpty())
+                                    res.add(bibles);
+                                bibles = new ArrayList<>();
+                            }
+                            bibles.add(bib);
                         }
-                        bibles.add(bib);
                     }
                 } catch (SQLException e) {
-                    continue; // Skip this group if table not found or error
+                    // Log error instead of silently continuing
+                    System.err.println(
+                            "Database error for language " + lang + ", version " + version + ": " + e.getMessage());
+                    continue;
                 }
 
                 if (!bibles.isEmpty())
@@ -184,6 +193,7 @@ public class dailymail extends AbstractApplication {
                 buffer.append("<div class=\"feedEntryContent\">");
 
                 book book = new book();
+                int chapterId = 0;
                 for (List<bible> bs : res) {
                     Table table = book.findWith("WHERE book_id=? and language=?",
                             new Object[] { bs.get(0).getBookId(), lang.contains("en") ? "en_US" : "zh_CN" });
@@ -213,6 +223,10 @@ public class dailymail extends AbstractApplication {
 
                 String content = buffer.toString();
                 for (subscription s : entry.getValue()) {
+                    if (!shouldContinue.get()) {
+                        break;
+                    }
+
                     String unsubscribeLink = "https://www.ingod.today/?q=services/unsubscribe/" + s.getId();
                     String footerContent = Resource.getInstance(locale).getLocaleString("mail.footer.message")
                             + "<br />"
@@ -233,22 +247,20 @@ public class dailymail extends AbstractApplication {
                     }
                 }
             }
-            Thread.sleep(1);
-        } catch (ApplicationException | InterruptedException e) {
-            suggestion = new suggestion();
-            suggestion.setEmail("services@ingod.today");
-            suggestion.setIP("-");
-            suggestion.setPostDate(new Date());
-            suggestion.setStatus(false);
-            suggestion.setTitle(e.getMessage() != null ? e.getMessage() : "");
-            note(e, suggestion);
+        } catch (ApplicationException e) {
+            suggestion threadLocalSuggestion = new suggestion();
+            threadLocalSuggestion.setEmail("services@ingod.today");
+            threadLocalSuggestion.setIP("-");
+            threadLocalSuggestion.setPostDate(new Date());
+            threadLocalSuggestion.setStatus(false);
+            threadLocalSuggestion.setTitle(e.getMessage() != null ? e.getMessage() : "");
+            note(e, threadLocalSuggestion);
         } finally {
-            this.next.set(true);
+            taskLock.unlock();
         }
     }
 
     public void note(Throwable e, suggestion suggestion) {
-        // TODO Auto-generated method stub
         StackTraceElement[] trace = e.getStackTrace();
 
         StringBuilder errors = new StringBuilder("Details:\r\n");
@@ -271,14 +283,12 @@ public class dailymail extends AbstractApplication {
         try {
             suggestion.append();
         } catch (ApplicationException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
     }
 
     @Override
     public void init() {
-        // TODO Auto-generated constructor stub
         this.scheduler = new Scheduler(true);
 
         suggestion = new suggestion();
@@ -296,7 +306,6 @@ public class dailymail extends AbstractApplication {
             try {
                 payload.append();
             } catch (ApplicationException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -311,11 +320,13 @@ public class dailymail extends AbstractApplication {
             try {
                 payload.append();
             } catch (ApplicationException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
-            scheduler.cancel();
+            shouldContinue.set(false);
+            if (scheduler != null) {
+                scheduler.cancel();
+            }
         });
 
         dispatcher.dispatch(new DailyMailStartEvent(suggestion));
@@ -324,7 +335,6 @@ public class dailymail extends AbstractApplication {
     }
 
     public String version() {
-        // TODO Auto-generated method stub
         return null;
     }
 
