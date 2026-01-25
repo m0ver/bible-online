@@ -52,7 +52,7 @@ public class sender extends AbstractApplication {
     public boolean send(Request request) throws ApplicationException {
         if (request.getParameter("id") == null
                 || request.getParameter("text") == null
-                || request.getParameter("text").trim().length() == 0) {
+                || request.getParameter("text").trim().isEmpty()) {
             return false;
         }
 
@@ -65,7 +65,7 @@ public class sender extends AbstractApplication {
 
         report.setModifiedTime(new Date());
         try {
-            report.appendAndGetId();
+            Object id = report.appendAndGetId();
 
             bible bible = new bible();
             if (this.getLocale().toString().equalsIgnoreCase(Locale.US.toString())) {
@@ -84,7 +84,7 @@ public class sender extends AbstractApplication {
             //你好！有一个用户发来的经文更新请求!<br />原文是：%s，建议更新为：%s <br/> --- <br />请点击此链接进行确认！(或复制此地址到浏览器访问):<br /> %s <br /><br /> InGod.asia工作小组
             String body = String.format(
                     this.getProperty("mail.report.content"), bible.getContent(), report.getUpdatedContent(),
-                    getContext().getAttribute("HTTP_HOST") + "services/bible/update/" + report.getId());
+                    getContext().getAttribute("HTTP_HOST") + "services/bible/update/" + id);
             mail.setSubject(this.getProperty("mail.report.title"));
             mail.setBody(body);
             mail.addTo("moverinfo@gmail.com");
