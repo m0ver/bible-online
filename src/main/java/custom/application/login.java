@@ -22,7 +22,7 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import custom.objects.User;
-import custom.util.ValidateCode;
+import custom.util.CaptchaCode;
 import custom.util.model.oAuth2Provider;
 import org.apache.http.ParseException;
 import org.tinystruct.AbstractApplication;
@@ -122,6 +122,7 @@ public class login extends AbstractApplication {
             this.setVariable("user.profile", "");
         }
 
+        this.setVariable("codename", "code");
         this.setVariable("code", this.toImage());
         return this;
     }
@@ -228,7 +229,7 @@ public class login extends AbstractApplication {
         Request request = (Request) getContext()
                 .getAttribute(HTTP_REQUEST);
 
-        ValidateCode code = new ValidateCode(request);
+        CaptchaCode code = new CaptchaCode(request);
         return code.getEstablishedCode();
     }
 

@@ -26,9 +26,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
-public class ValidateCode {
-    private static String sessionName = "", sessionValue = "", formName = "";
-    private static String temp = "";
+public class CaptchaCode {
+    private String sessionName = "", sessionValue = "", formName = "";
+    private String temp = "";
     public boolean beRemoved = false;
     private int width = 66, height = 19;
     private Security.Mode mode = Security.Mode.OnlyNumber;
@@ -39,42 +39,19 @@ public class ValidateCode {
     private Session session = null;
     private BufferedImage image = null;
 
-    public ValidateCode(Request request) {
-        request = request;
+    public CaptchaCode(Request request) {
+        this.request = request;
         this.session = request.getSession();
     }
 
-    public ValidateCode(Request request, Response response) throws IOException {
+    public CaptchaCode(Request request, Response response) throws IOException {
         temp = formName;
-        request = request;
+        this.request = request;
         this.response = response;
         this.session = request.getSession();
 
 //			if(sessionName!=null&&sessionName.trim().length()!=0)	this.session.removeAttribute(sessionName);
 //			if(session.getAttribute(sessionName)==null)this.beRemoved=true;
-    }
-
-    public static String getSessionName(Request req) {
-        if (sessionName.trim().length() == 0) new ValidateCode(req).getEstablishedCode();
-        return sessionName;
-    }
-
-    public static String getSessionValue() {
-        return sessionValue;
-    }
-
-    public static String getLastFormName() {
-        return temp;
-    }
-
-    public static String getFormName(Request req) {
-        if (formName.trim().length() == 0) new ValidateCode(req).getEstablishedCode();
-        return formName;
-    }
-
-    public static void removeSession(Request _request) {
-        if (sessionName != null && sessionName.trim().length() != 0)
-            new ValidateCode(_request).session.removeAttribute(sessionName);
     }
 
     public void setWidth(int width) {

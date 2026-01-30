@@ -17,6 +17,7 @@ package custom.application;
 
 import custom.objects.User;
 import custom.objects.suggestion;
+import custom.util.CaptchaCode;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
 import org.tinystruct.application.SharedVariables;
@@ -29,8 +30,6 @@ import org.tinystruct.system.annotation.Action;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Logger;
-
-import static org.tinystruct.http.Constants.HTTP_REQUEST;
 
 public class suggest extends AbstractApplication {
     private final Logger logger = Logger.getLogger("suggest.class");
@@ -73,6 +72,8 @@ public class suggest extends AbstractApplication {
         this.setText("suggestion.email.invalid");
         this.setText("suggestion.send.success");
         this.setText("suggestion.send.failure");
+        this.setText("suggestion.captcha");
+        this.setText("suggestion.captcha.invalid");
 
         this.setVariable("TEMPLATES_DIR", "/themes");
         String username = "";
@@ -97,6 +98,9 @@ public class suggest extends AbstractApplication {
         html.append("<ul>\r\n");
         html.append("<li><label>" + this.getProperty("suggestion.email.address") + "<br /><input type=\"text\" value=\"\" name=\"iemail\" id=\"iemail\" class=\"text\"/></label></li>\r\n");
         html.append("<li><label>" + this.getProperty("suggestion.content.text") + "<br /><textarea name=\"content\" id=\"content\" cols=\"45\" rows=\"8\"></textarea></label></li>\r\n");
+        CaptchaCode captchaCode = new CaptchaCode(request);
+        String captchaImage = captchaCode.getEstablishedCode();
+        html.append("<li><label>" + this.getProperty("suggestion.captcha") + "<br /><input type=\"text\" name=\"code\" id=\"code\" class=\"text\" style=\"width:100px\"/> <img src=\"" + captchaImage + "\" style=\"vertical-align:middle;\"/></label></li>\r\n");
         html.append("<li><label><input type=\"submit\" class=\"button-secondary\" value=\"" + this.getProperty("suggestion.button.ok") + "\"/> </label><input type=\"reset\" class=\"button-secondary\" value=\"" + this.getProperty("suggestion.button.cancel") + " \" onclick=\"history.back()\"/></li>\r\n");
         html.append("</ul>\r\n");
         html.append("</form>\r\n");
@@ -129,6 +133,9 @@ public class suggest extends AbstractApplication {
         html.append("<ul>\r\n");
         html.append("<li><label>" + this.getProperty("suggestion.email.address") + "<br /><input type=\"text\" value=\"\" name=\"iemail\" id=\"iemail\" class=\"text\"/></label></li>\r\n");
         html.append("<li><label>" + this.getProperty("suggestion.content.text") + "<br /><textarea name=\"content\" id=\"content\" cols=\"45\" rows=\"8\"></textarea></label></li>\r\n");
+        CaptchaCode captchaCode = new CaptchaCode(request);
+        String captchaImage = captchaCode.getEstablishedCode();
+        html.append("<li><label>" + this.getProperty("suggestion.captcha") + "<br /><input type=\"text\" name=\"code\" id=\"code\" class=\"text\" style=\"width:100px\"/> <img src=\"" + captchaImage + "\" style=\"vertical-align:middle;\"/></label></li>\r\n");
         html.append("<li><label><input type=\"submit\" class=\"button-secondary\" value=\"" + this.getProperty("suggestion.button.ok") + "\"/> </label><input type=\"reset\" class=\"button-secondary\" value=\"" + this.getProperty("suggestion.button.cancel") + " \" onclick=\"history.back()\"/></li>\r\n");
         html.append("</ul>\r\n");
         html.append("</form>\r\n");
@@ -160,6 +167,12 @@ public class suggest extends AbstractApplication {
         if (request.getParameter("iemail") == null || request.getParameter("iemail").trim().length() <= 0) {
             this.setVariable("error", "<div class=\"error\">" + this.getProperty("suggestion.email.invalid") + "</div>");
 
+            return this;
+        }
+
+        String userCode = request.getParameter("code");
+        if (userCode == null || request.getSession().getAttribute(userCode) == null) {
+            this.setVariable("error", "<div class=\"error\">" + this.getProperty("suggestion.captcha.invalid") + "</div>");
             return this;
         }
         suggestion suggestion = new suggestion();
