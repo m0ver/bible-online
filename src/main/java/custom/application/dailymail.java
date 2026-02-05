@@ -17,6 +17,9 @@ import org.tinystruct.system.annotation.Action;
 import org.tinystruct.system.scheduling.Scheduler;
 import org.tinystruct.system.scheduling.SchedulerTask;
 import org.tinystruct.system.scheduling.TimeIterator;
+import org.tinystruct.valve.DistributedLock;
+import org.tinystruct.valve.Lock;
+import org.tinystruct.valve.Watcher;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +35,7 @@ public class dailymail extends AbstractApplication {
     private suggestion suggestion;
     private final AtomicBoolean isTaskRunning = new AtomicBoolean(false);
     private final AtomicBoolean shouldContinue = new AtomicBoolean(true);
-    private final ReentrantLock taskLock = new ReentrantLock();
+    private final Lock taskLock = Watcher.getInstance().acquire();
 
     @Action("start")
     public void start() {
