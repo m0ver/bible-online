@@ -583,8 +583,14 @@ public class search extends AbstractApplication {
             // Get the current locale
             Locale locale = this.getLocale();
 
-            // First analyze the query using OpenAI with language context
-            Builder analysisResult = getOpenAIAnalysis(query, locale);
+            // First analyze the query using OpenAI/Gemini with language context
+            Builder analysisResult;
+            String provider = getConfiguration().get("ai.provider");
+            if ("gemini".equalsIgnoreCase(provider) || (getConfiguration().get("gemini.api_key") != null && !getConfiguration().get("gemini.api_key").isEmpty() && (getConfiguration().get("openai.api_key") == null || getConfiguration().get("openai.api_key").isEmpty()))) {
+                analysisResult = getGeminiAnalysis(query, locale);
+            } else {
+                analysisResult = getOpenAIAnalysis(query, locale);
+            }
 
             if (analysisResult == null)
                 return results;
@@ -665,7 +671,14 @@ public class search extends AbstractApplication {
     private Builder getOpenAIAnalysis(String query, Locale locale) throws Exception {
         // Prepare the request body
         Builder requestBuilder = new Builder();
-        requestBuilder.put("model", MODEL);
+        String model = getConfiguration().get("openai.model");
+        if (model == null || model.isEmpty()) {
+            model = getConfiguration().get("ai.model");
+        }
+        if (model == null || model.isEmpty()) {
+            model = MODEL;
+        }
+        requestBuilder.put("model", model);
 
         // Create prompt with language context
         String promptTemplate = "Given this Bible search query in %s: '%s'\n" +
@@ -708,7 +721,7 @@ public class search extends AbstractApplication {
         jsonResponse = jsonResponse.replaceAll("撒母耳记上", "撒母耳记（上）");
         jsonResponse = jsonResponse.replaceAll("撒母耳记下", "撒母耳记（下）");
         jsonResponse = jsonResponse.replaceAll("列王记上", "列王记（上）");
-        jsonResponse = jsonResponse.replaceAll("列王记上", "列王记（上）");
+        jsonResponse = jsonResponse.replaceAll("列王记下", "列王记（下）");
         jsonResponse = jsonResponse.replaceAll("历代志上", "历代志（上）");
         jsonResponse = jsonResponse.replaceAll("历代志下", "历代志（下）");
         try {
@@ -722,6 +735,113 @@ public class search extends AbstractApplication {
         }
 
         return null;
+    }
+
+    private Builder getGeminiAnalysis(String query, Locale locale) throws Exception {
+        // Prepare the request body
+        Builder requestBuilder = new Builder();
+
+        // Create prompt with language context
+        String promptTemplate = "Given this Bible search query in %s: '%s'\n" +
+                "Find the most relevant Bible verses and return them in this JSON format:\n" +
+                "{\n" +
+                "  \"verses\": [\n" +
+                "    {\n" +
+                "      \"book\": \"BookName\",\n" +
+                "      \"chapter\": ChapterNumber,\n" +
+                "      \"verse\": VerseNumber,\n" +
+                "      \"relevance\": RelevanceScore,\n" +
+                "      \"explanation\": \"Why this verse is relevant\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}\n" +
+                "Include up to 5 most relevant verses, but each item only one verse. Relevance score should be between 0 and 1.";
+
+        String prompt = String.format(promptTemplate, locale.getDisplayLanguage(), query);
+
+        // Gemini payload format: {"contents": [{"parts":[{"text": "..."}]}]}
+        Builders contents = new Builders();
+        Builder content = new Builder();
+        Builders parts = new Builders();
+        Builder part = new Builder();
+        part.put("text", prompt);
+        parts.add(part);
+        content.put("parts", parts);
+        contents.add(content);
+        requestBuilder.put("contents", contents);
+
+        // Make the API request
+        String model = getConfiguration().get("gemini.model");
+        if (model == null || model.isEmpty()) {
+            model = getConfiguration().get("ai.model");
+        }
+        if (model == null || model.isEmpty()) {
+            model = "gemini-2.0-flash";
+        }
+
+        String url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent";
+        String jsonResponse = makeGeminiRequest(url, requestBuilder.toString());
+
+        jsonResponse = processAIResponse(jsonResponse);
+        jsonResponse = jsonResponse.replaceAll("\\\\n", "\n");
+        jsonResponse = jsonResponse.replaceAll("\\\\", "");
+        jsonResponse = jsonResponse.replaceAll("撒母耳记上", "撒母耳记（上）");
+        jsonResponse = jsonResponse.replaceAll("撒母耳记下", "撒母耳记（下）");
+        jsonResponse = jsonResponse.replaceAll("列王记上", "列王记（上）");
+        jsonResponse = jsonResponse.replaceAll("列王记下", "列王记（下）");
+        jsonResponse = jsonResponse.replaceAll("历代志上", "历代志（上）");
+        jsonResponse = jsonResponse.replaceAll("历代志下", "历代志（下）");
+        try {
+            // Parse the JSON response
+            Builder resultBuilder = new Builder();
+            resultBuilder.parse(jsonResponse);
+
+            return resultBuilder;
+        } catch (ApplicationException e) {
+            logger.severe(e.getMessage() + ":\n" + jsonResponse);
+        }
+
+        return null;
+    }
+
+    private String makeGeminiRequest(String urlString, String requestBody) throws Exception {
+        URL url = new URL(urlString);
+        URLRequest request = new URLRequest(url);
+
+        String GEMINI_API_KEY = getConfiguration().get("gemini.api_key");
+
+        // Set headers
+        request.setHeader("Content-Type", "application/json");
+        request.setHeader("x-goog-api-key", GEMINI_API_KEY);
+
+        // Set request method and body
+        request.setMethod("POST");
+        request.setBody(requestBody);
+
+        URLHandler handler = URLHandlerFactory.getHandler(url);
+        // Make the request
+        URLResponse response = handler.handleRequest(request);
+
+        if (response.getStatusCode() != 200) {
+            throw new ApplicationException(response.getBody());
+        }
+
+        // Parse JSON response using Builder
+        Builder responseBuilder = new Builder();
+        responseBuilder.parse(response.getBody());
+
+        // Extract text content from candidates array
+        Builders candidates = (Builders) responseBuilder.get("candidates");
+        if (candidates != null && !candidates.isEmpty()) {
+            Builder firstCandidate = candidates.get(0);
+            Builder content = (Builder) firstCandidate.get("content");
+            Builders parts = (Builders) content.get("parts");
+            if (parts != null && !parts.isEmpty()) {
+                return parts.get(0).get("text").toString().trim();
+            }
+        }
+
+        throw new ApplicationException("No text content found in Gemini response");
     }
 
     private String makeOpenAIRequest(String urlString, String requestBody) throws Exception {
