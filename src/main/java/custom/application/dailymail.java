@@ -8,7 +8,6 @@ import org.tinystruct.data.DatabaseOperator;
 import org.tinystruct.data.component.Row;
 import org.tinystruct.data.component.Table;
 import org.tinystruct.mail.SimpleMail;
-import org.tinystruct.system.ApplicationManager;
 import org.tinystruct.system.Event;
 import org.tinystruct.system.EventDispatcher;
 import org.tinystruct.system.Resource;
@@ -28,19 +27,25 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class dailymail extends AbstractApplication {
 
-    private volatile Scheduler scheduler;
-    private suggestion suggestion;
-    private final AtomicBoolean isTaskRunning = new AtomicBoolean(false);
-    private final AtomicBoolean shouldContinue = new AtomicBoolean(true);
-    private final Lock taskLock = Watcher.getInstance().acquire();
+    private static Scheduler scheduler;
+    private static suggestion suggestion;
+    private static final AtomicBoolean isTaskRunning = new AtomicBoolean(false);
+    private static final AtomicBoolean shouldContinue = new AtomicBoolean(true);
+    private static final Lock taskLock = Watcher.getInstance().acquire();
+    private static final AtomicBoolean initialized = new AtomicBoolean(false);
+    private static final AtomicBoolean isScheduled = new AtomicBoolean(false);
 
     @Action("start")
     public void start() {
-        TimeIterator iterator = new TimeIterator(00, 00, 00);
+        if (!isScheduled.compareAndSet(false, true)) {
+            return;
+        }
+
+        TimeIterator iterator = new TimeIterator(0, 0, 0);
         iterator.setInterval(3600 * 24);
         this.getConfiguration().getOrDefault("default.base_url", "https://www.ingod.today/?q=");
 
-        this.scheduler.schedule(new SchedulerTask() {
+        scheduler.schedule(new SchedulerTask() {
             @Override
             public void cancel() {
                 shouldContinue.set(false);
@@ -288,7 +293,11 @@ public class dailymail extends AbstractApplication {
 
     @Override
     public void init() {
-        this.scheduler = new Scheduler(true);
+        if (!initialized.compareAndSet(false, true)) {
+            return;
+        }
+
+        scheduler = new Scheduler(true);
 
         suggestion = new suggestion();
         suggestion.setEmail("services@ingod.today");
@@ -371,13 +380,5 @@ public class dailymail extends AbstractApplication {
         public suggestion getPayload() {
             return this.suggestion;
         }
-    }
-
-    public static void main(String[] args) throws ApplicationException {
-        dailymail mailing = new dailymail();
-        ApplicationManager.init();
-        ApplicationManager.install(mailing);
-        mailing.setLocale(Locale.US);
-        mailing.loadBible();
     }
 }
