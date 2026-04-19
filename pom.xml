@@ -12,12 +12,12 @@
         <dependency>
             <groupId>org.tinystruct</groupId>
             <artifactId>tinystruct</artifactId>
-            <version>1.7.17</version>
+            <version>1.7.20</version>
         </dependency>
         <dependency>
             <groupId>org.tinystruct</groupId>
-            <artifactId>tinystruct-tomcat-server</artifactId>
-            <version>1.0.6</version>
+            <artifactId>tinystruct-netty-http-server</artifactId>
+            <version>1.1.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
         <dependency>
