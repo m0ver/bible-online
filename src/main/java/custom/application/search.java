@@ -511,9 +511,6 @@ public class search extends AbstractApplication {
                         .append(this.setText("search.bible.info", bookName, chapterId, partId))
                         .append("</a>")
                         .append("<p>").append(content).append("</p>")
-                        .append("<div class=\"relevance\">")
-                        .append("Relevance Score: ").append(String.format("%.2f", relevance))
-                        .append("</div>")
                         .append("<div class=\"explanation\">").append(explanation).append("</div>")
                         .append("</li>\r\n");
 
@@ -742,7 +739,7 @@ public class search extends AbstractApplication {
         Builder requestBuilder = new Builder();
 
         // Create prompt with language context
-        String promptTemplate = "Given this Bible search query in %s: '%s'\n" +
+        String promptTemplate = "Given this Bible search query: '%s'\n" +
                 "Find the most relevant Bible verses and return them in this JSON format:\n" +
                 "{\n" +
                 "  \"verses\": [\n" +
@@ -755,9 +752,9 @@ public class search extends AbstractApplication {
                 "    }\n" +
                 "  ]\n" +
                 "}\n" +
-                "Include up to 5 most relevant verses, but each item only one verse. Relevance score should be between 0 and 1.";
+                "Include up to 5 most relevant verses, but each item only one verse. Relevance score should be between 0 and 1. But return it in %s.";
 
-        String prompt = String.format(promptTemplate, locale.getDisplayLanguage(), query);
+        String prompt = String.format(promptTemplate, query, locale.getDisplayLanguage());
 
         // Gemini payload format: {"contents": [{"parts":[{"text": "..."}]}]}
         Builders contents = new Builders();
@@ -776,7 +773,7 @@ public class search extends AbstractApplication {
             model = getConfiguration().get("ai.model");
         }
         if (model == null || model.isEmpty()) {
-            model = "gemini-2.0-flash";
+            model = "gemini-flash-latest";
         }
 
         String url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent";

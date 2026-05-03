@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  *   GET  /api/gemini/models           → list available models
  *
  * The Gemini API key is read from application.properties as {@code gemini.api.key}.
- * The model name defaults to {@code gemini-2.0-flash} but can be overridden per-request
+ * The model name defaults to {@code gemini-flash-latest} but can be overridden per-request
  * by including a {@code "model"} field in the JSON body.
  */
 public class GeminiApplication extends AbstractApplication {
@@ -34,7 +34,7 @@ public class GeminiApplication extends AbstractApplication {
 
     private static final String GEMINI_BASE_URL =
             "https://generativelanguage.googleapis.com/v1beta/models";
-    private static final String DEFAULT_MODEL = "gemini-2.0-flash";
+    private static final String DEFAULT_MODEL = "gemini-flash-latest";
     private static final int CONNECT_TIMEOUT_MS = 10_000;
     private static final int READ_TIMEOUT_MS    = 60_000;
 
@@ -47,7 +47,7 @@ public class GeminiApplication extends AbstractApplication {
     @Override
     public void init() {
         this.geminiApiKey = this.getConfiguration().get("gemini.api.key");
-        if (this.geminiApiKey == null || this.geminiApiKey.isBlank()) {
+        if (this.geminiApiKey == null || this.geminiApiKey.isEmpty()) {
             logger.warning("gemini.api.key is not configured in application.properties");
         }
         this.setTemplateRequired(false);
@@ -237,7 +237,7 @@ public class GeminiApplication extends AbstractApplication {
         req.setHeader("Content-Type", "application/json");
         req.setHeader("x-goog-api-key", geminiApiKey);
 
-        if (jsonBody != null && !jsonBody.isBlank()) {
+        if (jsonBody != null && !jsonBody.isEmpty()) {
             req.setBody(jsonBody);
         }
 
@@ -302,7 +302,7 @@ public class GeminiApplication extends AbstractApplication {
 
     /** Ensures the API key is configured; returns an error response and throws if missing. */
     private void requireApiKey(Response<?, ?> response) throws ApplicationException {
-        if (geminiApiKey == null || geminiApiKey.isBlank()) {
+        if (geminiApiKey == null || geminiApiKey.isEmpty()) {
             errorResponse(response, "Gemini API key is not configured on the server",
                     ResponseStatus.INTERNAL_SERVER_ERROR);
             throw new ApplicationException("gemini.api.key not configured");
