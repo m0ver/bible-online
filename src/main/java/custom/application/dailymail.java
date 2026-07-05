@@ -35,6 +35,7 @@ public class dailymail extends AbstractApplication {
     private static final AtomicBoolean initialized = new AtomicBoolean(false);
     private static final AtomicBoolean isScheduled = new AtomicBoolean(false);
 
+
     @Action("start")
     public void start() {
         if (!isScheduled.compareAndSet(false, true)) {
@@ -240,12 +241,18 @@ public class dailymail extends AbstractApplication {
                             + Resource.getInstance(locale).getLocaleString("mail.footer.unsubscribe.link.text")
                             + "</a>" + (lang.contains("zh") ? "\u3002" : ".");
 
+                    // Skip if this email has already been sent today (DB check)
+                    if (isEmailSentToday(s.getEmail())) {
+                        continue;
+                    }
                     themail.setBody("<div style=\"background-color:#f5f5f5;text-align:justify\">" + content
                             + "<div style=\"padding:10px;font-size:12px;color:#ccc;\">" + footerContent
                             + "</div></div>");
                     themail.setTo(s.getEmail());
                     try {
                         themail.send();
+                        // Record successful send in DB
+                        recordEmailSent(s.getEmail());
                     } catch (ApplicationException e) {
                         s.update();
                     }
@@ -297,6 +304,21 @@ public class dailymail extends AbstractApplication {
             return;
         }
 
+        try (DatabaseOperator operator = new DatabaseOperator()) {
+            operator.disableSafeCheck();
+            String sql = "CREATE TABLE IF NOT EXISTS email_sent_log (" +
+                    "id INT AUTO_INCREMENT PRIMARY KEY, " +
+                    "email VARCHAR(255) NOT NULL, " +
+                    "send_date DATETIME NOT NULL, " +
+                    "INDEX idx_email_date (email, send_date)" +
+                    ")";
+            try (PreparedStatement stmt = operator.preparedStatement(sql, new Object[]{})) {
+                stmt.execute();
+            }
+        } catch (ApplicationException | SQLException e) {
+            System.err.println("Error initializing email_sent_log table: " + e.getMessage());
+        }
+
         scheduler = new Scheduler(true);
 
         suggestion = new suggestion();
@@ -344,6 +366,44 @@ public class dailymail extends AbstractApplication {
 
     public String version() {
         return null;
+    }
+
+    /**
+     * Checks if an email has already been sent today.
+     */
+    private boolean isEmailSentToday(String email) {
+        try (DatabaseOperator operator = new DatabaseOperator()) {
+            operator.disableSafeCheck();
+            String sql = "SELECT COUNT(*) AS cnt FROM email_sent_log WHERE email = ? AND DATE(send_date) = CURDATE()";
+            try (PreparedStatement stmt = operator.preparedStatement(sql, new Object[]{email});
+                 ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("cnt") > 0;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error checking email sent status: " + e.getMessage());
+        } catch (ApplicationException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    /**
+     * Records that an email was sent.
+     */
+    private void recordEmailSent(String email) {
+        try (DatabaseOperator operator = new DatabaseOperator()) {
+            operator.disableSafeCheck();
+            String sql = "INSERT INTO email_sent_log (email, send_date) VALUES (?, ?)";
+            try (PreparedStatement stmt = operator.preparedStatement(sql, new Object[]{email, new java.util.Date()})) {
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error recording email sent: " + e.getMessage());
+        } catch (ApplicationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static class DailyMailStartEvent implements Event<suggestion> {
