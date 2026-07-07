@@ -306,13 +306,17 @@ public class dailymail extends AbstractApplication {
 
         try (DatabaseOperator operator = new DatabaseOperator()) {
             operator.disableSafeCheck();
-            String sql = "CREATE TABLE IF NOT EXISTS email_sent_log (" +
-                    "id INT AUTO_INCREMENT PRIMARY KEY, " +
+            String createTableSql = "CREATE TABLE IF NOT EXISTS email_sent_log (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "email VARCHAR(255) NOT NULL, " +
-                    "send_date DATETIME NOT NULL, " +
-                    "INDEX idx_email_date (email, send_date)" +
+                    "send_date DATETIME NOT NULL" +
                     ")";
-            try (PreparedStatement stmt = operator.preparedStatement(sql, new Object[]{})) {
+            try (PreparedStatement stmt = operator.preparedStatement(createTableSql, new Object[]{})) {
+                stmt.execute();
+            }
+            
+            String createIndexSql = "CREATE INDEX IF NOT EXISTS idx_email_date ON email_sent_log (email, send_date)";
+            try (PreparedStatement stmt = operator.preparedStatement(createIndexSql, new Object[]{})) {
                 stmt.execute();
             }
         } catch (ApplicationException | SQLException e) {
@@ -374,7 +378,7 @@ public class dailymail extends AbstractApplication {
     private boolean isEmailSentToday(String email) {
         try (DatabaseOperator operator = new DatabaseOperator()) {
             operator.disableSafeCheck();
-            String sql = "SELECT COUNT(*) AS cnt FROM email_sent_log WHERE email = ? AND DATE(send_date) = CURDATE()";
+            String sql = "SELECT COUNT(*) AS cnt FROM email_sent_log WHERE email = ? AND send_date = CURRENT_DATE";
             try (PreparedStatement stmt = operator.preparedStatement(sql, new Object[]{email});
                  ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -395,8 +399,8 @@ public class dailymail extends AbstractApplication {
     private void recordEmailSent(String email) {
         try (DatabaseOperator operator = new DatabaseOperator()) {
             operator.disableSafeCheck();
-            String sql = "INSERT INTO email_sent_log (email, send_date) VALUES (?, ?)";
-            try (PreparedStatement stmt = operator.preparedStatement(sql, new Object[]{email, new java.util.Date()})) {
+            String sql = "INSERT INTO email_sent_log (email, send_date) VALUES (?, CURRENT_DATE)";
+            try (PreparedStatement stmt = operator.preparedStatement(sql, new Object[]{email})) {
                 stmt.executeUpdate();
             }
         } catch (SQLException e) {
