@@ -300,6 +300,7 @@ public class dailymail extends AbstractApplication {
 
     @Override
     public void init() {
+        this.setTemplateRequired(false);
         if (!initialized.compareAndSet(false, true)) {
             return;
         }
