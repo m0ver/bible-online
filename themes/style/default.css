@@ -734,8 +734,7 @@ p.summary {
 }
 
 #documentation ol li {
-	/*display: inline;*/
-
+	display: inline;
 }
 
 .sub {
