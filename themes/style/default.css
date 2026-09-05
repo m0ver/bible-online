@@ -1625,11 +1625,13 @@ body.sidebar-hidden .sidebar-toggle-btn:hover {
 }
 
 /* Paragraph separation */
-#documentation .column li.paragraph-start {
+#documentation .column li.paragraph-start::before {
+	content: "";
+	display: block;
 	margin-top: 0.8em;
 }
 
-#documentation .column li.paragraph-start:first-child {
+#documentation .column li.paragraph-start:first-child::before {
 	margin-top: 0;
 }
 
@@ -1658,6 +1660,6 @@ body.hide-pericopes .pericope-header {
 	display: none !important;
 }
 
-body.hide-pericopes #documentation .column li.paragraph-start {
+body.hide-pericopes #documentation .column li.paragraph-start::before {
 	margin-top: 0.4em;
 }
