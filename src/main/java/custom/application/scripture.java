@@ -17,6 +17,7 @@ package custom.application;
 
 import custom.objects.User;
 import custom.objects.bible;
+import custom.objects.bible_section;
 import custom.objects.book;
 import org.tinystruct.AbstractApplication;
 import org.tinystruct.ApplicationException;
@@ -222,11 +223,13 @@ public class scripture extends AbstractApplication {
 
         String host = String.valueOf(getContext().getAttribute("HTTP_HOST"));
         // remove the default language for action
-        this.setVariable("action", host.substring(0, host.lastIndexOf("/")) + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
-        this.setVariable("base_url", String.valueOf(getContext().getAttribute("HTTP_HOST")));
+        int lastSlash = host.lastIndexOf("/");
+        String actionBase = lastSlash != -1 ? host.substring(0, lastSlash) : host;
+        this.setVariable("action", actionBase + "/?q=" + getContext().getAttribute("REQUEST_PATH").toString());
+        this.setVariable("base_url", host);
 
-        Session session = request.getSession(); //@TODO
-        if (session.getAttribute("usr") != null) {
+        Session session = request != null ? request.getSession() : null;
+        if (session != null && session.getAttribute("usr") != null) {
             User usr = (User) session.getAttribute("usr");
 
             this.setVariable("user.status", "");
@@ -281,7 +284,7 @@ public class scripture extends AbstractApplication {
             this.setVariable("language.switch", "<a href=\"?lang=en-US&version=NIV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">NIV</a> | <a href=\"?lang=en-GB&version=ESV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">ESV</a> | <a href=\"?lang=en-GB&version=KJV&q=bible/" + bookId + "/" + chapterId + "/" + partId + "#up\">KJV</a>");
         }
 
-        if (request.getParameter("version") != null && !request.getParameter("version").isEmpty()) {
+        if (request != null && request.getParameter("version") != null && !request.getParameter("version").isEmpty()) {
             switch (request.getParameter("version")) {
                 case "NIV":
                     bible.setTableName("NIV");
@@ -312,6 +315,21 @@ public class scripture extends AbstractApplication {
         StringBuilder left_column = new StringBuilder();
         String line;
 
+        // Query sections/headings for this book and chapter
+        Map<Integer, bible_section> sectionMap = new HashMap<>();
+        try {
+            bible_section sectionQuery = new bible_section();
+            String sectionWhere = "WHERE book_id=? AND chapter_id=? AND (language=? OR language=?) ORDER BY part_id";
+            Table sectionTable = sectionQuery.setRequestFields("*").findWith(sectionWhere, new Object[]{bookId, chapterId, lang, this.getLocale().toString()});
+            for (Row row : sectionTable) {
+                bible_section sec = new bible_section();
+                sec.setData(row);
+                sectionMap.put(sec.getPartId(), sec);
+            }
+        } catch (Exception e) {
+            // Ignore if section lookup fails
+        }
+
         if (count > 0) {
             int i;
 
@@ -329,8 +347,26 @@ public class scripture extends AbstractApplication {
                                 + "</span>" + line.substring(1);
 
                     line = line.replaceAll("\n\n", "<br />");
-                    left_column.append("<li").append(partId == bible.getPartId() ? " class=\"selected\""
-                            : "").append("><a class=\"sup\" onmousedown=\"rightMenu.show(event,'").append(bible.getId()).append("')\">").append(bible.getPartId()).append("</a>").append(line).append("</li>");
+
+                    bible_section currentSection = sectionMap.get(bible.getPartId());
+                    StringBuilder sectionHeaderHtml = new StringBuilder();
+                    if (currentSection != null && currentSection.getTitle() != null && !currentSection.getTitle().isEmpty()) {
+                        sectionHeaderHtml.append("<div class=\"pericope-header\">");
+                        sectionHeaderHtml.append("<h3 class=\"pericope-title\">").append(currentSection.getTitle()).append("</h3>");
+                        if (currentSection.getParallelRef() != null && !currentSection.getParallelRef().trim().isEmpty()) {
+                            sectionHeaderHtml.append("<span class=\"parallel-ref\">(").append(currentSection.getParallelRef()).append(")</span>");
+                        }
+                        sectionHeaderHtml.append("</div>");
+                    }
+
+                    boolean isParagraphStart = currentSection != null && currentSection.getIsParagraph() == 1;
+
+                    left_column.append("<li").append(partId == bible.getPartId() ? " class=\"selected" + (isParagraphStart ? " paragraph-start" : "") + "\""
+                            : (isParagraphStart ? " class=\"paragraph-start\"" : "")).append(">");
+                    if (sectionHeaderHtml.length() > 0) {
+                        left_column.append(sectionHeaderHtml);
+                    }
+                    left_column.append("<a class=\"sup\" onmousedown=\"rightMenu.show(event,'").append(bible.getId()).append("')\">").append(bible.getPartId()).append("</a>").append(line).append("</li>");
                 }
 
             }

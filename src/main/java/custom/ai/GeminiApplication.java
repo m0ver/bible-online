@@ -48,7 +48,10 @@ public class GeminiApplication extends AbstractApplication {
     public void init() {
         this.geminiApiKey = this.getConfiguration().get("gemini.api.key");
         if (this.geminiApiKey == null || this.geminiApiKey.isEmpty()) {
-            logger.warning("gemini.api.key is not configured in application.properties");
+            this.geminiApiKey = this.getConfiguration().get("gemini.api_key");
+        }
+        if (this.geminiApiKey == null || this.geminiApiKey.isEmpty()) {
+            logger.warning("Gemini API key is not configured in application.properties");
         }
         this.setTemplateRequired(false);
     }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapping>
+ <class name="bible_section" table="bible_section">
+  <id name="Id" column="id" increment="true" generate="false" length="11" type="int"/>
+  <property name="version" column="version" length="20" type="varchar"/>
+  <property name="language" column="language" length="20" type="varchar"/>
+  <property name="bookId" column="book_id" length="4" type="int"/>
+  <property name="chapterId" column="chapter_id" length="4" type="int"/>
+  <property name="partId" column="part_id" length="4" type="int"/>
+  <property name="title" column="title" length="255" type="varchar"/>
+  <property name="parallelRef" column="parallel_ref" length="255" type="varchar"/>
+  <property name="isParagraph" column="is_paragraph" length="4" type="int"/>
+ </class>
+</mapping>

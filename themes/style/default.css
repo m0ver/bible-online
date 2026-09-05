@@ -1482,3 +1482,77 @@ body.sidebar-hidden .sidebar-toggle-btn:hover {
     }
 }
 
+/* ==========================================================================
+   Pericope Headings & Paragraph Styles (BibleGateway Style)
+   ========================================================================== */
+
+.pericope-header {
+    display: block;
+    margin: 1.4em 0 0.6em 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    break-after: avoid;
+    -webkit-column-break-after: avoid;
+    page-break-after: avoid;
+    clear: both;
+}
+
+.pericope-title {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    display: inline-block;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+}
+
+.parallel-ref {
+    display: inline-block;
+    font-size: 0.85em;
+    color: #7f8c8d;
+    margin-left: 8px;
+    font-weight: normal;
+    font-style: italic;
+    letter-spacing: normal;
+}
+
+/* Paragraph separation */
+#documentation .column li.paragraph-start {
+    margin-top: 0.8em;
+}
+
+#documentation .column li.paragraph-start:first-child {
+    margin-top: 0;
+}
+
+/* Headings Toggle Control */
+.heading-toggle-link {
+    cursor: pointer;
+    font-size: 0.9em;
+    color: #34495e;
+    text-decoration: none;
+    padding: 2px 6px;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+    background-color: #f8f9fa;
+    transition: all 0.2s ease;
+    margin-left: 6px;
+    display: inline-block;
+}
+
+.heading-toggle-link:hover {
+    background-color: #e9ecef;
+    color: #1a252f;
+}
+
+/* When headings are hidden */
+body.hide-pericopes .pericope-header {
+    display: none !important;
+}
+
+body.hide-pericopes #documentation .column li.paragraph-start {
+    margin-top: 0.4em;
+}
+
+
