@@ -1,24 +1,62 @@
 /* The Reset ---------------------------------- */
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,table,th,td
-	{
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+p,
+blockquote,
+table,
+th,
+td {
 	margin: 0;
 	padding: 0;
 }
 
-fieldset,img,abbr {
+fieldset,
+img,
+abbr {
 	border: 0;
 }
 
-address,caption,cite,code,dfn,em,h1,h2,h3,h4,h5,h6,th,var {
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+var {
 	font-style: normal;
 	font-weight: normal;
 }
 
-caption,th {
+caption,
+th {
 	text-align: left;
 }
 
-q:before,q:after {
+q:before,
+q:after {
 	content: '';
 }
 
@@ -30,12 +68,12 @@ hr {
 body {
 	font-size: 92.5%;
 	background: #fff;
-	font-family: "Times New Roman",'Microsoft Yahei',sans-serif, Verdana, Arial, "Lucida Grande",
+	font-family: "Times New Roman", 'Microsoft Yahei', sans-serif, Verdana, Arial, "Lucida Grande",
 		"Bitstream Vera Sans";
 	line-height: 2.2em;
 	color: #555;
 	padding-bottom: 2.0em;
-/* 	transform: scale(1.3, 1.3);
+	/* 	transform: scale(1.3, 1.3);
     transform-origin: left top 0; */
 }
 
@@ -80,7 +118,8 @@ strong {
 	font-weight: bold;
 }
 
-em,cite {
+em,
+cite {
 	font-style: italic;
 }
 
@@ -95,7 +134,7 @@ em,cite {
 
 #header {
 	/*background: url("/themes/images/candle.png") no-repeat scroll right center / 15% auto #464646;*/
-	background:url("/themes/images/banner.jpg") repeat-x scroll 0 50% #464646;
+	background: url("/themes/images/banner.jpg") repeat-x scroll 0 50% #464646;
 	padding: 0 3em;
 }
 
@@ -106,10 +145,10 @@ em,cite {
 
 #header h1 a {
 	background: url("../images/logo.png") no-repeat scroll left center / 32% auto transparent;
-    display: block;
-    height: 5.6em;
-    text-indent: -9999px;
-    transition: all 3s ease 0s;
+	display: block;
+	height: 5.6em;
+	text-indent: -9999px;
+	transition: all 3s ease 0s;
 	-webkit-transition: all 3s;
 	-moz-transition: all 3s;
 	-o-transition: all 3s;
@@ -147,7 +186,8 @@ em,cite {
 	color: #fff;
 }
 
-#header ul li a.current,#header ul li#download a.current {
+#header ul li a.current,
+#header ul li#download a.current {
 	color: #555;
 	background: #ffffff;
 	-moz-border-radius-topleft: 0.3em;
@@ -162,8 +202,7 @@ em,cite {
 }
 
 #header ul li#download a {
-	background: #d54e21 url(../images/download-tab-bg.png) bottom left
-		repeat-x;
+	background: #d54e21 url(../images/download-tab-bg.png) bottom left repeat-x;
 	color: #fff;
 	-moz-border-radius-topleft: 0.3em;
 	-khtml-border-top-left-radius: 0.3em;
@@ -208,7 +247,8 @@ em,cite {
 	border-radius: 0.3em;
 }
 
-a.download-button span,a.download-button:hover {
+a.download-button span,
+a.download-button:hover {
 	color: #ffac90;
 }
 
@@ -268,11 +308,15 @@ button {
 	height: 2.4em;
 }
 
-.text:hover,.text:focus,select:hover,select:focus {
+.text:hover,
+.text:focus,
+select:hover,
+select:focus {
 	border-color: #80b5d0;
 }
 
-.button,.button-secondary {
+.button,
+.button-secondary {
 	cursor: pointer;
 	color: #246;
 	background: #e5e5e5;
@@ -306,7 +350,8 @@ p.button {
 	border-color: #80b5d0;
 }
 
-.button:hover,.button-secondary:hover {
+.button:hover,
+.button-secondary:hover {
 	color: #d54e21;
 }
 
@@ -347,8 +392,8 @@ p.button {
 }
 
 #headline .container {
-    float: none;
-    padding: 1em 0;
+	float: none;
+	padding: 1em 0;
 }
 
 #pagebody {
@@ -356,17 +401,19 @@ p.button {
 }
 
 #pagebody .standard {
-	font-size:1.4em;
+	font-size: 1.4em;
 }
 
-#pagebody .submenu,#pagebody #submenu {
+#pagebody .submenu,
+#pagebody #submenu {
 	margin-left: 0;
 	margin-top: -0.2em;
 	font-size: 1em;
 	list-style: none;
 }
 
-#pagebody .submenu a#subcurrent,#pagebody #submenu a#subcurrent {
+#pagebody .submenu a#subcurrent,
+#pagebody #submenu a#subcurrent {
 	color: #333;
 	cursor: default;
 }
@@ -399,7 +446,9 @@ p.button {
 	padding-bottom: 0.2em;
 }
 
-#pagebody p,#pagebody ol,#pagebody ul {
+#pagebody p,
+#pagebody ol,
+#pagebody ul {
 	margin: 0.5em 0 0.5em 0;
 }
 
@@ -412,9 +461,7 @@ p.button {
 	color: #F55912;
 }
 
-#pagebody ol.searchresults li.odd {
-	
-}
+#pagebody ol.searchresults li.odd {}
 
 #pagebody ol.searchresults li.even {
 	background: #f5f5f5;
@@ -435,8 +482,8 @@ p.button {
 }
 
 #pagebody ol.menu {
-    list-style-position: inside;
-    width: 300px;
+	list-style-position: inside;
+	width: 300px;
 }
 
 #pagebody ul {
@@ -470,11 +517,12 @@ a.rsslink {
 }
 
 .sidebar label {
-	clear:both;
+	clear: both;
 }
 
-#old_book, #new_book {
-  width:7.5em;
+#old_book,
+#new_book {
+	width: 7.5em;
 }
 
 #pagebody #sitesearch input#keyword.text {
@@ -546,11 +594,12 @@ blockquote {
 .info {
 	padding: 0.5em;
 	padding-left: 1em;
-    background-color: #e3f6e9;
-    border: 1px solid #0ba51f;
+	background-color: #e3f6e9;
+	border: 1px solid #0ba51f;
 }
 
-.wrap,.updated {
+.wrap,
+.updated {
 	padding: 0.5em;
 	padding-left: 1em;
 	background-color: #e4f2fd;
@@ -579,9 +628,9 @@ textarea {
 	border: 1px solid #bdc7d8;
 	width: 13.5em;
 	padding: 0.3em;
-	font-family: "Times New Roman",'Microsoft Yahei',sans-serif, Verdana, Arial, "Lucida Grande", "Bitstream Vera Sans";
+	font-family: "Times New Roman", 'Microsoft Yahei', sans-serif, Verdana, Arial, "Lucida Grande", "Bitstream Vera Sans";
 	color: #555555;
-    font-size: 0.9em;
+	font-size: 0.9em;
 }
 
 select {
@@ -595,9 +644,9 @@ select {
 }
 
 .selected {
-    border-bottom: 1px dotted #000;
-    color: #0000ff;
-    margin-bottom: -1px;
+	border-bottom: 1px dotted #000;
+	color: #0000ff;
+	margin-bottom: -1px;
 }
 
 .line {
@@ -621,7 +670,8 @@ a.clear-fix {
 	margin: 0 auto;
 }
 
-#documentation,p.summary {
+#documentation,
+p.summary {
 	padding-top: 1em;
 	padding-bottom: 1em;
 	/*text-indent: 2.4em;*/
@@ -638,6 +688,7 @@ a.clear-fix {
 	float: none;
 	width: auto;
 }
+
 #documentation .column ol {
 	/* Multi-column layout applied to the list so items flow across columns */
 	-webkit-column-count: 3;
@@ -647,6 +698,7 @@ a.clear-fix {
 	-moz-column-gap: 2rem;
 	column-gap: 2rem;
 }
+
 #documentation .column li {
 	/* Prevent awkward splits across columns */
 	break-inside: avoid;
@@ -657,10 +709,19 @@ a.clear-fix {
 
 /* Responsive column counts */
 @media only screen and (max-width: 1200px) {
-	#documentation .column ol { -webkit-column-count: 2; -moz-column-count: 2; column-count: 2; }
+	#documentation .column ol {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		column-count: 2;
+	}
 }
+
 @media only screen and (max-width: 959px) {
-	#documentation .column ol { -webkit-column-count: 1; -moz-column-count: 1; column-count: 1; }
+	#documentation .column ol {
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+		column-count: 1;
+	}
 }
 
 /*
@@ -672,8 +733,9 @@ a.clear-fix {
 	list-style: none;
 }
 
-#documentation ol li { /*display: inline;*/
-	
+#documentation ol li {
+	/*display: inline;*/
+
 }
 
 .sub {
@@ -693,12 +755,13 @@ ol li span.phonetic {
 	color: Blue;
 }
 
-ol li span.phrase,ol li span.phonetic {
+ol li span.phrase,
+ol li span.phonetic {
 	margin-right: 1.200em;
 }
 
 ol li span.interpretation {
-	display:block
+	display: block
 }
 
 #menu {
@@ -707,11 +770,12 @@ ol li span.interpretation {
 	border: 1px solid #c6d9e9;
 	display: block;
 	width: 11.5em;
-	filter: alpha(opacity =     95);
+	filter: alpha(opacity=95);
 	opacity: 0.95;
 }
 
-#dialog, #tdialog {
+#dialog,
+#tdialog {
 	position: absolute;
 	background: #e4f2fd;
 	border: 1px solid #c6d9e9;
@@ -729,7 +793,8 @@ ol li span.interpretation {
 	width: 100%;
 }
 
-#menu ul,#dialog ul {
+#menu ul,
+#dialog ul {
 	margin: 0px;
 	padding: 0px;
 }
@@ -739,7 +804,8 @@ ol li span.interpretation {
 	padding: 0px;
 }
 
-#dialog ul li, #tdialog ul li {
+#dialog ul li,
+#tdialog ul li {
 	list-style: none;
 	padding-left: 1em;
 	padding-right: 1em;
@@ -790,7 +856,8 @@ ol li span.interpretation {
 	border: 0px solid #ffffff;
 }
 
-#tab ul li a.current,#tab ul li#download a.current {
+#tab ul li a.current,
+#tab ul li#download a.current {
 	color: #555;
 	background: #e4f2fd;
 	-moz-border-radius-topleft: 0.3em;
@@ -831,8 +898,7 @@ div.line-space {
 }
 
 a.download-link {
-	background: url("../images/download-button.png") no-repeat scroll -0.4em 0
-		transparent;
+	background: url("../images/download-button.png") no-repeat scroll -0.4em 0 transparent;
 	color: #09700B;
 	display: block;
 	height: 6.3em;
@@ -841,8 +907,7 @@ a.download-link {
 }
 
 * html a.download-link {
-	background: url("../images/download-button-ie.png") no-repeat scroll 0 0
-		transparent;
+	background: url("../images/download-button-ie.png") no-repeat scroll 0 0 transparent;
 }
 
 a.download-link:hover {
@@ -926,11 +991,13 @@ ul.testament li ol li {
 }
 
 .container {
-	float:right;width:74%;
+	float: right;
+	width: 74%;
 	font-size: 1.4em;
 }
+
 .sidebar {
-	float:left;
+	float: left;
 	font-size: 1.4em;
 }
 
@@ -939,547 +1006,588 @@ ul.testament li ol li {
 }
 
 .col-12 {
-	font-size:1.4em;
+	font-size: 1.4em;
 }
 
 .gallery {
-    background: url("/themes/images/last-dinner.png") no-repeat scroll 0 50%;
-        background-size: auto;
-    height: 20em;
-    margin-bottom: 0.5em;
-    background-size: 100%;
+	background: url("/themes/images/last-dinner.png") no-repeat scroll 0 50%;
+	background-size: auto;
+	height: 20em;
+	margin-bottom: 0.5em;
+	background-size: 100%;
 }
 
 /* Mobile and iPad Portrait */
 @media only screen and (max-width: 1200px) {
-    .container {
-		float:right;width:70%;
+	.container {
+		float: right;
+		width: 70%;
 	}
+
 	.sidebar {
-		float:left
+		float: left
 	}
 }
 
 /* Mobile and iPad Portrait */
 @media only screen and (max-width: 1100px) {
-    .container {
-		float:right;width:67%;
+	.container {
+		float: right;
+		width: 67%;
 	}
+
 	.sidebar {
-		float:left
+		float: left
 	}
 }
 
 /* Mobile and iPad Portrait */
 @media only screen and (max-width: 980px) {
-    .container {
-		float:right;width:65%;
+	.container {
+		float: right;
+		width: 65%;
 	}
+
 	.sidebar {
-		float:left
+		float: left
 	}
 }
 
 /* Mobile and iPad Portrait */
 @media only screen and (max-width: 959px) {
-    .container {
-		float:none;width:auto;
+	.container {
+		float: none;
+		width: auto;
 	}
+
 	.sidebar {
-		float:none
+		float: none
 	}
 }
 
 /* Mobile Landscape and Portrait */
 @media only screen and (max-width: 767px) {
-    #header {
-    	background: #770707;
-    }
-    #headline h2, #header ul { display: none; }
-    #header .wrapper, #header h1 a {
-    	height:7.5em;
-    }
-    
-    #header h1 a {
-    	height:3.7em;
-    	background:url("../images/logo-small.png") no-repeat scroll left center transparent;
-    }
-    
-    #header .welcome a { color: #fff; }
-    #header .welcome {
-	    padding: 1.300em 0;
-	    position: absolute;
-	    right: 0;
-	    top: 0;
+	#header {
+		background: #770707;
 	}
-    
-    .open { display: block; }
-    
-    .container {
-		float:none;width:auto;
+
+	#headline h2,
+	#header ul {
+		display: none;
 	}
+
+	#header .wrapper,
+	#header h1 a {
+		height: 7.5em;
+	}
+
+	#header h1 a {
+		height: 3.7em;
+		background: url("../images/logo-small.png") no-repeat scroll left center transparent;
+	}
+
+	#header .welcome a {
+		color: #fff;
+	}
+
+	#header .welcome {
+		padding: 1.300em 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	.open {
+		display: block;
+	}
+
+	.container {
+		float: none;
+		width: auto;
+	}
+
 	.sidebar {
-		float:none
+		float: none
 	}
-    .text.glass {
-        width: 17.5em;
-        padding-left: 2.3em;
-        background-size: 6%;
-    }
-    textarea {
-        width: 19.8em;
-    }
+
+	.text.glass {
+		width: 17.5em;
+		padding-left: 2.3em;
+		background-size: 6%;
+	}
+
+	textarea {
+		width: 19.8em;
+	}
 }
 
 /* Mobile Portrait */
-/* for 480 px width screen */ 
-@media only screen and (max-width:480px) { 
-    #header .wrapper, #header h1 a {
-    	height: 4em;
-    }
-    #header {
-    	padding: 0 1.500em;
-    	position: fixed;
-    	top:0;
-    	width:100%;
-    	z-index: 1000; /* Ensure header stays on top */
-    }
-    #header .welcome {
-	    padding: 1em 0;
-	    position: absolute;
-	    right: 3em;
-	    top: 0;
-        font-size: 1.0em;
+/* for 480 px width screen */
+@media only screen and (max-width:480px) {
+
+	#header .wrapper,
+	#header h1 a {
+		height: 4em;
 	}
+
+	#header {
+		padding: 0 1.500em;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 1000;
+		/* Ensure header stays on top */
+	}
+
+	#header .welcome {
+		padding: 1em 0;
+		position: absolute;
+		right: 3em;
+		top: 0;
+		font-size: 1.0em;
+	}
+
 	#headline {
-	    margin-top: 4em;
-	    padding: 0 1.500em;
+		margin-top: 4em;
+		padding: 0 1.500em;
 	}
+
 	#pagebody {
-	    padding: 1em 1.500em;
-	    margin-top: 1em; /* Add margin to ensure content doesn't get covered */
+		padding: 1em 1.500em;
+		margin-top: 1em;
+		/* Add margin to ensure content doesn't get covered */
 	}
+
 	#footer {
-	    padding: 0 1.500em;
+		padding: 0 1.500em;
 	}
-    #header h1 a { 
-	    background:url("../images/favicon-b.png") no-repeat scroll left center / auto auto transparent; 
-	    height: 2em;
-    }
+
+	#header h1 a {
+		background: url("../images/favicon-b.png") no-repeat scroll left center / auto auto transparent;
+		height: 2em;
+	}
+
 	.container {
-		float:none;width:auto;
+		float: none;
+		width: auto;
 	}
+
 	.sidebar {
-		float:none
+		float: none
 	}
 }
 
 /* Search Styles */
 .search-container {
-    display: flex;
-    width: 100%;
-    max-width: 800px;
-    margin: 20px auto;
-    gap: 10px;
-    padding: 0 20px;
-    box-sizing: border-box;
+	display: flex;
+	width: 100%;
+	max-width: 800px;
+	margin: 20px auto;
+	gap: 10px;
+	padding: 0 20px;
+	box-sizing: border-box;
 }
 
 .search-input {
-    flex: 1;
-    min-width: 200px;
-    padding: 12px 20px;
-    font-size: 16px;
-    border: 2px solid #e4f2fd;
-    border-radius: 12px;
-    background: #fff url("data:image/svg+xml,%3Csvg focusable='false' height='24px' viewBox='0 0 24 24' width='24px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z' fill='%23ababab'%3E%3C/path%3E%3C/svg%3E") no-repeat 16px center;
-    padding-left: 50px;
-    transition: all 0.3s ease;
-    color: #555;
-    box-sizing: border-box;
+	flex: 1;
+	min-width: 200px;
+	padding: 12px 20px;
+	font-size: 16px;
+	border: 2px solid #e4f2fd;
+	border-radius: 12px;
+	background: #fff url("data:image/svg+xml,%3Csvg focusable='false' height='24px' viewBox='0 0 24 24' width='24px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z' fill='%23ababab'%3E%3C/path%3E%3C/svg%3E") no-repeat 16px center;
+	padding-left: 50px;
+	transition: all 0.3s ease;
+	color: #555;
+	box-sizing: border-box;
 }
 
 .search-input:focus {
-    outline: none;
-    border-color: #2583ad;
-    box-shadow: 0 0 5px rgba(37, 131, 173, 0.2);
+	outline: none;
+	border-color: #2583ad;
+	box-shadow: 0 0 5px rgba(37, 131, 173, 0.2);
 }
 
 .search-input::placeholder {
-    color: #999;
+	color: #999;
 }
 
 .search-button {
-    padding: 12px 30px;
-    font-size: 16px;
-    color: #fff;
-    background: #2583ad;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    height: auto;
-    box-sizing: border-box;
+	padding: 12px 30px;
+	font-size: 16px;
+	color: #fff;
+	background: #2583ad;
+	border: none;
+	border-radius: 12px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	white-space: nowrap;
+	height: auto;
+	box-sizing: border-box;
 }
 
 .search-button:hover {
-    background: #1f6a8d;
-    transform: translateY(-1px);
+	background: #1f6a8d;
+	transform: translateY(-1px);
 }
 
 .search-button:active {
-    transform: translateY(1px);
+	transform: translateY(1px);
 }
 
 /* Responsive adjustments */
 @media only screen and (max-width: 767px) {
-    .search-container {
-        flex-direction: column;
-        width: 100%;
-        padding: 0 15px;
-        margin: 10px auto;
-        box-sizing: border-box;
-    }
-    
-    .search-input {
-        width: 100%;
-        margin-bottom: 10px;
-        font-size: 14px;
-    }
-    
-    .search-button {
-        width: 100%;
-        font-size: 14px;
-    }
+	.search-container {
+		flex-direction: column;
+		width: 100%;
+		padding: 0 15px;
+		margin: 10px auto;
+		box-sizing: border-box;
+	}
+
+	.search-input {
+		width: 100%;
+		margin-bottom: 10px;
+		font-size: 14px;
+	}
+
+	.search-button {
+		width: 100%;
+		font-size: 14px;
+	}
 }
 
 @media only screen and (max-width: 480px) {
-    .search-container {
-        padding: 0 10px;
-        margin-top: 20px; /* Add top margin to avoid fixed header */
-    }
-    
-    .search-input,
-    .search-button {
-        font-size: 13px;
-        padding: 10px 15px;
-    }
-    
-    .search-input {
-        padding-left: 40px;
-        background-size: 20px;
-        background-position: 12px center;
-    }
+	.search-container {
+		padding: 0 10px;
+		margin-top: 20px;
+		/* Add top margin to avoid fixed header */
+	}
+
+	.search-input,
+	.search-button {
+		font-size: 13px;
+		padding: 10px 15px;
+	}
+
+	.search-input {
+		padding-left: 40px;
+		background-size: 20px;
+		background-position: 12px center;
+	}
 }
 
 /* Fix Firefox selection */
 *::-moz-selection {
-    background-color: #2583AD;
-    color: #ffffff;
+	background-color: #2583AD;
+	color: #ffffff;
 }
 
 /* Mobile search page specific fixes */
 @media only screen and (max-width: 480px) {
-    /* Ensure search page content is properly spaced from fixed header */
-    #pagebody .search-container {
-        margin-top: 30px; /* Extra spacing for search container specifically */
-    }
-    
-    /* Ensure the first search container in pagebody has proper spacing */
-    #pagebody > .wrapper > .col-12 > .search-container {
-        margin-top: 25px;
-    }
-    
-    /* Additional fix for search page headline spacing */
-    #headline + #pagebody .search-container {
-        margin-top: 2.5em;
-    }
+
+	/* Ensure search page content is properly spaced from fixed header */
+	#pagebody .search-container {
+		margin-top: 30px;
+		/* Extra spacing for search container specifically */
+	}
+
+	/* Ensure the first search container in pagebody has proper spacing */
+	#pagebody>.wrapper>.col-12>.search-container {
+		margin-top: 25px;
+	}
+
+	/* Additional fix for search page headline spacing */
+	#headline+#pagebody .search-container {
+		margin-top: 2.5em;
+	}
 }
 
 /* Additional mobile fixes for search functionality */
 @media only screen and (max-width: 767px) {
-    /* Ensure search container has proper spacing on all mobile devices */
-    #pagebody .search-container {
-        margin-top: 15px;
-    }
+
+	/* Ensure search container has proper spacing on all mobile devices */
+	#pagebody .search-container {
+		margin-top: 15px;
+	}
 }
 
 /* Sidebar Toggle Button Styles */
 .sidebar-toggle-container {
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1000;
-    background: #007bff;
-    border-radius: 0 8px 8px 0;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+	position: fixed;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1000;
+	background: #007bff;
+	border-radius: 0 8px 8px 0;
+	box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease;
 }
 
 .sidebar-toggle-btn {
-    background: transparent;
-    color: white;
-    border: none;
-    padding: 12px 8px;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 40px;
-    min-height: 60px;
-    transition: all 0.3s ease;
+	background: transparent;
+	color: white;
+	border: none;
+	padding: 12px 8px;
+	cursor: pointer;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	min-height: 60px;
+	transition: all 0.3s ease;
 }
 
 .sidebar-toggle-btn:hover {
-    background: rgba(255,255,255,0.1);
-    transform: scale(1.05);
+	background: rgba(255, 255, 255, 0.1);
+	transform: scale(1.05);
 }
 
 .sidebar-toggle-btn:active {
-    background: rgba(255,255,255,0.2);
+	background: rgba(255, 255, 255, 0.2);
 }
 
 .toggle-icon {
-    font-size: 20px;
-    font-weight: bold;
-    transition: transform 0.3s ease;
+	font-size: 20px;
+	font-weight: bold;
+	transition: transform 0.3s ease;
 }
 
 /* Chapter Navigation Button Styles */
 .chapter-nav-container {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1000;
-    background: #6c757d;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+	position: fixed;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1000;
+	background: #6c757d;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease;
 }
 
 .chapter-nav-container.left {
-    left: 0;
-    border-radius: 0 8px 8px 0;
+	left: 0;
+	border-radius: 0 8px 8px 0;
 }
 
 .chapter-nav-container.right {
-    right: 0;
-    border-radius: 8px 0 0 8px;
+	right: 0;
+	border-radius: 8px 0 0 8px;
 }
 
 .chapter-nav-btn {
-    background: transparent;
-    color: white;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 40px;
-    min-height: 60px;
-    transition: all 0.3s ease;
-    text-decoration: none;
+	background: transparent;
+	color: white;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	min-height: 60px;
+	transition: all 0.3s ease;
+	text-decoration: none;
 }
 
 .chapter-nav-btn:hover {
-    background: rgba(255,255,255,0.1);
-    transform: scale(1.05);
+	background: rgba(255, 255, 255, 0.1);
+	transform: scale(1.05);
 }
 
 .chapter-nav-btn:active {
-    background: rgba(255,255,255,0.2);
+	background: rgba(255, 255, 255, 0.2);
 }
 
 .chapter-nav-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
 .chapter-nav-btn:disabled:hover {
-    background: transparent;
-    transform: none;
+	background: transparent;
+	transform: none;
 }
 
 .chapter-nav-icon {
-    font-size: 18px;
-    font-weight: bold;
-    transition: transform 0.3s ease;
+	font-size: 18px;
+	font-weight: bold;
+	transition: transform 0.3s ease;
 }
 
 /* Left dock: Previous chapter button */
 .chapter-nav-container.left .chapter-nav-btn {
-    color: #fff;
+	color: #fff;
 }
 
 .chapter-nav-container.left:hover {
-    background: #5a6268;
+	background: #5a6268;
 }
 
 /* Right dock: Next chapter button */
 .chapter-nav-container.right .chapter-nav-btn {
-    color: #fff;
+	color: #fff;
 }
 
 .chapter-nav-container.right:hover {
-    background: #5a6268;
+	background: #5a6268;
 }
 
 /* Ensure proper spacing between dock elements */
 .sidebar-toggle-container {
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .chapter-nav-container.left {
-    left: 0;
-    top: 35%;
-    transform: translateY(-50%);
+	left: 0;
+	top: 35%;
+	transform: translateY(-50%);
 }
 
 .chapter-nav-container.right {
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 /* Sidebar Toggle Functionality */
 .sidebar.hidden {
-    display: none;
+	display: none;
 }
 
 /* Container width adjustment when sidebar is hidden */
-#pagebody .wrapper .sidebar.hidden ~ .container {
-    width: 100% !important;
-    float: none !important;
+#pagebody .wrapper .sidebar.hidden~.container {
+	width: 100% !important;
+	float: none !important;
 }
 
 /* Alternative approach: when sidebar is hidden, adjust container */
-#pagebody .wrapper .sidebar.hidden + .container {
-    width: 100% !important;
-    float: none !important;
+#pagebody .wrapper .sidebar.hidden+.container {
+	width: 100% !important;
+	float: none !important;
 }
 
 /* Force container to full width when sidebar is hidden */
-#pagebody .wrapper .sidebar.hidden ~ .container {
-    width: 100% !important;
-    float: none !important;
+#pagebody .wrapper .sidebar.hidden~.container {
+	width: 100% !important;
+	float: none !important;
 }
 
 /* Ensure proper layout when sidebar is hidden */
-#pagebody .wrapper .sidebar.hidden ~ .container {
-    width: 100% !important;
-    float: none !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+#pagebody .wrapper .sidebar.hidden~.container {
+	width: 100% !important;
+	float: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
 }
 
 /* Adjust wrapper layout when sidebar is hidden */
 #pagebody .wrapper:has(.sidebar.hidden) .container {
-    width: 100% !important;
-    float: none !important;
+	width: 100% !important;
+	float: none !important;
 }
 
 /* Alternative approach using JavaScript class on body */
 body.sidebar-hidden .container {
-    width: 100% !important;
-    float: none !important;
+	width: 100% !important;
+	float: none !important;
 }
 
 /* Smooth transitions for layout changes */
-.container, .sidebar {
-    transition: all 0.3s ease;
+.container,
+.sidebar {
+	transition: all 0.3s ease;
 }
 
 /* Visual feedback when sidebar is hidden */
 body.sidebar-hidden .sidebar-toggle-container {
-    background: #28a745;
+	background: #28a745;
 }
 
 body.sidebar-hidden .sidebar-toggle-btn:hover {
-    background: rgba(255,255,255,0.2);
+	background: rgba(255, 255, 255, 0.2);
 }
 
 /* Responsive adjustments for dock toggle */
 @media only screen and (max-width: 959px) {
-    .sidebar-toggle-container {
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .sidebar-toggle-btn {
-        min-width: 35px;
-        min-height: 50px;
-        padding: 10px 6px;
-    }
-    
-    .toggle-icon {
-        font-size: 16px;
-    }
-    
-    /* Chapter navigation responsive adjustments */
-    .chapter-nav-container {
-        min-width: 35px;
-        min-height: 50px;
-    }
-    
-    .chapter-nav-btn {
-        min-width: 35px;
-        min-height: 50px;
-    }
-    
-    .chapter-nav-icon {
-        font-size: 16px;
-    }
-    
-    /* Adjust positioning for mobile */
-    .chapter-nav-container.left {
-        top: 30%;
-    }
-    
-    .chapter-nav-container.right {
-        top: 45%;
-    }
+	.sidebar-toggle-container {
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.sidebar-toggle-btn {
+		min-width: 35px;
+		min-height: 50px;
+		padding: 10px 6px;
+	}
+
+	.toggle-icon {
+		font-size: 16px;
+	}
+
+	/* Chapter navigation responsive adjustments */
+	.chapter-nav-container {
+		min-width: 35px;
+		min-height: 50px;
+	}
+
+	.chapter-nav-btn {
+		min-width: 35px;
+		min-height: 50px;
+	}
+
+	.chapter-nav-icon {
+		font-size: 16px;
+	}
+
+	/* Adjust positioning for mobile */
+	.chapter-nav-container.left {
+		top: 30%;
+	}
+
+	.chapter-nav-container.right {
+		top: 45%;
+	}
 }
 
 @media only screen and (max-width: 480px) {
-    .sidebar-toggle-container {
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .sidebar-toggle-btn {
-        min-width: 30px;
-        min-height: 45px;
-        padding: 8px 5px;
-    }
-    
-    .toggle-icon {
-        font-size: 14px;
-    }
-    
-    /* Chapter navigation responsive adjustments */
-    .chapter-nav-container {
-        min-width: 30px;
-        min-height: 45px;
-    }
-    
-    .chapter-nav-btn {
-        min-width: 30px;
-        min-height: 45px;
-        padding: 8px 5px;
-    }
-    
-    .chapter-nav-icon {
-        font-size: 14px;
-    }
+	.sidebar-toggle-container {
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.sidebar-toggle-btn {
+		min-width: 30px;
+		min-height: 45px;
+		padding: 8px 5px;
+	}
+
+	.toggle-icon {
+		font-size: 14px;
+	}
+
+	/* Chapter navigation responsive adjustments */
+	.chapter-nav-container {
+		min-width: 30px;
+		min-height: 45px;
+	}
+
+	.chapter-nav-btn {
+		min-width: 30px;
+		min-height: 45px;
+		padding: 8px 5px;
+	}
+
+	.chapter-nav-icon {
+		font-size: 14px;
+	}
 }
 
 /* ==========================================================================
@@ -1487,72 +1595,70 @@ body.sidebar-hidden .sidebar-toggle-btn:hover {
    ========================================================================== */
 
 .pericope-header {
-    display: block;
-    margin: 1.4em 0 0.6em 0;
-    padding-bottom: 4px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    break-after: avoid;
-    -webkit-column-break-after: avoid;
-    page-break-after: avoid;
-    clear: both;
+	display: block;
+	margin: 0 0 0.6em 0;
+	padding-bottom: 4px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	break-after: avoid;
+	-webkit-column-break-after: avoid;
+	page-break-after: avoid;
+	clear: both;
 }
 
 .pericope-title {
-    font-size: 1.15em;
-    font-weight: 600;
-    color: #2c3e50;
-    margin: 0;
-    display: inline-block;
-    line-height: 1.35;
-    letter-spacing: 0.02em;
+	font-size: 1.15em;
+	font-weight: 600;
+	color: #2c3e50;
+	margin: 0;
+	display: inline-block;
+	line-height: 1.35;
+	letter-spacing: 0.02em;
 }
 
 .parallel-ref {
-    display: inline-block;
-    font-size: 0.85em;
-    color: #7f8c8d;
-    margin-left: 8px;
-    font-weight: normal;
-    font-style: italic;
-    letter-spacing: normal;
+	display: inline-block;
+	font-size: 0.85em;
+	color: #7f8c8d;
+	margin-left: 8px;
+	font-weight: normal;
+	font-style: italic;
+	letter-spacing: normal;
 }
 
 /* Paragraph separation */
 #documentation .column li.paragraph-start {
-    margin-top: 0.8em;
+	margin-top: 0.8em;
 }
 
 #documentation .column li.paragraph-start:first-child {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 /* Headings Toggle Control */
 .heading-toggle-link {
-    cursor: pointer;
-    font-size: 0.9em;
-    color: #34495e;
-    text-decoration: none;
-    padding: 2px 6px;
-    border: 1px solid #dcdcdc;
-    border-radius: 3px;
-    background-color: #f8f9fa;
-    transition: all 0.2s ease;
-    margin-left: 6px;
-    display: inline-block;
+	cursor: pointer;
+	font-size: 0.9em;
+	color: #34495e;
+	text-decoration: none;
+	padding: 2px 6px;
+	border: 1px solid #dcdcdc;
+	border-radius: 3px;
+	background-color: #f8f9fa;
+	transition: all 0.2s ease;
+	margin-left: 6px;
+	display: inline-block;
 }
 
 .heading-toggle-link:hover {
-    background-color: #e9ecef;
-    color: #1a252f;
+	background-color: #e9ecef;
+	color: #1a252f;
 }
 
 /* When headings are hidden */
 body.hide-pericopes .pericope-header {
-    display: none !important;
+	display: none !important;
 }
 
 body.hide-pericopes #documentation .column li.paragraph-start {
-    margin-top: 0.4em;
+	margin-top: 0.4em;
 }
-
-

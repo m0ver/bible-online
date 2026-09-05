@@ -280,7 +280,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
                     href="{%base_url%}{%book.bookName%}/{%nextchapter%}&amp;version={%version%}#up"
                     title="{%book.bookName%} | 第{%nextchapter%}章 | {%holy.bible%}">{%holy.book.next%} &#8250;&#8250;</a>
                 {%holy.bible.version%} {%language.switch%}
-                <a id="heading-toggle-btn" class="heading-toggle-link" href="javascript:void(0)" title="显示/隐藏小标题">📑 标题: 开</a>
+                <a id="heading-toggle-btn" class="heading-toggle-link" href="javascript:void(0)" title="显示/隐藏小标题">标题: 开</a>
             </div>
             <div id="documentation">
                 <div class="column" id="column1" itemprop="articleBody">{%left_column%}</div>
@@ -505,17 +505,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const hideHeadingsSaved = localStorage.getItem('hideHeadings') === 'true';
         if (hideHeadingsSaved) {
             document.body.classList.add('hide-pericopes');
-            headingToggleBtn.textContent = '📑 标题: 关';
+            headingToggleBtn.textContent = '标题: 关';
         }
 
         headingToggleBtn.addEventListener('click', function() {
             if (document.body.classList.contains('hide-pericopes')) {
                 document.body.classList.remove('hide-pericopes');
-                headingToggleBtn.textContent = '📑 标题: 开';
+                headingToggleBtn.textContent = '标题: 开';
                 localStorage.setItem('hideHeadings', 'false');
             } else {
                 document.body.classList.add('hide-pericopes');
-                headingToggleBtn.textContent = '📑 标题: 关';
+                headingToggleBtn.textContent = '标题: 关';
                 localStorage.setItem('hideHeadings', 'true');
             }
         });
