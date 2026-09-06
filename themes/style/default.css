@@ -266,7 +266,7 @@ a.download-button:hover {
 }
 
 h3 {
-	font-size: 1.4em;
+	font-size: 1em;
 	color: #333;
 	font-weight: bold;
 	margin: -1px 0 1px 0;
@@ -286,7 +286,7 @@ h4 {
 
 h5 {
 	font-weight: bold;
-	font-size: 1em;
+	font-size: 0.8em;
 	margin-bottom: 1.200em;
 }
 
@@ -1605,7 +1605,6 @@ body.sidebar-hidden .sidebar-toggle-btn:hover {
 }
 
 .pericope-title {
-	font-size: 1.15em;
 	font-weight: 600;
 	color: #555;
 	margin: 0;
