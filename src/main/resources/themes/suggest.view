@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="{%language_code%}">
 <head>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -380,13 +380,6 @@
         });
     //]]>
     </script>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-M4N6DS4N');</script>
-    <!-- End Google Tag Manager -->
     <title>{%page.suggestion.title%} - {%application.title%}</title>
 </head>
 <body itemscope="" itemtype="http://schema.org/WebPage">
@@ -453,5 +446,23 @@
             });
         });
     </script>
+
+<!-- Analytics: loaded last so they never block page load -->
+<!-- Google Tag Manager -->
+<script defer src="https://www.googletagmanager.com/gtm.js?id=GTM-M4N6DS4N"></script>
+<script>
+(function(w,d,l){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+})(window,document,'dataLayer');
+</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script defer src="https://www.googletagmanager.com/gtag/js?id=G-4NLGCC5K7C"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-4NLGCC5K7C');
+</script>
+<!-- End Google tag -->
 </body>
 </html>

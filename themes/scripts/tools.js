@@ -1031,3 +1031,226 @@ if (typeof document !== 'undefined') {
 		setTimeout(initializeCopyButtons, 200);
 	});
 }
+
+// ─── Parallel-Ref Linkifier ──────────────────────────────────────────────────
+// Converts plain-text cross-reference strings like "Mk 1:1-8; Lk 3:1-18"
+// (or Chinese equivalents) inside .parallel-ref elements into clickable links.
+
+(function () {
+	// Map of abbreviation → book ID (1-based, canonical order).
+	// Covers both the English abbreviations used by ParallelRefGenerator and
+	// the Chinese abbreviations stored in zh_CN / zh_TW.
+	var ABBR_TO_BOOK_ID = {
+		// ── Old Testament ──────────────────────────────────────────────────────
+		"Gen": 1,  "创": 1,
+		"Ex": 2,   "出": 2,
+		"Lev": 3,  "利": 3,
+		"Num": 4,  "民": 4,
+		"Deut": 5, "申": 5,
+		"Josh": 6, "书": 6,
+		"Judg": 7, "士": 7,
+		"Ruth": 8, "得": 8,
+		"1 Sam": 9,  "撒上": 9,
+		"2 Sam": 10, "撒下": 10,
+		"1 Ki": 11,  "王上": 11,
+		"2 Ki": 12,  "王下": 12,
+		"1 Chr": 13, "代上": 13,
+		"2 Chr": 14, "代下": 14,
+		"Ezra": 15, "拉": 15,
+		"Neh": 16,  "尼": 16,
+		"Est": 17,  "斯": 17,
+		"Job": 18,  "伯": 18,
+		"Ps": 19,   "诗": 19,
+		"Prov": 20, "箴": 20,
+		"Eccl": 21, "传": 21,
+		"Song": 22, "歌": 22,
+		"Isa": 23,  "赛": 23,
+		"Jer": 24,  "耶": 24,
+		"Lam": 25,  "哀": 25,
+		"Ezek": 26, "结": 26,
+		"Dan": 27,  "但": 27,
+		"Hos": 28,  "何": 28,
+		"Joel": 29, "珥": 29,
+		"Amos": 30, "摩": 30,
+		"Obad": 31, "俄": 31,
+		"Jonah": 32,"拿": 32,
+		"Mic": 33,  "弥": 33,
+		"Nah": 34,  "鸿": 34,
+		"Hab": 35,  "哈": 35,
+		"Zeph": 36, "番": 36,
+		"Hag": 37,  "该": 37,
+		"Zech": 38, "亚": 38,
+		"Mal": 39,  "玛": 39,
+		// ── New Testament ──────────────────────────────────────────────────────
+		"Mt": 40,      "太": 40,
+		"Mk": 41,      "可": 41,
+		"Lk": 42,      "路": 42,
+		"Jn": 43,      "约": 43,
+		"Acts": 44,    "徒": 44,
+		"Rom": 45,     "罗": 45,
+		"1 Cor": 46,   "林前": 46,
+		"2 Cor": 47,   "林后": 47,
+		"Gal": 48,     "加": 48,
+		"Eph": 49,     "弗": 49,
+		"Phil": 50,    "腓": 50,
+		"Col": 51,     "西": 51,
+		"1 Thess": 52, "帖前": 52,
+		"2 Thess": 53, "帖后": 53,
+		"1 Tim": 54,   "提前": 54,
+		"2 Tim": 55,   "提后": 55,
+		"Titus": 56,   "多": 56,
+		"Phlm": 57,    "门": 57,
+		"Heb": 58,     "来": 58,
+		"Jas": 59,     "雅": 59,
+		"1 Pet": 60,   "彼前": 60,
+		"2 Pet": 61,   "彼后": 61,
+		"1 Jn": 62,    "约一": 62,
+		"2 Jn": 63,    "约二": 63,
+		"3 Jn": 64,    "约三": 64,
+		"Jude": 65,    "犹": 65,
+		"Rev": 66,     "启": 66
+	};
+
+	// Build a sorted list of abbreviations (longest first) for greedy matching.
+	var ABBRS = Object.keys(ABBR_TO_BOOK_ID).sort(function (a, b) {
+		return b.length - a.length;
+	});
+
+	/**
+	 * Detect the base URL prefix used by the app (e.g. "" or "/app").
+	 * We look at the current path for a "bible/" segment to figure it out.
+	 */
+	function getBaseUrl() {
+		var loc = window.location;
+		// Support both clean-URL routes (/bible/…) and query-string routes (?q=bible/…)
+		return loc.protocol + "//" + loc.host;
+	}
+
+	/**
+	 * Given a single reference token like "Mk 1:1-8" or "路 3:1",
+	 * return an <a> element linking to the correct chapter, or null if unparseable.
+	 */
+	function tokenToLink(token) {
+		token = token.trim();
+		if (!token) return null;
+
+		var matchedAbbr = null;
+		for (var i = 0; i < ABBRS.length; i++) {
+			var abbr = ABBRS[i];
+			if (token.indexOf(abbr) === 0) {
+				// Make sure the character after the abbreviation is a space or digit (not part of another word)
+				var after = token.charAt(abbr.length);
+				if (after === "" || after === " " || /\d/.test(after)) {
+					matchedAbbr = abbr;
+					break;
+				}
+			}
+		}
+		if (!matchedAbbr) return null;
+
+		var bookId = ABBR_TO_BOOK_ID[matchedAbbr];
+		var rest = token.slice(matchedAbbr.length).trim(); // e.g. "3:1-18" or "3"
+		var chapterId = 1;
+		var verseStart = 1; // 1-based
+		var verseEnd = 1;   // 1-based
+		var chapterMatch = rest.match(/^(\d+)(?::(\d+)(?:-(\d+))?)?/);
+		if (chapterMatch) {
+			chapterId = parseInt(chapterMatch[1], 10);
+			if (chapterMatch[2]) {
+				verseStart = parseInt(chapterMatch[2], 10);
+				verseEnd   = chapterMatch[3] ? parseInt(chapterMatch[3], 10) : verseStart;
+			}
+		}
+
+		// Build comma-separated 0-based indices for all verses in the range
+		var indices = [];
+		for (var v = verseStart; v <= verseEnd; v++) {
+			indices.push(v - 1);
+		}
+		var verseHash = indices.join(",");
+
+		// Preserve current lang/version query params if present
+		var search = window.location.search;
+		var extraParams = "";
+		if (search) {
+			// Strip existing 'q' param; keep lang/version
+			var params = search.replace(/^\?/, "").split("&").filter(function (p) {
+				return !/^q=/.test(p);
+			});
+			if (params.length) {
+				extraParams = "&" + params.join("&");
+			}
+		}
+
+		var href = getBaseUrl() + "/?q=bible/" + bookId + "/" + chapterId + extraParams + "#" + verseHash;
+
+		var a = document.createElement("a");
+		a.href = href;
+		a.textContent = token;
+		a.className = "parallel-ref-link";
+		a.title = token;
+		return a;
+	}
+
+	/**
+	 * Process a single .parallel-ref element: parse its text content,
+	 * split on "; " and replace with linked tokens.
+	 */
+	function linkifyElement(el) {
+		// Avoid double-processing
+		if (el.dataset && el.dataset.linkified) return;
+
+		var raw = el.textContent.replace(/^\(|\)$/g, "").trim(); // strip outer parens
+		var parts = raw.split(/\s*;\s*/);
+		var hasLink = false;
+
+		// Clear and rebuild
+		el.textContent = "(";
+		parts.forEach(function (part, idx) {
+			if (idx > 0) {
+				el.appendChild(document.createTextNode("; "));
+			}
+			var link = tokenToLink(part);
+			if (link) {
+				el.appendChild(link);
+				hasLink = true;
+			} else {
+				el.appendChild(document.createTextNode(part));
+			}
+		});
+		el.appendChild(document.createTextNode(")"));
+
+		if (el.dataset) el.dataset.linkified = "1";
+	}
+
+	function linkifyAll() {
+		var refs = document.querySelectorAll(".parallel-ref:not([data-linkified])");
+		refs.forEach(linkifyElement);
+	}
+
+	// Run on initial load
+	document.addEventListener("DOMContentLoaded", function () {
+		setTimeout(linkifyAll, 100);
+	});
+
+	// Also run when dynamic content is injected (e.g. AJAX chapter navigation)
+	if (typeof MutationObserver !== "undefined") {
+		var refObserver = new MutationObserver(function (mutations) {
+			var needsRun = false;
+			mutations.forEach(function (m) {
+				if (m.type === "childList" && m.addedNodes.length > 0) {
+					m.addedNodes.forEach(function (node) {
+						if (node.nodeType === Node.ELEMENT_NODE) {
+							if (node.classList && node.classList.contains("parallel-ref")) needsRun = true;
+							if (node.querySelector && node.querySelector(".parallel-ref")) needsRun = true;
+						}
+					});
+				}
+			});
+			if (needsRun) linkifyAll();
+		});
+		document.addEventListener("DOMContentLoaded", function () {
+			refObserver.observe(document.body, { childList: true, subtree: true });
+		});
+	}
+}());

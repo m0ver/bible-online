@@ -168,14 +168,7 @@
 		});
 	});
 	
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', '392100062']);
-	_gaq.push(['_trackPageview']);
-	(function() {
-	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
+
 	//]]>
 
     </script>
@@ -194,22 +187,7 @@
     });
     </script>
     <![endif]-->
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-M4N6DS4N');</script>
-    <!-- End Google Tag Manager -->
-    <!-- Google tag (gtag.js) -->
-    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4NLGCC5K7C"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'G-4NLGCC5K7C');
-    </script>
     <title>{%book.bookName%} 第{%chapterid%}章 - 今日有道 - 圣经查询与灵修指南</title>
 </head>
 <body itemscope="" itemtype="http://schema.org/WebPage" data-role="page">
@@ -522,5 +500,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+<!-- Analytics: loaded last so they never block page highlight logic -->
+<!-- Google Tag Manager -->
+<script defer src="https://www.googletagmanager.com/gtm.js?id=GTM-M4N6DS4N"></script>
+<script>
+(function(w,d,l){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+})(window,document,'dataLayer');
+</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script defer src="https://www.googletagmanager.com/gtag/js?id=G-4NLGCC5K7C"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-4NLGCC5K7C');
+</script>
+<!-- End Google tag -->
 </body>
 </html>
