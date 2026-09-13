@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{%language_code%}">
 <head>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -467,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<!-- Analytics: loaded last so they never block page load -->
+<!-- Analytics: loaded last so they never block page highlight logic -->
 <!-- Google Tag Manager -->
 <script defer src="https://www.googletagmanager.com/gtm.js?id=GTM-M4N6DS4N"></script>
 <script>
