@@ -511,18 +511,149 @@ a.rsslink {
 	font-weight: normal;
 }
 
+.sidebar {
+	float: left;
+	width: 24%;
+	font-size: 1em;
+	box-sizing: border-box;
+}
+
 .sidebar .container {
-	width: 287px;
+	width: 100%;
+	max-width: 100%;
 	float: none;
+	box-sizing: border-box;
+	margin-bottom: 1em;
 }
 
 .sidebar label {
+	display: block;
+	font-size: 1em;
+	font-weight: normal;
+	color: #444;
+	margin: 0.9em 0 0.4em 0;
 	clear: both;
+}
+
+.sidebar label:first-child {
+	margin-top: 0.2em;
+}
+
+.sidebar ul {
+	margin: 0.4em 0 1em 0;
+	padding: 0;
+	list-style: none;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.sidebar ul li {
+	display: flex;
+	gap: 8px;
+	width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 8px;
+	align-items: center;
+}
+
+.sidebar ul li label {
+	display: inline;
+	font-weight: normal;
+	font-size: 0.85em;
+	color: #555;
+	margin: 0;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.sidebar ul li input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	margin: 0 8px 0 0;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+.sidebar select {
+	flex: 1;
+	min-width: 0;
+	width: 100%;
+	height: 38px;
+	padding: 6px 28px 6px 10px;
+	font-size: 0.9em;
+	color: #333;
+	background-color: #fff;
+	border: 1px solid #ccd0d5;
+	border-radius: 6px;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8.5L2 4.5h8z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sidebar select:focus {
+	outline: none;
+	border-color: #007bff;
+	box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }
 
 #old_book,
 #new_book {
-	width: 7.5em;
+	flex: 1.2;
+}
+
+#old_book_chapter,
+#new_book_chapter {
+	flex: 1;
+}
+
+/* Sidebar Search Form */
+.sidebar form#f .container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	width: 100%;
+	box-sizing: border-box;
+	align-items: center;
+}
+
+.sidebar form#f label {
+	width: 100%;
+	flex-basis: 100%;
+}
+
+.sidebar input#keyword.text.glass {
+	flex: 1;
+	min-width: 120px;
+	height: 2.2em;
+	line-height: 1.4em;
+	background-color: #fff;
+	background-image: url("data:image/svg+xml,%3Csvg focusable='false' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z' fill='%23888888'%3E%3C/path%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: 8px center;
+	background-size: 21px 21px;
+	padding-left: 30px;
+	box-sizing: border-box;
+}
+
+/* Sidebar Textarea */
+.sidebar textarea,
+.sidebar textarea.text {
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box !important;
+	margin: 0 0 8px 0;
+	display: block;
+}
+
+.sidebar #invite-message,
+.sidebar #subscribe-message {
+	display: block;
+	margin-top: 6px;
+	font-size: 13px;
 }
 
 #pagebody #sitesearch input#keyword.text {
@@ -618,10 +749,16 @@ blockquote {
 }
 
 .text.glass {
-	background: rgb(255, 255, 255) url("data:image/svg+xml,%3Csvg focusable='false' height='30px' viewBox='0 0 24 24' width='30px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z' fill='%23ababab'%3E%3C/path%3E%3Cpath d='M0,0h24v24H0V0z' fill='none'%3E%3C/path%3E%3C/svg%3E") no-repeat scroll 0.5em 0.5em / 8%;
-	height: 1.4em;
-	padding-left: 1.8em;
+	background-color: #fff;
+	background-image: url("data:image/svg+xml,%3Csvg focusable='false' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z' fill='%23888888'%3E%3C/path%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: 8px center;
+	background-size: 16px 16px;
+	height: 2.2em;
+	line-height: 1.4em;
+	padding-left: 30px;
 	width: 12em;
+	box-sizing: border-box;
 }
 
 textarea {
@@ -993,15 +1130,21 @@ ul.testament li ol li {
 	float: right;
 	width: 74%;
 	font-size: 1.4em;
+	box-sizing: border-box;
 }
 
 .sidebar {
 	float: left;
+	width: 24%;
 	font-size: 1.4em;
+	box-sizing: border-box;
 }
 
 .sidebar .container {
 	font-size: 100%;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
 .col-12 {
@@ -1056,11 +1199,25 @@ ul.testament li ol li {
 @media only screen and (max-width: 959px) {
 	.container {
 		float: none;
-		width: auto;
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 
 	.sidebar {
-		float: none
+		float: none;
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
+		margin-top: 2em;
+		padding-top: 1.5em;
+		border-top: 1px solid #e0e0e0;
+	}
+
+	.sidebar .container {
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box !important;
 	}
 }
 
@@ -1102,21 +1259,26 @@ ul.testament li ol li {
 
 	.container {
 		float: none;
-		width: auto;
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 
 	.sidebar {
-		float: none
+		float: none;
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 
-	.text.glass {
-		width: 17.5em;
-		padding-left: 2.3em;
-		background-size: 6%;
+	.sidebar .text.glass {
+		width: 100%;
+		box-sizing: border-box;
 	}
 
-	textarea {
-		width: 19.8em;
+	.sidebar textarea {
+		width: 100% !important;
+		box-sizing: border-box !important;
 	}
 }
 
@@ -1151,9 +1313,9 @@ ul.testament li ol li {
 	}
 
 	#pagebody {
-		padding: 3em;
+		padding: 1.2em 1em;
 		margin-top: 1em;
-		/* Add margin to ensure content doesn't get covered */
+		box-sizing: border-box;
 	}
 
 	#footer {
@@ -1167,11 +1329,16 @@ ul.testament li ol li {
 
 	.container {
 		float: none;
-		width: auto;
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 
 	.sidebar {
-		float: none
+		float: none;
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 }
 
