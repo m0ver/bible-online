@@ -1281,11 +1281,6 @@ ul.testament li ol li {
 		box-sizing: border-box !important;
 	}
 
-	/* On mobile, sidebar stacks naturally below content — hide the floating toggle */
-	.sidebar-toggle-container {
-		display: none;
-	}
-
 	/* Add horizontal clearance so text isn't hidden behind fixed chapter nav buttons */
 	#pagebody {
 		padding-left: 48px;
