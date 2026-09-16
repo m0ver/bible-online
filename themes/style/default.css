@@ -1280,6 +1280,28 @@ ul.testament li ol li {
 		width: 100% !important;
 		box-sizing: border-box !important;
 	}
+
+	/* On mobile, sidebar stacks naturally below content — hide the floating toggle */
+	.sidebar-toggle-container {
+		display: none;
+	}
+
+	/* Add horizontal clearance so text isn't hidden behind fixed chapter nav buttons */
+	#pagebody {
+		padding-left: 48px;
+		padding-right: 48px;
+	}
+
+	/* Make chapter nav buttons smaller on mobile */
+	.chapter-nav-btn {
+		min-width: 34px;
+		min-height: 52px;
+		padding: 0;
+	}
+
+	.chapter-nav-icon {
+		font-size: 15px;
+	}
 }
 
 /* Mobile Portrait */
@@ -1313,7 +1335,8 @@ ul.testament li ol li {
 	}
 
 	#pagebody {
-		padding: 1.2em 1em;
+		/* Keep vertical padding, override horizontal to clear fixed chapter nav buttons */
+		padding: 1.2em 44px;
 		margin-top: 1em;
 		box-sizing: border-box;
 	}
@@ -1339,6 +1362,16 @@ ul.testament li ol li {
 		width: 100%;
 		max-width: 100%;
 		box-sizing: border-box;
+	}
+
+	/* Chapter nav buttons: compact size for small screens */
+	.chapter-nav-btn {
+		min-width: 30px;
+		min-height: 48px;
+	}
+
+	.chapter-nav-icon {
+		font-size: 13px;
 	}
 }
 
