@@ -1,4 +1,34 @@
-/* The Reset ---------------------------------- */
+/* ==========================================================================
+   default.css — Bible Online Stylesheet
+   --------------------------------------------------------------------------
+   Table of Contents
+   1.  CSS Reset
+   2.  Base / Typography
+   3.  Links & Interactive
+   4.  Layout Helpers
+   5.  Header
+   6.  Headline Bar
+   7.  Page Body
+   8.  Sidebar
+   9.  Footer
+   10. Forms & Inputs
+   11. Buttons
+   12. Blockquote / Status Messages
+   13. Documentation & Scripture Column
+   14. Context Menu & Dialog
+   15. Tab Form
+   16. Testament List
+   17. Search Styles
+   18. Sidebar Toggle & Chapter Navigation
+   19. Pericope Headings & Paragraph Styles
+   20. Responsive — Media Queries
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. CSS Reset
+   ========================================================================== */
+
 body,
 div,
 dl,
@@ -65,23 +95,21 @@ hr {
 	size: 1px;
 }
 
+
+/* ==========================================================================
+   2. Base / Typography
+   ========================================================================== */
+
 body {
 	font-size: 92.5%;
 	background: #fff;
-	font-family: "Times New Roman", 'Microsoft Yahei', sans-serif, Verdana, Arial, "Lucida Grande",
-		"Bitstream Vera Sans";
+	font-family: "Times New Roman", 'Microsoft Yahei', sans-serif, Verdana, Arial,
+		"Lucida Grande", "Bitstream Vera Sans";
 	line-height: 2.2em;
 	color: #555;
 	padding-bottom: 2.0em;
 	/* 	transform: scale(1.3, 1.3);
     transform-origin: left top 0; */
-}
-
-/* -------------------------------------------- */
-/* Enhanced interactive with Firefox */
-*::-moz-selection {
-	background-color: #2583AD;
-	color: #ffffff
 }
 
 code {
@@ -101,19 +129,6 @@ pre a {
 	font-weight: normal;
 }
 
-a {
-	color: #2583ad;
-	text-decoration: none;
-	font-weight: bold;
-	padding-left: 2px;
-	padding-left: 2px;
-	padding-right: 2px;
-}
-
-a:hover {
-	color: #d54e21;
-}
-
 strong {
 	font-weight: bold;
 }
@@ -123,6 +138,89 @@ cite {
 	font-style: italic;
 }
 
+h3 {
+	font-size: 1em;
+	color: #333;
+	font-weight: bold;
+	margin: -1px 0 1px 0;
+}
+
+h3 u {
+	color: #ff0000;
+}
+
+h4 {
+	font-weight: bold;
+	border-bottom: 1px solid #dedede;
+	padding-bottom: 0.4em;
+	color: #333;
+	margin-bottom: 1.8em;
+}
+
+h5 {
+	font-weight: bold;
+	font-size: 0.8em;
+	margin-bottom: 1.200em;
+}
+
+blockquote {
+	background: #f5f5f5;
+	border: 1px solid #dadada;
+	padding: 1em 1em;
+	margin-bottom: 2.2em;
+}
+
+.selected {
+	border-bottom: 1px dotted #000;
+	color: #0000ff;
+	margin-bottom: -1px;
+}
+
+.line {
+	background: url(../images/dotline.gif) repeat-x 0 bottom;
+}
+
+
+/* ==========================================================================
+   3. Links & Interactive
+   ========================================================================== */
+
+/* Enhanced text selection — Firefox */
+*::-moz-selection {
+	background-color: #2583AD;
+	color: #ffffff;
+}
+
+a {
+	color: #2583ad;
+	text-decoration: none;
+	font-weight: bold;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+a:hover {
+	color: #d54e21;
+}
+
+a.rsslink {
+	background: url(../images/feedicon10.png) top left no-repeat;
+	padding-left: 0.7em;
+}
+
+a.clear-fix {
+	padding-top: 1em;
+}
+
+a.download {
+	float: right;
+}
+
+
+/* ==========================================================================
+   4. Layout Helpers
+   ========================================================================== */
+
 .wrapper {
 	clear: both;
 	margin: 0 auto;
@@ -131,6 +229,105 @@ cite {
 .column {
 	float: left;
 }
+
+.clear-fix {
+	display: block;
+	clear: both;
+}
+
+div.line-space {
+	clear: both;
+	height: 5em;
+}
+
+.sub {
+	vertical-align: sub;
+}
+
+.sup {
+	text-decoration: underline;
+	font-size: 0.8em;
+	vertical-align: top;
+	line-height: 1.100em;
+	color: #ff0000;
+	cursor: pointer;
+}
+
+.feed {
+	background: url(../images/feedicon.png) center left no-repeat;
+	padding-left: 1.9em;
+}
+
+.shadow {
+	float: left;
+	margin-right: 2.0em;
+	background-color: #EFEFEF;
+}
+
+.shadow img {
+	padding: 0.4em;
+	border: 1px solid #CDCDCD;
+	background-color: #FFFFFF;
+	position: relative;
+	top: -5px;
+	left: -5px;
+}
+
+.__base__ {
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+	background: none repeat scroll 0% 0% rgb(175, 50, 51);
+	color: rgb(255, 255, 255);
+	font-size: 1.2em;
+	text-align: center;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+body > div.__base__ {
+	position: fixed;
+}
+
+.tips {
+	background: yellow;
+	border: 1px solid #ff8000;
+	padding: 0.5em;
+}
+
+.required {
+	color: #ff0000;
+}
+
+.col-12 {
+	font-size: 1.4em;
+}
+
+.gallery {
+	background: url("/themes/images/last-dinner.png") no-repeat scroll 0 50%;
+	background-size: 100%;
+	height: 20em;
+	margin-bottom: 0.5em;
+}
+
+.container {
+	float: right;
+	width: 74%;
+	font-size: 1.4em;
+	box-sizing: border-box;
+}
+
+/* Smooth transitions for layout changes */
+.container,
+.sidebar {
+	transition: all 0.3s ease;
+}
+
+
+/* ==========================================================================
+   5. Header
+   ========================================================================== */
 
 #header {
 	/*background: url("/themes/images/candle.png") no-repeat scroll right center / 15% auto #464646;*/
@@ -236,132 +433,10 @@ cite {
 	top: 0;
 }
 
-.download-button {
-	cursor: pointer;
-	background: #d54e21;
-	padding: 0.8em 1em;
-	color: #fff;
-	-moz-border-radius: 0.3em;
-	-khtml-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-	border-radius: 0.3em;
-}
 
-a.download-button span,
-a.download-button:hover {
-	color: #ffac90;
-}
-
-.download-tar {
-	font-size: 1em;
-	margin-top: -0.1em !important;
-	text-align: center;
-	margin-bottom: 1.400em !important;
-}
-
-#pagebody h2 {
-	border-bottom: 1px dotted #CCCCCC;
-	color: #333333;
-	padding: 0.714em 0 1em;
-}
-
-h3 {
-	font-size: 1em;
-	color: #333;
-	font-weight: bold;
-	margin: -1px 0 1px 0;
-}
-
-h3 u {
-	color: #ff0000;
-}
-
-h4 {
-	font-weight: bold;
-	border-bottom: 1px solid #dedede;
-	padding-bottom: 0.4em;
-	color: #333;
-	margin-bottom: 1.8em;
-}
-
-h5 {
-	font-weight: bold;
-	font-size: 0.8em;
-	margin-bottom: 1.200em;
-}
-
-input.text {
-	margin-right: 0.2em;
-	padding: 0.3em;
-	background: #f5f5f5;
-	border: 1px solid #ccc;
-	-moz-border-radius: 0.3em;
-	-khtml-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-	border-radius: 0.3em;
-	vertical-align: top;
-	color: #666;
-	font-size: 0.9em;
-}
-
-button {
-	height: 2.4em;
-}
-
-.text:hover,
-.text:focus,
-select:hover,
-select:focus {
-	border-color: #80b5d0;
-}
-
-.button,
-.button-secondary {
-	cursor: pointer;
-	color: #246;
-	background: #e5e5e5;
-	padding: 0.2em;
-	border: 1px solid #a3a3a3;
-	-moz-border-radius: 0.3em;
-	-khtml-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-	border-radius: 0.3em;
-	font-size: 0.9em;
-}
-
-span.button a {
-	line-height: 2.2em;
-	display: inline-block;
-	height: 2.2em;
-}
-
-span.button {
-	height: 2.2em;
-	display: inline-block;
-	vertical-align: bottom;
-}
-
-p.button {
-	padding-bottom: 0.8em !important;
-}
-
-.button-secondary {
-	background: #cee1ef;
-	border-color: #80b5d0;
-}
-
-.button:hover,
-.button-secondary:hover {
-	color: #d54e21;
-}
-
-.button:hover {
-	border-color: #535353;
-}
-
-.button-secondary:hover {
-	border-color: #328ab2;
-}
+/* ==========================================================================
+   6. Headline Bar
+   ========================================================================== */
 
 #headline {
 	background: #e4f2fd;
@@ -395,6 +470,11 @@ p.button {
 	float: none;
 	padding: 1em 0;
 }
+
+
+/* ==========================================================================
+   7. Page Body
+   ========================================================================== */
 
 #pagebody {
 	padding: 1em 3em;
@@ -461,6 +541,7 @@ p.button {
 	color: #F55912;
 }
 
+/* Empty rule preserved intentionally */
 #pagebody ol.searchresults li.odd {}
 
 #pagebody ol.searchresults li.even {
@@ -490,11 +571,6 @@ p.button {
 	list-style: none;
 }
 
-a.rsslink {
-	background: url(../images/feedicon10.png) top left no-repeat;
-	padding-left: 0.7em;
-}
-
 #pagebody ol {
 	list-style: roman;
 }
@@ -511,14 +587,44 @@ a.rsslink {
 	font-weight: normal;
 }
 
+#pagebody h2 {
+	border-bottom: 1px dotted #CCCCCC;
+	color: #333333;
+	padding: 0.714em 0 1em;
+}
+
+#pagebody #sitesearch input#keyword.text {
+	width: 100%;
+	padding: 0.65em;
+}
+
+#pagebody #sitesearch input.button {
+	padding: 0.5em;
+}
+
+#pagebody .search-tips {
+	border-bottom: 1px solid #F5F5F5;
+	padding: 0.7em 0;
+}
+
+#pagebody .search-tips u {
+	color: #ff0000;
+}
+
+
+/* ==========================================================================
+   8. Sidebar
+   ========================================================================== */
+
 .sidebar {
 	float: left;
 	width: 24%;
-	font-size: 1em;
+	font-size: 1.4em;
 	box-sizing: border-box;
 }
 
 .sidebar .container {
+	font-size: 100%;
 	width: 100%;
 	max-width: 100%;
 	float: none;
@@ -600,11 +706,13 @@ a.rsslink {
 	box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }
 
+/* Book selects */
 #old_book,
 #new_book {
 	flex: 1.2;
 }
 
+/* Chapter selects */
 #old_book_chapter,
 #new_book_chapter {
 	flex: 1;
@@ -656,28 +764,15 @@ a.rsslink {
 	font-size: 13px;
 }
 
-#pagebody #sitesearch input#keyword.text {
-	width: 100%;
-	padding: 0.65em;
+/* Sidebar hidden state */
+.sidebar.hidden {
+	display: none;
 }
 
-#pagebody #sitesearch input.button {
-	padding: 0.5em;
-}
 
-#pagebody .search-tips {
-	border-bottom: 1px solid #F5F5F5;
-	padding: 0.7em 0;
-}
-
-#pagebody .search-tips u {
-	color: #ff0000;
-}
-
-.feed {
-	background: url(../images/feedicon.png) center left no-repeat;
-	padding-left: 1.9em;
-}
+/* ==========================================================================
+   9. Footer
+   ========================================================================== */
 
 #footer {
 	padding: 0 3em;
@@ -690,62 +785,51 @@ a.rsslink {
 	font-size: 1.4em;
 }
 
+/* Two rules originally declared separately are merged here */
 #footer h6 {
 	float: right;
-}
-
-#footer h6 {
 	width: 13.3em;
 	height: 0.9em;
 	text-indent: -9999px;
 	margin-top: 0.6em;
 }
 
-blockquote {
+/* Footer Class helper */
+.footer {
+	clear: both;
+	border-top: 1px solid #dedede;
+	padding: 0.6em 1.400em;
+	margin: 0 auto;
+}
+
+
+/* ==========================================================================
+   10. Forms & Inputs
+   ========================================================================== */
+
+input.text {
+	margin-right: 0.2em;
+	padding: 0.3em;
 	background: #f5f5f5;
-	border: 1px solid #dadada;
-	padding: 1em 1em;
-	margin-bottom: 2.2em;
+	border: 1px solid #ccc;
+	-moz-border-radius: 0.3em;
+	-khtml-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	border-radius: 0.3em;
+	vertical-align: top;
+	color: #666;
+	font-size: 0.9em;
 }
 
-.submit {
-	border-top: 1px solid #ccc;
-	padding: 1.5em 0 0 0;
-	margin: 1em 0 0 0;
-	-moz-border-radius-bottomleft: 0.3em;
-	-khtml-border-bottom-left-radius: 0.3em;
-	-webkit-border-bottom-left-radius: 0.3em;
-	border-bottom-left-radius: 0.3em;
-	-moz-border-radius-bottomright: 0.3em;
-	-khtml-border-bottom-right-radius: 0.3em;
-	-webkit-border-bottom-right-radius: 0.3em;
-	border-bottom-right-radius: 0.3em;
+button {
+	height: 2.4em;
 }
 
-.info {
-	padding: 0.5em;
-	padding-left: 1em;
-	background-color: #e3f6e9;
-	border: 1px solid #0ba51f;
-}
-
-.wrap,
-.updated {
-	padding: 0.5em;
-	padding-left: 1em;
-	background-color: #e4f2fd;
-	border: 1px solid #2583ad;
-}
-
-.error {
-	padding: 0.5em;
-	padding-left: 1em;
-	background-color: #ffebe8;
-	border: 1px solid #c00;
-}
-
-.error a {
-	color: #c00;
+.text:hover,
+.text:focus,
+select:hover,
+select:focus {
+	border-color: #80b5d0;
 }
 
 .text.glass {
@@ -780,32 +864,150 @@ select {
 	font-size: 0.9em;
 }
 
-.selected {
-	border-bottom: 1px dotted #000;
-	color: #0000ff;
-	margin-bottom: -1px;
+.submit {
+	border-top: 1px solid #ccc;
+	padding: 1.5em 0 0 0;
+	margin: 1em 0 0 0;
+	-moz-border-radius-bottomleft: 0.3em;
+	-khtml-border-bottom-left-radius: 0.3em;
+	-webkit-border-bottom-left-radius: 0.3em;
+	border-bottom-left-radius: 0.3em;
+	-moz-border-radius-bottomright: 0.3em;
+	-khtml-border-bottom-right-radius: 0.3em;
+	-webkit-border-bottom-right-radius: 0.3em;
+	border-bottom-right-radius: 0.3em;
 }
 
-.line {
-	background: url(../images/dotline.gif) repeat-x 0 bottom;
+
+/* ==========================================================================
+   11. Buttons
+   ========================================================================== */
+
+.download-button {
+	cursor: pointer;
+	background: #d54e21;
+	padding: 0.8em 1em;
+	color: #fff;
+	-moz-border-radius: 0.3em;
+	-khtml-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	border-radius: 0.3em;
 }
 
-a.clear-fix {
-	padding-top: 1em;
+a.download-button span,
+a.download-button:hover {
+	color: #ffac90;
 }
 
-.clear-fix {
+.download-tar {
+	font-size: 1em;
+	margin-top: -0.1em !important;
+	text-align: center;
+	margin-bottom: 1.400em !important;
+}
+
+.button,
+.button-secondary {
+	cursor: pointer;
+	color: #246;
+	background: #e5e5e5;
+	padding: 0.2em;
+	border: 1px solid #a3a3a3;
+	-moz-border-radius: 0.3em;
+	-khtml-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	border-radius: 0.3em;
+	font-size: 0.9em;
+}
+
+span.button a {
+	line-height: 2.2em;
+	display: inline-block;
+	height: 2.2em;
+}
+
+span.button {
+	height: 2.2em;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+p.button {
+	padding-bottom: 0.8em !important;
+}
+
+.button-secondary {
+	background: #cee1ef;
+	border-color: #80b5d0;
+}
+
+.button:hover,
+.button-secondary:hover {
+	color: #d54e21;
+}
+
+.button:hover {
+	border-color: #535353;
+}
+
+.button-secondary:hover {
+	border-color: #328ab2;
+}
+
+a.download-link {
+	background: url("../images/download-button.png") no-repeat scroll -0.4em 0 transparent;
+	color: #09700B;
 	display: block;
-	clear: both;
+	height: 6.3em;
+	padding: 11.500em 1.500em 1.500em 6em;
+	width: 21.9em;
 }
 
-/* Footer Class */
-.footer {
-	clear: both;
-	border-top: 1px solid #dedede;
-	padding: 0.6em 1.400em;
-	margin: 0 auto;
+* html a.download-link {
+	background: url("../images/download-button-ie.png") no-repeat scroll 0 0 transparent;
 }
+
+a.download-link:hover {
+	background-position: -304px 0;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+
+/* ==========================================================================
+   12. Blockquote / Status Messages
+   ========================================================================== */
+
+.info {
+	padding: 0.5em;
+	padding-left: 1em;
+	background-color: #e3f6e9;
+	border: 1px solid #0ba51f;
+}
+
+.wrap,
+.updated {
+	padding: 0.5em;
+	padding-left: 1em;
+	background-color: #e4f2fd;
+	border: 1px solid #2583ad;
+}
+
+.error {
+	padding: 0.5em;
+	padding-left: 1em;
+	background-color: #ffebe8;
+	border: 1px solid #c00;
+}
+
+.error a {
+	color: #c00;
+}
+
+
+/* ==========================================================================
+   13. Documentation & Scripture Column
+   ========================================================================== */
 
 #documentation,
 p.summary {
@@ -818,8 +1020,8 @@ p.summary {
 }
 
 #documentation .column {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	text-align: justify;
 	text-justify: inter-ideograph;
 	float: none;
@@ -844,47 +1046,17 @@ p.summary {
 	margin-bottom: 0.6em;
 }
 
-/* Responsive column counts */
-@media only screen and (max-width: 1200px) {
-	#documentation .column ol {
-		-webkit-column-count: 2;
-		-moz-column-count: 2;
-		column-count: 2;
-	}
-}
-
-@media only screen and (max-width: 959px) {
-	#documentation .column ol {
-		-webkit-column-count: 1;
-		-moz-column-count: 1;
-		column-count: 1;
-	}
-}
-
 /*
-#documentation ol:before { content:" ";background:url(../images/quote.png) no-repeat ;background-position: top left;border:0px solid #ff0000;padding:16px 23px 16px 23px;} 
-#documentation ol:after { content:" ";background:url(../images/quote.png) no-repeat ;background-position: bottom right;border:0px solid #ff0000;padding:16px 23px 16px 23px;}  
+#documentation ol:before { content:" ";background:url(../images/quote.png) no-repeat ;background-position: top left;border:0px solid #ff0000;padding:16px 23px 16px 23px;}
+#documentation ol:after  { content:" ";background:url(../images/quote.png) no-repeat ;background-position: bottom right;border:0px solid #ff0000;padding:16px 23px 16px 23px;}
 */
 #documentation ol {
-	margin: 0px;
+	margin: 0;
 	list-style: none;
 }
 
 #documentation ol li {
 	display: inline;
-}
-
-.sub {
-	vertical-align: sub;
-}
-
-.sup {
-	text-decoration: underline;
-	font-size: 0.8em;
-	vertical-align: top;
-	line-height: 1.100em;
-	color: #ff0000;
-	cursor: pointer;
 }
 
 ol li span.phonetic {
@@ -897,8 +1069,24 @@ ol li span.phonetic {
 }
 
 ol li span.interpretation {
-	display: block
+	display: block;
 }
+
+/* Paragraph separation */
+#documentation .column li.paragraph-start::before {
+	content: "";
+	display: block;
+	margin-top: 0.8em;
+}
+
+#documentation .column li.paragraph-start:first-child::before {
+	margin-top: 0;
+}
+
+
+/* ==========================================================================
+   14. Context Menu & Dialog
+   ========================================================================== */
 
 #menu {
 	position: absolute;
@@ -931,13 +1119,13 @@ ol li span.interpretation {
 
 #menu ul,
 #dialog ul {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 
 #menu ul li {
 	list-style: none;
-	padding: 0px;
+	padding: 0;
 }
 
 #dialog ul li,
@@ -948,7 +1136,7 @@ ol li span.interpretation {
 }
 
 #menu ul li a {
-	padding: 0px;
+	padding: 0;
 	padding-left: 1em;
 	font-weight: normal;
 	font-size: 1.2em;
@@ -962,12 +1150,16 @@ ol li span.interpretation {
 	color: #ffffff;
 }
 
-/*tab form*/
+
+/* ==========================================================================
+   15. Tab Form
+   ========================================================================== */
+
 #tab ul {
 	float: left;
 	list-style: none;
 	min-width: 50em;
-	margin: 0px;
+	margin: 0;
 }
 
 #tab ul li {
@@ -989,7 +1181,7 @@ ol li span.interpretation {
 }
 
 #tab ul li a:focus {
-	border: 0px solid #ffffff;
+	border: 0 solid #ffffff;
 }
 
 #tab ul li a.current,
@@ -1014,79 +1206,20 @@ ol li span.interpretation {
 
 #tab form {
 	border: 1em solid #e4f2fd;
-	padding: 1em 1em 0px 1em;
-	margin: 0px;
+	padding: 1em 1em 0 1em;
+	margin: 0;
 	clear: both;
 }
 
 #tab div.panel {
-	margin: 0px;
+	margin: 0;
 	clear: both;
 }
 
-.required {
-	color: #ff0000;
-}
 
-div.line-space {
-	clear: both;
-	height: 5em;
-}
-
-a.download-link {
-	background: url("../images/download-button.png") no-repeat scroll -0.4em 0 transparent;
-	color: #09700B;
-	display: block;
-	height: 6.3em;
-	padding: 11.500em 1.500em 1.500em 6em;
-	width: 21.9em;
-}
-
-* html a.download-link {
-	background: url("../images/download-button-ie.png") no-repeat scroll 0 0 transparent;
-}
-
-a.download-link:hover {
-	background-position: -304px 0;
-	cursor: pointer;
-	text-decoration: none;
-}
-
-a.download {
-	float: right;
-}
-
-.shadow {
-	float: left;
-	margin-right: 2.0em;
-	background-color: #EFEFEF;
-}
-
-.shadow img {
-	padding: 0.4em;
-	border: 1px solid #CDCDCD;
-	background-color: #FFFFFF;
-	position: relative;
-	top: -5px;
-	left: -5px;
-}
-
-.__base__ {
-	padding-left: 0.2em;
-	padding-right: 0.2em;
-	background: none repeat scroll 0% 0% rgb(175, 50, 51);
-	color: rgb(255, 255, 255);
-	font-size: 1.2em;
-	text-align: center;
-	display: none;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-body>div.__base__ {
-	position: fixed;
-}
+/* ==========================================================================
+   16. Testament List
+   ========================================================================== */
 
 ul.testament {
 	margin: 0 !important;
@@ -1120,58 +1253,330 @@ ul.testament li ol li {
 	border: 0;
 }
 
-.tips {
-	background: yellow;
-	border: 1px solid #ff8000;
-	padding: 0.5em
-}
 
-.container {
-	float: right;
-	width: 74%;
-	font-size: 1.4em;
-	box-sizing: border-box;
-}
+/* ==========================================================================
+   17. Search Styles
+   ========================================================================== */
 
-.sidebar {
-	float: left;
-	width: 24%;
-	font-size: 1.4em;
-	box-sizing: border-box;
-}
-
-.sidebar .container {
-	font-size: 100%;
+.search-container {
+	display: flex;
 	width: 100%;
-	max-width: 100%;
+	max-width: 800px;
+	margin: 20px auto;
+	gap: 10px;
+	padding: 0 20px;
 	box-sizing: border-box;
 }
 
-.col-12 {
-	font-size: 1.4em;
+.search-input {
+	flex: 1;
+	min-width: 200px;
+	padding: 12px 20px;
+	font-size: 16px;
+	border: 2px solid #e4f2fd;
+	border-radius: 12px;
+	background: #fff url("data:image/svg+xml,%3Csvg focusable='false' height='24px' viewBox='0 0 24 24' width='24px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z' fill='%23ababab'%3E%3C/path%3E%3C/svg%3E") no-repeat 16px center;
+	padding-left: 50px;
+	transition: all 0.3s ease;
+	color: #555;
+	box-sizing: border-box;
 }
 
-.gallery {
-	background: url("/themes/images/last-dinner.png") no-repeat scroll 0 50%;
-	background-size: auto;
-	height: 20em;
-	margin-bottom: 0.5em;
-	background-size: 100%;
+.search-input:focus {
+	outline: none;
+	border-color: #2583ad;
+	box-shadow: 0 0 5px rgba(37, 131, 173, 0.2);
 }
 
-/* Mobile and iPad Portrait */
+.search-input::placeholder {
+	color: #999;
+}
+
+.search-button {
+	padding: 12px 30px;
+	font-size: 16px;
+	color: #fff;
+	background: #2583ad;
+	border: none;
+	border-radius: 12px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	white-space: nowrap;
+	height: auto;
+	box-sizing: border-box;
+}
+
+.search-button:hover {
+	background: #1f6a8d;
+	transform: translateY(-1px);
+}
+
+.search-button:active {
+	transform: translateY(1px);
+}
+
+
+/* ==========================================================================
+   18. Sidebar Toggle & Chapter Navigation
+   ========================================================================== */
+
+/* --- Sidebar Toggle --- */
+
+.sidebar-toggle-container {
+	position: fixed;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1000;
+	background: #007bff;
+	border-radius: 0 8px 8px 0;
+	box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease;
+}
+
+.sidebar-toggle-btn {
+	background: transparent;
+	color: white;
+	border: none;
+	padding: 12px 8px;
+	cursor: pointer;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	min-height: 60px;
+	transition: all 0.3s ease;
+}
+
+.sidebar-toggle-btn:hover {
+	background: rgba(255, 255, 255, 0.1);
+	transform: scale(1.05);
+}
+
+.sidebar-toggle-btn:active {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.toggle-icon {
+	font-size: 20px;
+	font-weight: bold;
+	transition: transform 0.3s ease;
+}
+
+/* Visual feedback when sidebar is hidden */
+body.sidebar-hidden .sidebar-toggle-container {
+	background: #28a745;
+}
+
+body.sidebar-hidden .sidebar-toggle-btn:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+/* Container width adjustment when sidebar is hidden */
+#pagebody .wrapper .sidebar.hidden ~ .container,
+#pagebody .wrapper .sidebar.hidden + .container {
+	width: 100% !important;
+	float: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+/* :has() approach for modern browsers */
+#pagebody .wrapper:has(.sidebar.hidden) .container {
+	width: 100% !important;
+	float: none !important;
+}
+
+/* JavaScript class on body approach */
+body.sidebar-hidden .container {
+	width: 100% !important;
+	float: none !important;
+}
+
+/* --- Chapter Navigation --- */
+
+.chapter-nav-container {
+	position: fixed;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1000;
+	background: #6c757d;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease;
+}
+
+.chapter-nav-container.left {
+	left: 0;
+	top: 35%;
+	border-radius: 0 8px 8px 0;
+}
+
+.chapter-nav-container.right {
+	right: 0;
+	top: 50%;
+	border-radius: 8px 0 0 8px;
+}
+
+.chapter-nav-btn {
+	background: transparent;
+	color: white;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	min-height: 60px;
+	transition: all 0.3s ease;
+	text-decoration: none;
+}
+
+.chapter-nav-btn:hover {
+	background: rgba(255, 255, 255, 0.1);
+	transform: scale(1.05);
+}
+
+.chapter-nav-btn:active {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.chapter-nav-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.chapter-nav-btn:disabled:hover {
+	background: transparent;
+	transform: none;
+}
+
+.chapter-nav-icon {
+	font-size: 18px;
+	font-weight: bold;
+	transition: transform 0.3s ease;
+}
+
+/* Left dock: Previous chapter button */
+.chapter-nav-container.left .chapter-nav-btn {
+	color: #fff;
+}
+
+.chapter-nav-container.left:hover {
+	background: #5a6268;
+}
+
+/* Right dock: Next chapter button */
+.chapter-nav-container.right .chapter-nav-btn {
+	color: #fff;
+}
+
+.chapter-nav-container.right:hover {
+	background: #5a6268;
+}
+
+
+/* ==========================================================================
+   19. Pericope Headings & Paragraph Styles  (BibleGateway style)
+   ========================================================================== */
+
+.pericope-header {
+	display: block;
+	margin: 0 0 0.6em 0;
+	padding-bottom: 4px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	break-after: avoid;
+	-webkit-column-break-after: avoid;
+	page-break-after: avoid;
+	clear: both;
+}
+
+.pericope-title {
+	font-weight: 600;
+	color: #555;
+	margin: 0;
+	display: inline-block;
+	line-height: 1.35;
+	letter-spacing: 0.02em;
+}
+
+.parallel-ref {
+	display: inline-block;
+	font-size: 0.85em;
+	color: #7f8c8d;
+	margin-left: 8px;
+	font-weight: normal;
+	font-style: italic;
+	letter-spacing: normal;
+}
+
+.parallel-ref-link {
+	color: inherit;
+	text-decoration: none;
+	border-bottom: 1px dotted currentColor;
+}
+
+.parallel-ref-link:hover {
+	color: #2980b9;
+	border-bottom-style: solid;
+}
+
+/* Headings Toggle Control */
+.heading-toggle-link {
+	cursor: pointer;
+	font-size: 0.9em;
+	color: #34495e;
+	text-decoration: none;
+	padding: 2px 6px;
+	border: 1px solid #dcdcdc;
+	border-radius: 3px;
+	background-color: #f8f9fa;
+	transition: all 0.2s ease;
+	margin-left: 6px;
+	display: inline-block;
+}
+
+.heading-toggle-link:hover {
+	background-color: #e9ecef;
+	color: #1a252f;
+}
+
+/* When headings are hidden */
+body.hide-pericopes .pericope-header {
+	display: none !important;
+}
+
+body.hide-pericopes #documentation .column li.paragraph-start::before {
+	margin-top: 0.4em;
+}
+
+
+/* ==========================================================================
+   20. Responsive — Media Queries
+   ========================================================================== */
+
+/* --- Multi-column scripture: <= 1200px -> 2 columns --- */
 @media only screen and (max-width: 1200px) {
+	#documentation .column ol {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		column-count: 2;
+	}
+
 	.container {
 		float: right;
 		width: 70%;
 	}
 
 	.sidebar {
-		float: left
+		float: left;
 	}
 }
 
-/* Mobile and iPad Portrait */
+/* --- Layout: <= 1100px --- */
 @media only screen and (max-width: 1100px) {
 	.container {
 		float: right;
@@ -1179,11 +1584,11 @@ ul.testament li ol li {
 	}
 
 	.sidebar {
-		float: left
+		float: left;
 	}
 }
 
-/* Mobile and iPad Portrait */
+/* --- Layout: <= 980px --- */
 @media only screen and (max-width: 980px) {
 	.container {
 		float: right;
@@ -1191,12 +1596,18 @@ ul.testament li ol li {
 	}
 
 	.sidebar {
-		float: left
+		float: left;
 	}
 }
 
-/* Mobile and iPad Portrait */
+/* --- Tablet portrait: <= 959px --- */
 @media only screen and (max-width: 959px) {
+	#documentation .column ol {
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+		column-count: 1;
+	}
+
 	.container {
 		float: none;
 		width: 100%;
@@ -1219,9 +1630,49 @@ ul.testament li ol li {
 		max-width: 100% !important;
 		box-sizing: border-box !important;
 	}
+
+	.sidebar-toggle-container {
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.sidebar-toggle-btn {
+		min-width: 35px;
+		min-height: 50px;
+		padding: 10px 6px;
+	}
+
+	.toggle-icon {
+		font-size: 16px;
+	}
+
+	/* Chapter navigation responsive adjustments */
+	.chapter-nav-container {
+		min-width: 35px;
+		min-height: 50px;
+	}
+
+	.chapter-nav-btn {
+		min-width: 35px;
+		min-height: 50px;
+	}
+
+	.chapter-nav-icon {
+		font-size: 16px;
+	}
+
+	/* Adjust positioning for tablet */
+	.chapter-nav-container.left {
+		top: 30%;
+	}
+
+	.chapter-nav-container.right {
+		top: 45%;
+	}
 }
 
-/* Mobile Landscape and Portrait */
+/* --- Mobile landscape & portrait: <= 767px --- */
 @media only screen and (max-width: 767px) {
 	#header {
 		background: #770707;
@@ -1297,12 +1748,34 @@ ul.testament li ol li {
 	.chapter-nav-icon {
 		font-size: 15px;
 	}
+
+	/* Ensure search container has proper spacing on mobile */
+	#pagebody .search-container {
+		margin-top: 15px;
+	}
+
+	.search-container {
+		flex-direction: column;
+		width: 100%;
+		padding: 0 15px;
+		margin: 10px auto;
+		box-sizing: border-box;
+	}
+
+	.search-input {
+		width: 100%;
+		margin-bottom: 10px;
+		font-size: 14px;
+	}
+
+	.search-button {
+		width: 100%;
+		font-size: 14px;
+	}
 }
 
-/* Mobile Portrait */
-/* for 480 px width screen */
-@media only screen and (max-width:480px) {
-
+/* --- Mobile portrait: <= 480px --- */
+@media only screen and (max-width: 480px) {
 	#header .wrapper,
 	#header h1 a {
 		height: 4em;
@@ -1311,8 +1784,7 @@ ul.testament li ol li {
 	#header {
 		padding: 0 1.500em;
 		top: 0;
-		z-index: 1000;
-		/* Ensure header stays on top */
+		z-index: 1000; /* Ensure header stays on top */
 	}
 
 	#header .welcome {
@@ -1367,93 +1839,25 @@ ul.testament li ol li {
 	.chapter-nav-icon {
 		font-size: 13px;
 	}
-}
 
-/* Search Styles */
-.search-container {
-	display: flex;
-	width: 100%;
-	max-width: 800px;
-	margin: 20px auto;
-	gap: 10px;
-	padding: 0 20px;
-	box-sizing: border-box;
-}
-
-.search-input {
-	flex: 1;
-	min-width: 200px;
-	padding: 12px 20px;
-	font-size: 16px;
-	border: 2px solid #e4f2fd;
-	border-radius: 12px;
-	background: #fff url("data:image/svg+xml,%3Csvg focusable='false' height='24px' viewBox='0 0 24 24' width='24px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z' fill='%23ababab'%3E%3C/path%3E%3C/svg%3E") no-repeat 16px center;
-	padding-left: 50px;
-	transition: all 0.3s ease;
-	color: #555;
-	box-sizing: border-box;
-}
-
-.search-input:focus {
-	outline: none;
-	border-color: #2583ad;
-	box-shadow: 0 0 5px rgba(37, 131, 173, 0.2);
-}
-
-.search-input::placeholder {
-	color: #999;
-}
-
-.search-button {
-	padding: 12px 30px;
-	font-size: 16px;
-	color: #fff;
-	background: #2583ad;
-	border: none;
-	border-radius: 12px;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	white-space: nowrap;
-	height: auto;
-	box-sizing: border-box;
-}
-
-.search-button:hover {
-	background: #1f6a8d;
-	transform: translateY(-1px);
-}
-
-.search-button:active {
-	transform: translateY(1px);
-}
-
-/* Responsive adjustments */
-@media only screen and (max-width: 767px) {
-	.search-container {
-		flex-direction: column;
-		width: 100%;
-		padding: 0 15px;
-		margin: 10px auto;
-		box-sizing: border-box;
+	/* Ensure search page content is properly spaced from fixed header */
+	#pagebody .search-container {
+		margin-top: 30px;
 	}
 
-	.search-input {
-		width: 100%;
-		margin-bottom: 10px;
-		font-size: 14px;
+	/* Ensure the first search container in pagebody has proper spacing */
+	#pagebody > .wrapper > .col-12 > .search-container {
+		margin-top: 25px;
 	}
 
-	.search-button {
-		width: 100%;
-		font-size: 14px;
+	/* Additional fix for search page headline spacing */
+	#headline + #pagebody .search-container {
+		margin-top: 2.5em;
 	}
-}
 
-@media only screen and (max-width: 480px) {
 	.search-container {
 		padding: 0 10px;
-		margin-top: 20px;
-		/* Add top margin to avoid fixed header */
+		margin-top: 20px; /* Add top margin to avoid fixed header */
 	}
 
 	.search-input,
@@ -1467,288 +1871,7 @@ ul.testament li ol li {
 		background-size: 20px;
 		background-position: 12px center;
 	}
-}
 
-/* Fix Firefox selection */
-*::-moz-selection {
-	background-color: #2583AD;
-	color: #ffffff;
-}
-
-/* Mobile search page specific fixes */
-@media only screen and (max-width: 480px) {
-
-	/* Ensure search page content is properly spaced from fixed header */
-	#pagebody .search-container {
-		margin-top: 30px;
-		/* Extra spacing for search container specifically */
-	}
-
-	/* Ensure the first search container in pagebody has proper spacing */
-	#pagebody>.wrapper>.col-12>.search-container {
-		margin-top: 25px;
-	}
-
-	/* Additional fix for search page headline spacing */
-	#headline+#pagebody .search-container {
-		margin-top: 2.5em;
-	}
-}
-
-/* Additional mobile fixes for search functionality */
-@media only screen and (max-width: 767px) {
-
-	/* Ensure search container has proper spacing on all mobile devices */
-	#pagebody .search-container {
-		margin-top: 15px;
-	}
-}
-
-/* Sidebar Toggle Button Styles */
-.sidebar-toggle-container {
-	position: fixed;
-	left: 0;
-	top: 50%;
-	transform: translateY(-50%);
-	z-index: 1000;
-	background: #007bff;
-	border-radius: 0 8px 8px 0;
-	box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
-	transition: all 0.3s ease;
-}
-
-.sidebar-toggle-btn {
-	background: transparent;
-	color: white;
-	border: none;
-	padding: 12px 8px;
-	cursor: pointer;
-	font-size: 18px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-width: 40px;
-	min-height: 60px;
-	transition: all 0.3s ease;
-}
-
-.sidebar-toggle-btn:hover {
-	background: rgba(255, 255, 255, 0.1);
-	transform: scale(1.05);
-}
-
-.sidebar-toggle-btn:active {
-	background: rgba(255, 255, 255, 0.2);
-}
-
-.toggle-icon {
-	font-size: 20px;
-	font-weight: bold;
-	transition: transform 0.3s ease;
-}
-
-/* Chapter Navigation Button Styles */
-.chapter-nav-container {
-	position: fixed;
-	top: 50%;
-	transform: translateY(-50%);
-	z-index: 1000;
-	background: #6c757d;
-	border-radius: 8px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-	transition: all 0.3s ease;
-}
-
-.chapter-nav-container.left {
-	left: 0;
-	border-radius: 0 8px 8px 0;
-}
-
-.chapter-nav-container.right {
-	right: 0;
-	border-radius: 8px 0 0 8px;
-}
-
-.chapter-nav-btn {
-	background: transparent;
-	color: white;
-	border: none;
-	padding: 0;
-	cursor: pointer;
-	font-size: 16px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-width: 40px;
-	min-height: 60px;
-	transition: all 0.3s ease;
-	text-decoration: none;
-}
-
-.chapter-nav-btn:hover {
-	background: rgba(255, 255, 255, 0.1);
-	transform: scale(1.05);
-}
-
-.chapter-nav-btn:active {
-	background: rgba(255, 255, 255, 0.2);
-}
-
-.chapter-nav-btn:disabled {
-	opacity: 0.5;
-	cursor: not-allowed;
-}
-
-.chapter-nav-btn:disabled:hover {
-	background: transparent;
-	transform: none;
-}
-
-.chapter-nav-icon {
-	font-size: 18px;
-	font-weight: bold;
-	transition: transform 0.3s ease;
-}
-
-/* Left dock: Previous chapter button */
-.chapter-nav-container.left .chapter-nav-btn {
-	color: #fff;
-}
-
-.chapter-nav-container.left:hover {
-	background: #5a6268;
-}
-
-/* Right dock: Next chapter button */
-.chapter-nav-container.right .chapter-nav-btn {
-	color: #fff;
-}
-
-.chapter-nav-container.right:hover {
-	background: #5a6268;
-}
-
-/* Ensure proper spacing between dock elements */
-.sidebar-toggle-container {
-	left: 0;
-	top: 50%;
-	transform: translateY(-50%);
-}
-
-.chapter-nav-container.left {
-	left: 0;
-	top: 35%;
-	transform: translateY(-50%);
-}
-
-.chapter-nav-container.right {
-	right: 0;
-	top: 50%;
-	transform: translateY(-50%);
-}
-
-/* Sidebar Toggle Functionality */
-.sidebar.hidden {
-	display: none;
-}
-
-/* Container width adjustment when sidebar is hidden */
-#pagebody .wrapper .sidebar.hidden~.container {
-	width: 100% !important;
-	float: none !important;
-}
-
-/* Alternative approach: when sidebar is hidden, adjust container */
-#pagebody .wrapper .sidebar.hidden+.container {
-	width: 100% !important;
-	float: none !important;
-}
-
-/* Force container to full width when sidebar is hidden */
-#pagebody .wrapper .sidebar.hidden~.container {
-	width: 100% !important;
-	float: none !important;
-}
-
-/* Ensure proper layout when sidebar is hidden */
-#pagebody .wrapper .sidebar.hidden~.container {
-	width: 100% !important;
-	float: none !important;
-	margin-left: 0 !important;
-	margin-right: 0 !important;
-}
-
-/* Adjust wrapper layout when sidebar is hidden */
-#pagebody .wrapper:has(.sidebar.hidden) .container {
-	width: 100% !important;
-	float: none !important;
-}
-
-/* Alternative approach using JavaScript class on body */
-body.sidebar-hidden .container {
-	width: 100% !important;
-	float: none !important;
-}
-
-/* Smooth transitions for layout changes */
-.container,
-.sidebar {
-	transition: all 0.3s ease;
-}
-
-/* Visual feedback when sidebar is hidden */
-body.sidebar-hidden .sidebar-toggle-container {
-	background: #28a745;
-}
-
-body.sidebar-hidden .sidebar-toggle-btn:hover {
-	background: rgba(255, 255, 255, 0.2);
-}
-
-/* Responsive adjustments for dock toggle */
-@media only screen and (max-width: 959px) {
-	.sidebar-toggle-container {
-		left: 0;
-		top: 50%;
-		transform: translateY(-50%);
-	}
-
-	.sidebar-toggle-btn {
-		min-width: 35px;
-		min-height: 50px;
-		padding: 10px 6px;
-	}
-
-	.toggle-icon {
-		font-size: 16px;
-	}
-
-	/* Chapter navigation responsive adjustments */
-	.chapter-nav-container {
-		min-width: 35px;
-		min-height: 50px;
-	}
-
-	.chapter-nav-btn {
-		min-width: 35px;
-		min-height: 50px;
-	}
-
-	.chapter-nav-icon {
-		font-size: 16px;
-	}
-
-	/* Adjust positioning for mobile */
-	.chapter-nav-container.left {
-		top: 30%;
-	}
-
-	.chapter-nav-container.right {
-		top: 45%;
-	}
-}
-
-@media only screen and (max-width: 480px) {
 	.sidebar-toggle-container {
 		left: 0;
 		top: 50%;
@@ -1780,89 +1903,4 @@ body.sidebar-hidden .sidebar-toggle-btn:hover {
 	.chapter-nav-icon {
 		font-size: 14px;
 	}
-}
-
-/* ==========================================================================
-   Pericope Headings & Paragraph Styles (BibleGateway Style)
-   ========================================================================== */
-
-.pericope-header {
-	display: block;
-	margin: 0 0 0.6em 0;
-	padding-bottom: 4px;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-	break-after: avoid;
-	-webkit-column-break-after: avoid;
-	page-break-after: avoid;
-	clear: both;
-}
-
-.pericope-title {
-	font-weight: 600;
-	color: #555;
-	margin: 0;
-	display: inline-block;
-	line-height: 1.35;
-	letter-spacing: 0.02em;
-}
-
-.parallel-ref {
-	display: inline-block;
-	font-size: 0.85em;
-	color: #7f8c8d;
-	margin-left: 8px;
-	font-weight: normal;
-	font-style: italic;
-	letter-spacing: normal;
-}
-
-.parallel-ref-link {
-	color: inherit;
-	text-decoration: none;
-	border-bottom: 1px dotted currentColor;
-}
-
-.parallel-ref-link:hover {
-	color: #2980b9;
-	border-bottom-style: solid;
-}
-
-/* Paragraph separation */
-#documentation .column li.paragraph-start::before {
-	content: "";
-	display: block;
-	margin-top: 0.8em;
-}
-
-#documentation .column li.paragraph-start:first-child::before {
-	margin-top: 0;
-}
-
-/* Headings Toggle Control */
-.heading-toggle-link {
-	cursor: pointer;
-	font-size: 0.9em;
-	color: #34495e;
-	text-decoration: none;
-	padding: 2px 6px;
-	border: 1px solid #dcdcdc;
-	border-radius: 3px;
-	background-color: #f8f9fa;
-	transition: all 0.2s ease;
-	margin-left: 6px;
-	display: inline-block;
-}
-
-.heading-toggle-link:hover {
-	background-color: #e9ecef;
-	color: #1a252f;
-}
-
-/* When headings are hidden */
-body.hide-pericopes .pericope-header {
-	display: none !important;
-}
-
-body.hide-pericopes #documentation .column li.paragraph-start::before {
-	margin-top: 0.4em;
 }
