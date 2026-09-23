@@ -911,7 +911,7 @@ a.download-button:hover {
 	cursor: pointer;
 	color: #246;
 	background: #e5e5e5;
-	padding: 0.2em;
+	padding: 0.5em;
 	border: 1px solid #a3a3a3;
 	-moz-border-radius: 0.3em;
 	-khtml-border-radius: 0.3em;

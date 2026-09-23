@@ -103,8 +103,8 @@ public class password extends AbstractApplication {
             try {
                 SimpleMail email = new SimpleMail();
                 email.setFrom(this.getProperty("mail.default.from"));
-                email.setSubject("密码重置邮件");
-                email.setBody("亲爱的" + row.getFieldInfo("username").stringValue() + "用户，我们刚刚收到您的密码找回请求。为了保证您能及时使用我们提供的服务，请您于24小时内点击此链接重置您的密码。");
+                email.setSubject(this.getProperty("mail.password-reset.title"));
+                email.setBody(String.format(this.getProperty("mail.password-reset.content"), row.getFieldInfo("username").stringValue()));
                 email.setTo(mailto);
 
                 return email.send();
