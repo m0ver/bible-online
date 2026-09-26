@@ -311,7 +311,7 @@ $(function(){
 	<div class="container">
 		<input type="hidden" id="lang" name="lang" value="{%LANGUAGE_TAG%}"/>
 		<input type="hidden" id="version" name="version" value="{%version%}"/>
-		<textarea class="text" rows="3" cols="33" id="toemail" name="toemail" onfocus="this.value=''">{%subscribe.email.default.tips%}</textarea>
+		<textarea class="text" rows="3" cols="33" id="toemail" name="toemail" placeholder="{%subscribe.email.default.tips%}"></textarea>
 		<input class="button-secondary" id="subscribe_button" type="submit" value=" {%subscribe.submit.caption%} " />
 		<span id="subscribe-message"></span>
 	</div>

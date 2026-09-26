@@ -420,7 +420,7 @@
 
         function subscribe() {
             var email = $('#toemail').val();
-            if(email == '' || email == '{%subscribe.email.default.tips%}') return false;
+            if(email == '') return false;
             var bible = $('#bible').is(':checked') ? 'bible' : '';
             var article = $('#article').is(':checked') ? 'article' : '';
             $.post('[%LINK:services/subscribe%]', {toemail: email, bible: bible, article: article, lang: '{%LANGUAGE_TAG%}', version: '{%version%}'}, function(data){
