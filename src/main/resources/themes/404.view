@@ -186,7 +186,7 @@ $(function(){
 
 	<form method="post" onsubmit="return invite()">
 	<div class="container"><label for="email">{%invite.confirm.caption%}</label>
-	<textarea class="text" rows="3" cols="33" id="email" name="email" onfocus="this.value=''">{%invite.email.default.tips%}</textarea>
+	<textarea class="text" rows="3" cols="33" id="email" name="email" placeholder="{%invite.email.default.tips%}"></textarea>
 	<input class="button-secondary" id="invite_button" type="submit" value=" {%invite.submit.caption%} " />
 	<span id="invite-message"> </span>
 	</div>

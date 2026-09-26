@@ -411,7 +411,7 @@
 
         function invite() {
             var email = $('#email').val();
-            if(email == '' || email == '{%invite.email.default.tips%}') return false;
+            if(email == '') return false;
             $.post('[%LINK:friends/invite%]', {email: email}, function(data){
                 $('#invite-message').html(data).fadeIn();
             });
@@ -530,8 +530,7 @@
                 <div class="util-card">
                     <h3>{%invite.confirm.caption%}</h3>
                     <form method="post" onsubmit="return invite()">
-                        <label for="email">{%invite.email.default.tips%}</label>
-                        <textarea class="form-control" rows="3" id="email" name="email"></textarea>
+                        <textarea class="form-control" rows="3" id="email" name="email" placeholder="{%invite.email.default.tips%}"></textarea>
                         <input class="inputbutton" style="width: 100%; height: 48px;" type="submit" value="{%invite.submit.caption%}" />
                         <div id="invite-message" style="margin-top: 1rem; font-size: 0.9rem; color: var(--accent);"></div>
                     </form>
