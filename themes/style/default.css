@@ -766,7 +766,17 @@ body > div.__base__ {
 
 /* Sidebar hidden state */
 .sidebar.hidden {
-	display: none;
+	transform: translateX(-100%);
+	margin-left: -24%;
+	opacity: 0;
+	pointer-events: none;
+	visibility: hidden;
+}
+
+@media only screen and (max-width: 959px) {
+	.sidebar.hidden {
+		display: none;
+	}
 }
 
 
