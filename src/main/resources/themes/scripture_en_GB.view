@@ -199,7 +199,7 @@ $(function(){
 <![endif]-->
 <title>{%book.bookName%} Chapter {%chapterid%} - Holy Bible Online - Bible Scriptures & Christian Study</title>
 </head>
-<body itemscope=""  itemtype="http://schema.org/WebPage" data-role="page">
+<body itemscope=""  itemtype="http://schema.org/WebPage" data-role="page" class="sidebar-hidden">
 <div id="header" data-role="header">
 	<div class="wrapper" itemscope=""  itemtype="http://schema.org/Organization">
 		<h1><a href="/?lang={%LANGUAGE_TAG%}">{%application.title%}</a></h1>
@@ -263,7 +263,7 @@ $(function(){
 		
 	<a name="down" class="clear-fix"> </a>
 	</div>
-	<div class="sidebar">
+	<div class="sidebar hidden">
 	<label>{%holy.book.find-and-reading%}</label>
 	
 	<ul>
@@ -349,11 +349,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleIcon = sidebarToggle.querySelector('.toggle-icon');
     
     // Check if sidebar state is saved in localStorage
-    const sidebarHidden = localStorage.getItem('sidebarHidden') === 'true';
-    if (sidebarHidden) {
-        sidebar.classList.add('hidden');
-        document.body.classList.add('sidebar-hidden');
-        toggleIcon.textContent = '☰';
+    const sidebarState = localStorage.getItem('sidebarHidden');
+    const sidebarHidden = sidebarState === null ? true : sidebarState === 'true';
+    if (!sidebarHidden) {
+        sidebar.classList.remove('hidden');
+        document.body.classList.remove('sidebar-hidden');
     }
     
     sidebarToggle.addEventListener('click', function() {
