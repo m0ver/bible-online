@@ -194,7 +194,7 @@
 <div id="header" data-role="header">
     <div class="wrapper" itemscope="" itemtype="http://schema.org/Organization">
         <h1><a href="/?lang={%LANGUAGE_TAG%}">{%application.title%}</a></h1>
-        <p class="welcome">{%page.welcome.hello%}{%page.welcome.caption%} <a href="javascript:void(0)"
+        <p class="welcome"> <a href="javascript:void(0)"
                                                                              onmousedown="javascript:languageMenu.show(event,1)">{%application.language.name%}</a>
             | {%user.profile%} {%user.status%}</p>
         <ul class="menu">

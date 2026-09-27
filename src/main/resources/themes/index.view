@@ -442,7 +442,7 @@
         <div class="wrapper" itemscope="" itemtype="http://schema.org/Organization">
             <h1><a href="/?lang={%LANGUAGE_TAG%}">{%application.title%}</a></h1>
             <div class="header-nav">
-                <p class="welcome">{%page.welcome.hello%}{%page.welcome.caption%} <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">{%application.language.name%}</a> | {%user.profile%} {%user.status%}</p>
+                <p class="welcome"> <a href="javascript:void(0)" onmousedown="javascript:languageMenu.show(event,1)">{%application.language.name%}</a> | {%user.profile%} {%user.status%}</p>
                 <ul class="top-menu">
                     <li><a href='[%LINK:bible%]' title="{%navigator.bible.caption%}">{%navigator.bible.caption%}</a></li>
                     <li><a href='[%LINK:dashboard%]' title="{%navigator.controller.caption%}">{%navigator.controller.caption%}</a></li>
