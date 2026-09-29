@@ -609,6 +609,8 @@ select {
 
 #content {
 	font-size: 12px;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 #menu ul,#dialog ul {

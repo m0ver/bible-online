@@ -1148,6 +1148,7 @@ ol li span.interpretation {
 #content {
 	font-size: 1.2em;
 	width: 100%;
+	box-sizing: border-box;
 }
 
 #menu ul,
