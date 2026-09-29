@@ -599,10 +599,12 @@ select {
 #dialog {
 	position: absolute;
 	width: 300px;
+	max-width: calc(100vw - 16px);
 	background: #e4f2fd;
 	border: 1px solid #c6d9e9;
 	display: block;
 	font-size: 12px;
+	z-index: 10000;
 }
 
 #content {

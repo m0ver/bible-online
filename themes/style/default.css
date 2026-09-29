@@ -1136,6 +1136,8 @@ ol li span.interpretation {
 	border: 1px solid #c6d9e9;
 	display: block;
 	font-size: 1.2em;
+	max-width: calc(100vw - 16px);
+	z-index: 10000;
 }
 
 #tdialog .text {

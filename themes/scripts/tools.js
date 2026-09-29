@@ -506,18 +506,27 @@ var Dialog = function () {
 		this.timer.stop();
 	};
 	this.reposition = function () {
-		var x = 0, y = 0;
-		this.panel.style.position = "absolute";
-
-		var ie = (document.compatMode && document.compatMode != "BackCompat") ? document.documentElement : document.body;
-		if (!document.all) {
-			x -= window.pageXOffset;
-			y -= window.pageYOffset;
+		// On mobile, use position:fixed and account for the visual viewport
+		// so the dialog stays above the soft keyboard.
+		var isMobile = window.visualViewport !== undefined && /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+		if (isMobile) {
+			var vv = window.visualViewport;
+			// Keyboard height = layout viewport height - visual viewport height - offset top
+			var keyboardHeight = (window.innerHeight - vv.height - vv.offsetTop);
+			if (keyboardHeight < 0) { keyboardHeight = 0; }
+			this.panel.style.position = "fixed";
+			this.panel.style.right = "0px";
+			this.panel.style.bottom = keyboardHeight + "px";
+		} else {
+			var x = 0, y = 0;
+			this.panel.style.position = "absolute";
+			if (!document.all) {
+				x -= window.pageXOffset;
+				y -= window.pageYOffset;
+			}
+			this.panel.style.right = x + "px";
+			this.panel.style.bottom = y + "px";
 		}
-
-		this.panel.style.right = x + "px";
-		this.panel.style.bottom = y + "px";
-
 		this.timer.start(1);
 	};
 	this.save = function () {
@@ -608,18 +617,26 @@ var TDialog = function () {
 		this.timer.stop();
 	};
 	this.reposition = function () {
-		var x = 0, y = 0;
-		this.panel.style.position = "absolute";
-
-		var ie = (document.compatMode && document.compatMode != "BackCompat") ? document.documentElement : document.body;
-		if (!document.all) {
-			x -= window.pageXOffset;
-			y -= window.pageYOffset;
+		// On mobile, use position:fixed and account for the visual viewport
+		// so the dialog stays above the soft keyboard.
+		var isMobile = window.visualViewport !== undefined && /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+		if (isMobile) {
+			var vv = window.visualViewport;
+			var keyboardHeight = (window.innerHeight - vv.height - vv.offsetTop);
+			if (keyboardHeight < 0) { keyboardHeight = 0; }
+			this.panel.style.position = "fixed";
+			this.panel.style.right = "0px";
+			this.panel.style.bottom = keyboardHeight + "px";
+		} else {
+			var x = 0, y = 0;
+			this.panel.style.position = "absolute";
+			if (!document.all) {
+				x -= window.pageXOffset;
+				y -= window.pageYOffset;
+			}
+			this.panel.style.right = x + "px";
+			this.panel.style.bottom = y + "px";
 		}
-
-		this.panel.style.right = x + "px";
-		this.panel.style.bottom = y + "px";
-
 		this.timer.start(1);
 	};
 	this.save = function () {
