@@ -506,12 +506,13 @@ var Dialog = function () {
 		this.timer.stop();
 	};
 	this.reposition = function () {
-		// On mobile, use position:fixed and pin to the top-right
+		// On mobile, use position:fixed and pin to the top-left
 		// so the dialog stays out of the way of the soft keyboard.
 		var isMobile = window.visualViewport !== undefined && /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 		if (isMobile) {
 			this.panel.style.position = "fixed";
-			this.panel.style.right = "0px";
+			this.panel.style.left = "0px";
+			this.panel.style.right = "auto";
 			this.panel.style.top = "0px";
 			this.panel.style.bottom = "auto";
 		} else {
@@ -614,12 +615,13 @@ var TDialog = function () {
 		this.timer.stop();
 	};
 	this.reposition = function () {
-		// On mobile, use position:fixed and pin to the top-right
+		// On mobile, use position:fixed and pin to the top-left
 		// so the dialog stays out of the way of the soft keyboard.
 		var isMobile = window.visualViewport !== undefined && /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 		if (isMobile) {
 			this.panel.style.position = "fixed";
-			this.panel.style.right = "0px";
+			this.panel.style.left = "0px";
+			this.panel.style.right = "auto";
 			this.panel.style.top = "0px";
 			this.panel.style.bottom = "auto";
 		} else {
