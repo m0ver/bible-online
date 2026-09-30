@@ -253,10 +253,7 @@
                 <div class="column" id="column1" itemprop="articleBody">{%left_column%}</div>
             </div>
             <div class="clear-fix footnote">
-                <ul>
-                    <li>注1:</li>
-                    <li>注2:</li>
-                </ul>
+
 
                 <div class="clear-fix">{%holy.book.forward%}：<a
                         href="{%base_url%}{%book.bookName%}/{%lastchapter%}&amp;version={%version%}#up"
